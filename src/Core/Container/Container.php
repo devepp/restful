@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Core\Container;
+
 use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface
@@ -16,8 +18,8 @@ class Container implements ContainerInterface
      *
      * @param string $id Identifier of the entry to look for.
      *
-     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
-     * @throws ContainerExceptionInterface Error while retrieving the entry.
+     * @throws NotFoundException  No entry was found for **this** identifier.
+     * @throws ContainerException Error while retrieving the entry.
      *
      * @return mixed Entry.
      */
@@ -27,7 +29,7 @@ class Container implements ContainerInterface
             try {
                 $entry = $this->entries[$id];
                 return $entry();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 throw new ContainerException();
             }
         } else {
