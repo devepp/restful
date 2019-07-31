@@ -8,9 +8,9 @@ class Container implements ContainerInterface
 {
     protected $entries = [];
 
-    public function __construct()
+    public function __construct($arr)
     {
-
+        $this->entries = $arr;
     }
 
      /**
@@ -28,7 +28,9 @@ class Container implements ContainerInterface
         if ($this->has($id)) {
             try {
                 $entry = $this->entries[$id];
-                return $entry();
+                // var_dump($this->entries);
+                // die('get');
+                return $entry($this);
             } catch (\Exception $e) {
                 throw new ContainerException();
             }
@@ -50,6 +52,7 @@ class Container implements ContainerInterface
      */
     public function has($id)
     {
+        // return true;
         return array_key_exists($id, $this->entries);
     }
 }
