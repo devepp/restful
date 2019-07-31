@@ -21,7 +21,6 @@ class RouteDispatcher implements MiddlewareInterface
 
 	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 	{
-		// TODO: Implement process() method.
 		$route = $this->router->getRoute($request);
 		$controller =  $this->container->get($route->getController);
 		$method = $route->getMethod();
