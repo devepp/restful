@@ -2,6 +2,7 @@
 
 namespace App\Core\Middleware;
 
+use App\Core\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -22,7 +23,7 @@ class RouteDispatcher implements MiddlewareInterface
 	public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
 	{
 		$route = $this->router->getRoute($request);
-		$controller =  $this->container->get($route->getController);
+		$controller =  $this->container->get($route->getController());
 		$method = $route->getMethod();
 
 		return $controller->$method($request);
