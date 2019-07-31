@@ -1,27 +1,40 @@
 <?php 
 
-namespace App;
+namespace App\Core\Router;
 
 use Psr\Http\Message\ServerRequestInterface;
 
-class Router {
+class Router implements RouterInterface {
 
+	/**
+	 * // Example Routes
+	 *	private $routes = [
+	 *		'POST' => [
+	 *			'first/first_function' => ['first', 'doSomething']
+	 *		],
+	 *		'GET' => [
+	 *			'first/first_function' => ['first', 'doSomethingElse'],
+	 *		]
+	 *	];
+	 */
 	private $routes = [];
 
-	public function __construct(array $routes = null)
+	public function __construct(array $routes = [])
 	{
-		$this->routes = $routes ?: [];
+		$this->routes = $routes;
 	}
 
-	public function locate(ServerRequestInterface $request) 
+	public function getRoute(ServerRequestInterface $request): RouteInterface
 	{
 		$uri = $request->getUri();
 		$uriPath = $uri->getPath();
-		$method = $uri->getMethod();
-
-		//TODO add 404 handler
-		$controller = $this->routes[$uriPath];
-
+		$httpMethod = $uri->getMethod();
+		
+		if (isset($this->routes[$httpMethod][$uriPath])) {
+			list($controller, $method) = $this->routes[$httpMethod][$uriPath];
+		} else {
+			throw new \Exception('Route not found');
+		}
 		return new Route($controller, $method);
 	}
 }
