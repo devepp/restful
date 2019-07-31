@@ -1,14 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Core;
 
-use http\Exception;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class Request implements RequestHandlerInterface
+class RequestHandler implements RequestHandlerInterface
 {
 	protected $middleware;
 	protected $container;
