@@ -9,44 +9,51 @@ use Psr\Http\Message\StreamInterface;
 
 class Response implements ResponseInterface
 {
-	public function getStatusCode()
-	{
-		return 200;
-	}
+	protected $statusCode;
+	protected $reasonPhrase;
+	protected $headers;
+	protected $body;
+	protected $protocolVersion;
 
 	public function withStatus($code, $reasonPhrase = '')
 	{
-		// TODO: Implement withStatus() method.
+		$this->statusCode = $code;
+		$this->reasonPhrase = $reasonPhrase;
 	}
 
 	public function getReasonPhrase()
 	{
-		// TODO: Implement getReasonPhrase() method.
+		return $this->reasonPhrase;
 	}
 
 	public function getProtocolVersion()
 	{
-		// TODO: Implement getProtocolVersion() method.
+		return $this->protocolVersion;
 	}
 
 	public function withProtocolVersion($version)
 	{
-		// TODO: Implement withProtocolVersion() method.
+		$this->protocolVersion = $version;
 	}
 
 	public function getHeaders()
 	{
-		// TODO: Implement getHeaders() method.
+		return $this->headers;
+	}
+
+	public function getStatusCode()
+	{
+		return $this->statusCode;
 	}
 
 	public function hasHeader($name)
 	{
-		// TODO: Implement hasHeader() method.
+		return array_key_exists($name, $this->headers);
 	}
 
 	public function getHeader($name)
 	{
-		// TODO: Implement getHeader() method.
+		return $this->hasHeader($name) ? $this->headers[$name] : null;
 	}
 
 	public function getHeaderLine($name)
@@ -56,26 +63,26 @@ class Response implements ResponseInterface
 
 	public function withHeader($name, $value)
 	{
-		// TODO: Implement withHeader() method.
+		$this->headers[$name] = $value;
 	}
 
 	public function withAddedHeader($name, $value)
 	{
-		// TODO: Implement withAddedHeader() method.
+		$this->withHeader($name, $value);
 	}
 
 	public function withoutHeader($name)
 	{
-		// TODO: Implement withoutHeader() method.
+		unset($this->headers[$name]);
 	}
 
 	public function getBody()
 	{
-		// TODO: Implement getBody() method.
+		return $this->body;
 	}
 
 	public function withBody(StreamInterface $body)
 	{
-		// TODO: Implement withBody() method.
+		$this->body = $body;
 	}
 }
