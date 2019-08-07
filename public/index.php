@@ -1,6 +1,6 @@
 <?php
 
-use App\Core\Container\Alpha;
+use Dotenv\Dotenv;
 use App\Core\Container\Container;
 use Psr\Container\ContainerInterface;
 use App\Core\Middleware\AuthMiddleware;
@@ -13,14 +13,15 @@ use App\Core\Router\Router;
 use App\Core\RequestHandler;
 use Zend\Diactoros\ServerRequestFactory;
 use App\Controllers\AssetsController;
+use App\Core\PDOManager;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// echo 'You are a success!';
+Dotenv::create('../')->load();
 
-$entries = [
-    Alpha::class => function (ContainerInterface $c) {
-        return new Alpha();
+$classFactories = [
+    AuthMiddleware::class => function (ContainerInterface $c) {
+        return new AuthMiddleware($c->get(ResponseFactoryInterface::class));
     },
 	AuthMiddleware::class => function(ContainerInterface $c) {
 		return new AuthMiddleware($c->get(ResponseFactoryInterface::class));
@@ -40,40 +41,31 @@ $entries = [
 	RouterInterface::class => function(ContainerInterface $c) {
 		return new Router([
 			'GET' => [
-	 			'/assets' => ['AssetsController', 'index'],
+	 			'/assets' => [AssetsController::class, 'index'],
 	 		],
 			'POST' => [
-				'/assets' => ['AssetsController', 'store'],
+				'/assets' => [AssetsController::class, 'store'],
 			],
 		]);
 	},
 	AssetsController::class => function(ContainerInterface $c) {
 		return new AssetsController($c->get(\PDO::class));
 	},
-	\PDO::class => function(ContainerInterface $c) {
-		return new AssetsController($c->get(\PDO::class));
+	PDO::class => function(ContainerInterface $c) {
+		return PDOManager::getInstance()->getConnection();
 	}
 ];
 
-$c = new Container($entries);
-
-//$alpha = $c->get(Alpha::class);
-//echo $alpha->name;
+$container = new Container($classFactories);
 
 $middleWare = [
-	$c->get(AuthMiddleware::class),
-	$c->get(JsonDecoder::class),
-	$c->get(RouteDispatcher::class),
+	$container->get(AuthMiddleware::class),
+	$container->get(JsonDecoder::class),
+	$container->get(RouteDispatcher::class),
 ];
 
-
-
-$requestHandler =  new RequestHandler($middleWare, $c);
-
+$requestHandler =  new RequestHandler($middleWare, $container);
 $request = ServerRequestFactory::fromGlobals();
-
 $response  = $requestHandler->handle($request);
 
-var_dump($response);
-
-// NEED ASSETS CONTROLLER
+// NEED EMITTER

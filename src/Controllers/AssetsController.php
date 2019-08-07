@@ -28,7 +28,7 @@ class AssetsController
 	public function store(ServerRequestInterface $request)
 	{
 		$new_record = $this->dbConnection->query('INSERT INTO as_assets (equipment_no, friendly_name) VALUES (123456, "my Equipment")');
-		$request->getAttribute('name');
+
 		if ($new_record) {
 			return new JsonResponse($new_record, 201);
 		}

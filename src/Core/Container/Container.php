@@ -32,7 +32,7 @@ class Container implements ContainerInterface
                 // die('get');
                 return $entry($this);
             } catch (\Exception $e) {
-                throw new ContainerException();
+                throw new ContainerException($e->getMessage());
             }
         } else {
             throw new NotFoundException();
