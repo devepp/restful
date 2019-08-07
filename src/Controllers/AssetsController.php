@@ -19,7 +19,7 @@ class AssetsController
 
 	public function index(ServerRequestInterface $request)
 	{
-		$result = $this->dbConnection->query('SELECT * FROM as_assets LIMIT 10');
+		$result = $this->dbConnection->query('SELECT * FROM as_assets LIMIT '.$request->getAttribute('limit', 10));
 
 		$assets = $result->fetchAll(PDO::FETCH_ASSOC);
 
