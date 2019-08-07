@@ -12,6 +12,7 @@ use App\Core\Router\RouterInterface;
 use App\Core\Router\Router;
 use App\Core\RequestHandler;
 use Zend\Diactoros\ServerRequestFactory;
+use App\Controllers\AssetsController;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -45,6 +46,12 @@ $entries = [
 				'/assets' => ['AssetsController', 'store'],
 			],
 		]);
+	},
+	AssetsController::class => function(ContainerInterface $c) {
+		return new AssetsController($c->get(\PDO::class));
+	},
+	\PDO::class => function(ContainerInterface $c) {
+		return new AssetsController($c->get(\PDO::class));
 	}
 ];
 
