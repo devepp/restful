@@ -9,7 +9,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 // echo 'You are a success!';
 
 $entries = [
-    Alpha::class => function () {
+    Alpha::class => function (ContainerInterface $c) {
         return new Alpha();
     }
 ];
