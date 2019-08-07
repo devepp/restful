@@ -14,6 +14,7 @@ use App\Core\RequestHandler;
 use Zend\Diactoros\ServerRequestFactory;
 use App\Controllers\AssetsController;
 use App\Core\PDOManager;
+use Narrowspark\HttpEmitter\SapiEmitter;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -68,4 +69,5 @@ $requestHandler =  new RequestHandler($middleWare, $container);
 $request = ServerRequestFactory::fromGlobals();
 $response  = $requestHandler->handle($request);
 
-// NEED EMITTER
+$emmitter = new SapiEmitter();
+$emmitter->emit($response);

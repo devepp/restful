@@ -6,12 +6,13 @@ use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
+use PDO;
 
 class AssetsController
 {
 	private $dbConnection;
 
-	public function __construct(\PDO $dbConnection)
+	public function __construct(PDO $dbConnection)
 	{
 		$this->dbConnection = $dbConnection;
 	}
@@ -20,7 +21,7 @@ class AssetsController
 	{
 		$result = $this->dbConnection->query('SELECT * FROM as_assets LIMIT 10');
 
-		$assets = $result->fetchAll();
+		$assets = $result->fetchAll(PDO::FETCH_ASSOC);
 
 		return new JsonResponse($assets);
 	}
