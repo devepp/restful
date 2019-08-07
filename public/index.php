@@ -60,6 +60,8 @@ $middleWare = [
 	$c->get(RouteDispatcher::class),
 ];
 
+
+
 $requestHandler =  new RequestHandler($middleWare, $c);
 
 $request = ServerRequestFactory::fromGlobals();
