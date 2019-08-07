@@ -28,8 +28,7 @@ class Router implements RouterInterface {
 	{
 		$uri = $request->getUri();
 		$uriPath = $uri->getPath();
-		$httpMethod = $uri->getMethod();
-		
+		$httpMethod = $request->getMethod();
 		if (isset($this->routes[$httpMethod][$uriPath])) {
 			list($controller, $method) = $this->routes[$httpMethod][$uriPath];
 		} else {

@@ -39,14 +39,13 @@ $entries = [
 	RouterInterface::class => function(ContainerInterface $c) {
 		return new Router([
 			'GET' => [
-	 			'assets' => ['AssetsController', 'index'],
+	 			'/assets' => ['AssetsController', 'index'],
 	 		],
 			'POST' => [
-				'assets' => ['AssetsController', 'store'],
+				'/assets' => ['AssetsController', 'store'],
 			],
 		]);
 	}
-
 ];
 
 $c = new Container($entries);
