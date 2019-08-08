@@ -10,10 +10,10 @@ class Router implements RouterInterface {
 	 * // Example Routes
 	 *	private $routes = [
 	 *		'POST' => [
-	 *			'first/first_function' => ['first', 'doSomething']
+	 *			'/first/first_function' => ['first', 'doSomething']
 	 *		],
 	 *		'GET' => [
-	 *			'first/first_function' => ['first', 'doSomethingElse'],
+	 *			'/first/first_function' => ['first', 'doSomethingElse'],
 	 *		]
 	 *	];
 	 */
