@@ -40,14 +40,9 @@ $classFactories = [
 		return $c;
 	},
 	RouterInterface::class => function(ContainerInterface $c) {
-		return new Router([
-			'GET' => [
-	 			'/assets' => [AssetsController::class, 'index'],
-	 		],
-			'POST' => [
-				'/assets' => [AssetsController::class, 'store'],
-			],
-		]);
+		$routes = [];
+		require_once('../src/Config/routes.php');
+		return new Router($routes);
 	},
 	AssetsController::class => function(ContainerInterface $c) {
 		return new AssetsController($c->get(\PDO::class));

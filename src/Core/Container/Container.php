@@ -35,7 +35,7 @@ class Container implements ContainerInterface
                 throw new ContainerException($e->getMessage());
             }
         } else {
-            throw new NotFoundException();
+            throw new NotFoundException("Could not find " . $id);
         }
     }
 

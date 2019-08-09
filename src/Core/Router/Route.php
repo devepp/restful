@@ -6,11 +6,19 @@ class Route implements RouteInterface {
 
 	private $controllerName;
 	private $methodName;
+	private $parameters;
 
-	public function __construct($controllerName, $methodName)
+	/**
+	 * Route constructor.
+	 * @param $controllerName
+	 * @param $methodName
+	 * @param $parameters
+	 */
+	public function __construct($controllerName, $methodName, $parameters = [])
 	{
 		$this->controllerName = $controllerName;
 		$this->methodName = $methodName;
+		$this->parameters = $parameters;
 	}
 
 	public function getController() 
@@ -21,5 +29,10 @@ class Route implements RouteInterface {
 	public function getMethod() 
 	{
 		return $this->methodName;
+	}
+
+	public function getParameters()
+	{
+		return $this->parameters;
 	}
 }
