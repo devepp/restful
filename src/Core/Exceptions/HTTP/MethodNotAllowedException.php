@@ -3,7 +3,7 @@
 namespace App\Core\Exceptions\HTTP;
 
 
-class MethodNotAllowed
+class MethodNotAllowedException extends \Exception
 {
 
 }

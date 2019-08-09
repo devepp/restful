@@ -6,8 +6,11 @@ use Psr\Container\ContainerInterface;
 use App\Core\Middleware\AuthMiddleware;
 use Zend\Diactoros\ResponseFactory;
 use Psr\Http\Message\ResponseFactoryInterface;
+use \Psr\Http\Message\ServerRequestInterface;
 use App\Core\Middleware\JsonDecoder;
-use App\Core\Middleware\RouteDispatcher;
+use App\Core\Router\RouteDispatcher;
+use App\Core\Router\RouteCollector;
+use App\Core\Router\RouteCollection;
 use App\Core\Router\RouterInterface;
 use App\Core\Router\Router;
 use App\Core\RequestHandler;
@@ -36,13 +39,22 @@ $classFactories = [
 	RouteDispatcher::class => function(ContainerInterface $c) {
 		return new RouteDispatcher($c->get(ContainerInterface::class), $c->get(RouterInterface::class));
 	},
+	RouteCollector::class => function(ContainerInterface $c) {
+		return new RouteCollector();
+	},
 	ContainerInterface::class => function(ContainerInterface $c) {
 		return $c;
 	},
 	RouterInterface::class => function(ContainerInterface $c) {
-		$routes = [];
+		return new Router($c->get(RouteCollection::class));
+	},
+	RouteCollection::class => function(ContainerInterface $c) {
+		$routeCollector = $c->get(RouteCollector::class);
 		require_once('../src/Config/routes.php');
-		return new Router($routes);
+		return $routeCollector->getCollection();
+	},
+	ServerRequestInterface::class => function(ContainerInterface $c) {
+		return new AssetsController($c->get(\PDO::class));
 	},
 	AssetsController::class => function(ContainerInterface $c) {
 		return new AssetsController($c->get(\PDO::class));
@@ -56,11 +68,12 @@ $container = new Container($classFactories);
 
 $middleWare = [
 	$container->get(AuthMiddleware::class),
-	$container->get(JsonDecoder::class),
-	$container->get(RouteDispatcher::class),
+	$container->get(JsonDecoder::class)
 ];
 
-$requestHandler =  new RequestHandler($middleWare, $container);
+$routeDispatcher = $container->get(RouteDispatcher::class);
+
+$requestHandler =  new RequestHandler($middleWare, $routeDispatcher);
 $request = ServerRequestFactory::fromGlobals();
 $response  = $requestHandler->handle($request);
 

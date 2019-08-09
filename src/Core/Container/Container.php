@@ -28,8 +28,6 @@ class Container implements ContainerInterface
         if ($this->has($id)) {
             try {
                 $entry = $this->entries[$id];
-                // var_dump($this->entries);
-                // die('get');
                 return $entry($this);
             } catch (\Exception $e) {
                 throw new ContainerException($e->getMessage());

@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Core\Router\RouteDispatcher;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -11,26 +12,28 @@ use Psr\Http\Server\RequestHandlerInterface;
 class RequestHandler implements RequestHandlerInterface
 {
 	protected $middleware = [];
-	protected $container;
+	protected $routeDispatcher;
 
 	/**
 	 * RequestHandler constructor.
 	 * @param array $middleware
 	 * @param ContainerInterface $container
 	 */
-	public function __construct(array $middleware, ContainerInterface $container)
+	public function __construct(array $middleware, RouteDispatcher $dispatcher)
 	{
 		array_map([$this, 'addMiddleware'], $middleware);
-		$this->container = $container;
+		$this->routeDispatcher = $dispatcher;
 	}
 
 	public function handle(ServerRequestInterface $request): ResponseInterface
 	{
-		if ($m = $this->getMiddleware()) {
-			return $m->process($request, $this);
+		if (!empty($this->middleware)) {
+			$middleware = $this->getMiddleware();
+			return $middleware->process($request, $this);
 		}
 
-		throw new \Exception();
+		// we may want to do something if dispatch doesn't return a response
+		return $this->routeDispatcher->dispatch($request);
 	}
 
 	/**

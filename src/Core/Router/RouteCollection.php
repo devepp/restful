@@ -1,15 +1,25 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 8/9/2019
- * Time: 5:09 PM
- */
 
 namespace App\Core\Router;
 
 
 class RouteCollection
 {
+	private $routes = [];
+
+	/**
+	 * RouteCollection constructor.
+	 * @param array $routes
+	 */
+	public function __construct(array $routes)
+	{
+		$this->routes = $routes;
+	}
+
+	public function toArray()
+	{
+		return $this->routes;
+	}
+
 
 }

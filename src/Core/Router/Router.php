@@ -2,27 +2,35 @@
 
 namespace App\Core\Router;
 
+use App\Core\Exceptions\HTTP\MethodNotAllowedException;
+use App\Core\Exceptions\NotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Router implements RouterInterface {
+class Router implements RouterInterface
+{
+	private $routes;
 
-	private $routes = [];
-
-	public function __construct(array $routes = [])
+	public function __construct(RouteCollection $routes)
 	{
 		$this->routes = $routes;
 	}
 
-	public function getRoute(ServerRequestInterface $request): RouteInterface
+	public function getRoute($requestedUrl, $httpMethod): Route
 	{
-		$uri = $request->getUri();
-		$uriPath = $uri->getPath();
-		$httpMethod = $request->getMethod();
-
-		if (isset($this->routes[$httpMethod][$uriPath])) {
-			return $this->routes[$httpMethod][$uriPath];
+		/** @var Route $route */
+		foreach ($this->routes->toArray() as $route) {
+			if ($route->matches($requestedUrl) && $route->methodAllowed($httpMethod)) {
+				return $route;
+			}
 		}
 
-		throw new \Exception('Route not found');
+		/** @var Route $route */
+		foreach ($this->routes->toArray() as $route) {
+			if ($route->matches($requestedUrl) && !$route->methodAllowed($httpMethod)) {
+				throw new MethodNotAllowedException('Method '.$httpMethod.' not allowed');
+			}
+		}
+
+		throw new NotFoundException('Route not found');
 	}
 }

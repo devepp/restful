@@ -5,53 +5,52 @@ namespace App\Core\Router;
 
 class RouteCollector
 {
-	protected $get = [];
-	protected $post = [];
-	protected $put = [];
-	protected $delete = [];
+	protected $routes = [];
 
 	public function add($httpMethod, $url, $controller, $method)
 	{
-		switch (strtoupper($httpMethod)) {
-			case "GET" :
-				$this->get($url, $controller, $method);
-				break;
-
-			case "POST" :
-				$this->post($url, $controller, $method);
-				break;
-
-			case "PUT" :
-				$this->put($url, $controller, $method);
-				break;
-
-			case "DELETE" :
-				$this->delete($url, $controller, $method);
-				break;
-
-			default :
-				throw new \Exception();
-		}
+		$this->routes[] = new Route($httpMethod, $url, $controller, $method);
 	}
 
 	public function get($url, $controller, $method)
 	{
-		$this->get[$url] = new Route($controller, $method);
+		$this->add('GET', $url, $controller, $method);
 	}
 
 	public function post($url, $controller, $method)
 	{
-		$this->post[$url] = new Route($controller, $method);
+		$this->add('POST', $url, $controller, $method);
 	}
 
 	public function put($url, $controller, $method)
 	{
-		$this->put[$url] = new Route($controller, $method);
+		$this->add('PUT', $url, $controller, $method);
 	}
 
 	public function delete($url, $controller, $method)
 	{
-		$this->delete[$url] = new Route($controller, $method);
+		$this->add('DELETE', $url, $controller, $method);
+	}
+
+	public function resource($url, $controller)
+	{
+		$this->get($url, $controller, 'index');
+		$this->post($url, $controller, 'store');
+		$this->get($url.'/{id}', $controller, 'show');
+		$this->put($url.'/{id}', $controller, 'update');
+		$this->delete($url.'/{id}', $controller, 'delete');
+	}
+
+	public function addCollection(RouteCollection $collection): void
+	{
+		foreach ($collection->toArray() as $route) {
+			$this->routes[] = $route;
+		}
+	}
+
+	public function getCollection(): RouteCollection
+	{
+		return new RouteCollection($this->routes);
 	}
 
 	private function createRegex(string $url_string)
