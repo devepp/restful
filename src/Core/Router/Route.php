@@ -8,11 +8,12 @@ class Route
 	private $urlPattern;
 	private $controllerName;
 	private $methodName;
+	private $urlSegments = [];
 
 	/**
 	 * Route constructor.
 	 * @param $httpMethod
-	 * @param $url
+	 * @param $urlPattern
 	 * @param $controllerName
 	 * @param $methodName
 	 */
@@ -22,11 +23,26 @@ class Route
 		$this->urlPattern = $urlPattern;
 		$this->controllerName = $controllerName;
 		$this->methodName = $methodName;
+		$this->parseUrlPattern($this->urlPattern);
 	}
 
 	public function matches($requestedUrl): bool
 	{
-		// TODO if dynamic route (with {} ) then use fancy regex otherwise check if url is exact match
+		if (strpos($requestedUrl, '/') === 0){
+			$requestedUrl = substr($requestedUrl, 1);
+		}
+
+		$requestedUrlArray = explode('/', $requestedUrl);
+
+		if (count($requestedUrlArray) != count($this->urlSegments)) {
+			return false;
+		}
+
+		foreach ($this->urlSegments as $index => $segment) {
+			if (!$segment->matches($requestedUrlArray[$index])) {
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -47,15 +63,29 @@ class Route
 
 	public function getParameters($requestedUrl): array
 	{
-		// TODO regex to get values from requestedUrl
-		// example:
-		//		$this->urlPattern = '/assets/{asset_id}/vendors/{vendor_id}';
-		//		$requestedUrl = '/assets/222/vendors/77';
-		//		return [
-		//			'asset_id' => '222',
-		//			'vendor_id' => '77',
-		//		];
+		$parameters = [];
 
-		return ['id' => '54'];
+		if (strpos($requestedUrl, '/') === 0){
+			$requestedUrl = substr($requestedUrl, 1);
+		}
+		$requestedUrlArray = explode('/', $requestedUrl);
+
+		foreach ($this->urlSegments as $index => $segment) {
+			$parameters = array_merge($parameters, $segment->getParameters($requestedUrlArray[$index]));
+		}
+		return $parameters;
+	}
+
+	private function parseUrlPattern($urlPattern)
+	{
+		if (strpos($urlPattern, '/') === 0){
+			$urlPattern = substr($urlPattern, 1);
+		}
+
+		$urlArray = explode('/', $urlPattern);
+
+		foreach ($urlArray as $urlSegment) {
+			$this->urlSegments[] = UrlSegment::makeUriSegment($urlSegment);
+		}
 	}
 }
