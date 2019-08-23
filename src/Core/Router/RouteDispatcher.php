@@ -17,6 +17,7 @@ class RouteDispatcher
 		$this->router = $router;
 	}
 
+	// entrance point to routing library
 	public function dispatch(ServerRequestInterface $request)
 	{
 		$requestedUrl = $request->getUri()->getPath();

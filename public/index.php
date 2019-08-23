@@ -21,26 +21,13 @@ use Narrowspark\HttpEmitter\SapiEmitter;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+// .env file to store credentials
 Dotenv::create('../')->load();
 
+// required by container
 $classFactories = [
-    AuthMiddleware::class => function (ContainerInterface $c) {
-        return new AuthMiddleware($c->get(ResponseFactoryInterface::class));
-    },
-	AuthMiddleware::class => function(ContainerInterface $c) {
-		return new AuthMiddleware($c->get(ResponseFactoryInterface::class));
-	},
 	ResponseFactoryInterface::class => function(ContainerInterface $c) {
 		return new ResponseFactory();
-	},
-	JsonDecoder::class => function(ContainerInterface $c) {
-		return new JsonDecoder();
-	},
-	RouteDispatcher::class => function(ContainerInterface $c) {
-		return new RouteDispatcher($c->get(ContainerInterface::class), $c->get(RouterInterface::class));
-	},
-	RouteCollector::class => function(ContainerInterface $c) {
-		return new RouteCollector();
 	},
 	ContainerInterface::class => function(ContainerInterface $c) {
 		return $c;
@@ -56,9 +43,6 @@ $classFactories = [
 	ServerRequestInterface::class => function(ContainerInterface $c) {
 		return new AssetsController($c->get(\PDO::class));
 	},
-	AssetsController::class => function(ContainerInterface $c) {
-		return new AssetsController($c->get(\PDO::class));
-	},
 	PDO::class => function(ContainerInterface $c) {
 		return PDOManager::getInstance()->getConnection();
 	}
@@ -66,6 +50,7 @@ $classFactories = [
 
 $container = new Container($classFactories);
 
+// auth checks for presence of header token and json decoder decodes into json if header says it should
 $middleWare = [
 	$container->get(AuthMiddleware::class),
 	$container->get(JsonDecoder::class)
@@ -75,7 +60,9 @@ $routeDispatcher = $container->get(RouteDispatcher::class);
 
 $requestHandler =  new RequestHandler($middleWare, $routeDispatcher);
 $request = ServerRequestFactory::fromGlobals();
+
+// the "magic" line where everything's run - Paul Epp, 2019
 $response  = $requestHandler->handle($request);
 
-$emmitter = new SapiEmitter();
-$emmitter->emit($response);
+$emitter = new SapiEmitter();
+$emitter->emit($response);

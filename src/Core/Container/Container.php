@@ -7,6 +7,7 @@ use Psr\Container\ContainerInterface;
 class Container implements ContainerInterface
 {
     protected $entries = [];
+    protected $fqcns = [];
 
     public function __construct($arr)
     {
@@ -33,7 +34,7 @@ class Container implements ContainerInterface
                 throw new ContainerException($e->getMessage());
             }
         } else {
-            throw new NotFoundException("Could not find " . $id);
+        		return $this->reflectOnMagic($id);
         }
     }
 
@@ -53,4 +54,56 @@ class Container implements ContainerInterface
         // return true;
         return array_key_exists($id, $this->entries);
     }
+
+	/**
+	 * Try to find the entry using reflection before throwing error
+	 *
+	 * @param string $id Identifier of the entry to look for.
+	 *
+	 * @throws NotFoundException  No entry was found for **this** identifier.
+	 */
+    private function reflectOnMagic($id)
+	 {
+	 	$this->loadFqcns();
+	 	if (in_array($id, $this->fqcns)) {
+			return $this->makeClass($id);
+		}
+
+		 throw new NotFoundException("Could not find " . $id);
+	 }
+
+	 private function makeClass($fqcn)
+	 {
+		 $reflectedClass = new \ReflectionClass($fqcn);
+		 $reflectedConstructor = $reflectedClass->getConstructor();
+		 if (!$reflectedConstructor) {
+		 	return new $fqcn;
+		 }
+		 $reflectedParameters = $reflectedConstructor->getParameters();
+
+		 $params = [];
+		 foreach ($reflectedParameters as $parameter) {
+		 	if ($parameter->hasType()) {
+		 		$parameterTypeName = $parameter->getType()->getName();
+		 		$params[] = $this->get($parameterTypeName);
+			} else {
+		 		throw new \Exception('Failed to construct '.$fqcn.'; missing '.$parameter);
+			}
+		 }
+		 return $reflectedClass->newInstanceArgs($params);
+	 }
+
+	 private function loadFqcns()
+	 {
+		 if (!empty($this->fqcn)) {
+		 	return;
+		 }
+	 	$directory = new \RecursiveDirectoryIterator('..\src');
+		 $iterator = new \RecursiveIteratorIterator($directory);
+		 $regex = new \RegexIterator($iterator, '/^.+\.php$/i', \RecursiveRegexIterator::GET_MATCH);
+
+		 foreach ($regex as $filepath) {
+			 $this->fqcns[] = str_replace(['..\src', '.php'], ['App', ''], reset($filepath));
+		 }
+	 }
 }
