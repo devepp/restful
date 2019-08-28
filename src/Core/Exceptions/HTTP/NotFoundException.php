@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Core\Exceptions;
+namespace App\Core\Exceptions\HTTP;
 
 
-class NotFoundException extends \Exception
+class NotFoundException extends \HttpRequestException
 {
 
 }

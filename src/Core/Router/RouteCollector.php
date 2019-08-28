@@ -52,10 +52,4 @@ class RouteCollector
 	{
 		return new RouteCollection($this->routes);
 	}
-
-// //TODO remove: For reference
-//	private function createRegex(string $url_string)
-//	{
-//		return preg_replace('({\w})', '([^/]+)', $url_string);
-//	}
 }

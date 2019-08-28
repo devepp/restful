@@ -3,7 +3,7 @@
 namespace App\Core\Router;
 
 use App\Core\Exceptions\HTTP\MethodNotAllowedException;
-use App\Core\Exceptions\NotFoundException;
+use App\Core\Exceptions\HTTP\NotFoundException;
 use Psr\Http\Message\ServerRequestInterface;
 
 class Router implements RouterInterface

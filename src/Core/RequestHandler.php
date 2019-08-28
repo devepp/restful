@@ -5,6 +5,7 @@ namespace App\Core;
 use App\Core\Middleware\MiddlewareCollection;
 use App\Core\Router\RouteDispatcher;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -17,17 +18,22 @@ class RequestHandler implements RequestHandlerInterface
 	protected $routeDispatcher;
 	/** @var ContainerInterface */
 	protected $container;
+	/** @var ResponseFactoryInterface */
+	protected $responseFactory;
 
 	/**
 	 * RequestHandler constructor.
-	 * @param array $middleware
+	 * @param MiddlewareCollection $middlewareCollection
+	 * @param RouteDispatcher $dispatcher
 	 * @param ContainerInterface $container
+	 * @param ResponseFactoryInterface $responseFactory
 	 */
-	public function __construct(MiddlewareCollection $middlewareCollection, RouteDispatcher $dispatcher, ContainerInterface $container)
+	public function __construct(MiddlewareCollection $middlewareCollection, RouteDispatcher $dispatcher, ContainerInterface $container, ResponseFactoryInterface $responseFactory)
 	{
 		$this->middleware = $middlewareCollection->toArray();
 		$this->routeDispatcher = $dispatcher;
 		$this->container = $container;
+		$this->responseFactory = $responseFactory;
 	}
 
 	public function handle(ServerRequestInterface $request): ResponseInterface
@@ -37,8 +43,13 @@ class RequestHandler implements RequestHandlerInterface
 			return $middleware->process($request, $this);
 		}
 
-		// we may want to do something if dispatch doesn't return a response
-		return $this->routeDispatcher->dispatch($request);
+		$response = $this->routeDispatcher->dispatch($request);
+
+		if ($response instanceOf ResponseInterface) {
+			return $response;
+		}
+
+		return $this->responseFactory->createResponse();
 	}
 
 	/**
