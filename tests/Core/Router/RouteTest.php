@@ -30,4 +30,16 @@ class RouteTest extends TestCase
 
       $this->assertEquals($parameters, $expectReturnedArray);
    }
+   
+	public function testMethodAllowed()
+	{
+		$route = new Route('GET', '', '', '');
+		$this->assertTrue($route->methodAllowed('GET'));
+	}
+
+	public function testMethodNotAllowed()
+	{
+		$route = new Route('GET', '', '', '');
+		$this->assertFalse($route->methodAllowed('POST'));
+	}
 }
