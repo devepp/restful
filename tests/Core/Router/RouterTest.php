@@ -19,12 +19,12 @@ class RouterTest extends TestCase
 		$routeCollection = new RouteCollection($routes);
 		$router = new Router($routeCollection);
 
-		$returnedRoute = $router->getRoute('', 'GET');
+		$returnedRoute = $router->getRoute('', '');
 
 		$this->assertSame($matchingRoute, $returnedRoute);
 	}
 
-	public function testDoesNotReturnARoute()
+	public function testUrlDoesNotMatch()
 	{
 		$notMatchingRoute = $this->routeMock(false, true);
 
@@ -33,7 +33,7 @@ class RouterTest extends TestCase
 		$router = new Router($routeCollection);
 
 		$this->expectException(NotFoundException::class);
-		$router->getRoute('', 'GET');
+		$router->getRoute('', '');
 	}
 
 	public function testMethodNotAllowed()
@@ -45,7 +45,7 @@ class RouterTest extends TestCase
 		$router = new Router($routeCollection);
 
 		$this->expectException(MethodNotAllowedException::class);
-		$router->getRoute('', 'GET');
+		$router->getRoute('', '');
 	}
 
 	private function routeMock($matches, $methodAllowed)
