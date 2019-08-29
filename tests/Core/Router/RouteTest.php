@@ -30,7 +30,7 @@ class RouteTest extends TestCase
 
       $this->assertEquals($parameters, $expectReturnedArray);
    }
-   
+
 	public function testMethodAllowed()
 	{
 		$route = new Route('GET', '', '', '');
@@ -41,5 +41,18 @@ class RouteTest extends TestCase
 	{
 		$route = new Route('GET', '', '', '');
 		$this->assertFalse($route->methodAllowed('POST'));
+	}
+
+	public function testMatchesDoLovelyStuff()
+	{
+		$route = new Route('GET', 'assets/{id}', 'assets', 'show');
+
+		$this->assertTrue($route->matches('assets/5'), 'URL is valid for method');
+	}
+
+	public function testMatchesDidntDoLovelyStuff()
+	{
+		$route = new Route('GET', 'assets/{id}', 'assets', 'show');
+		$this->assertFalse($route->matches('assets'), 'URL is not valid for method');
 	}
 }
