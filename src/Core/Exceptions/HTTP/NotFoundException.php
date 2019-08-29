@@ -3,7 +3,7 @@
 namespace App\Core\Exceptions\HTTP;
 
 
-class NotFoundException extends \HttpRequestException
+class NotFoundException extends \Exception
 {
 
 }

@@ -27,7 +27,7 @@ class Router implements RouterInterface
 		/** @var Route $route */
 		foreach ($this->routes->toArray() as $route) {
 			if ($route->matches($requestedUrl) && !$route->methodAllowed($httpMethod)) {
-				throw new MethodNotAllowedException('Method '.$httpMethod.' not allowed');
+//				throw new MethodNotAllowedException('Method '.$httpMethod.' not allowed');
 			}
 		}
 
