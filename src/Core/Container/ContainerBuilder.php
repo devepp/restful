@@ -14,6 +14,7 @@ use App\Core\Middleware\MiddlewareCollection;
 use App\Core\Middleware\MiddlewareCollector;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use PDO;
 
 
 class ContainerBuilder
