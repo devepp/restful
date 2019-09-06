@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Core\Exceptions\NotFoundException;
+use App\Core\Exceptions\HTTP\NotFoundException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;

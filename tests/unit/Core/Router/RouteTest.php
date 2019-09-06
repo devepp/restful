@@ -55,4 +55,11 @@ class RouteTest extends TestCase
 		$route = new Route('GET', 'assets/{id}', 'assets', 'show');
 		$this->assertFalse($route->matches('assets'), 'URL is not valid for method');
 	}
+
+	public function testTrimSlashes()
+	{
+		$route = new Route('GET', 'assets/', 'assets', 'show');
+
+		$this->assertTrue($route->matches('assets'), 'URL is valid for method');
+	}
 }

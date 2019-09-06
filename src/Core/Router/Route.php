@@ -28,9 +28,7 @@ class Route
 
 	public function matches($requestedUrl): bool
 	{
-		if (strpos($requestedUrl, '/') === 0){
-			$requestedUrl = substr($requestedUrl, 1);
-		}
+		$requestedUrl = trim($requestedUrl, '/');
 
 		$requestedUrlArray = explode('/', $requestedUrl);
 
@@ -65,9 +63,7 @@ class Route
 	{
 		$parameters = [];
 
-		if (strpos($requestedUrl, '/') === 0){
-			$requestedUrl = substr($requestedUrl, 1);
-		}
+		$requestedUrl = trim($requestedUrl, '/');
 		$requestedUrlArray = explode('/', $requestedUrl);
 
 		foreach ($this->urlSegments as $index => $segment) {
@@ -78,9 +74,7 @@ class Route
 
 	private function parseUrlPattern($urlPattern)
 	{
-		if (strpos($urlPattern, '/') === 0){
-			$urlPattern = substr($urlPattern, 1);
-		}
+		$urlPattern = trim($urlPattern, '/');
 
 		$urlArray = explode('/', $urlPattern);
 
