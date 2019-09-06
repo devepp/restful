@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\webserver\htdocs\frame\src\Reporting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../index.html">C:\webserver\htdocs\frame\src</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Reporting</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AbstractProviderRepository.php.html#5">App\Reporting\AbstractProviderRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#20">App\Reporting\Processing\QueryBuilder</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Ancestor.php.html#12">App\Reporting\Resources\Ancestor</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#8">App\Reporting\ReportRepository</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#15">App\Reporting\ReportField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#7">App\Reporting\Report</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#19">App\Reporting\Processing\Selections</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryPath.php.html#14">App\Reporting\Processing\QueryPath</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#20">App\Reporting\Processing\QueryGroup</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelFormatter.php.html#15">App\Reporting\Formatters\ExcelFormatter</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Descendant.php.html#12">App\Reporting\Resources\Descendant</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#14">App\Reporting\Form</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#14">App\Reporting\Filters\Filter</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/StartsWith.php.html#14">App\Reporting\Filters\Constraints\StartsWith</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/OneOf.php.html#14">App\Reporting\Filters\Constraints\OneOf</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotOneOf.php.html#14">App\Reporting\Filters\Constraints\NotOneOf</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotEqual.php.html#14">App\Reporting\Filters\Constraints\NotEqual</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotContains.php.html#14">App\Reporting\Filters\Constraints\NotContains</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Condition.php.html#14">App\Reporting\Resources\Condition</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Limit.php.html#5">App\Reporting\Resources\Limit</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/LessThan.php.html#15">App\Reporting\Filters\Constraints\LessThan</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#13">App\Reporting\Selectables\ListSelectable</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#16">App\Reporting\SelectedFilter</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#16">App\Reporting\SelectedField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#13">App\Reporting\Selectables\Sum</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Standard.php.html#13">App\Reporting\Selectables\Standard</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#13">App\Reporting\Selectables\Percent</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#13">App\Reporting\Selectables\Min</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#13">App\Reporting\Selectables\Max</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#13">App\Reporting\Selectables\Custom</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Relationship.php.html#12">App\Reporting\Resources\Relationship</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#13">App\Reporting\Selectables\Count</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#13">App\Reporting\Selectables\Average</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#14">App\Reporting\Selectables\AbstractSelectable</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectableField.php.html#13">App\Reporting\SelectableField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#13">App\Reporting\Resources\TableList</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#24">App\Reporting\Resources\Table</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#22">App\Reporting\Resources\ReportConfig</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotBetween.php.html#14">App\Reporting\Filters\Constraints\NotBetween</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsTrue.php.html#15">App\Reporting\Filters\Constraints\IsTrue</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractReport.php.html#14">App\Reporting\AbstractReport</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/From.php.html#6">App\Reporting\DB\QueryBuilder\QueryParts\From</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Update.php.html#8">App\Reporting\DB\QueryBuilder\QueryTypes\Update</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Insert.php.html#8">App\Reporting\DB\QueryBuilder\QueryTypes\Insert</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Delete.php.html#8">App\Reporting\DB\QueryBuilder\QueryTypes\Delete</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/WhereCollection.php.html#6">App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#6">App\Reporting\DB\QueryBuilder\QueryParts\Where</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Join.php.html#6">App\Reporting\DB\QueryBuilder\QueryParts\Join</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#14">App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#24">App\Reporting\DatabaseFields\BooleanField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#5">App\Reporting\DB\Dsn</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Credentials.php.html#12">App\Reporting\DB\Credentials</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionOptions.php.html#12">App\Reporting\DB\ConnectionOptions</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#8">App\Reporting\DB\ConnectionManager</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#7">App\Reporting\DB\Connection</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/CIConnectionInfo.php.html#8">App\Reporting\DB\CIConnectionInfo</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsFalse.php.html#15">App\Reporting\Filters\Constraints\IsFalse</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#8">App\Reporting\DB\Result</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#9">App\Reporting\DatabaseFields\DatabaseField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateField.php.html#20">App\Reporting\DatabaseFields\DateField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/GreaterThan.php.html#14">App\Reporting\Filters\Constraints\GreaterThan</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Equals.php.html#15">App\Reporting\Filters\Constraints\Equals</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/EndsWith.php.html#14">App\Reporting\Filters\Constraints\EndsWith</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Contains.php.html#14">App\Reporting\Filters\Constraints\Contains</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Between.php.html#13">App\Reporting\Filters\Constraints\Between</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#15">App\Reporting\Filters\Constraints\AbstractConstraint</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#10">App\Reporting\Excel\SpoutExcel</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/Row.php.html#12">App\Reporting\Excel\Row</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#13">App\Reporting\Excel\PhpOfficeSpreadsheet</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#20">App\Reporting\DatabaseFields\StringField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#14">App\Reporting\DatabaseFields\PrimaryKey</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#22">App\Reporting\DatabaseFields\NumberField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#16">App\Reporting\DatabaseFields\ForeignKey</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateTimeField.php.html#20">App\Reporting\DatabaseFields\DateTimeField</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#12">App\Reporting\TabularData</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#13">App\Reporting\DB\QueryBuilder\QueryBuilder</a></td><td class="text-right">27%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Type.php.html#7">App\Reporting\DB\QueryBuilder\QueryTypes\Type</a></td><td class="text-right">50%</td></tr>
+       <tr><td><a href="DB/Query.php.html#6">App\Reporting\DB\Query</a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/TableExpression.php.html#5">App\Reporting\DB\QueryBuilder\QueryParts\TableExpression</a></td><td class="text-right">81%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Resources/Table.php.html#24">App\Reporting\Resources\Table</a></td><td class="text-right">1482</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#20">App\Reporting\Processing\QueryGroup</a></td><td class="text-right">1122</td></tr>
+       <tr><td><a href="ReportRepository.php.html#8">App\Reporting\ReportRepository</a></td><td class="text-right">930</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#13">App\Reporting\Resources\TableList</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#20">App\Reporting\Processing\QueryBuilder</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#9">App\Reporting\DatabaseFields\DatabaseField</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#22">App\Reporting\Resources\ReportConfig</a></td><td class="text-right">506</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#14">App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder</a></td><td class="text-right">420</td></tr>
+       <tr><td><a href="Form.php.html#14">App\Reporting\Form</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="ReportField.php.html#15">App\Reporting\ReportField</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#19">App\Reporting\Processing\Selections</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="DB/Result.php.html#8">App\Reporting\DB\Result</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#14">App\Reporting\Selectables\AbstractSelectable</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#13">App\Reporting\DB\QueryBuilder\QueryBuilder</a></td><td class="text-right">175</td></tr>
+       <tr><td><a href="AbstractReport.php.html#14">App\Reporting\AbstractReport</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="TabularData.php.html#12">App\Reporting\TabularData</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#5">App\Reporting\DB\Dsn</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#14">App\Reporting\Filters\Filter</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#15">App\Reporting\Filters\Constraints\AbstractConstraint</a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#22">App\Reporting\DatabaseFields\NumberField</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#20">App\Reporting\DatabaseFields\StringField</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#24">App\Reporting\DatabaseFields\BooleanField</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#8">App\Reporting\DB\ConnectionManager</a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#13">App\Reporting\Excel\PhpOfficeSpreadsheet</a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#10">App\Reporting\Excel\SpoutExcel</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#13">App\Reporting\Selectables\Average</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#13">App\Reporting\Selectables\Count</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#13">App\Reporting\Selectables\Custom</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#13">App\Reporting\Selectables\ListSelectable</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#13">App\Reporting\Selectables\Max</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#13">App\Reporting\Selectables\Min</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#13">App\Reporting\Selectables\Percent</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#13">App\Reporting\Selectables\Sum</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="AbstractProviderRepository.php.html#5">App\Reporting\AbstractProviderRepository</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/WhereCollection.php.html#6">App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Delete.php.html#8">App\Reporting\DB\QueryBuilder\QueryTypes\Delete</a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Resources/Relationship.php.html#12">App\Reporting\Resources\Relationship</a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/TableExpression.php.html#5">App\Reporting\DB\QueryBuilder\QueryParts\TableExpression</a></td><td class="text-right">10</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AbstractProviderRepository.php.html#13"><abbr title="App\Reporting\AbstractProviderRepository::getBySlug">getBySlug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#44"><abbr title="App\Reporting\ReportField::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#59"><abbr title="App\Reporting\ReportRepository::find_all">find_all</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#12"><abbr title="App\Reporting\ReportRepository::find">find</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#105"><abbr title="App\Reporting\ReportField::aggregateFieldHtml">aggregateFieldHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#98"><abbr title="App\Reporting\ReportField::fieldHtml">fieldHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#86"><abbr title="App\Reporting\ReportField::selectableFields">selectableFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#80"><abbr title="App\Reporting\ReportField::tableAsCategory">tableAsCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#75"><abbr title="App\Reporting\ReportField::tableAlias">tableAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#68"><abbr title="App\Reporting\ReportField::type">type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#63"><abbr title="App\Reporting\ReportField::dbField">dbField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#57"><abbr title="App\Reporting\ReportField::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportField.php.html#28"><abbr title="App\Reporting\ReportField::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#147"><abbr title="App\Reporting\ReportRepository::save">save</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#54"><abbr title="App\Reporting\Report::getAccessProfiles">getAccessProfiles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#49"><abbr title="App\Reporting\Report::getAccessUsers">getAccessUsers</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#44"><abbr title="App\Reporting\Report::getName">getName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#39"><abbr title="App\Reporting\Report::getModuleID">getModuleID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#34"><abbr title="App\Reporting\Report::getUserID">getUserID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#29"><abbr title="App\Reporting\Report::getID">getID</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Report.php.html#17"><abbr title="App\Reporting\Report::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#113"><abbr title="App\Reporting\Processing\Selections::getLimit">getLimit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#96"><abbr title="App\Reporting\Processing\Selections::getFields">getFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#70"><abbr title="App\Reporting\Processing\Selections::getFilters">getFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#60"><abbr title="App\Reporting\Processing\Selections::limit">limit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#103"><abbr title="App\Reporting\ReportRepository::check_report_access">check_report_access</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#181"><abbr title="App\Reporting\ReportRepository::process_user_access">process_user_access</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#44"><abbr title="App\Reporting\Processing\Selections::selectedFields">selectedFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Relationship.php.html#37"><abbr title="App\Reporting\Resources\Relationship::joinConditionsSql">joinConditionsSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#126"><abbr title="App\Reporting\Resources\ReportConfig::generateSql">generateSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#102"><abbr title="App\Reporting\Resources\ReportConfig::addTable">addTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#96"><abbr title="App\Reporting\Resources\ReportConfig::addFilter">addFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#90"><abbr title="App\Reporting\Resources\ReportConfig::addReportField">addReportField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#85"><abbr title="App\Reporting\Resources\ReportConfig::form">form</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#78"><abbr title="App\Reporting\Resources\ReportConfig::generateFilters">generateFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#71"><abbr title="App\Reporting\Resources\ReportConfig::generateFields">generateFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#62"><abbr title="App\Reporting\Resources\ReportConfig::generateFieldsAndFilters">generateFieldsAndFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#55"><abbr title="App\Reporting\Resources\ReportConfig::__debugInfo">__debugInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#45"><abbr title="App\Reporting\Resources\ReportConfig::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Relationship.php.html#27"><abbr title="App\Reporting\Resources\Relationship::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#199"><abbr title="App\Reporting\ReportRepository::process_profile_access">process_profile_access</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Limit.php.html#43"><abbr title="App\Reporting\Resources\Limit::sql">sql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Limit.php.html#35"><abbr title="App\Reporting\Resources\Limit::offset">offset</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Limit.php.html#27"><abbr title="App\Reporting\Resources\Limit::numberOfRecords">numberOfRecords</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Limit.php.html#18"><abbr title="App\Reporting\Resources\Limit::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Descendant.php.html#14"><abbr title="App\Reporting\Resources\Descendant::descendant">descendant</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Condition.php.html#39"><abbr title="App\Reporting\Resources\Condition::sql">sql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Condition.php.html#31"><abbr title="App\Reporting\Resources\Condition::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Ancestor.php.html#15"><abbr title="App\Reporting\Resources\Ancestor::descendant">descendant</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#241"><abbr title="App\Reporting\ReportRepository::delete_profile_access">delete_profile_access</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#234"><abbr title="App\Reporting\ReportRepository::delete_user_access">delete_user_access</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ReportRepository.php.html#217"><abbr title="App\Reporting\ReportRepository::delete_report">delete_report</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#52"><abbr title="App\Reporting\Processing\Selections::selectedFilters">selectedFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#33"><abbr title="App\Reporting\Processing\Selections::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#159"><abbr title="App\Reporting\Resources\ReportConfig::findQueryGroupByTable">findQueryGroupByTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#33"><abbr title="App\Reporting\Form::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#48"><abbr title="App\Reporting\Processing\QueryBuilder::buildQuery">buildQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#36"><abbr title="App\Reporting\Processing\QueryBuilder::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelFormatter.php.html#19"><abbr title="App\Reporting\Formatters\ExcelFormatter::output">output</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#112"><abbr title="App\Reporting\Form::parseJson">parseJson</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#100"><abbr title="App\Reporting\Form::getFilterByName">getFilterByName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#87"><abbr title="App\Reporting\Form::getFieldByName">getFieldByName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#73"><abbr title="App\Reporting\Form::filtersByCategory">filtersByCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#65"><abbr title="App\Reporting\Form::filters">filters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#52"><abbr title="App\Reporting\Form::fieldsByCategory">fieldsByCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#44"><abbr title="App\Reporting\Form::fields">fields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Form.php.html#27"><abbr title="App\Reporting\Form::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#109"><abbr title="App\Reporting\Processing\QueryBuilder::buildSqlSubQuery">buildSqlSubQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#83"><abbr title="App\Reporting\Filters\Filter::url">url</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#77"><abbr title="App\Reporting\Filters\Filter::constraints">constraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#69"><abbr title="App\Reporting\Filters\Filter::tableAsCategory">tableAsCategory</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#64"><abbr title="App\Reporting\Filters\Filter::dbField">dbField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#58"><abbr title="App\Reporting\Filters\Filter::label">label</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#50"><abbr title="App\Reporting\Filters\Filter::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#34"><abbr title="App\Reporting\Filters\Filter::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#27"><abbr title="App\Reporting\Filters\Filter::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/StartsWith.php.html#29"><abbr title="App\Reporting\Filters\Constraints\StartsWith::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/StartsWith.php.html#24"><abbr title="App\Reporting\Filters\Constraints\StartsWith::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/StartsWith.php.html#19"><abbr title="App\Reporting\Filters\Constraints\StartsWith::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#75"><abbr title="App\Reporting\Processing\QueryBuilder::buildSqlPrimaryGroup">buildSqlPrimaryGroup</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#144"><abbr title="App\Reporting\Processing\QueryBuilder::selectSql">selectSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryPath.php.html#44"><abbr title="App\Reporting\Processing\QueryPath::addTable">addTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#89"><abbr title="App\Reporting\Processing\QueryGroup::getReportFields">getReportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryPath.php.html#32"><abbr title="App\Reporting\Processing\QueryPath::newQueryPath">newQueryPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryPath.php.html#23"><abbr title="App\Reporting\Processing\QueryPath::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#229"><abbr title="App\Reporting\Processing\QueryGroup::subQueryRequiredFields">subQueryRequiredFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#221"><abbr title="App\Reporting\Processing\QueryGroup::prefix">prefix</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#203"><abbr title="App\Reporting\Processing\QueryGroup::applicableFields">applicableFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#186"><abbr title="App\Reporting\Processing\QueryGroup::filtersRequiredTables">filtersRequiredTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#168"><abbr title="App\Reporting\Processing\QueryGroup::fieldsRequiredTables">fieldsRequiredTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#158"><abbr title="App\Reporting\Processing\QueryGroup::subQueryTables">subQueryTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#141"><abbr title="App\Reporting\Processing\QueryGroup::primaryQueryTables">primaryQueryTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#120"><abbr title="App\Reporting\Processing\QueryGroup::requiredTables">requiredTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#98"><abbr title="App\Reporting\Processing\QueryGroup::getReportFilters">getReportFilters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#84"><abbr title="App\Reporting\Processing\QueryGroup::getTable">getTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#162"><abbr title="App\Reporting\Processing\QueryBuilder::fromSql">fromSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#75"><abbr title="App\Reporting\Processing\QueryGroup::getRoot">getRoot</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#67"><abbr title="App\Reporting\Processing\QueryGroup::hasTable">hasTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#62"><abbr title="App\Reporting\Processing\QueryGroup::isSubQuery">isSubQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#57"><abbr title="App\Reporting\Processing\QueryGroup::isPrimary">isPrimary</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#49"><abbr title="App\Reporting\Processing\QueryGroup::addTable">addTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#42"><abbr title="App\Reporting\Processing\QueryGroup::__debugInfo">__debugInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#34"><abbr title="App\Reporting\Processing\QueryGroup::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#222"><abbr title="App\Reporting\Processing\QueryBuilder::groupBySql">groupBySql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#201"><abbr title="App\Reporting\Processing\QueryBuilder::whereSql">whereSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#189"><abbr title="App\Reporting\Processing\QueryBuilder::joinSql">joinSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#176"><abbr title="App\Reporting\Processing\QueryBuilder::joinSubQuery">joinSubQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#133"><abbr title="App\Reporting\Resources\ReportConfig::findFirstMatching">findFirstMatching</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#56"><abbr title="App\Reporting\Resources\Table::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/OneOf.php.html#24"><abbr title="App\Reporting\Filters\Constraints\OneOf::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#30"><abbr title="App\Reporting\Selectables\ListSelectable::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Standard.php.html#17"><abbr title="App\Reporting\Selectables\Standard::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#30"><abbr title="App\Reporting\Selectables\Percent::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#22"><abbr title="App\Reporting\Selectables\Percent::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#17"><abbr title="App\Reporting\Selectables\Percent::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#30"><abbr title="App\Reporting\Selectables\Min::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#22"><abbr title="App\Reporting\Selectables\Min::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#17"><abbr title="App\Reporting\Selectables\Min::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#30"><abbr title="App\Reporting\Selectables\Max::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#22"><abbr title="App\Reporting\Selectables\Max::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#17"><abbr title="App\Reporting\Selectables\Max::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#22"><abbr title="App\Reporting\Selectables\ListSelectable::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Standard.php.html#27"><abbr title="App\Reporting\Selectables\Standard::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#17"><abbr title="App\Reporting\Selectables\ListSelectable::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#30"><abbr title="App\Reporting\Selectables\Custom::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#22"><abbr title="App\Reporting\Selectables\Custom::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#17"><abbr title="App\Reporting\Selectables\Custom::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#30"><abbr title="App\Reporting\Selectables\Count::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#22"><abbr title="App\Reporting\Selectables\Count::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#17"><abbr title="App\Reporting\Selectables\Count::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#30"><abbr title="App\Reporting\Selectables\Average::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#22"><abbr title="App\Reporting\Selectables\Average::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#17"><abbr title="App\Reporting\Selectables\Average::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#81"><abbr title="App\Reporting\Selectables\AbstractSelectable::label">label</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Standard.php.html#22"><abbr title="App\Reporting\Selectables\Standard::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#17"><abbr title="App\Reporting\Selectables\Sum::defaultLabel">defaultLabel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#71"><abbr title="App\Reporting\Selectables\AbstractSelectable::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#59"><abbr title="App\Reporting\SelectedFilter::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#65"><abbr title="App\Reporting\TabularData::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#56"><abbr title="App\Reporting\TabularData::headerTextAll">headerTextAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#51"><abbr title="App\Reporting\TabularData::columns">columns</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#36"><abbr title="App\Reporting\TabularData::rowValues">rowValues</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#31"><abbr title="App\Reporting\TabularData::data">data</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#25"><abbr title="App\Reporting\TabularData::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#96"><abbr title="App\Reporting\SelectedFilter::filterAlias">filterAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#86"><abbr title="App\Reporting\SelectedFilter::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#76"><abbr title="App\Reporting\SelectedFilter::table">table</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#67"><abbr title="App\Reporting\SelectedFilter::label">label</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#47"><abbr title="App\Reporting\SelectedFilter::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#22"><abbr title="App\Reporting\Selectables\Sum::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedFilter.php.html#36"><abbr title="App\Reporting\SelectedFilter::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#104"><abbr title="App\Reporting\SelectedField::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#94"><abbr title="App\Reporting\SelectedField::fieldSql">fieldSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#84"><abbr title="App\Reporting\SelectedField::table">table</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#75"><abbr title="App\Reporting\SelectedField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#70"><abbr title="App\Reporting\SelectedField::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#62"><abbr title="App\Reporting\SelectedField::label">label</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#54"><abbr title="App\Reporting\SelectedField::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#41"><abbr title="App\Reporting\SelectedField::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectedField.php.html#32"><abbr title="App\Reporting\SelectedField::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#30"><abbr title="App\Reporting\Selectables\Sum::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#76"><abbr title="App\Reporting\Selectables\AbstractSelectable::fieldName">fieldName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#64"><abbr title="App\Reporting\Selectables\AbstractSelectable::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#63"><abbr title="App\Reporting\Resources\Table::__debugInfo">__debugInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#154"><abbr title="App\Reporting\Resources\Table::isChildOf">isChildOf</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#258"><abbr title="App\Reporting\Resources\Table::addDateTimeField">addDateTimeField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#248"><abbr title="App\Reporting\Resources\Table::addDateField">addDateField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#238"><abbr title="App\Reporting\Resources\Table::addNumberField">addNumberField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#228"><abbr title="App\Reporting\Resources\Table::addStringField">addStringField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#214"><abbr title="App\Reporting\Resources\Table::setPrimaryKey">setPrimaryKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#195"><abbr title="App\Reporting\Resources\Table::relationshipType">relationshipType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#190"><abbr title="App\Reporting\Resources\Table::getRelationshipAliases">getRelationshipAliases</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#181"><abbr title="App\Reporting\Resources\Table::setPath">setPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#173"><abbr title="App\Reporting\Resources\Table::getPath">getPath</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#159"><abbr title="App\Reporting\Resources\Table::connectTable">connectTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#149"><abbr title="App\Reporting\Resources\Table::isParentOf">isParentOf</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#278"><abbr title="App\Reporting\Resources\Table::addForeignKey">addForeignKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#140"><abbr title="App\Reporting\Resources\Table::dbField">dbField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#134"><abbr title="App\Reporting\Resources\Table::addDbField">addDbField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#129"><abbr title="App\Reporting\Resources\Table::descendant">descendant</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#121"><abbr title="App\Reporting\Resources\Table::setAlias">setAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#116"><abbr title="App\Reporting\Resources\Table::setIsDescendant">setIsDescendant</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#104"><abbr title="App\Reporting\Resources\Table::getReportFields">getReportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#96"><abbr title="App\Reporting\Resources\Table::getFields">getFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#88"><abbr title="App\Reporting\Resources\Table::primary_key">primary_key</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#83"><abbr title="App\Reporting\Resources\Table::alias">alias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#77"><abbr title="App\Reporting\Resources\Table::aggregateName">aggregateName</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#72"><abbr title="App\Reporting\Resources\Table::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#268"><abbr title="App\Reporting\Resources\Table::addBooleanField">addBooleanField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#284"><abbr title="App\Reporting\Resources\Table::joinSql">joinSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#59"><abbr title="App\Reporting\Selectables\AbstractSelectable::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#112"><abbr title="App\Reporting\Resources\TableList::getTables">getTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#46"><abbr title="App\Reporting\Selectables\AbstractSelectable::getSelectables">getSelectables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#37"><abbr title="App\Reporting\Selectables\AbstractSelectable::getSelectable">getSelectable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectableField.php.html#55"><abbr title="App\Reporting\SelectableField::label">label</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectableField.php.html#47"><abbr title="App\Reporting\SelectableField::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectableField.php.html#35"><abbr title="App\Reporting\SelectableField::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SelectableField.php.html#26"><abbr title="App\Reporting\SelectableField::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#145"><abbr title="App\Reporting\Resources\TableList::findFirstMatching">findFirstMatching</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#140"><abbr title="App\Reporting\Resources\TableList::merge">merge</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#130"><abbr title="App\Reporting\Resources\TableList::mergeTables">mergeTables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#122"><abbr title="App\Reporting\Resources\TableList::hasTable">hasTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#117"><abbr title="App\Reporting\Resources\TableList::hasAlias">hasAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#102"><abbr title="App\Reporting\Resources\TableList::getTable">getTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/Table.php.html#290"><abbr title="App\Reporting\Resources\Table::findRelationship">findRelationship</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#92"><abbr title="App\Reporting\Resources\TableList::addTable">addTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#86"><abbr title="App\Reporting\Resources\TableList::count">count</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#78"><abbr title="App\Reporting\Resources\TableList::last">last</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#70"><abbr title="App\Reporting\Resources\TableList::first">first</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#62"><abbr title="App\Reporting\Resources\TableList::rewind">rewind</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#57"><abbr title="App\Reporting\Resources\TableList::valid">valid</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#52"><abbr title="App\Reporting\Resources\TableList::key">key</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#47"><abbr title="App\Reporting\Resources\TableList::next">next</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#42"><abbr title="App\Reporting\Resources\TableList::current">current</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#35"><abbr title="App\Reporting\Resources\TableList::__debugInfo">__debugInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#27"><abbr title="App\Reporting\Resources\TableList::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/OneOf.php.html#29"><abbr title="App\Reporting\Filters\Constraints\OneOf::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/OneOf.php.html#19"><abbr title="App\Reporting\Filters\Constraints\OneOf::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractProviderRepository.php.html#21"><abbr title="App\Reporting\AbstractProviderRepository::getAll">getAll</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/From.php.html#14"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\From::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#28"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#18"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/TableExpression.php.html#46"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\TableExpression::getAlias">getAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/TableExpression.php.html#38"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\TableExpression::getTable">getTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Join.php.html#44"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Join::getType">getType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Join.php.html#36"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Join::getOn">getOn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Join.php.html#28"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Join::getTable">getTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Join.php.html#18"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Join::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/From.php.html#28"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\From::getFrom">getFrom</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/From.php.html#19"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\From::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#130"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::addSelect">addSelect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#44"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::getField">getField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#119"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::insert">insert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#113"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#107"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#101"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::join">join</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#95"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::whereNull">whereNull</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#88"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::whereIn">whereIn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#82"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::andWhere">andWhere</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#75"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::whereRaw">whereRaw</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#69"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::where">where</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#47"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::deleteBuilder">deleteBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#41"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::insertBuilder">insertBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#36"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::getStatementExpression">getStatementExpression</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#52"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::getOperator">getOperator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#146"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::getDoctrineQueryBuilder">getDoctrineQueryBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Update.php.html#10"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Update::type">type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#63"><abbr title="App\Reporting\DB\Result::nextAsClass">nextAsClass</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#56"><abbr title="App\Reporting\DB\Result::iteratorOfObjects">iteratorOfObjects</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#51"><abbr title="App\Reporting\DB\Result::nextAsObject">nextAsObject</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#44"><abbr title="App\Reporting\DB\Result::iteratorOfAssociativeArrays">iteratorOfAssociativeArrays</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#39"><abbr title="App\Reporting\DB\Result::nextAsAssociative">nextAsAssociative</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#34"><abbr title="App\Reporting\DB\Result::all">all</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#27"><abbr title="App\Reporting\DB\Result::iterator">iterator</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#22"><abbr title="App\Reporting\DB\Result::next">next</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#17"><abbr title="App\Reporting\DB\Result::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Update.php.html#15"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Update::compileStatement">compileStatement</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Type.php.html#31"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Type::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#60"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::getValue">getValue</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Type.php.html#26"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Type::insert">insert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Type.php.html#21"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Type::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Insert.php.html#15"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Insert::compileStatement">compileStatement</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Insert.php.html#10"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Insert::type">type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Delete.php.html#15"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Delete::compileStatement">compileStatement</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Delete.php.html#10"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Delete::type">type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/WhereCollection.php.html#27"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection::getWheres">getWheres</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/WhereCollection.php.html#20"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection::withWhere">withWhere</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/WhereCollection.php.html#14"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#78"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::getParameterKey">getParameterKey</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/Where.php.html#68"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\Where::getParameter">getParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryBuilder.php.html#35"><abbr title="App\Reporting\DB\QueryBuilder\QueryBuilder::updateBuilder">updateBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#140"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::delete">delete</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotOneOf.php.html#29"><abbr title="App\Reporting\Filters\Constraints\NotOneOf::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#45"><abbr title="App\Reporting\DB\Connection::execute">execute</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionOptions.php.html#24"><abbr title="App\Reporting\DB\ConnectionOptions::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#55"><abbr title="App\Reporting\DB\ConnectionManager::connectPDO">connectPDO</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#43"><abbr title="App\Reporting\DB\ConnectionManager::createConnection">createConnection</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#34"><abbr title="App\Reporting\DB\ConnectionManager::getConnectionInfo">getConnectionInfo</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#20"><abbr title="App\Reporting\DB\ConnectionManager::getConnection">getConnection</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#13"><abbr title="App\Reporting\DB\ConnectionManager::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#67"><abbr title="App\Reporting\DB\Connection::lastInsertId">lastInsertId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#62"><abbr title="App\Reporting\DB\Connection::rollback">rollback</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#57"><abbr title="App\Reporting\DB\Connection::commit">commit</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#52"><abbr title="App\Reporting\DB\Connection::beginTransaction">beginTransaction</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#36"><abbr title="App\Reporting\DB\Connection::getPDO">getPDO</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Credentials.php.html#23"><abbr title="App\Reporting\DB\Credentials::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Connection.php.html#28"><abbr title="App\Reporting\DB\Connection::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/CIConnectionInfo.php.html#28"><abbr title="App\Reporting\DB\CIConnectionInfo::connectionOptions">connectionOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/CIConnectionInfo.php.html#23"><abbr title="App\Reporting\DB\CIConnectionInfo::credentials">credentials</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/CIConnectionInfo.php.html#18"><abbr title="App\Reporting\DB\CIConnectionInfo::dsn">dsn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/CIConnectionInfo.php.html#12"><abbr title="App\Reporting\DB\CIConnectionInfo::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractReport.php.html#66"><abbr title="App\Reporting\AbstractReport::config">config</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractReport.php.html#58"><abbr title="App\Reporting\AbstractReport::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractReport.php.html#39"><abbr title="App\Reporting\AbstractReport::processInput">processInput</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractReport.php.html#34"><abbr title="App\Reporting\AbstractReport::form">form</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractReport.php.html#27"><abbr title="App\Reporting\AbstractReport::output">output</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AbstractProviderRepository.php.html#30"><abbr title="App\Reporting\AbstractProviderRepository::getAllList">getAllList</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/ConnectionOptions.php.html#33"><abbr title="App\Reporting\DB\ConnectionOptions::getOptions">getOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Credentials.php.html#32"><abbr title="App\Reporting\DB\Credentials::getUser">getUser</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#134"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::insert">insert</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#52"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::deleteBuilder">deleteBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#128"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::update">update</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#118"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::join">join</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#111"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::whereNull">whereNull</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#104"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::whereIn">whereIn</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#97"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::andWhere">andWhere</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#91"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::whereRaw">whereRaw</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#84"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::where">where</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#77"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::from">from</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#71"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::addSelect">addSelect</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#65"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::select">select</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#60"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::getQuery">getQuery</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#44"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::insertBuilder">insertBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Credentials.php.html#40"><abbr title="App\Reporting\DB\Credentials::getPassword">getPassword</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#36"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::updateBuilder">updateBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#28"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::selectBuilder">selectBuilder</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#23"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Query.php.html#34"><abbr title="App\Reporting\DB\Query::getParameters">getParameters</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#59"><abbr title="App\Reporting\DB\Dsn::params">params</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#49"><abbr title="App\Reporting\DB\Dsn::stringifiedParams">stringifiedParams</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#44"><abbr title="App\Reporting\DB\Dsn::dsnString">dsnString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#39"><abbr title="App\Reporting\DB\Dsn::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#29"><abbr title="App\Reporting\DB\Dsn::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#24"><abbr title="App\Reporting\DB\Dsn::mysqlLocal">mysqlLocal</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#19"><abbr title="App\Reporting\DB\Dsn::mysql">mysql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/Result.php.html#68"><abbr title="App\Reporting\DB\Result::iteratorOfClassObjects">iteratorOfClassObjects</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#27"><abbr title="App\Reporting\DatabaseFields\BooleanField::filterHtml">filterHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#32"><abbr title="App\Reporting\DatabaseFields\BooleanField::reportFields">reportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#42"><abbr title="App\Reporting\Filters\Constraints\AbstractConstraint::getConstraint">getConstraint</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/EndsWith.php.html#19"><abbr title="App\Reporting\Filters\Constraints\EndsWith::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Contains.php.html#29"><abbr title="App\Reporting\Filters\Constraints\Contains::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Contains.php.html#24"><abbr title="App\Reporting\Filters\Constraints\Contains::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Contains.php.html#19"><abbr title="App\Reporting\Filters\Constraints\Contains::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Between.php.html#28"><abbr title="App\Reporting\Filters\Constraints\Between::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Between.php.html#23"><abbr title="App\Reporting\Filters\Constraints\Between::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Between.php.html#18"><abbr title="App\Reporting\Filters\Constraints\Between::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#69"><abbr title="App\Reporting\Filters\Constraints\AbstractConstraint::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#60"><abbr title="App\Reporting\Filters\Constraints\AbstractConstraint::jsonSerialize">jsonSerialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#51"><abbr title="App\Reporting\Filters\Constraints\AbstractConstraint::getConstraints">getConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#44"><abbr title="App\Reporting\Excel\SpoutExcel::addData">addData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/EndsWith.php.html#29"><abbr title="App\Reporting\Filters\Constraints\EndsWith::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#35"><abbr title="App\Reporting\Excel\SpoutExcel::writeToFile">writeToFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#25"><abbr title="App\Reporting\Excel\SpoutExcel::stream">stream</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#19"><abbr title="App\Reporting\Excel\SpoutExcel::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/Row.php.html#21"><abbr title="App\Reporting\Excel\Row::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/Row.php.html#16"><abbr title="App\Reporting\Excel\Row::fromArray">fromArray</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#57"><abbr title="App\Reporting\Excel\PhpOfficeSpreadsheet::addDataToSheet">addDataToSheet</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#42"><abbr title="App\Reporting\Excel\PhpOfficeSpreadsheet::makeSpreadsheet">makeSpreadsheet</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#31"><abbr title="App\Reporting\Excel\PhpOfficeSpreadsheet::writeToFile">writeToFile</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#16"><abbr title="App\Reporting\Excel\PhpOfficeSpreadsheet::stream">stream</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#72"><abbr title="App\Reporting\DatabaseFields\StringField::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#60"><abbr title="App\Reporting\DatabaseFields\StringField::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/EndsWith.php.html#24"><abbr title="App\Reporting\Filters\Constraints\EndsWith::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Equals.php.html#20"><abbr title="App\Reporting\Filters\Constraints\Equals::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#40"><abbr title="App\Reporting\DatabaseFields\StringField::reportFields">reportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/LessThan.php.html#30"><abbr title="App\Reporting\Filters\Constraints\LessThan::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotOneOf.php.html#24"><abbr title="App\Reporting\Filters\Constraints\NotOneOf::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotOneOf.php.html#19"><abbr title="App\Reporting\Filters\Constraints\NotOneOf::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotEqual.php.html#29"><abbr title="App\Reporting\Filters\Constraints\NotEqual::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotEqual.php.html#24"><abbr title="App\Reporting\Filters\Constraints\NotEqual::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotEqual.php.html#19"><abbr title="App\Reporting\Filters\Constraints\NotEqual::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotContains.php.html#29"><abbr title="App\Reporting\Filters\Constraints\NotContains::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotContains.php.html#24"><abbr title="App\Reporting\Filters\Constraints\NotContains::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotContains.php.html#19"><abbr title="App\Reporting\Filters\Constraints\NotContains::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotBetween.php.html#29"><abbr title="App\Reporting\Filters\Constraints\NotBetween::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotBetween.php.html#24"><abbr title="App\Reporting\Filters\Constraints\NotBetween::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/NotBetween.php.html#19"><abbr title="App\Reporting\Filters\Constraints\NotBetween::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/LessThan.php.html#25"><abbr title="App\Reporting\Filters\Constraints\LessThan::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Equals.php.html#25"><abbr title="App\Reporting\Filters\Constraints\Equals::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/LessThan.php.html#20"><abbr title="App\Reporting\Filters\Constraints\LessThan::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsTrue.php.html#30"><abbr title="App\Reporting\Filters\Constraints\IsTrue::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsTrue.php.html#25"><abbr title="App\Reporting\Filters\Constraints\IsTrue::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsTrue.php.html#20"><abbr title="App\Reporting\Filters\Constraints\IsTrue::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsFalse.php.html#30"><abbr title="App\Reporting\Filters\Constraints\IsFalse::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsFalse.php.html#25"><abbr title="App\Reporting\Filters\Constraints\IsFalse::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/IsFalse.php.html#20"><abbr title="App\Reporting\Filters\Constraints\IsFalse::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/GreaterThan.php.html#29"><abbr title="App\Reporting\Filters\Constraints\GreaterThan::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/GreaterThan.php.html#24"><abbr title="App\Reporting\Filters\Constraints\GreaterThan::requiredInputs">requiredInputs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/GreaterThan.php.html#19"><abbr title="App\Reporting\Filters\Constraints\GreaterThan::filterSql">filterSql</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Filters/Constraints/Equals.php.html#30"><abbr title="App\Reporting\Filters\Constraints\Equals::directive">directive</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#53"><abbr title="App\Reporting\DatabaseFields\StringField::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#30"><abbr title="App\Reporting\DatabaseFields\StringField::filterHtml">filterHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#49"><abbr title="App\Reporting\DatabaseFields\BooleanField::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#102"><abbr title="App\Reporting\DatabaseFields\DatabaseField::subQueryTableAlias">subQueryTableAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateField.php.html#23"><abbr title="App\Reporting\DatabaseFields\DateField::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#180"><abbr title="App\Reporting\DatabaseFields\DatabaseField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#171"><abbr title="App\Reporting\DatabaseFields\DatabaseField::constraints">constraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#163"><abbr title="App\Reporting\DatabaseFields\DatabaseField::useAsFilter">useAsFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#155"><abbr title="App\Reporting\DatabaseFields\DatabaseField::useAsField">useAsField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#147"><abbr title="App\Reporting\DatabaseFields\DatabaseField::primaryQueryAlias">primaryQueryAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#138"><abbr title="App\Reporting\DatabaseFields\DatabaseField::primaryQueryField">primaryQueryField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#129"><abbr title="App\Reporting\DatabaseFields\DatabaseField::primaryQueryTableAlias">primaryQueryTableAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#120"><abbr title="App\Reporting\DatabaseFields\DatabaseField::subQueryAlias">subQueryAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#111"><abbr title="App\Reporting\DatabaseFields\DatabaseField::subQueryField">subQueryField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#93"><abbr title="App\Reporting\DatabaseFields\DatabaseField::fromDescendantTable">fromDescendantTable</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateField.php.html#42"><abbr title="App\Reporting\DatabaseFields\DateField::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#81"><abbr title="App\Reporting\DatabaseFields\DatabaseField::selectables">selectables</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#73"><abbr title="App\Reporting\DatabaseFields\DatabaseField::tableAggregateAlias">tableAggregateAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#65"><abbr title="App\Reporting\DatabaseFields\DatabaseField::tableAlias">tableAlias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#57"><abbr title="App\Reporting\DatabaseFields\DatabaseField::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#49"><abbr title="App\Reporting\DatabaseFields\DatabaseField::alias">alias</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#41"><abbr title="App\Reporting\DatabaseFields\DatabaseField::name">name</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#33"><abbr title="App\Reporting\DatabaseFields\DatabaseField::__toString">__toString</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#24"><abbr title="App\Reporting\DatabaseFields\DatabaseField::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#73"><abbr title="App\Reporting\DatabaseFields\BooleanField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#68"><abbr title="App\Reporting\DatabaseFields\BooleanField::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#60"><abbr title="App\Reporting\DatabaseFields\BooleanField::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateField.php.html#32"><abbr title="App\Reporting\DatabaseFields\DateField::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateField.php.html#48"><abbr title="App\Reporting\DatabaseFields\DateField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#23"><abbr title="App\Reporting\DatabaseFields\StringField::aggregateFieldHtml">aggregateFieldHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#30"><abbr title="App\Reporting\DatabaseFields\NumberField::reportFields">reportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#52"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#47"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::useAsFilter">useAsFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#42"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::useAsField">useAsField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#37"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#32"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#27"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::reportFields">reportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/PrimaryKey.php.html#17"><abbr title="App\Reporting\DatabaseFields\PrimaryKey::filterHtml">filterHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#73"><abbr title="App\Reporting\DatabaseFields\NumberField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#68"><abbr title="App\Reporting\DatabaseFields\NumberField::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#58"><abbr title="App\Reporting\DatabaseFields\NumberField::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#47"><abbr title="App\Reporting\DatabaseFields\NumberField::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#25"><abbr title="App\Reporting\DatabaseFields\NumberField::filterHtml">filterHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateTimeField.php.html#23"><abbr title="App\Reporting\DatabaseFields\DateTimeField::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#57"><abbr title="App\Reporting\DatabaseFields\ForeignKey::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#52"><abbr title="App\Reporting\DatabaseFields\ForeignKey::useAsFilter">useAsFilter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#47"><abbr title="App\Reporting\DatabaseFields\ForeignKey::useAsField">useAsField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#39"><abbr title="App\Reporting\DatabaseFields\ForeignKey::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#34"><abbr title="App\Reporting\DatabaseFields\ForeignKey::selectableOptions">selectableOptions</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#29"><abbr title="App\Reporting\DatabaseFields\ForeignKey::reportFields">reportFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/ForeignKey.php.html#19"><abbr title="App\Reporting\DatabaseFields\ForeignKey::filterHtml">filterHtml</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateTimeField.php.html#48"><abbr title="App\Reporting\DatabaseFields\DateTimeField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateTimeField.php.html#42"><abbr title="App\Reporting\DatabaseFields\DateTimeField::formatParameter">formatParameter</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DatabaseFields/DateTimeField.php.html#32"><abbr title="App\Reporting\DatabaseFields\DateTimeField::filterConstraints">filterConstraints</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="TabularData.php.html#74"><abbr title="App\Reporting\TabularData::isAssoc">isAssoc</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/TableExpression.php.html#14"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\TableExpression::__construct">__construct</abbr></a></td><td class="text-right">83%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="ReportRepository.php.html#59"><abbr title="App\Reporting\ReportRepository::find_all">find_all</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="ReportRepository.php.html#103"><abbr title="App\Reporting\ReportRepository::check_report_access">check_report_access</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#98"><abbr title="App\Reporting\Processing\QueryGroup::getReportFilters">getReportFilters</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#145"><abbr title="App\Reporting\Resources\TableList::findFirstMatching">findFirstMatching</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#70"><abbr title="App\Reporting\Processing\Selections::getFilters">getFilters</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#203"><abbr title="App\Reporting\Processing\QueryGroup::applicableFields">applicableFields</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#75"><abbr title="App\Reporting\Processing\QueryBuilder::buildSqlPrimaryGroup">buildSqlPrimaryGroup</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#109"><abbr title="App\Reporting\Processing\QueryBuilder::buildSqlSubQuery">buildSqlSubQuery</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#201"><abbr title="App\Reporting\Processing\QueryBuilder::whereSql">whereSql</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Resources/Table.php.html#290"><abbr title="App\Reporting\Resources\Table::findRelationship">findRelationship</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#133"><abbr title="App\Reporting\Resources\ReportConfig::findFirstMatching">findFirstMatching</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#59"><abbr title="App\Reporting\DB\Dsn::params">params</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="ReportRepository.php.html#12"><abbr title="App\Reporting\ReportRepository::find">find</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#159"><abbr title="App\Reporting\Resources\ReportConfig::findQueryGroupByTable">findQueryGroupByTable</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#186"><abbr title="App\Reporting\Processing\QueryGroup::filtersRequiredTables">filtersRequiredTables</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Resources/Table.php.html#104"><abbr title="App\Reporting\Resources\Table::getReportFields">getReportFields</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#96"><abbr title="App\Reporting\Processing\Selections::getFields">getFields</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Resources/Table.php.html#195"><abbr title="App\Reporting\Resources\Table::relationshipType">relationshipType</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#102"><abbr title="App\Reporting\Resources\ReportConfig::addTable">addTable</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#48"><abbr title="App\Reporting\Processing\QueryBuilder::buildQuery">buildQuery</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#36"><abbr title="App\Reporting\Processing\QueryBuilder::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Form.php.html#100"><abbr title="App\Reporting\Form::getFilterByName">getFilterByName</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Form.php.html#87"><abbr title="App\Reporting\Form::getFieldByName">getFieldByName</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#168"><abbr title="App\Reporting\Processing\QueryGroup::fieldsRequiredTables">fieldsRequiredTables</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Processing/Selections.php.html#113"><abbr title="App\Reporting\Processing\Selections::getLimit">getLimit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Excel/PhpOfficeSpreadsheet.php.html#57"><abbr title="App\Reporting\Excel\PhpOfficeSpreadsheet::addDataToSheet">addDataToSheet</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="TabularData.php.html#36"><abbr title="App\Reporting\TabularData::rowValues">rowValues</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryTypes/Delete.php.html#15"><abbr title="App\Reporting\DB\QueryBuilder\QueryTypes\Delete::compileStatement">compileStatement</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#37"><abbr title="App\Reporting\Selectables\AbstractSelectable::getSelectable">getSelectable</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TabularData.php.html#56"><abbr title="App\Reporting\TabularData::headerTextAll">headerTextAll</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/Relationship.php.html#37"><abbr title="App\Reporting\Resources\Relationship::joinConditionsSql">joinConditionsSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#62"><abbr title="App\Reporting\Resources\ReportConfig::generateFieldsAndFilters">generateFieldsAndFilters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#71"><abbr title="App\Reporting\Resources\ReportConfig::generateFields">generateFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/ReportConfig.php.html#78"><abbr title="App\Reporting\Resources\ReportConfig::generateFilters">generateFilters</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#30"><abbr title="App\Reporting\Selectables\Sum::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Sum.php.html#22"><abbr title="App\Reporting\Selectables\Sum::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#30"><abbr title="App\Reporting\Selectables\Percent::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Percent.php.html#22"><abbr title="App\Reporting\Selectables\Percent::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#30"><abbr title="App\Reporting\Selectables\Min::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Min.php.html#22"><abbr title="App\Reporting\Selectables\Min::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#30"><abbr title="App\Reporting\Selectables\Max::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#30"><abbr title="App\Reporting\Selectables\ListSelectable::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Max.php.html#22"><abbr title="App\Reporting\Selectables\Max::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/Table.php.html#140"><abbr title="App\Reporting\Resources\Table::dbField">dbField</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/ListSelectable.php.html#22"><abbr title="App\Reporting\Selectables\ListSelectable::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#30"><abbr title="App\Reporting\Selectables\Custom::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/Table.php.html#214"><abbr title="App\Reporting\Resources\Table::setPrimaryKey">setPrimaryKey</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Custom.php.html#22"><abbr title="App\Reporting\Selectables\Custom::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#30"><abbr title="App\Reporting\Selectables\Count::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Count.php.html#22"><abbr title="App\Reporting\Selectables\Count::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#30"><abbr title="App\Reporting\Selectables\Average::fieldAlias">fieldAlias</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/Average.php.html#22"><abbr title="App\Reporting\Selectables\Average::fieldSql">fieldSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#81"><abbr title="App\Reporting\Selectables\AbstractSelectable::label">label</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Selectables/AbstractSelectable.php.html#46"><abbr title="App\Reporting\Selectables\AbstractSelectable::getSelectables">getSelectables</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportRepository.php.html#199"><abbr title="App\Reporting\ReportRepository::process_profile_access">process_profile_access</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#102"><abbr title="App\Reporting\Resources\TableList::getTable">getTable</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#130"><abbr title="App\Reporting\Resources\TableList::mergeTables">mergeTables</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Resources/TableList.php.html#27"><abbr title="App\Reporting\Resources\TableList::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractProviderRepository.php.html#13"><abbr title="App\Reporting\AbstractProviderRepository::getBySlug">getBySlug</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportRepository.php.html#181"><abbr title="App\Reporting\ReportRepository::process_user_access">process_user_access</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/Result.php.html#44"><abbr title="App\Reporting\DB\Result::iteratorOfAssociativeArrays">iteratorOfAssociativeArrays</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#30"><abbr title="App\Reporting\DatabaseFields\NumberField::reportFields">reportFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#171"><abbr title="App\Reporting\DatabaseFields\DatabaseField::constraints">constraints</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/DatabaseField.php.html#81"><abbr title="App\Reporting\DatabaseFields\DatabaseField::selectables">selectables</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#68"><abbr title="App\Reporting\DatabaseFields\BooleanField::formatParameter">formatParameter</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/BooleanField.php.html#32"><abbr title="App\Reporting\DatabaseFields\BooleanField::reportFields">reportFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/Result.php.html#68"><abbr title="App\Reporting\DB\Result::iteratorOfClassObjects">iteratorOfClassObjects</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/Result.php.html#56"><abbr title="App\Reporting\DB\Result::iteratorOfObjects">iteratorOfObjects</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/Result.php.html#27"><abbr title="App\Reporting\DB\Result::iterator">iterator</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportRepository.php.html#147"><abbr title="App\Reporting\ReportRepository::save">save</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/WhereCollection.php.html#14"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/QueryBuilder/DoctrineQueryBuilder.php.html#118"><abbr title="App\Reporting\DB\QueryBuilder\DoctrineQueryBuilder::join">join</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/Dsn.php.html#49"><abbr title="App\Reporting\DB\Dsn::stringifiedParams">stringifiedParams</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#55"><abbr title="App\Reporting\DB\ConnectionManager::connectPDO">connectPDO</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/ConnectionManager.php.html#20"><abbr title="App\Reporting\DB\ConnectionManager::getConnection">getConnection</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractReport.php.html#66"><abbr title="App\Reporting\AbstractReport::config">config</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractReport.php.html#39"><abbr title="App\Reporting\AbstractReport::processInput">processInput</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/NumberField.php.html#73"><abbr title="App\Reporting\DatabaseFields\NumberField::formatValueAsType">formatValueAsType</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#23"><abbr title="App\Reporting\DatabaseFields\StringField::aggregateFieldHtml">aggregateFieldHtml</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DatabaseFields/StringField.php.html#40"><abbr title="App\Reporting\DatabaseFields\StringField::reportFields">reportFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Excel/SpoutExcel.php.html#44"><abbr title="App\Reporting\Excel\SpoutExcel::addData">addData</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportField.php.html#105"><abbr title="App\Reporting\ReportField::aggregateFieldHtml">aggregateFieldHtml</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportField.php.html#98"><abbr title="App\Reporting\ReportField::fieldHtml">fieldHtml</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportField.php.html#86"><abbr title="App\Reporting\ReportField::selectableFields">selectableFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportField.php.html#68"><abbr title="App\Reporting\ReportField::type">type</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="ReportField.php.html#28"><abbr title="App\Reporting\ReportField::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="AbstractProviderRepository.php.html#21"><abbr title="App\Reporting\AbstractProviderRepository::getAll">getAll</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#221"><abbr title="App\Reporting\Processing\QueryGroup::prefix">prefix</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#120"><abbr title="App\Reporting\Processing\QueryGroup::requiredTables">requiredTables</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#89"><abbr title="App\Reporting\Processing\QueryGroup::getReportFields">getReportFields</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Processing/QueryGroup.php.html#49"><abbr title="App\Reporting\Processing\QueryGroup::addTable">addTable</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Processing/QueryBuilder.php.html#144"><abbr title="App\Reporting\Processing\QueryBuilder::selectSql">selectSql</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Form.php.html#73"><abbr title="App\Reporting\Form::filtersByCategory">filtersByCategory</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Form.php.html#52"><abbr title="App\Reporting\Form::fieldsByCategory">fieldsByCategory</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Filters/Filter.php.html#27"><abbr title="App\Reporting\Filters\Filter::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#51"><abbr title="App\Reporting\Filters\Constraints\AbstractConstraint::getConstraints">getConstraints</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Filters/Constraints/AbstractConstraint.php.html#42"><abbr title="App\Reporting\Filters\Constraints\AbstractConstraint::getConstraint">getConstraint</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="TabularData.php.html#74"><abbr title="App\Reporting\TabularData::isAssoc">isAssoc</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="DB/QueryBuilder/QueryParts/TableExpression.php.html#14"><abbr title="App\Reporting\DB\QueryBuilder\QueryParts\TableExpression::__construct">__construct</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 7.0.7</a> using <a href="https://secure.php.net/" target="_top">PHP 7.3.1</a> with <a href="https://xdebug.org/">Xdebug 2.7.2</a> and <a href="https://phpunit.de/">PHPUnit 8.3.4</a> at Thu Sep 5 21:13:56 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([75,0,0,1,0,0,1,0,0,2,0,9], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([435,0,0,0,0,0,0,0,0,1,0,30], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,5,"<a href=\"AbstractProviderRepository.php.html#5\">App\\Reporting\\AbstractProviderRepository<\/a>"],[0,11,"<a href=\"AbstractReport.php.html#14\">App\\Reporting\\AbstractReport<\/a>"],[0,4,"<a href=\"DB\/CIConnectionInfo.php.html#8\">App\\Reporting\\DB\\CIConnectionInfo<\/a>"],[0,7,"<a href=\"DB\/Connection.php.html#7\">App\\Reporting\\DB\\Connection<\/a>"],[0,7,"<a href=\"DB\/ConnectionManager.php.html#8\">App\\Reporting\\DB\\ConnectionManager<\/a>"],[0,2,"<a href=\"DB\/ConnectionOptions.php.html#12\">App\\Reporting\\DB\\ConnectionOptions<\/a>"],[0,3,"<a href=\"DB\/Credentials.php.html#12\">App\\Reporting\\DB\\Credentials<\/a>"],[0,11,"<a href=\"DB\/Dsn.php.html#5\">App\\Reporting\\DB\\Dsn<\/a>"],[80,3,"<a href=\"DB\/Query.php.html#6\">App\\Reporting\\DB\\Query<\/a>"],[0,20,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#14\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder<\/a>"],[27.027027027027028,20,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#13\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder<\/a>"],[0,3,"<a href=\"DB\/QueryBuilder\/QueryParts\/From.php.html#6\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\From<\/a>"],[0,4,"<a href=\"DB\/QueryBuilder\/QueryParts\/Join.php.html#6\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Join<\/a>"],[100,0,"<a href=\"DB\/QueryBuilder\/QueryParts\/Select.php.html#12\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Select<\/a>"],[81.25,10,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#5\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression<\/a>"],[0,8,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#6\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where<\/a>"],[0,4,"<a href=\"DB\/QueryBuilder\/QueryParts\/WhereCollection.php.html#6\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\WhereCollection<\/a>"],[0,4,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Delete.php.html#8\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Delete<\/a>"],[0,2,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Insert.php.html#8\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Insert<\/a>"],[100,8,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Select.php.html#8\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Select<\/a>"],[50,7,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#7\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type<\/a>"],[0,2,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Update.php.html#8\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Update<\/a>"],[0,14,"<a href=\"DB\/Result.php.html#8\">App\\Reporting\\DB\\Result<\/a>"],[0,8,"<a href=\"DatabaseFields\/BooleanField.php.html#24\">App\\Reporting\\DatabaseFields\\BooleanField<\/a>"],[100,0,"<a href=\"DatabaseFields\/CalculatedField.php.html#12\">App\\Reporting\\DatabaseFields\\CalculatedField<\/a>"],[100,0,"<a href=\"DatabaseFields\/CustomField.php.html#12\">App\\Reporting\\DatabaseFields\\CustomField<\/a>"],[0,24,"<a href=\"DatabaseFields\/DatabaseField.php.html#9\">App\\Reporting\\DatabaseFields\\DatabaseField<\/a>"],[0,4,"<a href=\"DatabaseFields\/DateField.php.html#20\">App\\Reporting\\DatabaseFields\\DateField<\/a>"],[0,4,"<a href=\"DatabaseFields\/DateTimeField.php.html#20\">App\\Reporting\\DatabaseFields\\DateTimeField<\/a>"],[100,0,"<a href=\"DatabaseFields\/FieldList.php.html#12\">App\\Reporting\\DatabaseFields\\FieldList<\/a>"],[0,7,"<a href=\"DatabaseFields\/ForeignKey.php.html#16\">App\\Reporting\\DatabaseFields\\ForeignKey<\/a>"],[0,8,"<a href=\"DatabaseFields\/NumberField.php.html#22\">App\\Reporting\\DatabaseFields\\NumberField<\/a>"],[0,7,"<a href=\"DatabaseFields\/PrimaryKey.php.html#14\">App\\Reporting\\DatabaseFields\\PrimaryKey<\/a>"],[0,8,"<a href=\"DatabaseFields\/StringField.php.html#20\">App\\Reporting\\DatabaseFields\\StringField<\/a>"],[0,6,"<a href=\"Excel\/PhpOfficeSpreadsheet.php.html#13\">App\\Reporting\\Excel\\PhpOfficeSpreadsheet<\/a>"],[0,2,"<a href=\"Excel\/Row.php.html#12\">App\\Reporting\\Excel\\Row<\/a>"],[0,5,"<a href=\"Excel\/SpoutExcel.php.html#10\">App\\Reporting\\Excel\\SpoutExcel<\/a>"],[100,0,"<a href=\"Excel\/Style.php.html#12\">App\\Reporting\\Excel\\Style<\/a>"],[0,9,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#15\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/Between.php.html#13\">App\\Reporting\\Filters\\Constraints\\Between<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/Contains.php.html#14\">App\\Reporting\\Filters\\Constraints\\Contains<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/EndsWith.php.html#14\">App\\Reporting\\Filters\\Constraints\\EndsWith<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/Equals.php.html#15\">App\\Reporting\\Filters\\Constraints\\Equals<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/GreaterThan.php.html#14\">App\\Reporting\\Filters\\Constraints\\GreaterThan<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/IsFalse.php.html#15\">App\\Reporting\\Filters\\Constraints\\IsFalse<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/IsTrue.php.html#15\">App\\Reporting\\Filters\\Constraints\\IsTrue<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/LessThan.php.html#15\">App\\Reporting\\Filters\\Constraints\\LessThan<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/NotBetween.php.html#14\">App\\Reporting\\Filters\\Constraints\\NotBetween<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/NotContains.php.html#14\">App\\Reporting\\Filters\\Constraints\\NotContains<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/NotEqual.php.html#14\">App\\Reporting\\Filters\\Constraints\\NotEqual<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/NotOneOf.php.html#14\">App\\Reporting\\Filters\\Constraints\\NotOneOf<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/OneOf.php.html#14\">App\\Reporting\\Filters\\Constraints\\OneOf<\/a>"],[0,3,"<a href=\"Filters\/Constraints\/StartsWith.php.html#14\">App\\Reporting\\Filters\\Constraints\\StartsWith<\/a>"],[0,9,"<a href=\"Filters\/Filter.php.html#14\">App\\Reporting\\Filters\\Filter<\/a>"],[0,15,"<a href=\"Form.php.html#14\">App\\Reporting\\Form<\/a>"],[0,1,"<a href=\"Formatters\/ExcelFormatter.php.html#15\">App\\Reporting\\Formatters\\ExcelFormatter<\/a>"],[100,0,"<a href=\"Processing\/Processor.php.html#12\">App\\Reporting\\Processing\\Processor<\/a>"],[0,24,"<a href=\"Processing\/QueryBuilder.php.html#20\">App\\Reporting\\Processing\\QueryBuilder<\/a>"],[0,33,"<a href=\"Processing\/QueryGroup.php.html#20\">App\\Reporting\\Processing\\QueryGroup<\/a>"],[0,3,"<a href=\"Processing\/QueryPath.php.html#14\">App\\Reporting\\Processing\\QueryPath<\/a>"],[0,15,"<a href=\"Processing\/Selections.php.html#19\">App\\Reporting\\Processing\\Selections<\/a>"],[0,7,"<a href=\"Report.php.html#7\">App\\Reporting\\Report<\/a>"],[0,15,"<a href=\"ReportField.php.html#15\">App\\Reporting\\ReportField<\/a>"],[0,30,"<a href=\"ReportRepository.php.html#8\">App\\Reporting\\ReportRepository<\/a>"],[0,1,"<a href=\"Resources\/Ancestor.php.html#12\">App\\Reporting\\Resources\\Ancestor<\/a>"],[0,2,"<a href=\"Resources\/Condition.php.html#14\">App\\Reporting\\Resources\\Condition<\/a>"],[0,1,"<a href=\"Resources\/Descendant.php.html#12\">App\\Reporting\\Resources\\Descendant<\/a>"],[0,4,"<a href=\"Resources\/Limit.php.html#5\">App\\Reporting\\Resources\\Limit<\/a>"],[100,0,"<a href=\"Resources\/ModuleConfiguration.php.html#12\">App\\Reporting\\Resources\\ModuleConfiguration<\/a>"],[0,3,"<a href=\"Resources\/Relationship.php.html#12\">App\\Reporting\\Resources\\Relationship<\/a>"],[0,22,"<a href=\"Resources\/ReportConfig.php.html#22\">App\\Reporting\\Resources\\ReportConfig<\/a>"],[100,0,"<a href=\"Resources\/Sort.php.html#6\">App\\Reporting\\Resources\\Sort<\/a>"],[0,38,"<a href=\"Resources\/Table.php.html#24\">App\\Reporting\\Resources\\Table<\/a>"],[0,25,"<a href=\"Resources\/TableList.php.html#13\">App\\Reporting\\Resources\\TableList<\/a>"],[0,4,"<a href=\"SelectableField.php.html#13\">App\\Reporting\\SelectableField<\/a>"],[0,13,"<a href=\"Selectables\/AbstractSelectable.php.html#14\">App\\Reporting\\Selectables\\AbstractSelectable<\/a>"],[0,5,"<a href=\"Selectables\/Average.php.html#13\">App\\Reporting\\Selectables\\Average<\/a>"],[0,5,"<a href=\"Selectables\/Count.php.html#13\">App\\Reporting\\Selectables\\Count<\/a>"],[0,5,"<a href=\"Selectables\/Custom.php.html#13\">App\\Reporting\\Selectables\\Custom<\/a>"],[0,5,"<a href=\"Selectables\/ListSelectable.php.html#13\">App\\Reporting\\Selectables\\ListSelectable<\/a>"],[0,5,"<a href=\"Selectables\/Max.php.html#13\">App\\Reporting\\Selectables\\Max<\/a>"],[0,5,"<a href=\"Selectables\/Min.php.html#13\">App\\Reporting\\Selectables\\Min<\/a>"],[0,5,"<a href=\"Selectables\/Percent.php.html#13\">App\\Reporting\\Selectables\\Percent<\/a>"],[0,3,"<a href=\"Selectables\/Standard.php.html#13\">App\\Reporting\\Selectables\\Standard<\/a>"],[0,5,"<a href=\"Selectables\/Sum.php.html#13\">App\\Reporting\\Selectables\\Sum<\/a>"],[0,9,"<a href=\"SelectedField.php.html#16\">App\\Reporting\\SelectedField<\/a>"],[0,7,"<a href=\"SelectedFilter.php.html#16\">App\\Reporting\\SelectedFilter<\/a>"],[0,11,"<a href=\"TabularData.php.html#12\">App\\Reporting\\TabularData<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,2,"<a href=\"AbstractProviderRepository.php.html#13\">App\\Reporting\\AbstractProviderRepository::getBySlug<\/a>"],[0,2,"<a href=\"AbstractProviderRepository.php.html#21\">App\\Reporting\\AbstractProviderRepository::getAll<\/a>"],[0,1,"<a href=\"AbstractProviderRepository.php.html#30\">App\\Reporting\\AbstractProviderRepository::getAllList<\/a>"],[100,1,"<a href=\"AbstractReport.php.html#22\">App\\Reporting\\AbstractReport::slug<\/a>"],[100,1,"<a href=\"AbstractReport.php.html#23\">App\\Reporting\\AbstractReport::title<\/a>"],[100,1,"<a href=\"AbstractReport.php.html#24\">App\\Reporting\\AbstractReport::getConfig<\/a>"],[100,1,"<a href=\"AbstractReport.php.html#25\">App\\Reporting\\AbstractReport::processData<\/a>"],[0,1,"<a href=\"AbstractReport.php.html#27\">App\\Reporting\\AbstractReport::output<\/a>"],[0,1,"<a href=\"AbstractReport.php.html#34\">App\\Reporting\\AbstractReport::form<\/a>"],[0,2,"<a href=\"AbstractReport.php.html#39\">App\\Reporting\\AbstractReport::processInput<\/a>"],[0,1,"<a href=\"AbstractReport.php.html#58\">App\\Reporting\\AbstractReport::jsonSerialize<\/a>"],[0,2,"<a href=\"AbstractReport.php.html#66\">App\\Reporting\\AbstractReport::config<\/a>"],[0,1,"<a href=\"DB\/CIConnectionInfo.php.html#12\">App\\Reporting\\DB\\CIConnectionInfo::__construct<\/a>"],[0,1,"<a href=\"DB\/CIConnectionInfo.php.html#18\">App\\Reporting\\DB\\CIConnectionInfo::dsn<\/a>"],[0,1,"<a href=\"DB\/CIConnectionInfo.php.html#23\">App\\Reporting\\DB\\CIConnectionInfo::credentials<\/a>"],[0,1,"<a href=\"DB\/CIConnectionInfo.php.html#28\">App\\Reporting\\DB\\CIConnectionInfo::connectionOptions<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#28\">App\\Reporting\\DB\\Connection::__construct<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#36\">App\\Reporting\\DB\\Connection::getPDO<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#45\">App\\Reporting\\DB\\Connection::execute<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#52\">App\\Reporting\\DB\\Connection::beginTransaction<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#57\">App\\Reporting\\DB\\Connection::commit<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#62\">App\\Reporting\\DB\\Connection::rollback<\/a>"],[0,1,"<a href=\"DB\/Connection.php.html#67\">App\\Reporting\\DB\\Connection::lastInsertId<\/a>"],[0,1,"<a href=\"DB\/ConnectionManager.php.html#13\">App\\Reporting\\DB\\ConnectionManager::__construct<\/a>"],[0,2,"<a href=\"DB\/ConnectionManager.php.html#20\">App\\Reporting\\DB\\ConnectionManager::getConnection<\/a>"],[0,1,"<a href=\"DB\/ConnectionManager.php.html#34\">App\\Reporting\\DB\\ConnectionManager::getConnectionInfo<\/a>"],[0,1,"<a href=\"DB\/ConnectionManager.php.html#43\">App\\Reporting\\DB\\ConnectionManager::createConnection<\/a>"],[0,2,"<a href=\"DB\/ConnectionManager.php.html#55\">App\\Reporting\\DB\\ConnectionManager::connectPDO<\/a>"],[0,1,"<a href=\"DB\/ConnectionOptions.php.html#24\">App\\Reporting\\DB\\ConnectionOptions::__construct<\/a>"],[0,1,"<a href=\"DB\/ConnectionOptions.php.html#33\">App\\Reporting\\DB\\ConnectionOptions::getOptions<\/a>"],[0,1,"<a href=\"DB\/Credentials.php.html#23\">App\\Reporting\\DB\\Credentials::__construct<\/a>"],[0,1,"<a href=\"DB\/Credentials.php.html#32\">App\\Reporting\\DB\\Credentials::getUser<\/a>"],[0,1,"<a href=\"DB\/Credentials.php.html#40\">App\\Reporting\\DB\\Credentials::getPassword<\/a>"],[0,1,"<a href=\"DB\/Dsn.php.html#19\">App\\Reporting\\DB\\Dsn::mysql<\/a>"],[0,1,"<a href=\"DB\/Dsn.php.html#24\">App\\Reporting\\DB\\Dsn::mysqlLocal<\/a>"],[0,1,"<a href=\"DB\/Dsn.php.html#29\">App\\Reporting\\DB\\Dsn::__construct<\/a>"],[0,1,"<a href=\"DB\/Dsn.php.html#39\">App\\Reporting\\DB\\Dsn::__toString<\/a>"],[0,1,"<a href=\"DB\/Dsn.php.html#44\">App\\Reporting\\DB\\Dsn::dsnString<\/a>"],[0,2,"<a href=\"DB\/Dsn.php.html#49\">App\\Reporting\\DB\\Dsn::stringifiedParams<\/a>"],[0,4,"<a href=\"DB\/Dsn.php.html#59\">App\\Reporting\\DB\\Dsn::params<\/a>"],[100,1,"<a href=\"DB\/Query.php.html#17\">App\\Reporting\\DB\\Query::__construct<\/a>"],[100,1,"<a href=\"DB\/Query.php.html#26\">App\\Reporting\\DB\\Query::getStatement<\/a>"],[0,1,"<a href=\"DB\/Query.php.html#34\">App\\Reporting\\DB\\Query::getParameters<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#23\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::__construct<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#28\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::selectBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#36\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::updateBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#44\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::insertBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#52\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::deleteBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#60\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::getQuery<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#65\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::select<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#71\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::addSelect<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#77\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::from<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#84\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::where<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#91\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::whereRaw<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#97\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::andWhere<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#104\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::whereIn<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#111\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::whereNull<\/a>"],[0,2,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#118\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::join<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#128\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::update<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#134\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::insert<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#140\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::delete<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/DoctrineQueryBuilder.php.html#146\">App\\Reporting\\DB\\QueryBuilder\\DoctrineQueryBuilder::getDoctrineQueryBuilder<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#29\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::selectBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#35\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::updateBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#41\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::insertBuilder<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#47\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::deleteBuilder<\/a>"],[100,2,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#58\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::__construct<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#64\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::getQuery<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#69\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::where<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#75\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::whereRaw<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#82\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::andWhere<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#88\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::whereIn<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#95\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::whereNull<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#101\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::join<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#107\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::delete<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#113\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::update<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#119\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::insert<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#125\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::select<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#130\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::addSelect<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#135\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::getStatement<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryBuilder.php.html#140\">App\\Reporting\\DB\\QueryBuilder\\QueryBuilder::getParameters<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/From.php.html#14\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\From::__construct<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/From.php.html#19\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\From::__toString<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/From.php.html#28\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\From::getFrom<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Join.php.html#18\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Join::__construct<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Join.php.html#28\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Join::getTable<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Join.php.html#36\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Join::getOn<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Join.php.html#44\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Join::getType<\/a>"],[83.33333333333334,2,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#14\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression::__construct<\/a>"],[100,2,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#29\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression::__toString<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#38\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression::getTable<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#46\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression::getAlias<\/a>"],[100,2,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#51\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression::parseTableFromExpression<\/a>"],[100,2,"<a href=\"DB\/QueryBuilder\/QueryParts\/TableExpression.php.html#60\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\TableExpression::parseAliasFromExpression<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#18\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::__construct<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#28\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::__toString<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#36\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::getStatementExpression<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#44\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::getField<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#52\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::getOperator<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#60\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::getValue<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#68\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::getParameter<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/Where.php.html#78\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\Where::getParameterKey<\/a>"],[0,2,"<a href=\"DB\/QueryBuilder\/QueryParts\/WhereCollection.php.html#14\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\WhereCollection::__construct<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/WhereCollection.php.html#20\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\WhereCollection::withWhere<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryParts\/WhereCollection.php.html#27\">App\\Reporting\\DB\\QueryBuilder\\QueryParts\\WhereCollection::getWheres<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Delete.php.html#10\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Delete::type<\/a>"],[0,3,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Delete.php.html#15\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Delete::compileStatement<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Insert.php.html#10\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Insert::type<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Insert.php.html#15\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Insert::compileStatement<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Select.php.html#10\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Select::type<\/a>"],[100,7,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Select.php.html#22\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Select::compileStatement<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#16\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::select<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#21\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::update<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#26\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::insert<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#31\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::delete<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#37\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::type<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#46\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::compileStatement<\/a>"],[100,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Type.php.html#52\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Type::__construct<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Update.php.html#10\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Update::type<\/a>"],[0,1,"<a href=\"DB\/QueryBuilder\/QueryTypes\/Update.php.html#15\">App\\Reporting\\DB\\QueryBuilder\\QueryTypes\\Update::compileStatement<\/a>"],[0,1,"<a href=\"DB\/Result.php.html#17\">App\\Reporting\\DB\\Result::__construct<\/a>"],[0,1,"<a href=\"DB\/Result.php.html#22\">App\\Reporting\\DB\\Result::next<\/a>"],[0,2,"<a href=\"DB\/Result.php.html#27\">App\\Reporting\\DB\\Result::iterator<\/a>"],[0,1,"<a href=\"DB\/Result.php.html#34\">App\\Reporting\\DB\\Result::all<\/a>"],[0,1,"<a href=\"DB\/Result.php.html#39\">App\\Reporting\\DB\\Result::nextAsAssociative<\/a>"],[0,2,"<a href=\"DB\/Result.php.html#44\">App\\Reporting\\DB\\Result::iteratorOfAssociativeArrays<\/a>"],[0,1,"<a href=\"DB\/Result.php.html#51\">App\\Reporting\\DB\\Result::nextAsObject<\/a>"],[0,2,"<a href=\"DB\/Result.php.html#56\">App\\Reporting\\DB\\Result::iteratorOfObjects<\/a>"],[0,1,"<a href=\"DB\/Result.php.html#63\">App\\Reporting\\DB\\Result::nextAsClass<\/a>"],[0,2,"<a href=\"DB\/Result.php.html#68\">App\\Reporting\\DB\\Result::iteratorOfClassObjects<\/a>"],[0,1,"<a href=\"DatabaseFields\/BooleanField.php.html#27\">App\\Reporting\\DatabaseFields\\BooleanField::filterHtml<\/a>"],[0,2,"<a href=\"DatabaseFields\/BooleanField.php.html#32\">App\\Reporting\\DatabaseFields\\BooleanField::reportFields<\/a>"],[0,1,"<a href=\"DatabaseFields\/BooleanField.php.html#49\">App\\Reporting\\DatabaseFields\\BooleanField::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/BooleanField.php.html#60\">App\\Reporting\\DatabaseFields\\BooleanField::filterConstraints<\/a>"],[0,2,"<a href=\"DatabaseFields\/BooleanField.php.html#68\">App\\Reporting\\DatabaseFields\\BooleanField::formatParameter<\/a>"],[0,1,"<a href=\"DatabaseFields\/BooleanField.php.html#73\">App\\Reporting\\DatabaseFields\\BooleanField::formatValueAsType<\/a>"],[100,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#16\">App\\Reporting\\DatabaseFields\\DatabaseField::selectableOptions<\/a>"],[100,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#17\">App\\Reporting\\DatabaseFields\\DatabaseField::filterConstraints<\/a>"],[100,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#18\">App\\Reporting\\DatabaseFields\\DatabaseField::formatParameter<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#24\">App\\Reporting\\DatabaseFields\\DatabaseField::__construct<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#33\">App\\Reporting\\DatabaseFields\\DatabaseField::__toString<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#41\">App\\Reporting\\DatabaseFields\\DatabaseField::name<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#49\">App\\Reporting\\DatabaseFields\\DatabaseField::alias<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#57\">App\\Reporting\\DatabaseFields\\DatabaseField::title<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#65\">App\\Reporting\\DatabaseFields\\DatabaseField::tableAlias<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#73\">App\\Reporting\\DatabaseFields\\DatabaseField::tableAggregateAlias<\/a>"],[0,2,"<a href=\"DatabaseFields\/DatabaseField.php.html#81\">App\\Reporting\\DatabaseFields\\DatabaseField::selectables<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#93\">App\\Reporting\\DatabaseFields\\DatabaseField::fromDescendantTable<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#102\">App\\Reporting\\DatabaseFields\\DatabaseField::subQueryTableAlias<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#111\">App\\Reporting\\DatabaseFields\\DatabaseField::subQueryField<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#120\">App\\Reporting\\DatabaseFields\\DatabaseField::subQueryAlias<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#129\">App\\Reporting\\DatabaseFields\\DatabaseField::primaryQueryTableAlias<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#138\">App\\Reporting\\DatabaseFields\\DatabaseField::primaryQueryField<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#147\">App\\Reporting\\DatabaseFields\\DatabaseField::primaryQueryAlias<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#155\">App\\Reporting\\DatabaseFields\\DatabaseField::useAsField<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#163\">App\\Reporting\\DatabaseFields\\DatabaseField::useAsFilter<\/a>"],[0,2,"<a href=\"DatabaseFields\/DatabaseField.php.html#171\">App\\Reporting\\DatabaseFields\\DatabaseField::constraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/DatabaseField.php.html#180\">App\\Reporting\\DatabaseFields\\DatabaseField::formatValueAsType<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateField.php.html#23\">App\\Reporting\\DatabaseFields\\DateField::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateField.php.html#32\">App\\Reporting\\DatabaseFields\\DateField::filterConstraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateField.php.html#42\">App\\Reporting\\DatabaseFields\\DateField::formatParameter<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateField.php.html#48\">App\\Reporting\\DatabaseFields\\DateField::formatValueAsType<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateTimeField.php.html#23\">App\\Reporting\\DatabaseFields\\DateTimeField::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateTimeField.php.html#32\">App\\Reporting\\DatabaseFields\\DateTimeField::filterConstraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateTimeField.php.html#42\">App\\Reporting\\DatabaseFields\\DateTimeField::formatParameter<\/a>"],[0,1,"<a href=\"DatabaseFields\/DateTimeField.php.html#48\">App\\Reporting\\DatabaseFields\\DateTimeField::formatValueAsType<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#19\">App\\Reporting\\DatabaseFields\\ForeignKey::filterHtml<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#29\">App\\Reporting\\DatabaseFields\\ForeignKey::reportFields<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#34\">App\\Reporting\\DatabaseFields\\ForeignKey::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#39\">App\\Reporting\\DatabaseFields\\ForeignKey::filterConstraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#47\">App\\Reporting\\DatabaseFields\\ForeignKey::useAsField<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#52\">App\\Reporting\\DatabaseFields\\ForeignKey::useAsFilter<\/a>"],[0,1,"<a href=\"DatabaseFields\/ForeignKey.php.html#57\">App\\Reporting\\DatabaseFields\\ForeignKey::formatParameter<\/a>"],[0,1,"<a href=\"DatabaseFields\/NumberField.php.html#25\">App\\Reporting\\DatabaseFields\\NumberField::filterHtml<\/a>"],[0,2,"<a href=\"DatabaseFields\/NumberField.php.html#30\">App\\Reporting\\DatabaseFields\\NumberField::reportFields<\/a>"],[0,1,"<a href=\"DatabaseFields\/NumberField.php.html#47\">App\\Reporting\\DatabaseFields\\NumberField::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/NumberField.php.html#58\">App\\Reporting\\DatabaseFields\\NumberField::filterConstraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/NumberField.php.html#68\">App\\Reporting\\DatabaseFields\\NumberField::formatParameter<\/a>"],[0,2,"<a href=\"DatabaseFields\/NumberField.php.html#73\">App\\Reporting\\DatabaseFields\\NumberField::formatValueAsType<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#17\">App\\Reporting\\DatabaseFields\\PrimaryKey::filterHtml<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#27\">App\\Reporting\\DatabaseFields\\PrimaryKey::reportFields<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#32\">App\\Reporting\\DatabaseFields\\PrimaryKey::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#37\">App\\Reporting\\DatabaseFields\\PrimaryKey::filterConstraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#42\">App\\Reporting\\DatabaseFields\\PrimaryKey::useAsField<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#47\">App\\Reporting\\DatabaseFields\\PrimaryKey::useAsFilter<\/a>"],[0,1,"<a href=\"DatabaseFields\/PrimaryKey.php.html#52\">App\\Reporting\\DatabaseFields\\PrimaryKey::formatParameter<\/a>"],[0,2,"<a href=\"DatabaseFields\/StringField.php.html#23\">App\\Reporting\\DatabaseFields\\StringField::aggregateFieldHtml<\/a>"],[0,1,"<a href=\"DatabaseFields\/StringField.php.html#30\">App\\Reporting\\DatabaseFields\\StringField::filterHtml<\/a>"],[0,2,"<a href=\"DatabaseFields\/StringField.php.html#40\">App\\Reporting\\DatabaseFields\\StringField::reportFields<\/a>"],[0,1,"<a href=\"DatabaseFields\/StringField.php.html#53\">App\\Reporting\\DatabaseFields\\StringField::selectableOptions<\/a>"],[0,1,"<a href=\"DatabaseFields\/StringField.php.html#60\">App\\Reporting\\DatabaseFields\\StringField::filterConstraints<\/a>"],[0,1,"<a href=\"DatabaseFields\/StringField.php.html#72\">App\\Reporting\\DatabaseFields\\StringField::formatParameter<\/a>"],[0,1,"<a href=\"Excel\/PhpOfficeSpreadsheet.php.html#16\">App\\Reporting\\Excel\\PhpOfficeSpreadsheet::stream<\/a>"],[0,1,"<a href=\"Excel\/PhpOfficeSpreadsheet.php.html#31\">App\\Reporting\\Excel\\PhpOfficeSpreadsheet::writeToFile<\/a>"],[0,1,"<a href=\"Excel\/PhpOfficeSpreadsheet.php.html#42\">App\\Reporting\\Excel\\PhpOfficeSpreadsheet::makeSpreadsheet<\/a>"],[0,3,"<a href=\"Excel\/PhpOfficeSpreadsheet.php.html#57\">App\\Reporting\\Excel\\PhpOfficeSpreadsheet::addDataToSheet<\/a>"],[0,1,"<a href=\"Excel\/Row.php.html#16\">App\\Reporting\\Excel\\Row::fromArray<\/a>"],[0,1,"<a href=\"Excel\/Row.php.html#21\">App\\Reporting\\Excel\\Row::__construct<\/a>"],[0,1,"<a href=\"Excel\/SpoutExcel.php.html#19\">App\\Reporting\\Excel\\SpoutExcel::__construct<\/a>"],[0,1,"<a href=\"Excel\/SpoutExcel.php.html#25\">App\\Reporting\\Excel\\SpoutExcel::stream<\/a>"],[0,1,"<a href=\"Excel\/SpoutExcel.php.html#35\">App\\Reporting\\Excel\\SpoutExcel::writeToFile<\/a>"],[0,2,"<a href=\"Excel\/SpoutExcel.php.html#44\">App\\Reporting\\Excel\\SpoutExcel::addData<\/a>"],[100,1,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#34\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::filterSql<\/a>"],[100,1,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#35\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::directive<\/a>"],[100,1,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#36\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::requiredInputs<\/a>"],[0,2,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#42\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::getConstraint<\/a>"],[0,2,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#51\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::getConstraints<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#60\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::jsonSerialize<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/AbstractConstraint.php.html#69\">App\\Reporting\\Filters\\Constraints\\AbstractConstraint::name<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Between.php.html#18\">App\\Reporting\\Filters\\Constraints\\Between::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Between.php.html#23\">App\\Reporting\\Filters\\Constraints\\Between::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Between.php.html#28\">App\\Reporting\\Filters\\Constraints\\Between::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Contains.php.html#19\">App\\Reporting\\Filters\\Constraints\\Contains::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Contains.php.html#24\">App\\Reporting\\Filters\\Constraints\\Contains::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Contains.php.html#29\">App\\Reporting\\Filters\\Constraints\\Contains::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/EndsWith.php.html#19\">App\\Reporting\\Filters\\Constraints\\EndsWith::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/EndsWith.php.html#24\">App\\Reporting\\Filters\\Constraints\\EndsWith::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/EndsWith.php.html#29\">App\\Reporting\\Filters\\Constraints\\EndsWith::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Equals.php.html#20\">App\\Reporting\\Filters\\Constraints\\Equals::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Equals.php.html#25\">App\\Reporting\\Filters\\Constraints\\Equals::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/Equals.php.html#30\">App\\Reporting\\Filters\\Constraints\\Equals::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/GreaterThan.php.html#19\">App\\Reporting\\Filters\\Constraints\\GreaterThan::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/GreaterThan.php.html#24\">App\\Reporting\\Filters\\Constraints\\GreaterThan::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/GreaterThan.php.html#29\">App\\Reporting\\Filters\\Constraints\\GreaterThan::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/IsFalse.php.html#20\">App\\Reporting\\Filters\\Constraints\\IsFalse::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/IsFalse.php.html#25\">App\\Reporting\\Filters\\Constraints\\IsFalse::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/IsFalse.php.html#30\">App\\Reporting\\Filters\\Constraints\\IsFalse::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/IsTrue.php.html#20\">App\\Reporting\\Filters\\Constraints\\IsTrue::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/IsTrue.php.html#25\">App\\Reporting\\Filters\\Constraints\\IsTrue::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/IsTrue.php.html#30\">App\\Reporting\\Filters\\Constraints\\IsTrue::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/LessThan.php.html#20\">App\\Reporting\\Filters\\Constraints\\LessThan::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/LessThan.php.html#25\">App\\Reporting\\Filters\\Constraints\\LessThan::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/LessThan.php.html#30\">App\\Reporting\\Filters\\Constraints\\LessThan::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotBetween.php.html#19\">App\\Reporting\\Filters\\Constraints\\NotBetween::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotBetween.php.html#24\">App\\Reporting\\Filters\\Constraints\\NotBetween::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotBetween.php.html#29\">App\\Reporting\\Filters\\Constraints\\NotBetween::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotContains.php.html#19\">App\\Reporting\\Filters\\Constraints\\NotContains::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotContains.php.html#24\">App\\Reporting\\Filters\\Constraints\\NotContains::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotContains.php.html#29\">App\\Reporting\\Filters\\Constraints\\NotContains::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotEqual.php.html#19\">App\\Reporting\\Filters\\Constraints\\NotEqual::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotEqual.php.html#24\">App\\Reporting\\Filters\\Constraints\\NotEqual::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotEqual.php.html#29\">App\\Reporting\\Filters\\Constraints\\NotEqual::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotOneOf.php.html#19\">App\\Reporting\\Filters\\Constraints\\NotOneOf::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotOneOf.php.html#24\">App\\Reporting\\Filters\\Constraints\\NotOneOf::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/NotOneOf.php.html#29\">App\\Reporting\\Filters\\Constraints\\NotOneOf::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/OneOf.php.html#19\">App\\Reporting\\Filters\\Constraints\\OneOf::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/OneOf.php.html#24\">App\\Reporting\\Filters\\Constraints\\OneOf::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/OneOf.php.html#29\">App\\Reporting\\Filters\\Constraints\\OneOf::directive<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/StartsWith.php.html#19\">App\\Reporting\\Filters\\Constraints\\StartsWith::filterSql<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/StartsWith.php.html#24\">App\\Reporting\\Filters\\Constraints\\StartsWith::requiredInputs<\/a>"],[0,1,"<a href=\"Filters\/Constraints\/StartsWith.php.html#29\">App\\Reporting\\Filters\\Constraints\\StartsWith::directive<\/a>"],[0,2,"<a href=\"Filters\/Filter.php.html#27\">App\\Reporting\\Filters\\Filter::__construct<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#34\">App\\Reporting\\Filters\\Filter::jsonSerialize<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#50\">App\\Reporting\\Filters\\Filter::name<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#58\">App\\Reporting\\Filters\\Filter::label<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#64\">App\\Reporting\\Filters\\Filter::dbField<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#69\">App\\Reporting\\Filters\\Filter::tableAsCategory<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#77\">App\\Reporting\\Filters\\Filter::constraints<\/a>"],[0,1,"<a href=\"Filters\/Filter.php.html#83\">App\\Reporting\\Filters\\Filter::url<\/a>"],[0,1,"<a href=\"Form.php.html#27\">App\\Reporting\\Form::__construct<\/a>"],[0,1,"<a href=\"Form.php.html#33\">App\\Reporting\\Form::jsonSerialize<\/a>"],[0,1,"<a href=\"Form.php.html#44\">App\\Reporting\\Form::fields<\/a>"],[0,2,"<a href=\"Form.php.html#52\">App\\Reporting\\Form::fieldsByCategory<\/a>"],[0,1,"<a href=\"Form.php.html#65\">App\\Reporting\\Form::filters<\/a>"],[0,2,"<a href=\"Form.php.html#73\">App\\Reporting\\Form::filtersByCategory<\/a>"],[0,3,"<a href=\"Form.php.html#87\">App\\Reporting\\Form::getFieldByName<\/a>"],[0,3,"<a href=\"Form.php.html#100\">App\\Reporting\\Form::getFilterByName<\/a>"],[0,1,"<a href=\"Form.php.html#112\">App\\Reporting\\Form::parseJson<\/a>"],[0,1,"<a href=\"Formatters\/ExcelFormatter.php.html#19\">App\\Reporting\\Formatters\\ExcelFormatter::output<\/a>"],[0,3,"<a href=\"Processing\/QueryBuilder.php.html#36\">App\\Reporting\\Processing\\QueryBuilder::__construct<\/a>"],[0,3,"<a href=\"Processing\/QueryBuilder.php.html#48\">App\\Reporting\\Processing\\QueryBuilder::buildQuery<\/a>"],[0,4,"<a href=\"Processing\/QueryBuilder.php.html#75\">App\\Reporting\\Processing\\QueryBuilder::buildSqlPrimaryGroup<\/a>"],[0,4,"<a href=\"Processing\/QueryBuilder.php.html#109\">App\\Reporting\\Processing\\QueryBuilder::buildSqlSubQuery<\/a>"],[0,2,"<a href=\"Processing\/QueryBuilder.php.html#144\">App\\Reporting\\Processing\\QueryBuilder::selectSql<\/a>"],[0,1,"<a href=\"Processing\/QueryBuilder.php.html#162\">App\\Reporting\\Processing\\QueryBuilder::fromSql<\/a>"],[0,1,"<a href=\"Processing\/QueryBuilder.php.html#176\">App\\Reporting\\Processing\\QueryBuilder::joinSubQuery<\/a>"],[0,1,"<a href=\"Processing\/QueryBuilder.php.html#189\">App\\Reporting\\Processing\\QueryBuilder::joinSql<\/a>"],[0,4,"<a href=\"Processing\/QueryBuilder.php.html#201\">App\\Reporting\\Processing\\QueryBuilder::whereSql<\/a>"],[0,1,"<a href=\"Processing\/QueryBuilder.php.html#222\">App\\Reporting\\Processing\\QueryBuilder::groupBySql<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#34\">App\\Reporting\\Processing\\QueryGroup::__construct<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#42\">App\\Reporting\\Processing\\QueryGroup::__debugInfo<\/a>"],[0,2,"<a href=\"Processing\/QueryGroup.php.html#49\">App\\Reporting\\Processing\\QueryGroup::addTable<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#57\">App\\Reporting\\Processing\\QueryGroup::isPrimary<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#62\">App\\Reporting\\Processing\\QueryGroup::isSubQuery<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#67\">App\\Reporting\\Processing\\QueryGroup::hasTable<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#75\">App\\Reporting\\Processing\\QueryGroup::getRoot<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#84\">App\\Reporting\\Processing\\QueryGroup::getTable<\/a>"],[0,2,"<a href=\"Processing\/QueryGroup.php.html#89\">App\\Reporting\\Processing\\QueryGroup::getReportFields<\/a>"],[0,5,"<a href=\"Processing\/QueryGroup.php.html#98\">App\\Reporting\\Processing\\QueryGroup::getReportFilters<\/a>"],[0,2,"<a href=\"Processing\/QueryGroup.php.html#120\">App\\Reporting\\Processing\\QueryGroup::requiredTables<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#141\">App\\Reporting\\Processing\\QueryGroup::primaryQueryTables<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#158\">App\\Reporting\\Processing\\QueryGroup::subQueryTables<\/a>"],[0,3,"<a href=\"Processing\/QueryGroup.php.html#168\">App\\Reporting\\Processing\\QueryGroup::fieldsRequiredTables<\/a>"],[0,3,"<a href=\"Processing\/QueryGroup.php.html#186\">App\\Reporting\\Processing\\QueryGroup::filtersRequiredTables<\/a>"],[0,4,"<a href=\"Processing\/QueryGroup.php.html#203\">App\\Reporting\\Processing\\QueryGroup::applicableFields<\/a>"],[0,2,"<a href=\"Processing\/QueryGroup.php.html#221\">App\\Reporting\\Processing\\QueryGroup::prefix<\/a>"],[0,1,"<a href=\"Processing\/QueryGroup.php.html#229\">App\\Reporting\\Processing\\QueryGroup::subQueryRequiredFields<\/a>"],[0,1,"<a href=\"Processing\/QueryPath.php.html#23\">App\\Reporting\\Processing\\QueryPath::__construct<\/a>"],[0,1,"<a href=\"Processing\/QueryPath.php.html#32\">App\\Reporting\\Processing\\QueryPath::newQueryPath<\/a>"],[0,1,"<a href=\"Processing\/QueryPath.php.html#44\">App\\Reporting\\Processing\\QueryPath::addTable<\/a>"],[0,1,"<a href=\"Processing\/Selections.php.html#33\">App\\Reporting\\Processing\\Selections::__construct<\/a>"],[0,1,"<a href=\"Processing\/Selections.php.html#44\">App\\Reporting\\Processing\\Selections::selectedFields<\/a>"],[0,1,"<a href=\"Processing\/Selections.php.html#52\">App\\Reporting\\Processing\\Selections::selectedFilters<\/a>"],[0,1,"<a href=\"Processing\/Selections.php.html#60\">App\\Reporting\\Processing\\Selections::limit<\/a>"],[0,5,"<a href=\"Processing\/Selections.php.html#70\">App\\Reporting\\Processing\\Selections::getFilters<\/a>"],[0,3,"<a href=\"Processing\/Selections.php.html#96\">App\\Reporting\\Processing\\Selections::getFields<\/a>"],[0,3,"<a href=\"Processing\/Selections.php.html#113\">App\\Reporting\\Processing\\Selections::getLimit<\/a>"],[0,1,"<a href=\"Report.php.html#17\">App\\Reporting\\Report::__construct<\/a>"],[0,1,"<a href=\"Report.php.html#29\">App\\Reporting\\Report::getID<\/a>"],[0,1,"<a href=\"Report.php.html#34\">App\\Reporting\\Report::getUserID<\/a>"],[0,1,"<a href=\"Report.php.html#39\">App\\Reporting\\Report::getModuleID<\/a>"],[0,1,"<a href=\"Report.php.html#44\">App\\Reporting\\Report::getName<\/a>"],[0,1,"<a href=\"Report.php.html#49\">App\\Reporting\\Report::getAccessUsers<\/a>"],[0,1,"<a href=\"Report.php.html#54\">App\\Reporting\\Report::getAccessProfiles<\/a>"],[0,2,"<a href=\"ReportField.php.html#28\">App\\Reporting\\ReportField::__construct<\/a>"],[0,1,"<a href=\"ReportField.php.html#44\">App\\Reporting\\ReportField::jsonSerialize<\/a>"],[0,1,"<a href=\"ReportField.php.html#57\">App\\Reporting\\ReportField::name<\/a>"],[0,1,"<a href=\"ReportField.php.html#63\">App\\Reporting\\ReportField::dbField<\/a>"],[0,2,"<a href=\"ReportField.php.html#68\">App\\Reporting\\ReportField::type<\/a>"],[0,1,"<a href=\"ReportField.php.html#75\">App\\Reporting\\ReportField::tableAlias<\/a>"],[0,1,"<a href=\"ReportField.php.html#80\">App\\Reporting\\ReportField::tableAsCategory<\/a>"],[0,2,"<a href=\"ReportField.php.html#86\">App\\Reporting\\ReportField::selectableFields<\/a>"],[0,2,"<a href=\"ReportField.php.html#98\">App\\Reporting\\ReportField::fieldHtml<\/a>"],[0,2,"<a href=\"ReportField.php.html#105\">App\\Reporting\\ReportField::aggregateFieldHtml<\/a>"],[0,4,"<a href=\"ReportRepository.php.html#12\">App\\Reporting\\ReportRepository::find<\/a>"],[0,9,"<a href=\"ReportRepository.php.html#59\">App\\Reporting\\ReportRepository::find_all<\/a>"],[0,8,"<a href=\"ReportRepository.php.html#103\">App\\Reporting\\ReportRepository::check_report_access<\/a>"],[0,2,"<a href=\"ReportRepository.php.html#147\">App\\Reporting\\ReportRepository::save<\/a>"],[0,2,"<a href=\"ReportRepository.php.html#181\">App\\Reporting\\ReportRepository::process_user_access<\/a>"],[0,2,"<a href=\"ReportRepository.php.html#199\">App\\Reporting\\ReportRepository::process_profile_access<\/a>"],[0,1,"<a href=\"ReportRepository.php.html#217\">App\\Reporting\\ReportRepository::delete_report<\/a>"],[0,1,"<a href=\"ReportRepository.php.html#234\">App\\Reporting\\ReportRepository::delete_user_access<\/a>"],[0,1,"<a href=\"ReportRepository.php.html#241\">App\\Reporting\\ReportRepository::delete_profile_access<\/a>"],[0,1,"<a href=\"Resources\/Ancestor.php.html#15\">App\\Reporting\\Resources\\Ancestor::descendant<\/a>"],[0,1,"<a href=\"Resources\/Condition.php.html#31\">App\\Reporting\\Resources\\Condition::__construct<\/a>"],[0,1,"<a href=\"Resources\/Condition.php.html#39\">App\\Reporting\\Resources\\Condition::sql<\/a>"],[0,1,"<a href=\"Resources\/Descendant.php.html#14\">App\\Reporting\\Resources\\Descendant::descendant<\/a>"],[0,1,"<a href=\"Resources\/Limit.php.html#18\">App\\Reporting\\Resources\\Limit::__construct<\/a>"],[0,1,"<a href=\"Resources\/Limit.php.html#27\">App\\Reporting\\Resources\\Limit::numberOfRecords<\/a>"],[0,1,"<a href=\"Resources\/Limit.php.html#35\">App\\Reporting\\Resources\\Limit::offset<\/a>"],[0,1,"<a href=\"Resources\/Limit.php.html#43\">App\\Reporting\\Resources\\Limit::sql<\/a>"],[0,1,"<a href=\"Resources\/Relationship.php.html#27\">App\\Reporting\\Resources\\Relationship::__construct<\/a>"],[0,2,"<a href=\"Resources\/Relationship.php.html#37\">App\\Reporting\\Resources\\Relationship::joinConditionsSql<\/a>"],[0,1,"<a href=\"Resources\/ReportConfig.php.html#45\">App\\Reporting\\Resources\\ReportConfig::__construct<\/a>"],[0,1,"<a href=\"Resources\/ReportConfig.php.html#55\">App\\Reporting\\Resources\\ReportConfig::__debugInfo<\/a>"],[0,2,"<a href=\"Resources\/ReportConfig.php.html#62\">App\\Reporting\\Resources\\ReportConfig::generateFieldsAndFilters<\/a>"],[0,2,"<a href=\"Resources\/ReportConfig.php.html#71\">App\\Reporting\\Resources\\ReportConfig::generateFields<\/a>"],[0,2,"<a href=\"Resources\/ReportConfig.php.html#78\">App\\Reporting\\Resources\\ReportConfig::generateFilters<\/a>"],[0,1,"<a href=\"Resources\/ReportConfig.php.html#85\">App\\Reporting\\Resources\\ReportConfig::form<\/a>"],[0,1,"<a href=\"Resources\/ReportConfig.php.html#90\">App\\Reporting\\Resources\\ReportConfig::addReportField<\/a>"],[0,1,"<a href=\"Resources\/ReportConfig.php.html#96\">App\\Reporting\\Resources\\ReportConfig::addFilter<\/a>"],[0,3,"<a href=\"Resources\/ReportConfig.php.html#102\">App\\Reporting\\Resources\\ReportConfig::addTable<\/a>"],[0,1,"<a href=\"Resources\/ReportConfig.php.html#126\">App\\Reporting\\Resources\\ReportConfig::generateSql<\/a>"],[0,4,"<a href=\"Resources\/ReportConfig.php.html#133\">App\\Reporting\\Resources\\ReportConfig::findFirstMatching<\/a>"],[0,3,"<a href=\"Resources\/ReportConfig.php.html#159\">App\\Reporting\\Resources\\ReportConfig::findQueryGroupByTable<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#56\">App\\Reporting\\Resources\\Table::__construct<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#63\">App\\Reporting\\Resources\\Table::__debugInfo<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#72\">App\\Reporting\\Resources\\Table::name<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#77\">App\\Reporting\\Resources\\Table::aggregateName<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#83\">App\\Reporting\\Resources\\Table::alias<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#88\">App\\Reporting\\Resources\\Table::primary_key<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#96\">App\\Reporting\\Resources\\Table::getFields<\/a>"],[0,3,"<a href=\"Resources\/Table.php.html#104\">App\\Reporting\\Resources\\Table::getReportFields<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#116\">App\\Reporting\\Resources\\Table::setIsDescendant<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#121\">App\\Reporting\\Resources\\Table::setAlias<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#129\">App\\Reporting\\Resources\\Table::descendant<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#134\">App\\Reporting\\Resources\\Table::addDbField<\/a>"],[0,2,"<a href=\"Resources\/Table.php.html#140\">App\\Reporting\\Resources\\Table::dbField<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#149\">App\\Reporting\\Resources\\Table::isParentOf<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#154\">App\\Reporting\\Resources\\Table::isChildOf<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#159\">App\\Reporting\\Resources\\Table::connectTable<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#173\">App\\Reporting\\Resources\\Table::getPath<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#181\">App\\Reporting\\Resources\\Table::setPath<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#190\">App\\Reporting\\Resources\\Table::getRelationshipAliases<\/a>"],[0,3,"<a href=\"Resources\/Table.php.html#195\">App\\Reporting\\Resources\\Table::relationshipType<\/a>"],[0,2,"<a href=\"Resources\/Table.php.html#214\">App\\Reporting\\Resources\\Table::setPrimaryKey<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#228\">App\\Reporting\\Resources\\Table::addStringField<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#238\">App\\Reporting\\Resources\\Table::addNumberField<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#248\">App\\Reporting\\Resources\\Table::addDateField<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#258\">App\\Reporting\\Resources\\Table::addDateTimeField<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#268\">App\\Reporting\\Resources\\Table::addBooleanField<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#278\">App\\Reporting\\Resources\\Table::addForeignKey<\/a>"],[0,1,"<a href=\"Resources\/Table.php.html#284\">App\\Reporting\\Resources\\Table::joinSql<\/a>"],[0,4,"<a href=\"Resources\/Table.php.html#290\">App\\Reporting\\Resources\\Table::findRelationship<\/a>"],[0,2,"<a href=\"Resources\/TableList.php.html#27\">App\\Reporting\\Resources\\TableList::__construct<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#35\">App\\Reporting\\Resources\\TableList::__debugInfo<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#42\">App\\Reporting\\Resources\\TableList::current<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#47\">App\\Reporting\\Resources\\TableList::next<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#52\">App\\Reporting\\Resources\\TableList::key<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#57\">App\\Reporting\\Resources\\TableList::valid<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#62\">App\\Reporting\\Resources\\TableList::rewind<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#70\">App\\Reporting\\Resources\\TableList::first<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#78\">App\\Reporting\\Resources\\TableList::last<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#86\">App\\Reporting\\Resources\\TableList::count<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#92\">App\\Reporting\\Resources\\TableList::addTable<\/a>"],[0,2,"<a href=\"Resources\/TableList.php.html#102\">App\\Reporting\\Resources\\TableList::getTable<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#112\">App\\Reporting\\Resources\\TableList::getTables<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#117\">App\\Reporting\\Resources\\TableList::hasAlias<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#122\">App\\Reporting\\Resources\\TableList::hasTable<\/a>"],[0,2,"<a href=\"Resources\/TableList.php.html#130\">App\\Reporting\\Resources\\TableList::mergeTables<\/a>"],[0,1,"<a href=\"Resources\/TableList.php.html#140\">App\\Reporting\\Resources\\TableList::merge<\/a>"],[0,5,"<a href=\"Resources\/TableList.php.html#145\">App\\Reporting\\Resources\\TableList::findFirstMatching<\/a>"],[0,1,"<a href=\"SelectableField.php.html#26\">App\\Reporting\\SelectableField::__construct<\/a>"],[0,1,"<a href=\"SelectableField.php.html#35\">App\\Reporting\\SelectableField::jsonSerialize<\/a>"],[0,1,"<a href=\"SelectableField.php.html#47\">App\\Reporting\\SelectableField::name<\/a>"],[0,1,"<a href=\"SelectableField.php.html#55\">App\\Reporting\\SelectableField::label<\/a>"],[100,1,"<a href=\"Selectables\/AbstractSelectable.php.html#33\">App\\Reporting\\Selectables\\AbstractSelectable::defaultLabel<\/a>"],[100,1,"<a href=\"Selectables\/AbstractSelectable.php.html#34\">App\\Reporting\\Selectables\\AbstractSelectable::fieldSql<\/a>"],[100,1,"<a href=\"Selectables\/AbstractSelectable.php.html#35\">App\\Reporting\\Selectables\\AbstractSelectable::fieldAlias<\/a>"],[0,2,"<a href=\"Selectables\/AbstractSelectable.php.html#37\">App\\Reporting\\Selectables\\AbstractSelectable::getSelectable<\/a>"],[0,2,"<a href=\"Selectables\/AbstractSelectable.php.html#46\">App\\Reporting\\Selectables\\AbstractSelectable::getSelectables<\/a>"],[0,1,"<a href=\"Selectables\/AbstractSelectable.php.html#59\">App\\Reporting\\Selectables\\AbstractSelectable::__construct<\/a>"],[0,1,"<a href=\"Selectables\/AbstractSelectable.php.html#64\">App\\Reporting\\Selectables\\AbstractSelectable::jsonSerialize<\/a>"],[0,1,"<a href=\"Selectables\/AbstractSelectable.php.html#71\">App\\Reporting\\Selectables\\AbstractSelectable::name<\/a>"],[0,1,"<a href=\"Selectables\/AbstractSelectable.php.html#76\">App\\Reporting\\Selectables\\AbstractSelectable::fieldName<\/a>"],[0,2,"<a href=\"Selectables\/AbstractSelectable.php.html#81\">App\\Reporting\\Selectables\\AbstractSelectable::label<\/a>"],[0,1,"<a href=\"Selectables\/Average.php.html#17\">App\\Reporting\\Selectables\\Average::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Average.php.html#22\">App\\Reporting\\Selectables\\Average::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Average.php.html#30\">App\\Reporting\\Selectables\\Average::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Count.php.html#17\">App\\Reporting\\Selectables\\Count::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Count.php.html#22\">App\\Reporting\\Selectables\\Count::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Count.php.html#30\">App\\Reporting\\Selectables\\Count::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Custom.php.html#17\">App\\Reporting\\Selectables\\Custom::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Custom.php.html#22\">App\\Reporting\\Selectables\\Custom::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Custom.php.html#30\">App\\Reporting\\Selectables\\Custom::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/ListSelectable.php.html#17\">App\\Reporting\\Selectables\\ListSelectable::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/ListSelectable.php.html#22\">App\\Reporting\\Selectables\\ListSelectable::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/ListSelectable.php.html#30\">App\\Reporting\\Selectables\\ListSelectable::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Max.php.html#17\">App\\Reporting\\Selectables\\Max::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Max.php.html#22\">App\\Reporting\\Selectables\\Max::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Max.php.html#30\">App\\Reporting\\Selectables\\Max::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Min.php.html#17\">App\\Reporting\\Selectables\\Min::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Min.php.html#22\">App\\Reporting\\Selectables\\Min::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Min.php.html#30\">App\\Reporting\\Selectables\\Min::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Percent.php.html#17\">App\\Reporting\\Selectables\\Percent::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Percent.php.html#22\">App\\Reporting\\Selectables\\Percent::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Percent.php.html#30\">App\\Reporting\\Selectables\\Percent::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Standard.php.html#17\">App\\Reporting\\Selectables\\Standard::defaultLabel<\/a>"],[0,1,"<a href=\"Selectables\/Standard.php.html#22\">App\\Reporting\\Selectables\\Standard::fieldSql<\/a>"],[0,1,"<a href=\"Selectables\/Standard.php.html#27\">App\\Reporting\\Selectables\\Standard::fieldAlias<\/a>"],[0,1,"<a href=\"Selectables\/Sum.php.html#17\">App\\Reporting\\Selectables\\Sum::defaultLabel<\/a>"],[0,2,"<a href=\"Selectables\/Sum.php.html#22\">App\\Reporting\\Selectables\\Sum::fieldSql<\/a>"],[0,2,"<a href=\"Selectables\/Sum.php.html#30\">App\\Reporting\\Selectables\\Sum::fieldAlias<\/a>"],[0,1,"<a href=\"SelectedField.php.html#32\">App\\Reporting\\SelectedField::__construct<\/a>"],[0,1,"<a href=\"SelectedField.php.html#41\">App\\Reporting\\SelectedField::jsonSerialize<\/a>"],[0,1,"<a href=\"SelectedField.php.html#54\">App\\Reporting\\SelectedField::name<\/a>"],[0,1,"<a href=\"SelectedField.php.html#62\">App\\Reporting\\SelectedField::label<\/a>"],[0,1,"<a href=\"SelectedField.php.html#70\">App\\Reporting\\SelectedField::title<\/a>"],[0,1,"<a href=\"SelectedField.php.html#75\">App\\Reporting\\SelectedField::formatValueAsType<\/a>"],[0,1,"<a href=\"SelectedField.php.html#84\">App\\Reporting\\SelectedField::table<\/a>"],[0,1,"<a href=\"SelectedField.php.html#94\">App\\Reporting\\SelectedField::fieldSql<\/a>"],[0,1,"<a href=\"SelectedField.php.html#104\">App\\Reporting\\SelectedField::fieldAlias<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#36\">App\\Reporting\\SelectedFilter::__construct<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#47\">App\\Reporting\\SelectedFilter::jsonSerialize<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#59\">App\\Reporting\\SelectedFilter::name<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#67\">App\\Reporting\\SelectedFilter::label<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#76\">App\\Reporting\\SelectedFilter::table<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#86\">App\\Reporting\\SelectedFilter::filterSql<\/a>"],[0,1,"<a href=\"SelectedFilter.php.html#96\">App\\Reporting\\SelectedFilter::filterAlias<\/a>"],[0,1,"<a href=\"TabularData.php.html#25\">App\\Reporting\\TabularData::__construct<\/a>"],[0,1,"<a href=\"TabularData.php.html#31\">App\\Reporting\\TabularData::data<\/a>"],[0,3,"<a href=\"TabularData.php.html#36\">App\\Reporting\\TabularData::rowValues<\/a>"],[0,1,"<a href=\"TabularData.php.html#51\">App\\Reporting\\TabularData::columns<\/a>"],[0,2,"<a href=\"TabularData.php.html#56\">App\\Reporting\\TabularData::headerTextAll<\/a>"],[0,1,"<a href=\"TabularData.php.html#65\">App\\Reporting\\TabularData::jsonSerialize<\/a>"],[0,2,"<a href=\"TabularData.php.html#74\">App\\Reporting\\TabularData::isAssoc<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
