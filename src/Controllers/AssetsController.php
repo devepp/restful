@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Domain\Asset;
 use App\Domain\AssetId;
-use App\Repositories\CachedAssetRepository;
+use App\Repositories\AssetRepositoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use PDO;
@@ -13,7 +13,7 @@ class AssetsController
 {
 	private $assets;
 
-	public function __construct(CachedAssetRepository $assets)
+	public function __construct(AssetRepositoryInterface $assets)
 	{
 		$this->assets = $assets;
 	}
