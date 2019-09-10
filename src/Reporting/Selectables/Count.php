@@ -9,6 +9,7 @@
 namespace App\Reporting\Selectables;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\Resources\Table;
 
 class Count extends AbstractSelectable
 {
@@ -19,19 +20,19 @@ class Count extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Count)';
 	}
 
-	public function fieldSql(DatabaseField $field, $subQueryGroup)
+	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
-			return 'COUNT(`'.$field->tableAlias().'`.`'.$field->name().'`)';
+			return 'COUNT(`'.$table->alias().'`.`'.$field->name().'`)';
 		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		return '`'.$table->aggregateName().'`.`'.$this->fieldAlias($table, $field, true).'`';
 	}
 
-	public function fieldAlias(DatabaseField $field, $subQueryGroup)
+	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
-			return $field->alias().'_count';
+			return $field->alias($table->alias()).'_count';
 		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
+		return $table->aggregateName().'_'.$this->fieldAlias($table, $field, true);
 	}
 }

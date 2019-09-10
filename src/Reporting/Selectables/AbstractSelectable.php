@@ -8,6 +8,7 @@
 
 namespace App\Reporting\Selectables;
 
+use App\Reporting\Resources\Table;
 use JsonSerializable;
 use App\Reporting\DatabaseFields\DatabaseField;
 
@@ -31,8 +32,8 @@ abstract class AbstractSelectable implements JsonSerializable
 	protected $label_override;
 
 	abstract protected function defaultLabel(DatabaseField $field);
-	abstract public function fieldSql(DatabaseField $field, $subQueryGroup);
-	abstract public function fieldAlias(DatabaseField $field, $subQueryGroup);
+	abstract public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup);
+	abstract public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup);
 
 	public static function getSelectable($id)
 	{
@@ -73,9 +74,9 @@ abstract class AbstractSelectable implements JsonSerializable
 		return static::ID;
 	}
 
-	public function fieldName(DatabaseField $field)
+	public function fieldName(Table $table, DatabaseField $field)
 	{
-		return $field->alias();
+		return $field->alias($table->alias());
 	}
 
 	public function label(DatabaseField $field)

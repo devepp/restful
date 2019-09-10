@@ -104,7 +104,7 @@ class QueryGroup
 		foreach ($this->tables as $table) {
 			foreach ($table->getFields() as $db_field) {
 				if ($db_field->useAsFilter()) {
-					$report_filters[] = new Filter($db_field);
+					$report_filters[] = new Filter($table, $db_field);
 				}
 			}
 		}

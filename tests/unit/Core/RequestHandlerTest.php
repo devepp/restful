@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Core;
-
 use App\Core\Container\Container;
 use App\Core\Middleware\MiddlewareCollection;
+use App\Core\RequestHandler;
 use App\Core\Router\RouteCollection;
 use App\Core\Router\RouteDispatcher;
 use App\Core\Router\Router;

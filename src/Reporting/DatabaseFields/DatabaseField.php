@@ -8,8 +8,6 @@ use App\Reporting\Selectables\Standard;
 
 abstract class DatabaseField
 {
-	/** @var Table */
-	protected $table;
 	/** @var string */
 	protected $name;
 
@@ -21,156 +19,53 @@ abstract class DatabaseField
 	 * DatabaseField constructor.
 	 * @param string $name
 	 */
-	public function __construct(Table $table, $name)
+	public function __construct($name)
 	{
-		$this->table = $table;
 		$this->name = $name;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function __toString()
+	public function toString($tableAlias)
 	{
-		return '`'.$this->tableAlias().'`.`'.$this->name().'`';
+		return '`'.$tableAlias.'`.`'.$this->name().'`';
 	}
 
-	/**
-	 * @return string
-	 */
 	public function name()
 	{
 		return $this->name;
 	}
 
-	/**
-	 * @return string
-	 */
-	public function alias()
+	public function alias($tableAlias)
 	{
-		return $this->table->alias().'__'.$this->name();
+		return $tableAlias.'__'.$this->name();
 	}
 
-	/**
-	 * @return string
-	 */
-	public function title()
+	public function title($tableAlias)
 	{
-		return ucwords(str_replace('_', ' ',$this->table->alias().' '.$this->name()));
+		return ucwords(str_replace('_', ' ',$tableAlias.' '.$this->name()));
 	}
 
-	/**
-	 * @return string
-	 */
-	public function tableAlias()
+	public function selectables(Table $table)
 	{
-		return $this->table->alias();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function tableAggregateAlias()
-	{
-		return $this->table->aggregateName();
-	}
-
-	/**
-	 * @return array
-	 */
-	public function selectables()
-	{
-		if ($this->table->descendant()) {
+		if ($table->descendant()) {
 			return $this->selectableOptions();
 		}
 
 		return [new Standard()];
 	}
 
-	/**
-	 * @return bool
-	 */
-	public function fromDescendantTable()
-	{
-		return $this->table->descendant();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function subQueryTableAlias()
-	{
-		return $this->table->alias();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function subQueryField()
-	{
-		return $this->field->tableAlias();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function subQueryAlias()
-	{
-		return $this->field->tableAlias();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function primaryQueryTableAlias()
-	{
-		return $this->field->tableAlias();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function primaryQueryField()
-	{
-		return $this->field->tableAlias();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function primaryQueryAlias()
-	{
-		return $this->field->tableAlias();
-	}
-
-	/**
-	 * @return bool
-	 */
 	public function useAsField()
 	{
 		return true;
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function useAsFilter()
 	{
 		return true;
 	}
 
-	/**
-	 * @return array
-	 */
-	public function constraints()
+	public function constraints(Table $table)
 	{
-		if ($this->table->descendant()) {
+		if ($table->descendant()) {
 			return $this->selectableOptions();
 		}
 

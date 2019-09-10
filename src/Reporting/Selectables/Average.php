@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/8/2019
- * Time: 9:54 AM
- */
 
 namespace App\Reporting\Selectables;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\Resources\Table;
 
 class Average extends AbstractSelectable
 {
@@ -19,19 +14,19 @@ class Average extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Average)';
 	}
 
-	public function fieldSql(DatabaseField $field, $subQueryGroup)
+	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
-			return 'AVG(`'.$field->tableAlias().'`.`'.$field->name().'`)';
+			return 'AVG(`'.$table->alias().'`.`'.$field->name().'`)';
 		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		return '`'.$table->aggregateName().'`.`'.$this->fieldAlias($table, $field, true).'`';
 	}
 
-	public function fieldAlias(DatabaseField $field, $subQueryGroup)
+	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
-			return $field->alias().'_average';
+			return $field->alias($table->alias()).'_average';
 		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
+		return $table->aggregateName().'_'.$this->fieldAlias($table, $field, true);
 	}
 }

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for C:\webserver\htdocs\frame\src\Domain\Reports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../_css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/nv.d3.min.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
+ </head>
+ <body>
+  <header>
+   <div class="container-fluid">
+    <div class="row">
+     <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+       <ol class="breadcrumb">
+         <li class="breadcrumb-item"><a href="../../index.html">C:\webserver\htdocs\frame\src</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Domain</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Reports</a></li>
+         <li class="breadcrumb-item active">(Dashboard)</li>
+
+       </ol>
+      </nav>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container-fluid">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AccountingNoteType.php.html#9">App\Domain\Reports\AccountingNoteType</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PartNote.php.html#9">App\Domain\Reports\PartNote</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#12">App\Domain\Reports\WorkOrdersBaseReport</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrders.php.html#9">App\Domain\Reports\WorkOrders</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#9">App\Domain\Reports\Users</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Types.php.html#9">App\Domain\Reports\Types</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#12">eBase\Modules\SlamReportsWorkOrdersBaseReport</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ServiceGroup.php.html#9">App\Domain\Reports\ServiceGroup</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Response.php.html#9">App\Domain\Reports\Response</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Reasons.php.html#9">App\Domain\Reports\Reasons</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Priorities.php.html#9">App\Domain\Reports\Priorities</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LoadFileExport.php.html#8">App\Domain\Reports\LoadFileExport</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNotes.php.html#9">App\Domain\Reports\AccountingNotes</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Jobs.php.html#9">App\Domain\Reports\Jobs</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelHelper.php.html#7">App\Domain\Reports\Formatters\ExcelHelper</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#5">App\Domain\Reports\Formatters\ExcelFormats</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityRooms.php.html#9">App\Domain\Reports\FacilityRooms</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityAreas.php.html#9">App\Domain\Reports\FacilityAreas</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facilities.php.html#9">App\Domain\Reports\Facilities</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Events.php.html#9">App\Domain\Reports\Events</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BaseReport.php.html#19">App\Domain\Reports\BaseReport</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AwesomeEntityReport.php.html#8">App\Domain\Reports\AwesomeEntityReport</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkTypes.php.html#9">App\Domain\Reports\WorkTypes</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#5">App\Domain\Reports\Formatters\ExcelFormats</a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="WorkOrders.php.html#9">App\Domain\Reports\WorkOrders</a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Formatters/ExcelHelper.php.html#7">App\Domain\Reports\Formatters\ExcelHelper</a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="AccountingNoteType.php.html#15"><abbr title="App\Domain\Reports\AccountingNoteType::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#395"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_facility_areas">get_facility_areas</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#15"><abbr title="App\Domain\Reports\Users::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Types.php.html#39"><abbr title="App\Domain\Reports\Types::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Types.php.html#25"><abbr title="App\Domain\Reports\Types::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Types.php.html#20"><abbr title="App\Domain\Reports\Types::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Types.php.html#15"><abbr title="App\Domain\Reports\Types::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#478"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_part_note">get_wo_part_note</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#456"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_service_group">get_wo_service_group</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#439"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_facility_rooms">get_facility_rooms</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#426"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_response">get_wo_response</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#408"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_priorities">get_wo_priorities</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#380"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_reasons">get_wo_reasons</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#25"><abbr title="App\Domain\Reports\Users::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#352"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_work_types">get_wo_work_types</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#299"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_users">get_users</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#282"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_accounting_note_type">get_wo_accounting_note_type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#250"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_accounting_notes">get_wo_accounting_notes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#202"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_jobs">get_wo_jobs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#169"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_facilities">get_facilities</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#149"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_types">get_wo_types</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#128"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_events">get_events</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#56"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::get_wo_orders">get_wo_orders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="SlamReportsWorkOrdersBaseReport.php.html#14"><abbr title="eBase\Modules\SlamReportsWorkOrdersBaseReport::getModuleConfiguration">getModuleConfiguration</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#20"><abbr title="App\Domain\Reports\Users::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#39"><abbr title="App\Domain\Reports\Users::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ServiceGroup.php.html#25"><abbr title="App\Domain\Reports\ServiceGroup::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#380"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_work_types">get_wo_work_types</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkTypes.php.html#25"><abbr title="App\Domain\Reports\WorkTypes::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkTypes.php.html#20"><abbr title="App\Domain\Reports\WorkTypes::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkTypes.php.html#15"><abbr title="App\Domain\Reports\WorkTypes::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#504"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_part_note">get_wo_part_note</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#482"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_service_group">get_wo_service_group</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#465"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_facility_rooms">get_facility_rooms</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#452"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_response">get_wo_response</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#434"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_priorities">get_wo_priorities</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#421"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_facility_areas">get_facility_areas</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#406"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_reasons">get_wo_reasons</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#327"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_users">get_users</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrders.php.html#14"><abbr title="App\Domain\Reports\WorkOrders::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#310"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_accounting_note_type">get_wo_accounting_note_type</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#278"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_accounting_notes">get_wo_accounting_notes</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#230"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_jobs">get_wo_jobs</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#197"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_facilities">get_facilities</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#179"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_types">get_wo_types</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#158"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_events">get_events</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#87"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::get_wo_orders">get_wo_orders</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrdersBaseReport.php.html#14"><abbr title="App\Domain\Reports\WorkOrdersBaseReport::getModuleConfiguration">getModuleConfiguration</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrders.php.html#77"><abbr title="App\Domain\Reports\WorkOrders::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrders.php.html#24"><abbr title="App\Domain\Reports\WorkOrders::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkOrders.php.html#19"><abbr title="App\Domain\Reports\WorkOrders::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ServiceGroup.php.html#39"><abbr title="App\Domain\Reports\ServiceGroup::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ServiceGroup.php.html#20"><abbr title="App\Domain\Reports\ServiceGroup::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNoteType.php.html#20"><abbr title="App\Domain\Reports\AccountingNoteType::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Events.php.html#39"><abbr title="App\Domain\Reports\Events::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityRooms.php.html#20"><abbr title="App\Domain\Reports\FacilityRooms::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityRooms.php.html#15"><abbr title="App\Domain\Reports\FacilityRooms::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityAreas.php.html#39"><abbr title="App\Domain\Reports\FacilityAreas::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityAreas.php.html#25"><abbr title="App\Domain\Reports\FacilityAreas::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityAreas.php.html#20"><abbr title="App\Domain\Reports\FacilityAreas::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityAreas.php.html#15"><abbr title="App\Domain\Reports\FacilityAreas::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facilities.php.html#39"><abbr title="App\Domain\Reports\Facilities::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facilities.php.html#25"><abbr title="App\Domain\Reports\Facilities::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facilities.php.html#20"><abbr title="App\Domain\Reports\Facilities::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facilities.php.html#15"><abbr title="App\Domain\Reports\Facilities::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Events.php.html#25"><abbr title="App\Domain\Reports\Events::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityRooms.php.html#39"><abbr title="App\Domain\Reports\FacilityRooms::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Events.php.html#20"><abbr title="App\Domain\Reports\Events::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Events.php.html#15"><abbr title="App\Domain\Reports\Events::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="BaseReport.php.html#21"><abbr title="App\Domain\Reports\BaseReport::getModuleConfiguration">getModuleConfiguration</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AwesomeEntityReport.php.html#29"><abbr title="App\Domain\Reports\AwesomeEntityReport::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AwesomeEntityReport.php.html#11"><abbr title="App\Domain\Reports\AwesomeEntityReport::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNotes.php.html#39"><abbr title="App\Domain\Reports\AccountingNotes::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNotes.php.html#25"><abbr title="App\Domain\Reports\AccountingNotes::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNotes.php.html#20"><abbr title="App\Domain\Reports\AccountingNotes::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNotes.php.html#15"><abbr title="App\Domain\Reports\AccountingNotes::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNoteType.php.html#39"><abbr title="App\Domain\Reports\AccountingNoteType::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="AccountingNoteType.php.html#25"><abbr title="App\Domain\Reports\AccountingNoteType::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="FacilityRooms.php.html#25"><abbr title="App\Domain\Reports\FacilityRooms::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#173"><abbr title="App\Domain\Reports\Formatters\ExcelFormats::get">get</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="ServiceGroup.php.html#15"><abbr title="App\Domain\Reports\ServiceGroup::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Priorities.php.html#20"><abbr title="App\Domain\Reports\Priorities::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Response.php.html#39"><abbr title="App\Domain\Reports\Response::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Response.php.html#25"><abbr title="App\Domain\Reports\Response::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Response.php.html#20"><abbr title="App\Domain\Reports\Response::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Response.php.html#15"><abbr title="App\Domain\Reports\Response::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Reasons.php.html#39"><abbr title="App\Domain\Reports\Reasons::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Reasons.php.html#25"><abbr title="App\Domain\Reports\Reasons::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Reasons.php.html#20"><abbr title="App\Domain\Reports\Reasons::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Reasons.php.html#15"><abbr title="App\Domain\Reports\Reasons::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Priorities.php.html#39"><abbr title="App\Domain\Reports\Priorities::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Priorities.php.html#25"><abbr title="App\Domain\Reports\Priorities::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Priorities.php.html#15"><abbr title="App\Domain\Reports\Priorities::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#181"><abbr title="App\Domain\Reports\Formatters\ExcelFormats::all">all</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PartNote.php.html#39"><abbr title="App\Domain\Reports\PartNote::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PartNote.php.html#25"><abbr title="App\Domain\Reports\PartNote::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PartNote.php.html#20"><abbr title="App\Domain\Reports\PartNote::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="PartNote.php.html#15"><abbr title="App\Domain\Reports\PartNote::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="LoadFileExport.php.html#233"><abbr title="App\Domain\Reports\LoadFileExport::writeDataRow">writeDataRow</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Jobs.php.html#39"><abbr title="App\Domain\Reports\Jobs::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Jobs.php.html#25"><abbr title="App\Domain\Reports\Jobs::getConfig">getConfig</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Jobs.php.html#20"><abbr title="App\Domain\Reports\Jobs::title">title</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Jobs.php.html#15"><abbr title="App\Domain\Reports\Jobs::slug">slug</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelHelper.php.html#11"><abbr title="App\Domain\Reports\Formatters\ExcelHelper::setFormats">setFormats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#187"><abbr title="App\Domain\Reports\Formatters\ExcelFormats::initialize">initialize</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="WorkTypes.php.html#39"><abbr title="App\Domain\Reports\WorkTypes::processData">processData</abbr></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#187"><abbr title="App\Domain\Reports\Formatters\ExcelFormats::initialize">initialize</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Formatters/ExcelFormats.php.html#173"><abbr title="App\Domain\Reports\Formatters\ExcelFormats::get">get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Formatters/ExcelHelper.php.html#11"><abbr title="App\Domain\Reports\Formatters\ExcelHelper::setFormats">setFormats</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="WorkOrders.php.html#24"><abbr title="App\Domain\Reports\WorkOrders::getConfig">getConfig</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 7.0.7</a> using <a href="https://secure.php.net/" target="_top">PHP 7.3.1</a> with <a href="https://xdebug.org/">Xdebug 2.7.2</a> and <a href="https://phpunit.de/">PHPUnit 8.3.4</a> at Fri Sep 6 17:27:06 UTC 2019.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../_js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../_js/d3.min.js" type="text/javascript"></script>
+  <script src="../../_js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([23,0,0,0,0,0,0,0,0,0,0,4], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([106,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,4,"<a href=\"AccountingNoteType.php.html#9\">App\\Domain\\Reports\\AccountingNoteType<\/a>"],[0,4,"<a href=\"AccountingNotes.php.html#9\">App\\Domain\\Reports\\AccountingNotes<\/a>"],[100,0,"<a href=\"AllRecommendations.php.html#8\">App\\Domain\\Reports\\AllRecommendations<\/a>"],[0,2,"<a href=\"AwesomeEntityReport.php.html#8\">App\\Domain\\Reports\\AwesomeEntityReport<\/a>"],[0,1,"<a href=\"BaseReport.php.html#19\">App\\Domain\\Reports\\BaseReport<\/a>"],[0,4,"<a href=\"Events.php.html#9\">App\\Domain\\Reports\\Events<\/a>"],[0,4,"<a href=\"Facilities.php.html#9\">App\\Domain\\Reports\\Facilities<\/a>"],[0,4,"<a href=\"FacilityAreas.php.html#9\">App\\Domain\\Reports\\FacilityAreas<\/a>"],[0,4,"<a href=\"FacilityRooms.php.html#9\">App\\Domain\\Reports\\FacilityRooms<\/a>"],[0,12,"<a href=\"Formatters\/ExcelFormats.php.html#5\">App\\Domain\\Reports\\Formatters\\ExcelFormats<\/a>"],[0,2,"<a href=\"Formatters\/ExcelHelper.php.html#7\">App\\Domain\\Reports\\Formatters\\ExcelHelper<\/a>"],[0,4,"<a href=\"Jobs.php.html#9\">App\\Domain\\Reports\\Jobs<\/a>"],[0,1,"<a href=\"LoadFileExport.php.html#8\">App\\Domain\\Reports\\LoadFileExport<\/a>"],[0,4,"<a href=\"PartNote.php.html#9\">App\\Domain\\Reports\\PartNote<\/a>"],[0,4,"<a href=\"Priorities.php.html#9\">App\\Domain\\Reports\\Priorities<\/a>"],[0,4,"<a href=\"Reasons.php.html#9\">App\\Domain\\Reports\\Reasons<\/a>"],[100,0,"<a href=\"RecommendationCostsByAssetByYear.php.html#13\">App\\Domain\\Reports\\RecommendationCostsByAssetByYear<\/a>"],[0,4,"<a href=\"Response.php.html#9\">App\\Domain\\Reports\\Response<\/a>"],[0,4,"<a href=\"ServiceGroup.php.html#9\">App\\Domain\\Reports\\ServiceGroup<\/a>"],[100,0,"<a href=\"SlamProviderRepository.php.html#23\">eBase\\Modules\\SlamProviderRepository<\/a>"],[0,17,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#12\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport<\/a>"],[0,4,"<a href=\"Types.php.html#9\">App\\Domain\\Reports\\Types<\/a>"],[0,4,"<a href=\"Users.php.html#9\">App\\Domain\\Reports\\Users<\/a>"],[100,0,"<a href=\"WOProviderRepository.php.html#23\">App\\Domain\\Reports\\WOProviderRepository<\/a>"],[0,5,"<a href=\"WorkOrders.php.html#9\">App\\Domain\\Reports\\WorkOrders<\/a>"],[0,17,"<a href=\"WorkOrdersBaseReport.php.html#12\">App\\Domain\\Reports\\WorkOrdersBaseReport<\/a>"],[0,4,"<a href=\"WorkTypes.php.html#9\">App\\Domain\\Reports\\WorkTypes<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,1,"<a href=\"AccountingNoteType.php.html#15\">App\\Domain\\Reports\\AccountingNoteType::slug<\/a>"],[0,1,"<a href=\"AccountingNoteType.php.html#20\">App\\Domain\\Reports\\AccountingNoteType::title<\/a>"],[0,1,"<a href=\"AccountingNoteType.php.html#25\">App\\Domain\\Reports\\AccountingNoteType::getConfig<\/a>"],[0,1,"<a href=\"AccountingNoteType.php.html#39\">App\\Domain\\Reports\\AccountingNoteType::processData<\/a>"],[0,1,"<a href=\"AccountingNotes.php.html#15\">App\\Domain\\Reports\\AccountingNotes::slug<\/a>"],[0,1,"<a href=\"AccountingNotes.php.html#20\">App\\Domain\\Reports\\AccountingNotes::title<\/a>"],[0,1,"<a href=\"AccountingNotes.php.html#25\">App\\Domain\\Reports\\AccountingNotes::getConfig<\/a>"],[0,1,"<a href=\"AccountingNotes.php.html#39\">App\\Domain\\Reports\\AccountingNotes::processData<\/a>"],[0,1,"<a href=\"AwesomeEntityReport.php.html#11\">App\\Domain\\Reports\\AwesomeEntityReport::getConfig<\/a>"],[0,1,"<a href=\"AwesomeEntityReport.php.html#29\">App\\Domain\\Reports\\AwesomeEntityReport::processData<\/a>"],[0,1,"<a href=\"BaseReport.php.html#21\">App\\Domain\\Reports\\BaseReport::getModuleConfiguration<\/a>"],[0,1,"<a href=\"Events.php.html#15\">App\\Domain\\Reports\\Events::slug<\/a>"],[0,1,"<a href=\"Events.php.html#20\">App\\Domain\\Reports\\Events::title<\/a>"],[0,1,"<a href=\"Events.php.html#25\">App\\Domain\\Reports\\Events::getConfig<\/a>"],[0,1,"<a href=\"Events.php.html#39\">App\\Domain\\Reports\\Events::processData<\/a>"],[0,1,"<a href=\"Facilities.php.html#15\">App\\Domain\\Reports\\Facilities::slug<\/a>"],[0,1,"<a href=\"Facilities.php.html#20\">App\\Domain\\Reports\\Facilities::title<\/a>"],[0,1,"<a href=\"Facilities.php.html#25\">App\\Domain\\Reports\\Facilities::getConfig<\/a>"],[0,1,"<a href=\"Facilities.php.html#39\">App\\Domain\\Reports\\Facilities::processData<\/a>"],[0,1,"<a href=\"FacilityAreas.php.html#15\">App\\Domain\\Reports\\FacilityAreas::slug<\/a>"],[0,1,"<a href=\"FacilityAreas.php.html#20\">App\\Domain\\Reports\\FacilityAreas::title<\/a>"],[0,1,"<a href=\"FacilityAreas.php.html#25\">App\\Domain\\Reports\\FacilityAreas::getConfig<\/a>"],[0,1,"<a href=\"FacilityAreas.php.html#39\">App\\Domain\\Reports\\FacilityAreas::processData<\/a>"],[0,1,"<a href=\"FacilityRooms.php.html#15\">App\\Domain\\Reports\\FacilityRooms::slug<\/a>"],[0,1,"<a href=\"FacilityRooms.php.html#20\">App\\Domain\\Reports\\FacilityRooms::title<\/a>"],[0,1,"<a href=\"FacilityRooms.php.html#25\">App\\Domain\\Reports\\FacilityRooms::getConfig<\/a>"],[0,1,"<a href=\"FacilityRooms.php.html#39\">App\\Domain\\Reports\\FacilityRooms::processData<\/a>"],[0,2,"<a href=\"Formatters\/ExcelFormats.php.html#173\">App\\Domain\\Reports\\Formatters\\ExcelFormats::get<\/a>"],[0,1,"<a href=\"Formatters\/ExcelFormats.php.html#181\">App\\Domain\\Reports\\Formatters\\ExcelFormats::all<\/a>"],[0,9,"<a href=\"Formatters\/ExcelFormats.php.html#187\">App\\Domain\\Reports\\Formatters\\ExcelFormats::initialize<\/a>"],[0,2,"<a href=\"Formatters\/ExcelHelper.php.html#11\">App\\Domain\\Reports\\Formatters\\ExcelHelper::setFormats<\/a>"],[0,1,"<a href=\"Jobs.php.html#15\">App\\Domain\\Reports\\Jobs::slug<\/a>"],[0,1,"<a href=\"Jobs.php.html#20\">App\\Domain\\Reports\\Jobs::title<\/a>"],[0,1,"<a href=\"Jobs.php.html#25\">App\\Domain\\Reports\\Jobs::getConfig<\/a>"],[0,1,"<a href=\"Jobs.php.html#39\">App\\Domain\\Reports\\Jobs::processData<\/a>"],[0,1,"<a href=\"LoadFileExport.php.html#233\">App\\Domain\\Reports\\LoadFileExport::writeDataRow<\/a>"],[0,1,"<a href=\"PartNote.php.html#15\">App\\Domain\\Reports\\PartNote::slug<\/a>"],[0,1,"<a href=\"PartNote.php.html#20\">App\\Domain\\Reports\\PartNote::title<\/a>"],[0,1,"<a href=\"PartNote.php.html#25\">App\\Domain\\Reports\\PartNote::getConfig<\/a>"],[0,1,"<a href=\"PartNote.php.html#39\">App\\Domain\\Reports\\PartNote::processData<\/a>"],[0,1,"<a href=\"Priorities.php.html#15\">App\\Domain\\Reports\\Priorities::slug<\/a>"],[0,1,"<a href=\"Priorities.php.html#20\">App\\Domain\\Reports\\Priorities::title<\/a>"],[0,1,"<a href=\"Priorities.php.html#25\">App\\Domain\\Reports\\Priorities::getConfig<\/a>"],[0,1,"<a href=\"Priorities.php.html#39\">App\\Domain\\Reports\\Priorities::processData<\/a>"],[0,1,"<a href=\"Reasons.php.html#15\">App\\Domain\\Reports\\Reasons::slug<\/a>"],[0,1,"<a href=\"Reasons.php.html#20\">App\\Domain\\Reports\\Reasons::title<\/a>"],[0,1,"<a href=\"Reasons.php.html#25\">App\\Domain\\Reports\\Reasons::getConfig<\/a>"],[0,1,"<a href=\"Reasons.php.html#39\">App\\Domain\\Reports\\Reasons::processData<\/a>"],[0,1,"<a href=\"Response.php.html#15\">App\\Domain\\Reports\\Response::slug<\/a>"],[0,1,"<a href=\"Response.php.html#20\">App\\Domain\\Reports\\Response::title<\/a>"],[0,1,"<a href=\"Response.php.html#25\">App\\Domain\\Reports\\Response::getConfig<\/a>"],[0,1,"<a href=\"Response.php.html#39\">App\\Domain\\Reports\\Response::processData<\/a>"],[0,1,"<a href=\"ServiceGroup.php.html#15\">App\\Domain\\Reports\\ServiceGroup::slug<\/a>"],[0,1,"<a href=\"ServiceGroup.php.html#20\">App\\Domain\\Reports\\ServiceGroup::title<\/a>"],[0,1,"<a href=\"ServiceGroup.php.html#25\">App\\Domain\\Reports\\ServiceGroup::getConfig<\/a>"],[0,1,"<a href=\"ServiceGroup.php.html#39\">App\\Domain\\Reports\\ServiceGroup::processData<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#14\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::getModuleConfiguration<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#56\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_orders<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#128\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_events<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#149\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_types<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#169\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_facilities<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#202\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_jobs<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#250\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_accounting_notes<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#282\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_accounting_note_type<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#299\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_users<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#352\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_work_types<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#380\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_reasons<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#395\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_facility_areas<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#408\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_priorities<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#426\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_response<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#439\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_facility_rooms<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#456\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_service_group<\/a>"],[0,1,"<a href=\"SlamReportsWorkOrdersBaseReport.php.html#478\">eBase\\Modules\\SlamReportsWorkOrdersBaseReport::get_wo_part_note<\/a>"],[0,1,"<a href=\"Types.php.html#15\">App\\Domain\\Reports\\Types::slug<\/a>"],[0,1,"<a href=\"Types.php.html#20\">App\\Domain\\Reports\\Types::title<\/a>"],[0,1,"<a href=\"Types.php.html#25\">App\\Domain\\Reports\\Types::getConfig<\/a>"],[0,1,"<a href=\"Types.php.html#39\">App\\Domain\\Reports\\Types::processData<\/a>"],[0,1,"<a href=\"Users.php.html#15\">App\\Domain\\Reports\\Users::slug<\/a>"],[0,1,"<a href=\"Users.php.html#20\">App\\Domain\\Reports\\Users::title<\/a>"],[0,1,"<a href=\"Users.php.html#25\">App\\Domain\\Reports\\Users::getConfig<\/a>"],[0,1,"<a href=\"Users.php.html#39\">App\\Domain\\Reports\\Users::processData<\/a>"],[0,1,"<a href=\"WorkOrders.php.html#14\">App\\Domain\\Reports\\WorkOrders::slug<\/a>"],[0,1,"<a href=\"WorkOrders.php.html#19\">App\\Domain\\Reports\\WorkOrders::title<\/a>"],[0,2,"<a href=\"WorkOrders.php.html#24\">App\\Domain\\Reports\\WorkOrders::getConfig<\/a>"],[0,1,"<a href=\"WorkOrders.php.html#77\">App\\Domain\\Reports\\WorkOrders::processData<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#14\">App\\Domain\\Reports\\WorkOrdersBaseReport::getModuleConfiguration<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#87\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_orders<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#158\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_events<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#179\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_types<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#197\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_facilities<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#230\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_jobs<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#278\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_accounting_notes<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#310\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_accounting_note_type<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#327\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_users<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#380\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_work_types<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#406\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_reasons<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#421\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_facility_areas<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#434\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_priorities<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#452\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_response<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#465\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_facility_rooms<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#482\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_service_group<\/a>"],[0,1,"<a href=\"WorkOrdersBaseReport.php.html#504\">App\\Domain\\Reports\\WorkOrdersBaseReport::get_wo_part_note<\/a>"],[0,1,"<a href=\"WorkTypes.php.html#15\">App\\Domain\\Reports\\WorkTypes::slug<\/a>"],[0,1,"<a href=\"WorkTypes.php.html#20\">App\\Domain\\Reports\\WorkTypes::title<\/a>"],[0,1,"<a href=\"WorkTypes.php.html#25\">App\\Domain\\Reports\\WorkTypes::getConfig<\/a>"],[0,1,"<a href=\"WorkTypes.php.html#39\">App\\Domain\\Reports\\WorkTypes::processData<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace Tests\Reporting\DB\QueryBuilder;
 
+use App\Reporting\DB\QueryBuilder\QueryBuilder;
 use PHPUnit\Framework\TestCase;
 
 class QueryBuilderTest extends TestCase

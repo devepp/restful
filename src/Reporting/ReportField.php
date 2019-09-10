@@ -8,12 +8,15 @@
 
 namespace App\Reporting;
 
+use App\Reporting\Resources\Table;
 use JsonSerializable;
 use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\Selectables\AbstractSelectable;
 
 class ReportField implements JsonSerializable
 {
+	/** @var Table */
+	protected $table;
 	/** @var DatabaseField */
 	protected $field;
 
@@ -22,11 +25,13 @@ class ReportField implements JsonSerializable
 
 	/**
 	 * ReportField constructor.
+	 * @param Table $table
 	 * @param DatabaseField $field
-	 * @param null|array $selectable_overrides
+	 * @param null $selectable_overrides
 	 */
-	public function __construct(DatabaseField $field, $selectable_overrides = null)
+	public function __construct(Table $table, DatabaseField $field, $selectable_overrides = null)
 	{
+		$this->table = $table;
 		$this->field = $field;
 
 		if ($selectable_overrides === null) {
@@ -88,7 +93,7 @@ class ReportField implements JsonSerializable
 		$selectable_fields = [];
 
 		foreach ($this->selectables as $selectable) {
-			$selectable_fields[] = new SelectableField($selectable->fieldName($this->field), $selectable->label($this->field));
+			$selectable_fields[] = new SelectableField($selectable->fieldName($this->table, $this->field), $selectable->label($this->field));
 		}
 
 		return $selectable_fields;

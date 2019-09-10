@@ -1,7 +1,5 @@
 <?php
 
-namespace App\Core;
-
 use App\Core\Exceptions\HTTP\NotFoundException;
 use PHPUnit\Framework\TestCase;
 use App\Core\Middleware\ExceptionalMiddleware;
