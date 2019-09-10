@@ -2,7 +2,13 @@
 
 namespace App\Core\Container;
 
+use Exception;
 use Psr\Container\ContainerInterface;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use RecursiveRegexIterator;
+use ReflectionClass;
+use RegexIterator;
 
 class Container implements ContainerInterface
 {
@@ -17,7 +23,7 @@ class Container implements ContainerInterface
 	/**
 	 * @param string $id
 	 * @return mixed|object
-	 * @throws \Exception
+	 * @throws Exception
 	 */
     public function get($id)
     {
@@ -25,7 +31,7 @@ class Container implements ContainerInterface
             try {
                 $entry = $this->entries[$id];
                 return $entry($this);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 throw new ContainerException($e->getMessage());
             }
         } else {
@@ -52,7 +58,7 @@ class Container implements ContainerInterface
     /**
      * @param $id
      * @return object
-     * @throws \Exception
+     * @throws Exception
      */
     private function reflectOnMagic($id)
     {
@@ -66,7 +72,7 @@ class Container implements ContainerInterface
 
     private function makeClass($fqcn)
     {
-        $reflectedClass = new \ReflectionClass($fqcn);
+        $reflectedClass = new ReflectionClass($fqcn);
         $reflectedConstructor = $reflectedClass->getConstructor();
         if (!$reflectedConstructor) {
             return new $fqcn;
@@ -79,7 +85,7 @@ class Container implements ContainerInterface
                 $parameterTypeName = $parameter->getType()->getName();
                 $params[] = $this->get($parameterTypeName);
             } else {
-                throw new \Exception('Failed to construct '.$fqcn.'; missing '.$parameter);
+                throw new Exception('Failed to construct '.$fqcn.'; missing '.$parameter);
             }
         }
         return $reflectedClass->newInstanceArgs($params);
@@ -91,9 +97,9 @@ class Container implements ContainerInterface
         if (!empty($this->fqcn)) {
             return;
         }
-        $directory = new \RecursiveDirectoryIterator('..\src');
-        $iterator = new \RecursiveIteratorIterator($directory);
-        $regex = new \RegexIterator($iterator, '/^.+\.php$/i', \RecursiveRegexIterator::GET_MATCH);
+        $directory = new RecursiveDirectoryIterator('..\src');
+        $iterator = new RecursiveIteratorIterator($directory);
+        $regex = new RegexIterator($iterator, '/^.+\.php$/i', RecursiveRegexIterator::GET_MATCH);
 
         foreach ($regex as $filepath) {
             $this->fqcns[] = str_replace(['..\src', '.php'], ['App', ''], reset($filepath));
