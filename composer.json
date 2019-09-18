@@ -10,12 +10,9 @@
         "vlucas/phpdotenv": "^3.4",
         "zendframework/zend-diactoros": "^2.1",
         "narrowspark/http-emitter": "^0.8.0",
-<<<<<<< HEAD
         "doctrine/dbal": "^2.9"
-=======
         "psr/simple-cache": "^1.0",
         "duncan3dc/cache": "^0.6.1"
->>>>>>> master
     },
     "autoload": {
         "psr-4": {
