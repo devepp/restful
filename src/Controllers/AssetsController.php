@@ -2,52 +2,44 @@
 
 namespace App\Controllers;
 
-use App\Core\Exceptions\HTTP\NotFoundException;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
+use App\Domain\Asset;
+use App\Domain\AssetId;
+use App\Repositories\AssetRepositoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use PDO;
 
 class AssetsController
 {
-	private $dbConnection;
+	private $assets;
 
-	public function __construct(PDO $dbConnection)
+	public function __construct(AssetRepositoryInterface $assets)
 	{
-		$this->dbConnection = $dbConnection;
+		$this->assets = $assets;
 	}
 
 	public function index(ServerRequestInterface $request)
 	{
-		$result = $this->dbConnection->query('SELECT * FROM as_assets LIMIT '.$request->getAttribute('limit', 10));
-
-		$assets = $result->fetchAll(PDO::FETCH_ASSOC);
+		$assets = $this->assets->getAll();
 
 		return new JsonResponse($assets);
 	}
 
 	public function store(ServerRequestInterface $request)
 	{
-		$new_record = $this->dbConnection->query('INSERT INTO as_assets (equipment_no, friendly_name) VALUES (123456, "my Equipment")');
+		$asset = new Asset();
 
-		if ($new_record) {
-			return new JsonResponse($new_record, 201);
-		}
+		$assetId = $this->assets->add($asset);
 
-		return $this->factory->createResponse(422, 'This is a bad request');
+		$newAsset = $this->assets->getById($assetId);
+
+		return new JsonResponse($newAsset, 201);
 	}
 
 	public function show(ServerRequestInterface $request, $id)
 	{
-		$result = $this->dbConnection->query('SELECT * FROM as_assets WHERE id = '.$id);
+		$asset = $this->assets->getByIdOrFail(AssetId::fromString($id));
 
-		$asset = $result->fetch(PDO::FETCH_ASSOC);
-
-		if ($asset) {
-			return new JsonResponse($asset);
-		}
-
-		throw new NotFoundException('Asset with id '.$id.' could not be found');
+		return new JsonResponse($asset);
 	}
 }
