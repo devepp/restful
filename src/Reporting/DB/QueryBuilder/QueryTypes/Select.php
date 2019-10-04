@@ -19,16 +19,10 @@ class Select extends Type
 	 * @param array $whereExpressions
 	 * @return string
 	 */
-	public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [], $groupBys = [], $havings = [], $orderBys = [])
+	public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [])
 	{
 		$fields = empty($selectFields) ? '*' : implode(', ', $selectFields);
-		$joinClauses = empty($joinExpressions) ? '' : ' '.implode(' ', $joinExpressions);
-		$whereClause = empty($whereExpressions) ? '' : ' WHERE '.implode(' ', $whereExpressions);
-		$groupByClause = empty($groupBys) ? '' : ' GROUP BY '.implode(', ', $groupBys);
-		$havingClause = empty($havings) ? '' : ' HAVING '.implode(' ', $havings);
-		$orderByClause = empty($orderBys) ? '' : ' ORDER BY '.implode(', ', $orderBys);
-
-		return 'SELECT '.$fields.' FROM '.$tableExpression.$joinClauses.$whereClause.$groupByClause.$havingClause.$orderByClause;
+		return 'SELECT '.$fields.' FROM '.$tableExpression.' '.implode(' ', $joinExpressions).' WHERE '.implode(' ', $whereExpressions);
 	}
 
 }

@@ -35,7 +35,7 @@ class TableBuilder
 		$this->alias = $table_name;
 	}
 
-	public function alias($alias)
+	public function setAlias($alias)
 	{
 		$clone = clone $this;
 		$clone->alias = $alias;

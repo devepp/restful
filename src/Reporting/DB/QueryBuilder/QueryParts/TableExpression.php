@@ -2,16 +2,14 @@
 
 namespace App\Reporting\DB\QueryBuilder\QueryParts;
 
-class TableExpression
+use App\Reporting\DB\QueryBuilder\SqlExpressionInterface;
+
+class TableExpression implements SqlExpressionInterface
 {
 	private $table;
 	private $alias;
 
-	/**
-	 * TableExpression constructor.
-	 * @param $table
-	 */
-	public function __construct($tableExpression)
+	public static function fromString($tableExpression)
 	{
 		$tableExpression = trim($tableExpression);
 
@@ -19,8 +17,23 @@ class TableExpression
 			throw new \InvalidArgumentException('$tableExpression cannot contain more than 1 space');
 		}
 
-		$this->table = $this->parseTableFromExpression($tableExpression);
-		$this->alias = $this->parsealiasFromExpression($tableExpression);
+		$spaceIndex = strpos($tableExpression,' ');
+
+		$table = $spaceIndex === false ? $tableExpression : substr($tableExpression, 0, $spaceIndex);
+		$alias = $spaceIndex === false ? null : substr($tableExpression, $spaceIndex + 1);
+
+		return new self($table, $alias);
+	}
+
+	/**
+	 * TableExpression constructor.
+	 * @param $table
+	 * @param null $alias
+	 */
+	public function __construct($table, $alias = null)
+	{
+		$this->table = $table;
+		$this->alias = $alias;
 	}
 
 	/**
@@ -28,8 +41,7 @@ class TableExpression
 	 */
 	public function __toString()
 	{
-		$aliasString = $this->alias ? ' '.$this->alias : '';
-		return $this->table.$aliasString;
+		return $this->getStatementExpression();
 	}
 
 	/**
@@ -47,6 +59,32 @@ class TableExpression
 	{
 		return $this->alias;
 	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getAliasOrTable()
+	{
+		if ($this->alias) {
+			return $this->alias;
+		}
+		return $this->table;
+	}
+
+	public function getStatementExpression()
+	{
+		if ($this->alias) {
+			return $this->table.' '.$this->alias;
+		}
+
+		return $this->table;
+	}
+
+	public function getParameters()
+	{
+		return [];
+	}
+
 
 	private function parseTableFromExpression($tableExpression)
 	{

@@ -2,49 +2,28 @@
 
 namespace App\Reporting\DB\QueryBuilder\QueryParts;
 
-
-class Join
+abstract class Join implements JoinInterface
 {
-	private $table;
-	private $on;
-	private $type;
+	const INNER = 'INNER';
+	const LEFT = 'LEFT';
+	const RIGHT = 'RIGHT';
+	const OUTER = 'OUTER';
+	const CROSS = 'CROSS';
 
-	/**
-	 * Join constructor.
-	 * @param $table
-	 * @param $on
-	 * @param $type
-	 */
-	public function __construct($table, $on, $type)
+	const TYPES = [
+		self::INNER,
+		self::LEFT,
+		self::RIGHT,
+		self::OUTER,
+		self::CROSS,
+	];
+
+
+	abstract public function getStatementExpression();
+	abstract public function getParameters();
+
+	public function __toString()
 	{
-		$this->table = $table;
-		$this->on = $on;
-		$this->type = $type;
+		return $this->getStatementExpression();
 	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getTable()
-	{
-		return $this->table;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getOn()
-	{
-		return $this->on;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getType()
-	{
-		return $this->type;
-	}
-
-
 }

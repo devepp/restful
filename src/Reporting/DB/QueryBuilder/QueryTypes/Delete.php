@@ -12,7 +12,7 @@ class Delete extends Type
 		return Type::DELETE;
 	}
 
-	public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [], $groupBys = [], $havings = [], $orderBys = [])
+	public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [])
 	{
 		$alias = $tableExpression->getAlias() ? $tableExpression->getAlias() : $tableExpression->getTable();
 		$from = empty($joinExpressions) ? ' FROM '.$tableExpression : $alias.' FROM '.$tableExpression.' '.implode(' ', $joinExpressions);

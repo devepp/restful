@@ -29,6 +29,7 @@ class CIConnectionInfo implements ConnectionInfo
 	{
 		return new ConnectionOptions([
 			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_EMULATE_PREPARES => false,
 		]);
 	}
 

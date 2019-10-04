@@ -10,6 +10,7 @@ namespace App\Reporting\Resources;
 
 use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\Filters\Constraints\AbstractConstraint;
+use App\Reporting\Filters\Constraints\Equals;
 
 class Condition
 {
@@ -21,6 +22,11 @@ class Condition
 
 	/** @var mixed[] */
 	protected $constraint_parameters;
+
+	public static function equals(DatabaseField $dbField, $constraintParameters)
+	{
+		return new self($dbField, new Equals(), $constraintParameters);
+	}
 
 	/**
 	 * Condition constructor.

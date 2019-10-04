@@ -4,7 +4,7 @@ namespace App\Reporting\DB;
 
 use PDO;
 
-class Connection
+class Connection implements DbConnectionInterface
 {
 	/** @var PDO */
 	private $pdo;
@@ -67,5 +67,25 @@ class Connection
 	public function lastInsertId()
 	{
 		return $this->pdo->lastInsertId();
+	}
+
+	public function selectFrom($tableExpression)
+	{
+		return Query::selectQueryBuilder($tableExpression);
+	}
+
+	public function update($tableExpression)
+	{
+		return Query::selectQueryBuilder($tableExpression);
+	}
+
+	public function insertInto($tableExpression)
+	{
+		return Query::selectQueryBuilder($tableExpression);
+	}
+
+	public function deleteFrom($tableExpression)
+	{
+		return Query::selectQueryBuilder($tableExpression);
 	}
 }

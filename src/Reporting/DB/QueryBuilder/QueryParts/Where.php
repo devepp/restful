@@ -3,7 +3,7 @@
 namespace App\Reporting\DB\QueryBuilder\QueryParts;
 
 
-class Where
+class Where implements WhereInterface
 {
 	private $field;
 	private $operator;
@@ -35,7 +35,7 @@ class Where
 	 */
 	public function getStatementExpression()
 	{
-		return $this->getField().' '.$this->getOperator().' ';
+		return $this->getField().' '.$this->getOperator().' ?';
 	}
 
 	/**
@@ -62,21 +62,26 @@ class Where
 		return $this->value;
 	}
 
-	/**
-	 * @return array
-	 */
-	public function getParameter()
+	public function getParameters()
 	{
-		return [
-			$this->getParameterKey() => $this->getValue()
-		];
+		return [$this->value];
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getParameterKey()
-	{
-		return ':'.str_replace('.', '__', $this->field);
-	}
+
+
+//	/**
+//	 * @return array
+//	 */
+//	public function getParameter()
+//	{
+//		return $this->getValue();
+//	}
+//
+//	/**
+//	 * @return mixed
+//	 */
+//	public function getParameterKey()
+//	{
+//		return '?';
+//	}
 }

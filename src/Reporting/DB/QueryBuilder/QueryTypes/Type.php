@@ -43,7 +43,7 @@ abstract class Type
 	 * @param array $whereExpressions
 	 * @return string
 	 */
-	abstract public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [], $groupBys = [], $havings = [], $orderBys = []);
+	abstract public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = []);
 
 		/**
 	 * QueryType constructor.

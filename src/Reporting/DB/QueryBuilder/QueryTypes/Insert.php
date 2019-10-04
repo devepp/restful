@@ -12,7 +12,7 @@ class Insert extends Type
 		return Type::INSERT;
 	}
 
-	public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [], $groupBys = [], $havings = [], $orderBys = [])
+	public function compileStatement(TableExpression $tableExpression, $selectFields = [], $joinExpressions = [], $whereExpressions = [])
 	{
 		return 'INSERT INTO '.$tableExpression->getTable().' VALUES ('.implode(', ', $selectFields).') ';
 	}

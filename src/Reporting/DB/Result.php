@@ -19,9 +19,13 @@ class Result
 		$this->statement = $statement;
 	}
 
-	public function next($fetchStyle)
+	public function next($fetchStyle = null)
 	{
-		return $this->statement->fetch($fetchStyle);
+		if (isset($fetchStyle)) {
+			return $this->statement->fetch($fetchStyle);
+		}
+
+		return $this->statement->fetch();
 	}
 
 	public function iterator($fetchStyle)
@@ -31,9 +35,21 @@ class Result
 		}
 	}
 
-	public function all($fetchStyle, $fetchArgument = null, $constructorArgs = [])
+	public function all($fetchStyle = null, $fetchArgument = null, $constructorArgs = null)
 	{
-		return $this->statement->fetchAll($fetchStyle, $fetchArgument, $constructorArgs);
+		if (isset($constructorArgs) && isset($fetchArgument) && isset($fetchStyle)) {
+			return $this->statement->fetchAll($fetchStyle, $fetchArgument, $constructorArgs);
+		}
+
+		if (isset($fetchArgument) && isset($fetchStyle)) {
+			return $this->statement->fetchAll($fetchStyle, $fetchArgument);
+		}
+
+		if (isset($fetchStyle)) {
+			return $this->statement->fetchAll($fetchStyle);
+		}
+
+		return $this->statement->fetchAll();
 	}
 
 	public function nextAsAssociative()
@@ -41,7 +57,7 @@ class Result
 		return $this->statement->fetch(PDO::FETCH_ASSOC);
 	}
 
-	public function iteratorOfAssociativeArrays()
+	public function asAssociativeArrayIterator()
 	{
 		while ($array = $this->statement->fetch(PDO::FETCH_ASSOC)) {
 			yield $array;
@@ -53,7 +69,7 @@ class Result
 		return $this->statement->fetch(PDO::FETCH_OBJ);
 	}
 
-	public function iteratorOfObjects()
+	public function asObjectIterator()
 	{
 		while ($object = $this->statement->fetch(PDO::FETCH_OBJ)) {
 			yield $object;
@@ -65,10 +81,17 @@ class Result
 		return $this->statement->fetch(PDO::FETCH_CLASS, $className);
 	}
 
-	public function iteratorOfClassObjects($className)
+	public function asClassIterator($className)
 	{
 		while ($object = $this->statement->fetch(PDO::FETCH_CLASS, $className)) {
 			yield $object;
+		}
+	}
+
+	public function asMappedIterator(callable $map)
+	{
+		while ($array = $this->statement->fetch(PDO::FETCH_ASSOC)) {
+			yield $map($array);
 		}
 	}
 }

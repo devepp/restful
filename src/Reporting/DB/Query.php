@@ -3,6 +3,11 @@
 namespace App\Reporting\DB;
 
 
+use App\Reporting\DB\QueryBuilder\Delete;
+use App\Reporting\DB\QueryBuilder\Insert;
+use App\Reporting\DB\QueryBuilder\Select;
+use App\Reporting\DB\QueryBuilder\Update;
+
 class Query
 {
 	private $statement;
@@ -34,6 +39,42 @@ class Query
 	public function getParameters()
 	{
 		return $this->parameters;
+	}
+
+	/**
+	 * @param $tableExpression
+	 * @return Select
+	 */
+	public static function selectQueryBuilder($tableExpression)
+	{
+		return new Select($tableExpression);
+	}
+
+	/**
+	 * @param $tableExpression
+	 * @return Update
+	 */
+	public static function updateQueryBuilder($tableExpression)
+	{
+		return new Update($tableExpression);
+	}
+
+	/**
+	 * @param $tableExpression
+	 * @return Insert
+	 */
+	public static function insertQueryBuilder($tableExpression)
+	{
+		return new Insert($tableExpression);
+	}
+
+	/**
+	 * @param $tableExpression
+	 * @return Delete
+	 */
+	public static function deleteQueryBuilder($tableExpression)
+	{
+		return new Delete($tableExpression);
 	}
 
 }

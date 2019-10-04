@@ -218,6 +218,45 @@ class QueryGroup
 		return $applicable_fields;
 	}
 
+	/**
+	 * @param SelectedField[] $selectedFields
+	 * @return QueryField[]
+	 */
+	public function queryFields($selectedFields)
+	{
+		$queryFields = [];
+
+		foreach ($selectedFields as $selectedField) {
+			$fromQueryGroup = $this->tables->hasAlias($selectedField->table());
+
+
+			if ($this->isPrimary()) {
+				if ($fromQueryGroup) {
+
+				}
+				$queryFields[] = $selectedField;
+			} else {
+
+			}
+
+		}
+
+
+
+		if ($this->isPrimary()) {
+			return $queryFields;
+		}
+
+		$applicable_fields[] = $this->subQueryRequiredFields();
+
+		foreach ($selectedFields as $field) {
+			if ($this->tables->hasAlias($field->table())) {
+				$applicable_fields[] = $field;
+			}
+		}
+		return $applicable_fields;
+	}
+
 	public function prefix()
 	{
 		if ($this->isSubQuery()) {
