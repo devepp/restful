@@ -32,30 +32,30 @@ abstract class WorkOrdersBaseReport extends AbstractReport
 		$wo_service_group = $this->get_wo_service_group();
 		$wo_part_note = $this->get_wo_part_note();
 
-		new Relationship($wo_types, $wo_orders, [Condition::equals($wo_orders->dbField('type_id'), [$wo_types->primary_key()])]);
-		new Relationship($wo_reasons, $wo_orders, [Condition::equals($wo_orders->dbField('reason_id'), [$wo_reasons->primary_key()])]);
-		new Relationship($facilities, $wo_orders, [Condition::equals($wo_orders->dbField('facility_id'), [$facilities->primary_key()])]);
-		new Relationship($facility_areas, $wo_orders, [new Condition($wo_orders->dbField('facility_area_id'), new Equals(), [$facility_areas->primary_key()])]);
-		new Relationship($facility_rooms, $wo_orders, [new Condition($wo_orders->dbField('facility_room_id'), new Equals(), [$facility_rooms->primary_key()])]);
-		new Relationship($dispatchers, $wo_orders, [new Condition($wo_orders->dbField('dispatcher_id'), new Equals(), [$dispatchers->primary_key()])]);
-		new Relationship($child_response, $wo_orders, [new Condition($wo_orders->dbField('completed_response_id'), new Equals(), [$child_response->primary_key()])]);
-		new Relationship($parent_response, $child_response, [new Condition($child_response->dbField('parent_id'), new Equals(), [$parent_response->primary_key()])]);
+		new Relationship($wo_types, $wo_orders, [Condition::equals($wo_orders->dbField('type_id'), [$wo_types->primaryKey()])]);
+		new Relationship($wo_reasons, $wo_orders, [Condition::equals($wo_orders->dbField('reason_id'), [$wo_reasons->primaryKey()])]);
+		new Relationship($facilities, $wo_orders, [Condition::equals($wo_orders->dbField('facility_id'), [$facilities->primaryKey()])]);
+		new Relationship($facility_areas, $wo_orders, [new Condition($wo_orders->dbField('facility_area_id'), new Equals(), [$facility_areas->primaryKey()])]);
+		new Relationship($facility_rooms, $wo_orders, [new Condition($wo_orders->dbField('facility_room_id'), new Equals(), [$facility_rooms->primaryKey()])]);
+		new Relationship($dispatchers, $wo_orders, [new Condition($wo_orders->dbField('dispatcher_id'), new Equals(), [$dispatchers->primaryKey()])]);
+		new Relationship($child_response, $wo_orders, [new Condition($wo_orders->dbField('completed_response_id'), new Equals(), [$child_response->primaryKey()])]);
+		new Relationship($parent_response, $child_response, [new Condition($child_response->dbField('parent_id'), new Equals(), [$parent_response->primaryKey()])]);
 
 
-		new Relationship($wo_orders, $wo_jobs, [new Condition($wo_jobs->dbField('work_order_id'), new Equals(), [$wo_orders->primary_key()])]);
-		new Relationship($wo_work_types, $wo_jobs, [new Condition($wo_jobs->dbField('work_type_id'), new Equals(), [$wo_work_types->primary_key()])]);
-		new Relationship($service_providers, $wo_jobs, [new Condition($wo_jobs->dbField('assigned_to'), new Equals(), [$service_providers->primary_key()])]);
-		new Relationship($wo_priorities, $wo_jobs, [new Condition($wo_jobs->dbField('priority_id'), new Equals(), [$wo_priorities->primary_key()])]);
-		new Relationship($wo_service_group, $wo_jobs, [new Condition($wo_jobs->dbField('service_group_id'), new Equals(), [$wo_service_group->primary_key()])]);
+		new Relationship($wo_orders, $wo_jobs, [new Condition($wo_jobs->dbField('work_order_id'), new Equals(), [$wo_orders->primaryKey()])]);
+		new Relationship($wo_work_types, $wo_jobs, [new Condition($wo_jobs->dbField('work_type_id'), new Equals(), [$wo_work_types->primaryKey()])]);
+		new Relationship($service_providers, $wo_jobs, [new Condition($wo_jobs->dbField('assigned_to'), new Equals(), [$service_providers->primaryKey()])]);
+		new Relationship($wo_priorities, $wo_jobs, [new Condition($wo_jobs->dbField('priority_id'), new Equals(), [$wo_priorities->primaryKey()])]);
+		new Relationship($wo_service_group, $wo_jobs, [new Condition($wo_jobs->dbField('service_group_id'), new Equals(), [$wo_service_group->primaryKey()])]);
 
 
-		new Relationship($wo_jobs, $wo_accounting_notes, [new Condition($wo_accounting_notes->dbField('job_id'), new Equals(), [$wo_jobs->primary_key()])]);
-		new Relationship($wo_accounting_note_type, $wo_accounting_notes, [new Condition($wo_accounting_notes->dbField('accounting_note_type_id'), new Equals(), [$wo_accounting_note_type->primary_key()])]);
+		new Relationship($wo_jobs, $wo_accounting_notes, [new Condition($wo_accounting_notes->dbField('job_id'), new Equals(), [$wo_jobs->primaryKey()])]);
+		new Relationship($wo_accounting_note_type, $wo_accounting_notes, [new Condition($wo_accounting_notes->dbField('accounting_note_type_id'), new Equals(), [$wo_accounting_note_type->primaryKey()])]);
 
-		new Relationship($wo_jobs, $wo_part_note, [new Condition($wo_part_note->dbField('job_id'), new Equals(), [$wo_jobs->primary_key()])]);
+		new Relationship($wo_jobs, $wo_part_note, [new Condition($wo_part_note->dbField('job_id'), new Equals(), [$wo_jobs->primaryKey()])]);
 
 		new Relationship($wo_orders, $events, [
-			new Condition($events->dbField('ref_id'), new Equals(), [$wo_orders->primary_key()]),
+			new Condition($events->dbField('ref_id'), new Equals(), [$wo_orders->primaryKey()]),
 			new Condition($events->dbField('ref_type'), new Equals(), ['Wo::WorkOrder']),
 			new Condition($events->dbField('event'), new Equals(), ['comment']),
 		]);

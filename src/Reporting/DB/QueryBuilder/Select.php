@@ -29,6 +29,10 @@ class Select extends QueryBuilder implements SelectQueryBuilderInterface
 		$this->from = $this->fromValue($tableExpression);
 	}
 
+	/**
+	 * @param mixed ...$fieldExpressions
+	 * @return SelectQueryBuilderInterface
+	 */
 	public function select(...$fieldExpressions)
 	{
 		$clone = clone $this;

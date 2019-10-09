@@ -2,6 +2,7 @@
 
 namespace App\Reporting\DB\QueryBuilder\Traits;
 
+use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
 use App\Reporting\DB\QueryBuilder\QueryParts\Where;
 use App\Reporting\DB\QueryBuilder\QueryParts\WhereExists;
 use App\Reporting\DB\QueryBuilder\QueryParts\WhereIn;
@@ -20,7 +21,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres = [new Where($field, $operator, $value)];
+		$clone->addWhere(new Where($field, $operator, $value));
 
 		return $clone;
 	}
@@ -29,7 +30,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres = [$whereString];
+		$clone->addWhere($whereString);
 
 		return $clone;
 	}
@@ -38,7 +39,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = new Where($field, $operator, $value);
+		$clone->addWhere(new Where($field, $operator, $value), 'OR');
 
 		return $clone;
 	}
@@ -47,7 +48,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = new WhereIn($field, $values);
+		$clone->addWhere(new WhereIn($field, $values));
 
 		return $clone;
 	}
@@ -56,7 +57,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = new WhereNotIn($field, $values);
+		$clone->addWhere(new WhereNotIn($field, $values));
 
 		return $clone;
 	}
@@ -65,7 +66,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = $field.' IS NULL';
+		$clone->addWhere($field.' IS NULL');
 
 		return $clone;
 	}
@@ -74,7 +75,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = $field.' IS NOT NULL';
+		$clone->addWhere($field.' IS NOT NULL');
 
 		return $clone;
 	}
@@ -83,7 +84,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = new WhereExists($selectQueryBuilder);
+		$clone->addWhere(new WhereExists($selectQueryBuilder));
 
 		return $clone;
 	}
@@ -92,7 +93,7 @@ trait ConstrainsWithWheres
 	{
 		$clone = clone $this;
 
-		$clone->wheres[] = new WhereNotExists($selectQueryBuilder);
+		$clone->addWhere(new WhereNotExists($selectQueryBuilder));
 
 		return $clone;
 	}
@@ -104,7 +105,7 @@ trait ConstrainsWithWheres
 
 	protected function whereExpressions()
 	{
-		return empty($this->wheres)? '' :  implode(' ', $this->wheres);
+		return implode(' ', $this->wheres);
 	}
 
 	protected function getWhereParameters()
@@ -118,5 +119,18 @@ trait ConstrainsWithWheres
 		}
 
 		return $parameters;
+	}
+
+	protected function addWhere($where, $operand = 'AND')
+	{
+		if (!$where instanceof SqlExpressionInterface && is_string($where)) {
+			$where = new Expression($where);
+		}
+
+		if (!empty($this->wheres)) {
+			$this->wheres[] = $operand;
+		}
+
+		$this->wheres[] = $where;
 	}
 }

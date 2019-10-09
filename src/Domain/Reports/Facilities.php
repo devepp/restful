@@ -26,7 +26,7 @@ class Facilities extends WorkOrdersBaseReport
 	{
 		$module = $this->getModuleConfiguration();
 		
-		$config = new ReportConfig('Facilities', $module->getTable('facilities'));
+		$config = new ReportConfig('Facilities', $module->getTable('facility'));
 		
 		//TODO add other tables
 		// $config->addTable($module->getTable(''));

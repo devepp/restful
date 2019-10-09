@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/17/2019
- * Time: 11:00 AM
- */
 
 namespace App\Reporting\Processing;
 
@@ -19,24 +13,25 @@ use App\Reporting\SelectedFilter;
 
 class QueryGroup
 {
-	/** @var bool */
-	protected $is_primary;
 	/** @var Table */
 	protected $root;
 	/** @var TableList */
 	protected $tables;
+	/** @var QueryGroup[] */
+	protected $subQueryGroups;
 
 	/**
 	 * QueryGroup constructor.
 	 * @param Table $root
-	 * @param bool $primary
+	 * @param array $otherTables
+	 * @param array $subQueryGroups
 	 */
-	public function __construct(Table $root, $primary = false)
+	public function __construct(Table $root, $otherTables = [], $subQueryGroups = [])
 	{
-		$this->is_primary = $primary;
 		$this->root = $root;
 		$this->tables = new TableList();
-		$this->addTable($root);
+		array_map([$this, 'addTable'], $otherTables);
+		$this->subQueryGroups = $subQueryGroups;
 	}
 
 	public function __debugInfo() {
@@ -48,20 +43,7 @@ class QueryGroup
 
 	public function addTable(Table $table)
 	{
-		if ($this->isSubQuery()) {
-			$table->setIsDescendant(true);
-		}
 		$this->tables->addTable($table);
-	}
-
-	public function isPrimary()
-	{
-		return $this->is_primary;
-	}
-
-	public function isSubQuery()
-	{
-		return !$this->is_primary;
 	}
 
 	public function hasTable(Table $table)
@@ -271,7 +253,7 @@ class QueryGroup
 
 		$base_table = $root_table->getPath()->first();
 
-		return new SelectedField($base_table->primary_key(), new Standard());
+		return new SelectedField($base_table->primaryKey(), new Standard());
 
 	}
 

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/15/2019
- * Time: 1:56 PM
- */
 
 namespace App\Reporting\Resources;
 

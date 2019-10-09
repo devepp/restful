@@ -4,37 +4,50 @@
 namespace App\Reporting\Resources;
 
 
+use App\Reporting\Filters\Filter;
 use App\Reporting\Processing\QueryGroup;
+use App\Reporting\ReportField;
 
 class ResourceBuilder
 {
+	/** @var Schema */
+	private $schema;
+
 	/** @var Table */
 	private $baseResource;
 
 	/** @var TableList */
 	private $tables;
 
+	/** @var ReportField[] */
+	private $fields;
+
+	/** @var Filter[] */
+	private $filters;
+
 	/** @var QueryGroup[] */
 	private $queryGroups;
 
 	/**
 	 * ResourceBuilder constructor.
+	 * @param Schema $schema
 	 * @param Table $baseResource
 	 */
-	public function __construct(Table $baseResource)
+	public function __construct(Schema $schema, $baseResourceAlias)
 	{
-		$this->baseResource = $baseResource;
+		$this->schema = $schema;
+		$this->baseResource = $this->schema->getTable($baseResourceAlias);
 		$this->tables = new TableList();
 	}
 
 	public function build()
 	{
-		return new Resource($this->getQueryGroups());
+		return new Resource($this->getQueryGroups(), $this->fields, $this->filters);
 	}
 
-	public function withTable(Table $table)
+	public function withTable($tableAlias)
 	{
-		$this->tables->addTable($table);
+		$this->tables->addTable($this->schema->getTable($tableAlias));
 	}
 
 	/**
@@ -51,14 +64,52 @@ class ResourceBuilder
 
 	private function compileQueryGroups()
 	{
-		$first = true;
+		$root = $this->baseResource;
+		$otherTables = $this->tables->getTables();
+		$subQueryGroups = $this->getSubQueryGroups();
+
+		return new QueryGroup($root, $otherTables, $subQueryGroups);
+
+//		$first = true;
+//		foreach ($this->tables as $table) {
+//			if ($first) {
+//				$first = false;
+//			}
+//			$this->addTable($table);
+//		}
+	}
+
+	private function getOtherTables(Table $root, $otherTables = [])
+	{
+		$otherTables = [];
+
 		foreach ($this->tables as $table) {
-			if ($first) {
-				$first = false;
+			foreach ($otherTables as $otherTable) {
+				if ($this->schema->hasRelationship($table, $otherTable)) {
+					$relationship = $this->schema->getRelationship($table, $otherTable);
+					if ($relationship->tableHasOne($table, $otherTable)) {
+						return $table;
+					}
+				}
 			}
-			$this->addTable($table);
 		}
 	}
+
+	private function getAnotherTable(Table $root, $otherTables = [])
+	{
+		$otherTables = [];
+
+		foreach ($this->tables as $table) {
+			foreach ($otherTables as $otherTable) {
+				if ($this->schema->hasRelationship($table, $otherTable)) {
+					return $table;
+				}
+			}
+		}
+	}
+
+
+
 
 	private function addTable(Table $table)
 	{

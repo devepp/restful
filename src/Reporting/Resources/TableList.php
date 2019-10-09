@@ -153,4 +153,10 @@ class TableList implements Iterator
 			}
 		}
 	}
+
+	public function reduce(callable $reducingFunction, $initialValue = null)
+	{
+		return array_reduce($this->tables, $reducingFunction, $initialValue);
+	}
+
 }

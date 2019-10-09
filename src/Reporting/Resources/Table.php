@@ -76,7 +76,7 @@ class Table
 		return $this->alias;
 	}
 
-	public function primary_key()
+	public function primaryKey()
 	{
 		foreach ($this->fields as $field) {
 			if ($field instanceof PrimaryKey) {

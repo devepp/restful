@@ -2,8 +2,10 @@
 
 namespace App\Reporting\DB\QueryBuilder\Traits;
 
+use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
 use App\Reporting\DB\QueryBuilder\QueryParts\GroupBy;
 use App\Reporting\DB\QueryBuilder\QueryParts\GroupByInterface;
+use App\Reporting\DB\QueryBuilder\SqlExpressionInterface;
 
 trait Groups
 {
@@ -11,30 +13,26 @@ trait Groups
 
 	protected $havings = [];
 
-
 	public function groupBy($field)
 	{
 		$clone = clone $this;
 
-		$clone->groupBys = [$field];
+		if (!$field instanceof SqlExpressionInterface) {
+			$field = new Expression($field);
+		}
+		$clone->groupBys[] = $field;
 
 		return $clone;
 	}
 
-	public function having($aggregate, $operator, $value)
+	public function having($expression)
 	{
 		$clone = clone $this;
 
-		$clone->havings = [$aggregate];
-
-		return $clone;
-	}
-
-	public function addHaving($aggregate, $operator, $value)
-	{
-		$clone = clone $this;
-
-		$clone->groupBys[] = $aggregate;
+		if (!$expression instanceof SqlExpressionInterface) {
+			$expression = new Expression($expression);
+		}
+		$clone->havings[] = $expression;
 
 		return $clone;
 	}
@@ -53,8 +51,8 @@ trait Groups
 	{
 		$parameters = [];
 
-		foreach ($this->joins as $join) {
-			$parameters = $parameters + $join->getParameters();
+		foreach ($this->groupBys as $groupBy) {
+			$parameters = $parameters + $groupBy->getParameters();
 		}
 
 		return $parameters;
@@ -64,8 +62,8 @@ trait Groups
 	{
 		$parameters = [];
 
-		foreach ($this->joins as $join) {
-			$parameters = array_merge($parameters, $join->getParameters());
+		foreach ($this->havings as $having) {
+			$parameters = array_merge($parameters, $having->getParameters());
 		}
 
 		return $parameters;

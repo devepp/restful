@@ -1,65 +1,49 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/17/2019
- * Time: 10:38 AM
- */
 
 namespace App\Reporting\Processing;
 
 use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\DatabaseFields\PrimaryKey;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\Resources\Limit;
-use App\Reporting\Resources\ReportConfig;
 use App\Reporting\Resources\Table;
 use App\Reporting\SelectedField;
 use App\Reporting\SelectedFilter;
 use App\Reporting\SelectionsInterface;
+use InvalidArgumentException;
 
 class QueryBuilder
 {
-	/** @var SelectionsInterface */
-	protected $selections;
-
-	/** @var QueryGroup[] */
-	protected $sub_query_groups;
-
-	/** @var QueryGroup */
-	protected $primary_group;
+	/** @var QueryBuilderFactoryInterface */
+	private $db;
 
 	/**
 	 * QueryBuilder constructor.
-	 * @param SelectionsInterface $selections
-	 * @param QueryGroup[] $query_groups
+	 * @param QueryBuilderFactoryInterface $queryBuilder
 	 */
-	public function __construct(SelectionsInterface $selections, $query_groups)
+	public function __construct(QueryBuilderFactoryInterface $queryBuilder)
 	{
-		$this->selections = $selections;
-		foreach ($query_groups as $group) {
-			if ($group->isPrimary()) {
-				$this->primary_group = $group;
-			} else {
-				$this->sub_query_groups[] = $group;
-			}
-		}
+		$this->db = $queryBuilder;
+
 	}
 
-	public function buildQuery()
+	public function buildQuery(SelectionsInterface $selections, $queryGroups)
 	{
-		$sub_queries = [];
-		foreach ($this->sub_query_groups as $group) {
-			$sub_query = $this->buildSqlSubQuery($group, $this->selections->selectedFields(), $this->selections->selectedFilters());
-			if ($sub_query) {
-//				echo '<pre>';
-//				var_dump($group);
-//				die(var_dump($group->prefix()));
-				$sub_queries[$group->prefix()] = $sub_query;
-			}
+		$primaryGroup = $this->primaryGroup($queryGroups);
+
+		$qb = $this->db->selectFrom($primaryGroup->getRoot());
+
+		foreach ($this->subQueryGroups($queryGroups) as $group) {
+				$sub_query = $this->buildSqlSubQuery($group, $selections->selectedFields(), $selections->selectedFilters());
+				if ($sub_query) {
+					$sub_queries[$group->prefix()] = $sub_query;
+				}
+
 		}
 
 		//build some of primary
-		$query = $this->buildSqlPrimaryGroup($this->primary_group, $this->selections->selectedFields(), $this->selections->selectedFilters(), $sub_queries, $this->selections->limit());
+		$query = $this->buildSqlPrimaryGroup($primaryGroup, $selections->selectedFields(), $selections->selectedFilters(), $sub_queries, $selections->limit());
 
 //		var_dump($query);
 
@@ -72,7 +56,7 @@ class QueryBuilder
 	 * @param SelectedFilter[] $selected_filters
 	 * @return string
 	 */
-	public function buildSqlPrimaryGroup(QueryGroup $group, $selected_fields, $selected_filters, $sub_queries, Limit $limit)
+	private function buildSqlPrimaryGroup(QueryGroup $group, $selected_fields, $selected_filters, $sub_queries, Limit $limit)
 	{
 		$required_tables = $group->primaryQueryTables($selected_fields, $selected_filters);
 
@@ -91,7 +75,7 @@ class QueryBuilder
 		}
 		$root_table = $group->getRoot();
 		foreach ($sub_queries as $alias => $sub_query) {
-			$query .= $this->joinSubQuery($alias, $sub_query, $root_table->primary_key());
+			$query .= $this->joinSubQuery($alias, $sub_query, $root_table->primaryKey());
 		}
 
 		$query .= $this->whereSql($selected_filters);
@@ -106,7 +90,7 @@ class QueryBuilder
 	 * @param SelectedFilter[] $selected_filters
 	 * @return string
 	 */
-	public function buildSqlSubQuery(QueryGroup $group, $selected_fields, $selected_filters)
+	private function buildSqlSubQuery(QueryGroup $group, $selected_fields, $selected_filters)
 	{
 		$required_tables = $group->subQueryTables($selected_fields);
 		if ($required_tables->count() < 1) {
@@ -129,7 +113,7 @@ class QueryBuilder
 		$query .= $this->whereSql($selected_filters, true);
 
 		$first_table = $required_tables->first();
-		$query .= $this->groupBySql($first_table->primary_key());
+		$query .= $this->groupBySql($first_table->primaryKey());
 
 
 		return $query;
@@ -141,7 +125,7 @@ class QueryBuilder
 	 * @param QueryGroup $subQueryGroup
 	 * @return string
 	 */
-	protected function selectSql($applicable_fields, $subQueryGroup = null)
+	private function selectSql($applicable_fields, $subQueryGroup = null)
 	{
 		$sql = 'SELECT ';
 
@@ -159,7 +143,7 @@ class QueryBuilder
 	 * @param Table $table
 	 * @return string
 	 */
-	protected function fromSql(Table $table)
+	private function fromSql(Table $table)
 	{
 		$sql = ' FROM `'.$table->name().'` `'.$table->alias().'`';
 
@@ -173,7 +157,7 @@ class QueryBuilder
 	 * @param PrimaryKey $primary_key
 	 * @return string
 	 */
-	protected function joinSubQuery($sub_query_alias, $sub_query_sql, PrimaryKey $primary_key)
+	private function joinSubQuery($sub_query_alias, $sub_query_sql, PrimaryKey $primary_key)
 	{
 		$sql = 'LEFT JOIN ('.$sub_query_sql.') AS '.$sub_query_alias.' ON `'.$sub_query_alias.'`.`'.$primary_key->alias().'` = `'.$primary_key->tableAlias().'`.`'.$primary_key->name().'` ';
 
@@ -186,7 +170,7 @@ class QueryBuilder
 	 * @param $tables_used
 	 * @return string
 	 */
-	protected function joinSql(Table $table, $tables_used)
+	private function joinSql(Table $table, $tables_used)
 	{
 		$sql = ' '.$table->joinSql($tables_used);
 
@@ -198,7 +182,7 @@ class QueryBuilder
 	 * @param SelectedFilter[] $selected_filters
 	 * @return string
 	 */
-	protected function whereSql($selected_filters, $subQuery = false)
+	private function whereSql($selected_filters, $subQuery = false)
 	{
 		if ($subQuery || count($selected_filters) == 0) {
 			return '';
@@ -219,11 +203,48 @@ class QueryBuilder
 	 * @param DatabaseField $field
 	 * @return string
 	 */
-	protected function groupBySql(DatabaseField $field)
+	private function groupBySql(DatabaseField $field)
 	{
 		$sql = ' GROUP BY '.$field->tableAlias().'.'.$field->name();
 
 		return $sql;
+	}
+
+	/**
+	 * @param QueryGroup[] $queryGroups
+	 * @return QueryGroup
+	 */
+	private function primaryGroup($queryGroups)
+	{
+		foreach ($queryGroups as $queryGroup) {
+			if ($queryGroup->isPrimary()) {
+				return $queryGroup;
+			}
+		}
+
+		throw new InvalidArgumentException('At least one QueryGroup must be the primary QueryGroup. None given.');
+	}
+
+	/**
+	 * @param QueryGroup[] $queryGroups
+	 * @return QueryGroup[]
+	 */
+	private function subQueryGroups($queryGroups)
+	{
+		$primaries = 0;
+		$subQueryGroups = [];
+		foreach ($queryGroups as $queryGroup) {
+			if ($queryGroup->isPrimary()) {
+				$primaries++;
+				if ($primaries > 1) {
+					throw new InvalidArgumentException('No more than one primary QueryGroup should be used. More than 1 was given.');
+				}
+			} else {
+				$subQueryGroups[] = $queryGroup;
+			}
+		}
+
+		return $subQueryGroups;
 	}
 
 

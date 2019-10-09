@@ -4,7 +4,7 @@ namespace App\Reporting\DB;
 
 use PDO;
 
-class Connection implements DbConnectionInterface
+class Connection implements ConnectionInterface
 {
 	/** @var PDO */
 	private $pdo;
