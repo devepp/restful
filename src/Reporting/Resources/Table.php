@@ -38,7 +38,7 @@ class Table
 	/** @var Relationship[] */
 	protected $child_of_relationships = [];
 
-	/** @var TableList */
+	/** @var TableCollection */
 	protected $path;
 
 	public function __construct($table_name, $alias, $fields = [])
@@ -87,6 +87,14 @@ class Table
 
 	public function getFields()
 	{
+		return $this->fields;
+	}
+
+	public function hasField(DatabaseField $field)
+	{
+		foreach ($this->fields as $ownedField) {
+			//TODO finish this
+		}
 		return $this->fields;
 	}
 
@@ -139,7 +147,7 @@ class Table
 	public function connectTable(Table $table)
 	{
 		$connecting_table_path = $table->getPath();
-		$path = new TableList($connecting_table_path->getTables());
+		$path = new TableCollection($connecting_table_path->getTables());
 		$path->addTable($this);
 		$this->setPath($path);
 
@@ -151,7 +159,7 @@ class Table
 		return $this->path;
 	}
 
-	protected function setPath(TableList $path)
+	protected function setPath(TableCollection $path)
 	{
 		$this->path = $path;
 	}

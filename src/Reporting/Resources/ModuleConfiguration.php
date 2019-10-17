@@ -9,7 +9,7 @@
 namespace App\Reporting\Resources;
 
 
-class ModuleConfiguration extends TableList
+class ModuleConfiguration extends TableCollection
 {
 
 }

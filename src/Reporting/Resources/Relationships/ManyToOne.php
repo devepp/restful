@@ -44,10 +44,18 @@ class ManyToOne implements RelationshipInterface
 		return $this->condition;
 	}
 
+	public function __debugInfo()
+	{
+		return [
+			'child' => $this->child->alias(),
+			'parent' => $this->parent->alias(),
+		];
+	}
+
 	public function tableHasOne($tableAlias, $otherTableAlias)
 	{
 		if ($this->hasTables($tableAlias, $otherTableAlias)) {
-			return $tableAlias === $this->child;
+			return $tableAlias === $this->child->alias();
 		}
 
 		throw new InvalidArgumentException("`$tableAlias` and `$otherTableAlias` do not belong to this relationship.");

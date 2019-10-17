@@ -9,18 +9,18 @@
 namespace App\Reporting\Processing;
 
 use App\Reporting\Resources\Table;
-use App\Reporting\Resources\TableList;
+use App\Reporting\Resources\TableCollection;
 
 class QueryPath
 {
-	/** @var TableList */
+	/** @var TableCollection */
 	protected $tables;
 
 	/**
 	 * QueryPath constructor.
-	 * @param TableList $tables
+	 * @param TableCollection $tables
 	 */
-	public function __construct(TableList $tables)
+	public function __construct(TableCollection $tables)
 	{
 		$this->tables = $tables;
 	}

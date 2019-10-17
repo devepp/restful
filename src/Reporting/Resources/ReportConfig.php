@@ -19,7 +19,7 @@ class ReportConfig
 	protected $name;
 //	/** @var QueryGroup */
 //	protected $primary_query_group;
-	/** @var TableList */
+	/** @var TableCollection */
 	protected $tables;
 
 	/** @var array ReportField[] */

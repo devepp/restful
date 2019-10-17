@@ -8,8 +8,8 @@ use App\Reporting\ReportField;
 
 class Resource
 {
-	/** @var QueryGroup[] */
-	private $queryGroups;
+	/** @var QueryGroup */
+	private $queryGroup;
 
 	/** @var ReportField[] */
 	private $fields;
@@ -19,13 +19,13 @@ class Resource
 
 	/**
 	 * Resource constructor.
-	 * @param QueryGroup[] $queryGroups
+	 * @param QueryGroup $queryGroup
 	 * @param ReportField[] $fields
 	 * @param Filter[] $filters
 	 */
-	public function __construct(array $queryGroups, array $fields, array $filters)
+	public function __construct(QueryGroup $queryGroup, array $fields, array $filters)
 	{
-		$this->queryGroups = $queryGroups;
+		$this->queryGroup = $queryGroup;
 		$this->fields = $fields;
 		$this->filters = $filters;
 	}
@@ -36,10 +36,10 @@ class Resource
 	}
 
 	/**
-	 * @return QueryGroup[]
+	 * @return QueryGroup
 	 */
-	public function getQueryGroups(): array
+	public function getQueryGroup()
 	{
-		return $this->queryGroups;
+		return $this->queryGroup;
 	}
 }

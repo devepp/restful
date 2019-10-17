@@ -10,7 +10,7 @@ namespace App\Reporting\Resources;
 
 use Iterator;
 
-class TableList implements Iterator
+class TableCollection implements Iterator
 {
 	private $position = 0;
 
@@ -21,8 +21,8 @@ class TableList implements Iterator
 	protected $aliases = [];
 
 	/**
-	 * TableList constructor.
-	 * @param Table[] $tables
+	 * TableCollection constructor.
+	 * @param array $tables
 	 */
 	public function __construct($tables = [])
 	{
@@ -32,11 +32,14 @@ class TableList implements Iterator
 		}
 	}
 
-	public function __debugInfo() {
-		return [
-//			'tables' => $this->tables,
-			'aliases' => $this->aliases,
-		];
+	public static function fromArray($tables)
+	{
+		return new self($tables);
+	}
+
+	public function __debugInfo()
+	{
+		return $this->aliases;
 	}
 
 	public function current()
@@ -135,11 +138,13 @@ class TableList implements Iterator
 	}
 
 	/**
-	 * @param TableList $table_list
+	 * @param TableCollection $tableCollection
+	 * @return TableCollection
 	 */
-	public function merge(TableList $table_list)
+	public function merge(TableCollection $tableCollection)
 	{
-		$this->mergeTables($table_list->getTables());
+		$tables = \array_merge($this->getTables(), $tableCollection->getTables());
+		return new self($tables);
 	}
 
 	public function findFirstMatching($search_aliases, $reverse_order = false)
@@ -152,6 +157,16 @@ class TableList implements Iterator
 				}
 			}
 		}
+	}
+
+	public function map(callable $mapFunction)
+	{
+		return array_map($mapFunction, $this->tables);
+	}
+
+	public function filter(callable $filterFunction, $flag = 0)
+	{
+		return new self(array_filter($this->tables, $filterFunction, $flag));
 	}
 
 	public function reduce(callable $reducingFunction, $initialValue = null)

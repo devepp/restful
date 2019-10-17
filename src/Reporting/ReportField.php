@@ -87,6 +87,15 @@ class ReportField implements JsonSerializable
 		return ucwords(str_replace('_', ' ', $this->field->tableAlias()));
 	}
 
+	/**
+	 * @param Table $table
+	 * @return bool
+	 */
+	public function needsTable(Table $table)
+	{
+		return $this->table->alias() == $table->alias();
+	}
+
 
 	public function selectableFields()
 	{

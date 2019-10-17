@@ -7,14 +7,14 @@ use App\Reporting\Resources\Relationships\OneToOne;
 
 class SchemaBuilder
 {
-	/** @var TableList */
+	/** @var TableCollection */
 	private $tables;
 
 	private $relationships = [];
 
 	public function __construct()
 	{
-		$this->tables = new TableList();
+		$this->tables = new TableCollection();
 	}
 
 	public function build()
@@ -24,23 +24,26 @@ class SchemaBuilder
 
 	public function addManyToOneRelationship(Table $table, Table $secondTable, $condition)
 	{
-		$this->addTable($table);
-		$this->addTable($secondTable);
+		$clone = clone $this;
 
-		$this->relationships[] = new ManyToOne($table, $secondTable, $condition);
+		$clone->addTable($table);
+		$clone->addTable($secondTable);
+
+		$clone->relationships[] = new ManyToOne($table, $secondTable, $condition);
+
+		return $clone;
 	}
-
-//	public function addOneToManyRelationship(Table $table, Table $secondTable, $condition)
-//	{
-//
-//	}
 
 	public function addOneToOneRelationship(Table $table, Table $secondTable, $condition)
 	{
-		$this->addTable($table);
-		$this->addTable($secondTable);
+		$clone = clone $this;
 
-		$this->relationships[] = new OneToOne($table, $secondTable, $condition);
+		$clone->addTable($table);
+		$clone->addTable($secondTable);
+
+		$clone->relationships[] = new OneToOne($table, $secondTable, $condition);
+
+		return $clone;
 	}
 
 	private function addTable(Table $table)

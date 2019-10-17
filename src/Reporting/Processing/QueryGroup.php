@@ -3,19 +3,22 @@
 namespace App\Reporting\Processing;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\Filters\Filter;
 use App\Reporting\ReportField;
 use App\Reporting\Resources\Table;
-use App\Reporting\Resources\TableList;
+use App\Reporting\Resources\TableCollection;
 use App\Reporting\Selectables\Standard;
 use App\Reporting\SelectedField;
 use App\Reporting\SelectedFilter;
+use App\Reporting\SelectionsInterface;
 
 class QueryGroup
 {
 	/** @var Table */
 	protected $root;
-	/** @var TableList */
+	/** @var TableCollection */
 	protected $tables;
 	/** @var QueryGroup[] */
 	protected $subQueryGroups;
@@ -23,23 +26,49 @@ class QueryGroup
 	/**
 	 * QueryGroup constructor.
 	 * @param Table $root
-	 * @param array $otherTables
-	 * @param array $subQueryGroups
+	 * @param TableCollection $allTables
+	 * @param QueryGroup[] $subQueryGroups
 	 */
-	public function __construct(Table $root, $otherTables = [], $subQueryGroups = [])
+	public function __construct(Table $root, TableCollection $allTables, $subQueryGroups = [])
 	{
 		$this->root = $root;
-		$this->tables = new TableList();
-		array_map([$this, 'addTable'], $otherTables);
+		$this->tables = $allTables;
 		$this->subQueryGroups = $subQueryGroups;
 	}
 
-	public function __debugInfo() {
+	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections)
+	{
+		$qb = $queryBuilder->selectFrom($this->root->name().' '.$this->root->alias());
+
+//		foreach ($this->)
+	}
+
+	public function __debugInfo()
+	{
 		return [
-			'root' => $this->root,
-			'tables' => $this->tables,
+			'root' => $this->root->alias(),
+			'tables' => implode(', ', $this->tables->map(function (Table $table) {
+				return $table->alias();
+			})),
+			'subQueryGroups' => \array_map(function ($queryGroup){
+				return $queryGroup->__debugInfo();
+			}, $this->subQueryGroups)
 		];
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public function addTable(Table $table)
 	{
@@ -97,7 +126,7 @@ class QueryGroup
 	/**
 	 * @param SelectedField[] $selected_fields
 	 * @param SelectedFilter[] $selected_filters
-	 * @return TableList
+	 * @return TableCollection
 	 */
 	public function requiredTables($selected_fields, $selected_filters)
 	{
@@ -109,7 +138,7 @@ class QueryGroup
 
 		$filter_tables = $this->filtersRequiredTables($selected_filters);
 
-		$field_tables->merge($filter_tables);
+		$field_tables = $field_tables->merge($filter_tables);
 
 		return $field_tables;
 	}
@@ -118,16 +147,16 @@ class QueryGroup
 	/**
 	 * @param SelectedField[] $selected_fields
 	 * @param SelectedFilter[] $selected_filters
-	 * @return TableList
+	 * @return TableCollection
 	 */
 	public function primaryQueryTables($selected_fields, $selected_filters)
 	{
-		$tables = new TableList($this->root);
+		$tables = new TableCollection($this->root);
 		$field_tables = $this->fieldsRequiredTables($selected_fields);
-		$tables->merge($field_tables);
+		$tables = $tables->merge($field_tables);
 
 		$filter_tables = $this->filtersRequiredTables($selected_filters);
-		$tables->merge($filter_tables);
+		$tables = $tables->merge($filter_tables);
 
 		return $tables;
 	}
@@ -135,7 +164,7 @@ class QueryGroup
 
 	/**
 	 * @param SelectedField[] $selected_fields
-	 * @return TableList
+	 * @return TableCollection
 	 */
 	public function subQueryTables($selected_fields)
 	{
@@ -145,15 +174,15 @@ class QueryGroup
 
 	/**
 	 * @param SelectedField[] $selected_fields
-	 * @return TableList
+	 * @return TableCollection
 	 */
 	public function fieldsRequiredTables($selected_fields)
 	{
-		$table_list = new TableList();
+		$table_list = new TableCollection();
 		foreach ($selected_fields as $field) {
 			if ($this->tables->hasAlias($field->table())) {
 				$table = $this->tables->getTable($field->table());
-				$table_list->merge($table->getPath());
+				$table_list = $table_list->merge($table->getPath());
 			}
 		}
 
@@ -163,15 +192,15 @@ class QueryGroup
 
 	/**
 	 * @param SelectedFilter[] $selected_filters
-	 * @return TableList
+	 * @return TableCollection
 	 */
 	public function filtersRequiredTables($selected_filters)
 	{
-		$table_list = new TableList();
+		$table_list = new TableCollection();
 		foreach ($selected_filters as $filter) {
 			if ($this->tables->hasAlias($filter->table())) {
 				$table = $this->tables->getTable($filter->table());
-				$table_list->merge($table->getPath());
+				$table_list = $table_list->merge($table->getPath());
 			}
 		}
 
