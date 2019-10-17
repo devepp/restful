@@ -33,7 +33,15 @@ abstract class AbstractConstraint implements Constrains
 	 * @return SelectQueryBuilderInterface
 	 */
 	abstract public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = []);
+
+	/**
+	 * @return string
+	 */
 	abstract public function directive();	// return string - name of directive to use
+
+	/**
+	 * @return int
+	 */
 	abstract public function requiredInputs();	//return int - number of inputs required by constraint
 
 	/**
