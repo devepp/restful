@@ -55,6 +55,22 @@ interface SelectQueryBuilderInterface extends QueryBuilderInterface
 
 	/**
 	 * @param $field
+	 * @param $low
+	 * @param $high
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function whereBetween($field, $low, $high);
+
+	/**
+	 * @param $field
+	 * @param $low
+	 * @param $high
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function whereNotBetween($field, $low, $high);
+
+	/**
+	 * @param $field
 	 * @return SelectQueryBuilderInterface
 	 */
 	public function whereNull($field);

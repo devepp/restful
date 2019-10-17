@@ -9,6 +9,7 @@
 namespace App\Reporting;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\Selectables\AbstractSelectable;
 use JsonSerializable;
@@ -80,12 +81,12 @@ class SelectedFilter implements JsonSerializable
 
 
 	/**
-	 * @param bool $subQuery
-	 * @return string
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @return SelectQueryBuilderInterface
 	 */
-	public function filterSql($subQuery = false)
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder)
 	{
-		return $this->constraint->filterSql($this->field, $this->inputs);
+		return $this->constraint->filterSql($queryBuilder, $this->field, $this->inputs);
 	}
 
 

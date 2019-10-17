@@ -1,24 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/8/2019
- * Time: 4:05 PM
- */
 
 namespace App\Reporting\Filters\Constraints;
 
 use App\Reporting\DatabaseFields\DatabaseField;
-
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 
 class NotBetween extends AbstractConstraint
 {
 	const NAME = 'NotBetween';
 
-
-	public function filterSql(DatabaseField $db_field, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
 	{
-		return '`'.$db_field->tableAlias().'`.`'.$db_field->name().'` NOT BETWEEN '.$inputs[0].' AND '.$db_field->formatParameter($inputs[1]);
+		$queryBuilder->whereNotBetween($dbField, $inputs[0], $inputs[1]);
 	}
 
 	public function requiredInputs()
@@ -30,5 +23,4 @@ class NotBetween extends AbstractConstraint
 	{
 		return 'eb-report-filter-double-text';
 	}
-
 }

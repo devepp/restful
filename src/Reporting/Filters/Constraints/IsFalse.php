@@ -1,25 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/8/2019
- * Time: 4:01 PM
- */
 
 namespace App\Reporting\Filters\Constraints;
 
 use App\Reporting\DatabaseFields\DatabaseField;
-
-
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 
 class IsFalse extends AbstractConstraint
 {
 	const NAME = 'Is False';
 
-
-	public function filterSql(DatabaseField $db_field, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
 	{
-		return '`'.$db_field->tableAlias().'`.`'.$db_field->name().'` = 0';
+		return $queryBuilder->where($dbField, '=', 0);
 	}
 
 	public function requiredInputs()
@@ -31,5 +23,4 @@ class IsFalse extends AbstractConstraint
 	{
 		return null;
 	}
-
 }

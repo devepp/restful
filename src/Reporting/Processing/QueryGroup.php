@@ -36,11 +36,31 @@ class QueryGroup
 		$this->subQueryGroups = $subQueryGroups;
 	}
 
+	/**
+	 * @param QueryBuilderFactoryInterface $queryBuilder
+	 * @param SelectionsInterface $selections
+	 * @return SelectQueryBuilderInterface
+	 */
 	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections)
 	{
 		$qb = $queryBuilder->selectFrom($this->root->name().' '.$this->root->alias());
+		foreach ($this->subQueryGroups as $queryGroup) {
+			$qb = $qb->joinSubQuery($queryGroup->getQuery($queryBuilder, $selections), $queryGroup->root->alias(), '', 'left');
+		}
+
+		/** @var SelectedFilter $filter */
+		foreach ($selections->selectedFilters() as $filter) {
+			$qb = $filter->filterSql($qb);
+		}
 
 //		foreach ($this->)
+
+		return $qb;
+	}
+
+	public function joinAsSubQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections)
+	{
+
 	}
 
 	public function __debugInfo()

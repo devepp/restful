@@ -11,24 +11,24 @@ class Filter implements JsonSerializable
 	/** @var Table */
 	protected $table;
 	/** @var DatabaseField */
-	protected $db_field;
+	protected $dbField;
 
 	/** @var string */
 	protected $label;
 
-	public function __construct(Table $table, DatabaseField $db_field, $label = null)
+	public function __construct(Table $table, DatabaseField $dbField, $label = null)
 	{
 		$this->table = $table;
-		$this->db_field = $db_field;
+		$this->dbField = $dbField;
 
-		$this->label = $label ? $label : ucwords(str_replace('_', ' ', $this->db_field->name()));
+		$this->label = $label ? $label : ucwords(str_replace('_', ' ', $this->dbField->name()));
 	}
 
 	public function jsonSerialize()
 	{
 		return [
 			'name' => $this->name(),
-			'field_name' => $this->db_field->name(),
+			'field_name' => $this->dbField->name(),
 			'table_alias' => $this->table->alias(),
 			'table' => $this->tableAsCategory(),
 			'label' => $this->label(),
@@ -42,7 +42,7 @@ class Filter implements JsonSerializable
 	 */
 	public function name()
 	{
-		return $this->db_field->alias($this->table->alias());
+		return $this->dbField->alias($this->table->alias());
 	}
 
 	/**
@@ -56,7 +56,7 @@ class Filter implements JsonSerializable
 
 	public function dbField()
 	{
-		return $this->db_field;
+		return $this->dbField;
 	}
 
 	public function tableAsCategory()
@@ -69,7 +69,7 @@ class Filter implements JsonSerializable
 	 */
 	public function constraints()
 	{
-		return $this->db_field->filterConstraints();
+		return $this->dbField->filterConstraints();
 	}
 
 

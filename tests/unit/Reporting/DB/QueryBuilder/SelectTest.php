@@ -99,6 +99,24 @@ class SelectTest extends TestCase
 		$this->assertEquals($qb->getQuery(), $expectedQuery);
 	}
 
+	public function testWhereBetween()
+	{
+		$qb = new Select('as_assets');
+		$qb = $qb->whereBetween('as_assets.retired_on', '2018-01-01', '2018-01-31');
+
+		$expectedQuery = new Query('SELECT * FROM as_assets WHERE as_assets.retired_on BETWEEN ? AND ?', ['2018-01-01', '2018-01-31']);
+		$this->assertEquals($qb->getQuery(), $expectedQuery);
+	}
+
+	public function testWhereNotBetween()
+	{
+		$qb = new Select('as_assets');
+		$qb = $qb->whereNotBetween('as_assets.retired_on', '2018-01-01', '2018-01-31');
+
+		$expectedQuery = new Query('SELECT * FROM as_assets WHERE as_assets.retired_on NOT BETWEEN ? AND ?', ['2018-01-01', '2018-01-31']);
+		$this->assertEquals($qb->getQuery(), $expectedQuery);
+	}
+
 	public function testWhereNull()
 	{
 		$qb = new Select('as_assets');

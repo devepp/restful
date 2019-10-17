@@ -1,18 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/9/2019
- * Time: 8:23 AM
- */
 
 namespace App\Reporting\Filters\Constraints;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use JsonSerializable;
 use App\Reporting\Filters\Constrains;
 
-abstract class AbstractConstraint implements Constrains, JsonSerializable
+abstract class AbstractConstraint implements Constrains
 {
 	const NAME = 'Abstract';
 
@@ -31,7 +26,13 @@ abstract class AbstractConstraint implements Constrains, JsonSerializable
 		StartsWith::NAME => StartsWith::class,
 	];
 
-	abstract public function filterSql(DatabaseField $db_field, $inputs = []);
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @param DatabaseField $dbField
+	 * @param array $inputs
+	 * @return SelectQueryBuilderInterface
+	 */
+	abstract public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = []);
 	abstract public function directive();	// return string - name of directive to use
 	abstract public function requiredInputs();	//return int - number of inputs required by constraint
 

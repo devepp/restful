@@ -9,7 +9,7 @@ class ReportingTest extends TestCase
 	/**
 	 * @dataProvider pathProvider
 	 */
-	public function testReporting($firstTableAlias, $secondTableAlias, $expectedPath)
+	public function testPath($firstTableAlias, $secondTableAlias, $expectedPath)
 	{
 		$schema = $this->getSchema();
 

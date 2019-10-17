@@ -80,6 +80,24 @@ trait ConstrainsWithWheres
 		return $clone;
 	}
 
+	public function whereBetween($field, $low, $high)
+	{
+		$clone = clone $this;
+
+		$clone->addWhere(new Expression($field.' BETWEEN ? AND ?', [$low, $high]));
+
+		return $clone;
+	}
+
+	public function whereNotBetween($field, $low, $high)
+	{
+		$clone = clone $this;
+
+		$clone->addWhere(new Expression($field.' NOT BETWEEN ? AND ?', [$low, $high]));
+
+		return $clone;
+	}
+
 	public function whereExists(SelectQueryBuilderInterface $selectQueryBuilder)
 	{
 		$clone = clone $this;
