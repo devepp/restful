@@ -1,13 +1,20 @@
 <?php
 
+namespace Tests\Functional;
+
 use App\Reporting\Resources\Schema;
 use App\Reporting\Resources\Table;
+use App\Reporting\Resources\TableName;
 use PHPUnit\Framework\TestCase;
 
 class ReportingTest extends TestCase
 {
 	/**
 	 * @dataProvider pathProvider
+	 *
+	 * @param $firstTableAlias
+	 * @param $secondTableAlias
+	 * @param $expectedPath
 	 */
 	public function testPath($firstTableAlias, $secondTableAlias, $expectedPath)
 	{
@@ -27,6 +34,8 @@ class ReportingTest extends TestCase
 			['work_orders', 'dispatchers', ['work_orders', 'dispatchers']],
 			['jobs', 'dispatchers', ['jobs', 'work_orders', 'dispatchers']],
 			['work_orders', 'jobs', ['work_orders', 'jobs']],
+			['invoices', 'invoice_types', ['invoices', 'invoice_types']],
+			['facilities', 'work_orders', ['facilities', 'work_orders']],
 		];
 	}
 
@@ -42,13 +51,15 @@ class ReportingTest extends TestCase
 		$invoiceTypes = $this->get_wo_accounting_note_type('invoice_types');
 
 		return Schema::builder()
-			->addManyToOneRelationship($workOrders, $facilities, 'work_orders.facility_id = facilities.id')
-			->addManyToOneRelationship($workOrders, $authors, 'work_orders.user_id = authors.id')
-			->addManyToOneRelationship($workOrders, $dispatchers, 'work_orders.dispatcher_id = dispatchers.id')
-			->addManyToOneRelationship($workOrders, $classes, 'work_orders.type_id = classes.id')
-			->addManyToOneRelationship($jobs, $workOrders, 'jobs.type_id = work_orders.id')
-			->addManyToOneRelationship($invoices, $jobs, 'invoices.job_id = jobs.id')
-			->addManyToOneRelationship($invoices, $invoiceTypes, 'invoices.accounting_note_type_id = invoice_types.id')
+			->addTable($workOrders)
+			->addTable($facilities)
+			->addTable($authors)
+			->addTable($dispatchers)
+			->addTable($classes)
+			->addTable($jobs)
+			->addTable($classes)
+			->addTable($invoices)
+			->addTable($invoiceTypes)
 			->build();
 	}
 
@@ -57,10 +68,10 @@ class ReportingTest extends TestCase
 		return Table::builder('wo_orders')
 			->setAlias($alias)
 			->setPrimaryKey('id')
-			->addForeignKey('facility_id')
-			->addForeignKey('user_id')
-			->addForeignKey('type_id')
-			->addForeignKey('dispatcher_id')
+			->addManyToOneRelationship(new TableName('facilities'),'facility_id', 'work_orders.facility_id = facilities.id')
+			->addManyToOneRelationship(new TableName('users', 'authors'), 'user_id','work_orders.user_id = authors.id')
+			->addManyToOneRelationship(new TableName('users', 'dispatchers'), 'dispatcher_id', 'work_orders.dispatcher_id = dispatchers.id')
+			->addManyToOneRelationship(new TableName('wo_types', 'classes'), 'type_id', 'work_orders.type_id = classes.id')
 			->build();
 	}
 
@@ -100,10 +111,9 @@ class ReportingTest extends TestCase
 		return Table::builder('wo_jobs')
 			->setAlias($alias)
 			->setPrimaryKey('id')
-			->addForeignKey('work_order_id')
+			->addManyToOneRelationship(new TableName('wo_orders', 'work_orders'), 'work_order_id', 'jobs.type_id = work_orders.id')
 			->addStringField('subject')
 			->addStringField('description')
-			->addForeignKey('priority_id')
 			->addNumberField('assigned_to')
 			->addDateTimeField('created_on')
 			->addStringField('state')
@@ -115,10 +125,10 @@ class ReportingTest extends TestCase
 		return Table::builder('wo_accounting_notes')
 			->setAlias($alias)
 			->setPrimaryKey('id')
-			->addForeignKey('accounting_note_type_id')
+			->addManyToOneRelationship(new TableName('wo_accounting_note_type', 'invoice_types'), 'accounting_note_type_id', 'invoices.accounting_note_type_id = invoice_types.id')
 			->addNumberField('price')
 			->addNumberField('total')
-			->addForeignKey('job_id')
+			->addManyToOneRelationship(new TableName('wo_jobs', 'jobs'), 'job_id', 'invoices.job_id = jobs.id')
 			->build();
 	}
 

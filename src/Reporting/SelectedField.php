@@ -3,7 +3,9 @@
 namespace App\Reporting;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\Processing\QueryGroup;
+use App\Reporting\Resources\Table;
 use App\Reporting\Selectables\AbstractSelectable;
 use JsonSerializable;
 
@@ -12,20 +14,22 @@ class SelectedField implements JsonSerializable
 	/** @var DatabaseField */
 	protected $field;
 
-	/** @var string */
-//	protected $label;
+	/** @var Table */
+	protected $table;
 
 	/** @var AbstractSelectable */
 	protected $selectable;
 
 	/**
-	 * SelectableField constructor.
-	 * @param DatabaseField $db_field
+	 * SelectedField constructor.
+	 * @param Table $table
+	 * @param DatabaseField $dbField
 	 * @param AbstractSelectable $selectable
 	 */
-	public function __construct(DatabaseField $db_field, AbstractSelectable $selectable)
+	public function __construct(Table $table, DatabaseField $dbField, AbstractSelectable $selectable)
 	{
-		$this->field = $db_field;
+		$this->table = $table;
+		$this->field = $dbField;
 		$this->selectable = $selectable;
 	}
 
@@ -82,12 +86,13 @@ class SelectedField implements JsonSerializable
 
 
 	/**
-	 * @param QueryGroup $subQueryGroup
-	 * @return string
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @param $subQueryGroup
+	 * @return SelectQueryBuilderInterface
 	 */
-	public function fieldSql($subQueryGroup)
+	public function fieldSql(SelectQueryBuilderInterface $queryBuilder, $subQueryGroup)
 	{
-		return $this->selectable->fieldSql($this->field, $subQueryGroup);
+		return $queryBuilder->select($this->selectable->fieldSql($this->table, $this->field, $subQueryGroup));
 	}
 
 

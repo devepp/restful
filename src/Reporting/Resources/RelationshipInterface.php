@@ -27,4 +27,10 @@ interface RelationshipInterface
 	 * @return bool
 	 */
 	public function tableHasOne($tableAlias, $otherTableAlias);
+
+	/**
+	 * @param $tableAlias
+	 * @return string
+	 */
+	public function getOtherAlias($tableAlias);
 }

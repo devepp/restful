@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Reporting\Resources\TableCollectionFunctions\Reducers;
+namespace Tests\Unit\Reporting\Resources\TableCollectionFunctions\Reducers;
 
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;
@@ -68,7 +68,7 @@ class FilterAndMapTest extends TestCase
 
 	private function getTable($name)
 	{
-		return new Table($name, $name.'Alias', []);
+		return Table::fromString($name, $name.'Alias', []);
 	}
 
 	private function getFilterMock($keepsTables)

@@ -33,9 +33,15 @@ class SameNodeAs
 				$firstTableAlias = $path[$i];
 				$secondTableAlias = $path[$i + 1];
 
-				$relationship = $this->schema->getRelationship($firstTableAlias, $secondTableAlias);
+				$firstTable = $this->schema->getTable($firstTableAlias);
 
-				if($relationship->tableHasOne($firstTableAlias, $secondTableAlias) === false) {
+				if($firstTable && $firstTable->relatedTo($secondTableAlias) && $firstTable->hasOne($secondTableAlias) === false) {
+					return false;
+				}
+
+				$secondTable = $this->schema->getTable($secondTableAlias);
+
+				if ($secondTable && $secondTable->relatedTo($firstTableAlias) && $secondTable->hasOne($firstTableAlias)) {
 					return false;
 				}
 			}

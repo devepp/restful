@@ -9,6 +9,7 @@
 namespace App\Reporting\Selectables;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\Resources\Table;
 
 class ListSelectable extends AbstractSelectable
 {
@@ -19,7 +20,7 @@ class ListSelectable extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (List)';
 	}
 
-	public function fieldSql(DatabaseField $field, $subQueryGroup)
+	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
 			return 'GROUP_CONCAT(`'.$field->tableAlias().'`.`'.$field->name().'`)';
@@ -27,7 +28,7 @@ class ListSelectable extends AbstractSelectable
 		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
 	}
 
-	public function fieldAlias(DatabaseField $field, $subQueryGroup)
+	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
 			return $field->alias().'_list';

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/8/2019
- * Time: 9:52 AM
- */
 
 namespace App\Reporting\Selectables;
 

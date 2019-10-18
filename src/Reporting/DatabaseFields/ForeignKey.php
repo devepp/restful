@@ -1,20 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 12/28/2018
- * Time: 2:29 PM
- */
 
 namespace App\Reporting\DatabaseFields;
 
 use App\Reporting\Filters\Constraints\NotOneOf;
 use App\Reporting\Filters\Constraints\OneOf;
 use App\Reporting\ReportField;
+use App\Reporting\Resources\TableName;
 use App\Reporting\Selectables\ListSelectable;
 
 class ForeignKey extends DatabaseField
 {
+	/** @var TableName */
+	private $relationshipAlias;
+
+	/**
+	 * ForeignKey constructor.
+	 * @param $fieldName
+	 * @param TableName $relationshipAlias
+	 */
+	public function __construct($fieldName, TableName $relationshipAlias)
+	{
+		parent::__construct($fieldName);
+		$this->relationshipAlias = $relationshipAlias;
+	}
 
 	public function filterHtml($table_alias_name)
 	{

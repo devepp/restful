@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Reporting\DB\QueryBuilder;
+namespace Tests\Unit\Reporting\DB\QueryBuilder;
 
 use App\Reporting\DB\Query;
 use App\Reporting\DB\QueryBuilder\QueryParts\Expression;

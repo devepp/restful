@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Reporting\Resources\TableCollectionFunctions\Filters;
+namespace Tests\Unit\Reporting\Resources\TableCollectionFunctions\Filters;
 
 use PHPUnit\Framework\TestCase;
 

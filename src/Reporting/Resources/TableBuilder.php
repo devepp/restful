@@ -14,104 +14,107 @@ use App\Reporting\DatabaseFields\StringField;
 use App\Reporting\Processing\QueryGroup;
 use App\Reporting\Processing\QueryPath;
 use App\Reporting\ReportField;
+use App\Reporting\Resources\Relationships\ManyToOne;
+use App\Reporting\Resources\Relationships\OneToOne;
 
 class TableBuilder
 {
 	/** @var string */
-	protected $table_name;
-
-	/** @var string */
-	protected $alias;
-
-	/** @var PrimaryKey */
-	protected $primary_key;
+	protected $name;
 
 	/** @var DatabaseField[] */
-	protected $fields;
+	protected $fields = [];
 
-	public function __construct($table_name)
+	/** @var RelationshipInterface[] */
+	protected $relationships = [];
+
+	public function __construct($tableName)
 	{
-		$this->table_name = $table_name;
-		$this->alias = $table_name;
+		$this->name = new TableName($tableName);
+	}
+
+	public function build()
+	{
+		return new Table($this->name, $this->fields, $this->relationships);
 	}
 
 	public function setAlias($alias)
 	{
 		$clone = clone $this;
-		$clone->alias = $alias;
+		$clone->name = new TableName($this->name, $alias);
 		return $clone;
 	}
 
-	public function setPrimaryKey($field_name)
+	public function setPrimaryKey($fieldName)
 	{
-		$primary_key = new PrimaryKey($field_name);
+		$primaryKey = new PrimaryKey($fieldName);
 
 		$clone = clone $this;
-
-		if (is_null($this->primary_key) === false) {
-
-		}
-		$clone->addDbField($primary_key);
-		$clone->primary_key = $primary_key;
+		$clone->addDbField($primaryKey);
+		$clone->primaryKey = $primaryKey;
 		return $clone;
 	}
 
-	public function addStringField($field_name)
+	public function addStringField($fieldName)
 	{
 		$clone = clone $this;
-		$field = new StringField($field_name);
+		$field = new StringField($fieldName);
 		$clone->addDbField($field);
 		return $clone;
 	}
 
-	public function addNumberField($field_name)
+	public function addNumberField($fieldName)
 	{
 		$clone = clone $this;
-		$field = new NumberField($field_name);
+		$field = new NumberField($fieldName);
 		$clone->addDbField($field);
 		return $clone;
 	}
 
-	public function addDateField($field_name)
+	public function addDateField($fieldName)
 	{
 		$clone = clone $this;
-		$field = new DateField($field_name);
+		$field = new DateField($fieldName);
 		$clone->addDbField($field);
 		return $clone;
 	}
 
-	public function addDateTimeField($field_name)
+	public function addDateTimeField($fieldName)
 	{
 		$clone = clone $this;
-		$field = new DateTimeField($field_name);
+		$field = new DateTimeField($fieldName);
 		$clone->addDbField($field);
 		return $clone;
 	}
 
-	public function addBooleanField($field_name)
+	public function addBooleanField($fieldName)
 	{
 		$clone = clone $this;
-		$field = new BooleanField($field_name);
+		$field = new BooleanField($fieldName);
 		$clone->addDbField($field);
 		return $clone;
 	}
 
-	public function addForeignKey($field_name)
+	public function addManyToOneRelationship(TableName $tableName, $foreignKey, $condition)
 	{
 		$clone = clone $this;
-		$field = new ForeignKey($field_name);
+		$field = new ForeignKey($foreignKey, $tableName);
 		$clone->addDbField($field);
+		$clone->relationships[] = new ManyToOne($this->name, $tableName, $condition);
 		return $clone;
 	}
 
-	public function build()
+	public function addOneToOneRelationship(TableName $tableName, $foreignKey, $condition)
 	{
-		return new Table($this->table_name, $this->alias, $this->fields);
+		$clone = clone $this;
+		$field = new ForeignKey($foreignKey, $tableName);
+		$clone->addDbField($field);
+		$clone->relationships[] = new OneToOne($this->name, $tableName, $condition);
+		return $clone;
 	}
 
 	private function addDbField(DatabaseField $field)
 	{
-		$this->fields[$field->name()] = $field;
+		$this->fields[] = $field;
 	}
-
 }

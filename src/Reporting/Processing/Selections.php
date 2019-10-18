@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/17/2019
- * Time: 9:57 AM
- */
 
 namespace App\Reporting\Processing;
 
@@ -19,31 +13,45 @@ use App\Reporting\SelectionsInterface;
 class Selections implements SelectionsInterface
 {
 	/** @var SelectedField[] */
-	protected $selected_fields;
+	protected $selectedFields;
 	/** @var SelectedFilter[] */
-	protected $selected_filters;
+	protected $selectedFilters;
 	/** @var Limit */
 	protected $limit;
 
 	/**
 	 * Selections constructor.
-	 * @param $input
-	 * @param Form $form
+	 * @param SelectedField[] $selectedFields
+	 * @param SelectedFilter[] $selectedFilters
+	 * @param Limit $limit
 	 */
-	public function __construct($input, Form $form)
+	public function __construct(array $selectedFields, array $selectedFilters, Limit $limit)
 	{
-		$this->selected_fields = $this->getFields($input, $form);
-		$this->selected_filters = $this->getFilters($input, $form);
-		$this->limit = $this->getLimit($input);
+		$this->selectedFields = $selectedFields;
+		$this->selectedFilters = $selectedFilters;
+		$this->limit = $limit;
 	}
 
+	/**
+	 * @param $input
+	 * @param Form $form
+	 * @return Selections
+	 */
+	public static function FromInput($input, Form $form)
+	{
+		$fields = self::getFields($input, $form);
+		$filters = self::getFilters($input, $form);
+		$limit = self::getLimit($input);
+
+		return new self($fields, $filters, $limit);
+	}
 
 	/**
 	 * @return SelectedField[]
 	 */
 	public function selectedFields()
 	{
-		return $this->selected_fields;
+		return $this->selectedFields;
 	}
 
 	/**
@@ -51,7 +59,7 @@ class Selections implements SelectionsInterface
 	 */
 	public function selectedFilters()
 	{
-		return $this->selected_filters;
+		return $this->selectedFilters;
 	}
 
 	/**
@@ -67,9 +75,9 @@ class Selections implements SelectionsInterface
 	 * @param Form $form
 	 * @return SelectedFilter[]
 	 */
-	protected function getFilters($input, Form $form)
+	private static function getFilters($input, Form $form)
 	{
-		$selected_filters = [];
+		$selectedFilters = [];
 
 		foreach ($input['selected_filters'] as $filter) {
 			$selectable_filter = $form->getFilterByName($filter['name']);
@@ -82,10 +90,10 @@ class Selections implements SelectionsInterface
 					$inputs[] = $filter['constraint']['input_2'];
 				}
 
-				$selected_filters[] = new SelectedFilter($selectable_filter->dbField(), AbstractConstraint::getConstraint($filter['constraint']['name']), $inputs);
+				$selectedFilters[] = new SelectedFilter($selectable_filter->dbField(), AbstractConstraint::getConstraint($filter['constraint']['name']), $inputs);
 			}
 		}
-		return $selected_filters;
+		return $selectedFilters;
 	}
 
 	/**
@@ -93,24 +101,24 @@ class Selections implements SelectionsInterface
 	 * @param Form $form
 	 * @return SelectedField[]
 	 */
-	protected function getFields($input, Form $form)
+	private static function getFields($input, Form $form)
 	{
-		$selected_fields = [];
+		$selectedFields = [];
 
 		foreach ($input['selected_fields'] as $field) {
 			$selectable_field = $form->getFieldByName($field['name']);
 			if ($selectable_field) {
-				$selected_fields[] = new SelectedField($selectable_field->dbField(), AbstractSelectable::getSelectable($field['type']));
+				$selectedFields[] = new SelectedField($selectable_field->dbField(), AbstractSelectable::getSelectable($field['type']));
 			}
 		}
-		return $selected_fields;
+		return $selectedFields;
 	}
 
 	/**
 	 * @param $input
 	 * @return Limit
 	 */
-	protected function getLimit($input)
+	private static function getLimit($input)
 	{
 		$limit = isset($input['limit']) ? $input['limit'] : 10;
 		$offset = isset($input['offset']) ? $input['offset'] : 0;

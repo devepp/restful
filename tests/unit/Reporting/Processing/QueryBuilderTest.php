@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Reporting\Processing;
+namespace Tests\Unit\Reporting\Processing;
 
 use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\Processing\QueryBuilder;

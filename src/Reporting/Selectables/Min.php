@@ -9,6 +9,7 @@
 namespace App\Reporting\Selectables;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\Resources\Table;
 
 class Min extends AbstractSelectable
 {
@@ -19,7 +20,7 @@ class Min extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Min)';
 	}
 
-	public function fieldSql(DatabaseField $field, $subQueryGroup)
+	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
 			return 'MIN(`'.$field->tableAlias().'`.`'.$field->name().'`)';
@@ -27,7 +28,7 @@ class Min extends AbstractSelectable
 		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
 	}
 
-	public function fieldAlias(DatabaseField $field, $subQueryGroup)
+	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
 	{
 		if ($subQueryGroup) {
 			return $field->alias().'_min';

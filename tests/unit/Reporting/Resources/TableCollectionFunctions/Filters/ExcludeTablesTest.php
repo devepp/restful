@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Reporting\Resources\TableCollectionFunctions\Filters;
+namespace Tests\Unit\Reporting\Resources\TableCollectionFunctions\Filters;
 
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;

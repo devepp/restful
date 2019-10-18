@@ -2,50 +2,44 @@
 
 namespace App\Reporting\Resources;
 
-use App\Reporting\DatabaseFields\BooleanField;
 use App\Reporting\DatabaseFields\DatabaseField;
-use App\Reporting\DatabaseFields\DateField;
-use App\Reporting\DatabaseFields\DateTimeField;
-use App\Reporting\DatabaseFields\Field;
-use App\Reporting\DatabaseFields\ForeignKey;
-use App\Reporting\DatabaseFields\NumberField;
 use App\Reporting\DatabaseFields\PrimaryKey;
-use App\Reporting\DatabaseFields\StringField;
-use App\Reporting\Processing\QueryGroup;
-use App\Reporting\Processing\QueryPath;
+use App\Reporting\DB\QueryBuilder\QueryBuilderInterface;
 use App\Reporting\ReportField;
 
 class Table
 {
-	/** @var string */
-	protected $table_name;
-
-	/** @var string */
-	protected $alias;
-
-	/** @var bool */
-	protected $is_descendant = false;
-
-	/** @var PrimaryKey */
-	protected $primary_key;
+	/** @var TableName */
+	protected $name;
 
 	/** @var DatabaseField[] */
 	protected $fields;
 
-	/** @var Relationship[] */
-	protected $parent_of_relationships = [];
+	/** @var RelationshipInterface[] */
+	protected $relationships = [];
 
-	/** @var Relationship[] */
-	protected $child_of_relationships = [];
-
-	/** @var TableCollection */
-	protected $path;
-
-	public function __construct($table_name, $alias, $fields = [])
+	/**
+	 * Table constructor.
+	 * @param TableName $name
+	 * @param DatabaseField[] $fields
+	 * @param RelationshipInterface[] $relationships
+	 */
+	public function __construct(TableName $name, $fields = [], $relationships = [])
 	{
-		$this->table_name = $table_name;
-		$this->alias = $alias;
-		$this->fields = $fields;
+		$this->name = $name;
+
+		foreach ($fields as $field) {
+			$this->indexField($field);
+		}
+
+		foreach ($relationships as $relationship) {
+			$this->indexRelationship($relationship);
+		}
+	}
+
+	public static function fromString($tableName, $alias = null, $fields = [], $relationships = [])
+	{
+		return new self(new TableName($tableName, $alias), $fields, $relationships);
 	}
 
 	public static function builder($tableName)
@@ -53,27 +47,29 @@ class Table
 		return new TableBuilder($tableName);
 	}
 
-	public function __debugInfo() {
-		return [
-			'table_name' => $this->table_name,
-			'alias' => $this->alias,
-			'descendant' => $this->descendant(),
-		];
+	public function __toString()
+	{
+		return $this->name->__toString();
+	}
+
+	public function tableName()
+	{
+		return $this->name;
 	}
 
 	public function name()
 	{
-		return $this->table_name;
+		return $this->name->name();
 	}
 
 	public function aggregateName()
 	{
-		return $this->alias().'_aggregate';
+		return $this->name->aggregateName();
 	}
 
 	public function alias()
 	{
-		return $this->alias;
+		return $this->name->alias();
 	}
 
 	public function primaryKey()
@@ -83,19 +79,18 @@ class Table
 				return $field;
 			}
 		}
+
+		return null;
 	}
 
 	public function getFields()
 	{
-		return $this->fields;
+		return array_values($this->fields);
 	}
 
-	public function hasField(DatabaseField $field)
+	public function hasField(string $fieldName)
 	{
-		foreach ($this->fields as $ownedField) {
-			//TODO finish this
-		}
-		return $this->fields;
+		return isset($this->fields[$fieldName]);
 	}
 
 	public function getReportFields()
@@ -110,90 +105,56 @@ class Table
 		return $report_fields;
 	}
 
-	public function setIsDescendant($is_descendant)
+	public function dbField($fieldName)
 	{
-		$this->is_descendant = $is_descendant;
-	}
-
-	public function setAlias($alias)
-	{
-		$this->alias = $alias;
-	}
-
-	public function descendant()
-	{
-		return $this->is_descendant;
-	}
-
-	public function dbField($field_name)
-	{
-		if (isset($this->fields[$field_name])) {
-			return $this->fields[$field_name];
+		if (isset($this->fields[$fieldName])) {
+			return $this->fields[$fieldName];
 		}
 
-		throw new \LogicException($field_name.' does not exist on table '.$this->name());
+		throw new \LogicException($fieldName.' does not exist on table '.$this->name());
 	}
 
-	public function isParentOf(Table $table, $relationship)
+	/**
+	 * @param $tableAlias
+	 * @return bool
+	 */
+	public function relatedTo($tableAlias)
 	{
-		$this->parent_of_relationships[$table->alias()] = $relationship;
+		return isset($this->relationships[$tableAlias]);
 	}
 
-	public function isChildOf(Table $table, $relationship)
+	/**
+	 * @param $tableAlias
+	 * @return bool
+	 */
+	public function hasOne($tableAlias)
 	{
-		$this->child_of_relationships[$table->alias()] = $relationship;
-	}
-
-	public function connectTable(Table $table)
-	{
-		$connecting_table_path = $table->getPath();
-		$path = new TableCollection($connecting_table_path->getTables());
-		$path->addTable($this);
-		$this->setPath($path);
-
-		return $this->relationshipType($table->alias()) === 'child';
-	}
-
-	public function getPath()
-	{
-		return $this->path;
-	}
-
-	protected function setPath(TableCollection $path)
-	{
-		$this->path = $path;
-	}
-
-	public function getRelationshipAliases()
-	{
-		return array_merge(array_keys($this->parent_of_relationships), array_keys($this->child_of_relationships));
-	}
-
-	public function relationshipType($table_alias)
-	{
-		if (isset($this->child_of_relationships[$table_alias])) {
-			return 'child';
-		} elseif (isset($this->parent_of_relationships[$table_alias])) {
-			return 'parent';
+		if ($this->relatedTo($tableAlias) === false) {
+			$thisTableName = $this->name->name();
+			throw new \LogicException("tableAlias `$tableAlias` not related to table `$thisTableName`");
 		}
-		return false;
+
+		$relationship = $this->relationships[$tableAlias];
+
+		return $relationship->tableHasOne($this->alias(), $tableAlias);
 	}
 
-	public function joinSql($current_table_aliases)
+	public function joinSql(QueryBuilderInterface $queryBuilder, $current_table_aliases)
 	{
-		$relationship = $this->findRelationship($current_table_aliases);
-		return 'LEFT JOIN `'.$this->name().'` `'.$this->alias().'` ON '.$relationship->joinConditionsSql();
+		//TODO fix this or remove it
+//		$relationship = $this->findRelationship($current_table_aliases);
+//		return 'LEFT JOIN `'.$this->name().'` `'.$this->alias().'` ON '.$relationship->joinConditionsSql();
 	}
 
-	protected function findRelationship($current_table_aliases)
+	private function indexField(DatabaseField $field)
 	{
-		foreach ($current_table_aliases as $table_alias) {
-			if (isset($this->child_of_relationships[$table_alias])) {
-				return $this->child_of_relationships[$table_alias];
-			} elseif (isset($this->parent_of_relationships[$table_alias])) {
-				return $this->parent_of_relationships[$table_alias];
-			}
-		}
+		$this->fields[$field->name()] = $field;
+	}
+
+	private function indexRelationship(RelationshipInterface $relationship)
+	{
+
+		$this->relationships[$relationship->getOtherAlias($this->alias())] = $relationship;
 	}
 
 }

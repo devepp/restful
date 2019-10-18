@@ -11,6 +11,14 @@ class TableExpression implements SqlExpressionInterface
 
 	public static function fromString($tableExpression)
 	{
+		if (\is_object($tableExpression)) {
+			if(method_exists($tableExpression, '__toString')) {
+				$tableExpression = $tableExpression->__toString();
+			} else {
+				throw new \InvalidArgumentException('$tableExpression must either be a string or implement a __toString() method');
+			}
+		}
+
 		$tableExpression = trim($tableExpression);
 
 		if (substr_count($tableExpression, ' ') > 1) {

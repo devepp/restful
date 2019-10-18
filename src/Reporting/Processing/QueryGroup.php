@@ -44,8 +44,20 @@ class QueryGroup
 	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections)
 	{
 		$qb = $queryBuilder->selectFrom($this->root->name().' '.$this->root->alias());
+
+		foreach ($this->tables as $table) {
+			if ($table->alias() != $this->root->alias()) {
+				$qb = $qb->join($table, '', 'left');
+			}
+		}
+
 		foreach ($this->subQueryGroups as $queryGroup) {
 			$qb = $qb->joinSubQuery($queryGroup->getQuery($queryBuilder, $selections), $queryGroup->root->alias(), '', 'left');
+		}
+
+		/** @var SelectedField $field */
+		foreach ($selections->selectedFields() as $field) {
+			$qb = $field->fieldSql($qb, false);
 		}
 
 		/** @var SelectedFilter $filter */

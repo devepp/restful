@@ -22,32 +22,34 @@ class SchemaBuilder
 		return new Schema($this->tables, $this->relationships);
 	}
 
-	public function addManyToOneRelationship(Table $table, Table $secondTable, $condition)
+//	public function addManyToOneRelationship(Table $table, Table $secondTable, $condition)
+//	{
+//		$clone = clone $this;
+//
+//		$clone->addTable($table);
+//		$clone->addTable($secondTable);
+//
+//		$clone->relationships[] = new ManyToOne($table, $secondTable, $condition);
+//
+//		return $clone;
+//	}
+//
+//	public function addOneToOneRelationship(Table $table, Table $secondTable, $condition)
+//	{
+//		$clone = clone $this;
+//
+//		$clone->addTable($table);
+//		$clone->addTable($secondTable);
+//
+//		$clone->relationships[] = new OneToOne($table, $secondTable, $condition);
+//
+//		return $clone;
+//	}
+
+	public function addTable(Table $table)
 	{
 		$clone = clone $this;
-
-		$clone->addTable($table);
-		$clone->addTable($secondTable);
-
-		$clone->relationships[] = new ManyToOne($table, $secondTable, $condition);
-
+		$clone->tables->addTable($table);
 		return $clone;
-	}
-
-	public function addOneToOneRelationship(Table $table, Table $secondTable, $condition)
-	{
-		$clone = clone $this;
-
-		$clone->addTable($table);
-		$clone->addTable($secondTable);
-
-		$clone->relationships[] = new OneToOne($table, $secondTable, $condition);
-
-		return $clone;
-	}
-
-	private function addTable(Table $table)
-	{
-		$this->tables->addTable($table);
 	}
 }

@@ -53,39 +53,20 @@ class Schema
 	/**
 	 * @param $tableAlias
 	 * @param $otherTableAlias
-	 * @return bool
-	 */
-	public function hasDirectRelationship($tableAlias, $otherTableAlias)
-	{
-		if ($tableAlias === $otherTableAlias) {
-			return false;
-		}
-		foreach ($this->relationships as $relationship) {
-			if ($relationship->hasTables($tableAlias, $otherTableAlias)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * @param $tableAlias
-	 * @param $otherTableAlias
 	 * @return RelationshipInterface
 	 */
-	public function getRelationship($tableAlias, $otherTableAlias)
-	{
-		if ($tableAlias !== $otherTableAlias) {
-			foreach ($this->relationships as $relationship) {
-				if ($relationship->hasTables($tableAlias, $otherTableAlias)) {
-					return $relationship;
-				}
-			}
-		}
-
-		throw new \LogicException("Relationship does not exist for tables: `$tableAlias` and `$otherTableAlias`");
-	}
+//	public function getRelationship($tableAlias, $otherTableAlias)
+//	{
+//		if ($tableAlias !== $otherTableAlias) {
+//			foreach ($this->relationships as $relationship) {
+//				if ($relationship->hasTables($tableAlias, $otherTableAlias)) {
+//					return $relationship;
+//				}
+//			}
+//		}
+//
+//		throw new \LogicException("Relationship does not exist for tables: `$tableAlias` and `$otherTableAlias`");
+//	}
 
 	/**
 	 * @param $tableAlias
@@ -94,7 +75,7 @@ class Schema
 	 */
 	public function hasRelationship($tableAlias, $otherTableAlias)
 	{
-		$path = $this->getPath($tableAlias, $otherTableAlias);
+		$path = $this->getPath($tableAlias, $otherTableAlias, true);
 
 		if ($path) {
 			return true;
@@ -119,7 +100,7 @@ class Schema
 		throw new \LogicException("Relationship does not exist for tables: `$tableAlias` and `$otherTableAlias`");
 	}
 
-	private function getPath($tableAlias, $otherTableAlias, $pathSoFar = [])
+	private function getPath($tableAlias, $otherTableAlias, $returnFirstPath = false, $pathSoFar = [])
 	{
 		if (empty($pathSoFar)) {
 			$pathSoFar[] = $tableAlias;
@@ -130,15 +111,18 @@ class Schema
 		}
 
 		$currentTable = $this->tables->getTable($tableAlias);
-		$relatedTables = $this->tables->filter(new DirectlyRelatedTo($currentTable, $this));
+		$relatedTables = $this->tables->filter(new DirectlyRelatedTo($currentTable));
 		$possiblePaths = [];
 
 		foreach ($relatedTables as $relatedTable) {
 			if (!in_array($relatedTable->alias(), $pathSoFar)) {
 				$newPathSoFar = $pathSoFar;
 				$newPathSoFar[] = $relatedTable->alias();
-				$path = $this->getPath($relatedTable->alias(), $otherTableAlias, $newPathSoFar);
+				$path = $this->getPath($relatedTable->alias(), $otherTableAlias, $returnFirstPath, $newPathSoFar);
 				if ($path) {
+					if ($returnFirstPath) {
+						return $path;
+					}
 					$possiblePaths[] = $path;
 				}
 			}

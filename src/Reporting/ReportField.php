@@ -64,6 +64,10 @@ class ReportField implements JsonSerializable
 		return $this->field->alias();
 	}
 
+	public function table()
+	{
+		return $this->table;
+	}
 
 	public function dbField()
 	{
