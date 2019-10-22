@@ -47,12 +47,12 @@ class QueryGroup
 
 		foreach ($this->tables as $table) {
 			if ($table->alias() != $this->root->alias()) {
-				$qb = $qb->join($table, '', 'left');
+				$qb = $qb->join($table, $table->joinCondition($this->root), 'left');
 			}
 		}
 
 		foreach ($this->subQueryGroups as $queryGroup) {
-			$qb = $qb->joinSubQuery($queryGroup->getQuery($queryBuilder, $selections), $queryGroup->root->alias(), '', 'left');
+			$qb = $qb->joinSubQuery($queryGroup->getQuery($queryBuilder, $selections), $queryGroup->alias(), $queryGroup->joinCondition($this->root->alias()), 'left');
 		}
 
 		/** @var SelectedField $field */
@@ -70,9 +70,21 @@ class QueryGroup
 		return $qb;
 	}
 
-	public function joinAsSubQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections)
+	public function joinAsSubQuery(SelectQueryBuilderInterface $queryBuilder, SelectionsInterface $selections, $joinToAlias, QueryBuilderFactoryInterface $qbFactory)
 	{
+		// TODO probably remove this.  not sure if its the best way. getQuery might be better
 
+		return $queryBuilder->joinSubQuery($this->getQuery($qbFactory, $selections), $this->alias(), $this->joinCondition($joinToAlias), 'left');
+	}
+
+	public function alias()
+	{
+		return $this->root->alias();
+	}
+
+	public function joinCondition($tableAlias)
+	{
+		return $this->root->alias();
 	}
 
 	public function __debugInfo()

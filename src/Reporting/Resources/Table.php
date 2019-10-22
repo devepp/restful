@@ -13,7 +13,7 @@ class Table
 	protected $name;
 
 	/** @var DatabaseField[] */
-	protected $fields;
+	protected $fields = [];
 
 	/** @var RelationshipInterface[] */
 	protected $relationships = [];
@@ -93,6 +93,15 @@ class Table
 		return isset($this->fields[$fieldName]);
 	}
 
+	public function dbField($fieldName)
+	{
+		if (isset($this->fields[$fieldName])) {
+			return $this->fields[$fieldName];
+		}
+
+		throw new \LogicException($fieldName.' does not exist on table '.$this->name());
+	}
+
 	public function getReportFields()
 	{
 		$report_fields = [];
@@ -103,15 +112,6 @@ class Table
 		}
 
 		return $report_fields;
-	}
-
-	public function dbField($fieldName)
-	{
-		if (isset($this->fields[$fieldName])) {
-			return $this->fields[$fieldName];
-		}
-
-		throw new \LogicException($fieldName.' does not exist on table '.$this->name());
 	}
 
 	/**
@@ -139,11 +139,21 @@ class Table
 		return $relationship->tableHasOne($this->alias(), $tableAlias);
 	}
 
-	public function joinSql(QueryBuilderInterface $queryBuilder, $current_table_aliases)
+	public function joinCondition(Table $table)
 	{
-		//TODO fix this or remove it
-//		$relationship = $this->findRelationship($current_table_aliases);
-//		return 'LEFT JOIN `'.$this->name().'` `'.$this->alias().'` ON '.$relationship->joinConditionsSql();
+		if ($this->relatedTo($table->alias())) {
+			$relationship = $this->relationships[$table->alias()];
+
+			return $relationship->condition();
+		}
+		if ($table->relatedTo($this->alias())) {
+			return $table->joinCondition($this);
+		}
+
+		\var_dump($this->alias());
+		\var_dump($this->relationships);
+		\var_dump($table->alias());
+		throw new \LogicException('trying to get relation condition on `'.$this->alias().'` from unrelated table. `'.$table->alias().'`');
 	}
 
 	private function indexField(DatabaseField $field)
@@ -153,7 +163,6 @@ class Table
 
 	private function indexRelationship(RelationshipInterface $relationship)
 	{
-
 		$this->relationships[$relationship->getOtherAlias($this->alias())] = $relationship;
 	}
 

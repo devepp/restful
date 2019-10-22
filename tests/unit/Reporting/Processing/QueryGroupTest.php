@@ -37,7 +37,7 @@ class QueryGroupTest extends TestCase
 	public function provider()
 	{
 		return [
-			[$this->getTable('assets'), $this->getTableCollection(), $this->getSelections(), 'SELECT `assetsAlias`.`name` FROM assets assetsAlias LEFT JOIN elements elementsAlias ON  LEFT JOIN recommendations recommendationsAlias ON '],
+			[$this->getTable('assets', ['oneToMany' => $this->getTable('elements')]), $this->getTableCollection(), $this->getSelections(), 'SELECT `assetsAlias`.`name` FROM assets assetsAlias LEFT JOIN elements elementsAlias ON  LEFT JOIN recommendations recommendationsAlias ON '],
 		];
 	}
 
@@ -52,8 +52,16 @@ class QueryGroupTest extends TestCase
 			->setAlias($name.'Alias')
 			->addStringField('name');
 
-		foreach ($relatedTables as $relatedTable) {
-//			$tableBuilder->addForeignKey($relatedTable->name().'_id');
+		foreach ($relatedTables as $relationship => $relatedTable) {
+			if ($relationship === 'manyToOne') {
+				$tableBuilder->addManyToOneRelationship($relatedTable->tableName(), $relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id', $relatedTable->name() . '_id');
+			}
+			if ($relationship === 'oneToMany') {
+				$tableBuilder->addOneToManyRelationship($relatedTable->tableName(), $relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id');
+			}
+			if ($relationship === 'oneToOne') {
+				$tableBuilder->addOneToOneRelationship($relatedTable->tableName(), $relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id');
+			}
 		}
 
 		return $tableBuilder->build();
@@ -62,9 +70,9 @@ class QueryGroupTest extends TestCase
 	private function getTableCollection()
 	{
 		$tables = new TableCollection([
-			$this->getTable('assets'),
-			$this->getTable('elements', [$this->getTable('assets')]),
-			$this->getTable('recommendations', [$this->getTable('elements')]),
+			$this->getTable('assets', ['oneToMany' => $this->getTable('elements')]),
+			$this->getTable('elements', ['manyToOne' => $this->getTable('assets'), 'oneToMany' => $this->getTable('recommendations')]),
+			$this->getTable('recommendations', ['manyToOne' => $this->getTable('elements')]),
 		]);
 
 		return $tables;

@@ -95,7 +95,7 @@ class TableBuilder
 		return $clone;
 	}
 
-	public function addManyToOneRelationship(TableName $tableName, $foreignKey, $condition)
+	public function addManyToOneRelationship(TableName $tableName, $condition, $foreignKey)
 	{
 		$clone = clone $this;
 		$field = new ForeignKey($foreignKey, $tableName);
@@ -104,11 +104,20 @@ class TableBuilder
 		return $clone;
 	}
 
-	public function addOneToOneRelationship(TableName $tableName, $foreignKey, $condition)
+	public function addOneToManyRelationship(TableName $tableName, $condition)
 	{
 		$clone = clone $this;
-		$field = new ForeignKey($foreignKey, $tableName);
-		$clone->addDbField($field);
+		$clone->relationships[] = new ManyToOne($tableName, $this->name, $condition);
+		return $clone;
+	}
+
+	public function addOneToOneRelationship(TableName $tableName, $condition, $foreignKey = null)
+	{
+		$clone = clone $this;
+		if ($foreignKey) {
+			$field = new ForeignKey($foreignKey, $tableName);
+			$clone->addDbField($field);
+		}
 		$clone->relationships[] = new OneToOne($this->name, $tableName, $condition);
 		return $clone;
 	}

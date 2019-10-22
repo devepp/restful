@@ -28,10 +28,10 @@ class SameNodeSchema extends Schema
 	{
 		if($this->getTableCount === 0) {
 			$this->getTableCount++;
-			echo 'getting FIRST table'.\PHP_EOL;
+//			echo 'getting FIRST table'.\PHP_EOL;
 			return $this->table1;
 		}
-		echo 'getting SECOND table'.\PHP_EOL;
+//		echo 'getting SECOND table'.\PHP_EOL;
 		return $this->table2;
 	}
 }

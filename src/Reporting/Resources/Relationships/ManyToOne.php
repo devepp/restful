@@ -18,14 +18,14 @@ class ManyToOne implements RelationshipInterface
 
 	/**
 	 * ManyToOne constructor.
-	 * @param TableName $child
-	 * @param TableName $parent
+	 * @param TableName $many
+	 * @param TableName $one
 	 * @param $condition
 	 */
-	public function __construct(TableName $child, TableName $parent, $condition)
+	public function __construct(TableName $many, TableName $one, $condition)
 	{
-		$this->child = $child;
-		$this->parent = $parent;
+		$this->child = $many;
+		$this->parent = $one;
 		$this->condition = $condition;
 	}
 
