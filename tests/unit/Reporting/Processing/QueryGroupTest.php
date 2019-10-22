@@ -28,7 +28,7 @@ class QueryGroupTest extends TestCase
 	public function testGetQuery(Table $table, TableCollection $tables, SelectionsInterface $selections, $expectedQueryStatement)
 	{
 		$group = new QueryGroup($table, $tables, []);
-
+//		\var_dump($group->__debugInfo());
 		$query = $group->getQuery(new QueryBuilderFactory(), $selections);
 
 		$this->assertSame($expectedQueryStatement, $query->getStatementExpression());
@@ -37,7 +37,7 @@ class QueryGroupTest extends TestCase
 	public function provider()
 	{
 		return [
-			[$this->getTable('assets', ['oneToMany' => $this->getTable('elements')]), $this->getTableCollection(), $this->getSelections(), 'SELECT `assetsAlias`.`name` FROM assets assetsAlias LEFT JOIN elements elementsAlias ON  LEFT JOIN recommendations recommendationsAlias ON '],
+			[$this->getTable('assets', ['oneToMany' => $this->getTable('elements')]), $this->getTableCollection(), $this->getSelections(), 'SELECT `assetsAlias`.`name` FROM assets assetsAlias LEFT JOIN elements elementsAlias ON elementsAlias.assets_id = assetsAlias.id LEFT JOIN recommendations recommendationsAlias ON recommendationsAlias.elements_id = elementsAlias.id'],
 		];
 	}
 
@@ -54,13 +54,13 @@ class QueryGroupTest extends TestCase
 
 		foreach ($relatedTables as $relationship => $relatedTable) {
 			if ($relationship === 'manyToOne') {
-				$tableBuilder->addManyToOneRelationship($relatedTable->tableName(), $relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id', $relatedTable->name() . '_id');
+				$tableBuilder = $tableBuilder->addManyToOneRelationship($relatedTable->tableName(), $name.'Alias.'.$relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id', $relatedTable->name() . '_id');
 			}
 			if ($relationship === 'oneToMany') {
-				$tableBuilder->addOneToManyRelationship($relatedTable->tableName(), $relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id');
+				$tableBuilder = $tableBuilder->addOneToManyRelationship($relatedTable->tableName(), $name.'Alias.'.$relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id');
 			}
 			if ($relationship === 'oneToOne') {
-				$tableBuilder->addOneToOneRelationship($relatedTable->tableName(), $relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id');
+				$tableBuilder = $tableBuilder->addOneToOneRelationship($relatedTable->tableName(), $name.'Alias.'.$relatedTable->name() . '_id = ' . $relatedTable->alias() . '.id');
 			}
 		}
 

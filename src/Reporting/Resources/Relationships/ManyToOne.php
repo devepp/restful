@@ -29,6 +29,15 @@ class ManyToOne implements RelationshipInterface
 		$this->condition = $condition;
 	}
 
+	public function __debugInfo()
+	{
+		return [
+			'child' => $this->child,
+			'parent' => $this->parent,
+			'condition' => $this->condition,
+		];
+	}
+
 	public function hasTable($tableAlias)
 	{
 		return $this->child->alias() === $tableAlias || $this->parent->alias() === $tableAlias;
@@ -42,14 +51,6 @@ class ManyToOne implements RelationshipInterface
 	public function condition()
 	{
 		return $this->condition;
-	}
-
-	public function __debugInfo()
-	{
-		return [
-			'child' => $this->child->alias(),
-			'parent' => $this->parent->alias(),
-		];
 	}
 
 	public function tableHasOne($tableAlias, $otherTableAlias)

@@ -2,13 +2,12 @@
 
 namespace App\Reporting\Processing;
 
-use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\Filters\Filter;
-use App\Reporting\ReportField;
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;
+use App\Reporting\Resources\TableCollectionFunctions\Filters\DirectlyRelatedTo;
 use App\Reporting\Selectables\Standard;
 use App\Reporting\SelectedField;
 use App\Reporting\SelectedFilter;
@@ -45,9 +44,12 @@ class QueryGroup
 	{
 		$qb = $queryBuilder->selectFrom($this->root->name().' '.$this->root->alias());
 
+		$joined = new TableCollection([$this->root]);
 		foreach ($this->tables as $table) {
 			if ($table->alias() != $this->root->alias()) {
-				$qb = $qb->join($table, $table->joinCondition($this->root), 'left');
+				$related = $joined->filter(new DirectlyRelatedTo($table));
+				$qb = $qb->join($table, $table->joinCondition($related->first()), 'left');
+				$joined->addTable($table);
 			}
 		}
 
@@ -90,10 +92,10 @@ class QueryGroup
 	public function __debugInfo()
 	{
 		return [
-			'root' => $this->root->alias(),
-			'tables' => implode(', ', $this->tables->map(function (Table $table) {
-				return $table->alias();
-			})),
+			'root' => $this->root->__debugInfo(),
+			'tables' => $this->tables->map(function (Table $table) {
+				return $table->__debugInfo();
+			}),
 			'subQueryGroups' => \array_map(function ($queryGroup){
 				return $queryGroup->__debugInfo();
 			}, $this->subQueryGroups)

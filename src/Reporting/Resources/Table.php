@@ -47,6 +47,21 @@ class Table
 		return new TableBuilder($tableName);
 	}
 
+	public function __debugInfo()
+	{
+		return [
+			'name' => $this->name(),
+			'alias' => $this->alias(),
+			'fields' => \array_map(function (DatabaseField $field){
+				return $field->name();
+			}, $this->fields),
+			'relationships' => \array_map(function (RelationshipInterface $relationship){
+				return $relationship->__debugInfo();
+			}, $this->relationships),
+
+		];
+	}
+
 	public function __toString()
 	{
 		return $this->name->__toString();
@@ -150,9 +165,9 @@ class Table
 			return $table->joinCondition($this);
 		}
 
-		\var_dump($this->alias());
-		\var_dump($this->relationships);
-		\var_dump($table->alias());
+//		\var_dump($this->alias());
+//		\var_dump($this->relationships);
+//		\var_dump($table->alias());
 		throw new \LogicException('trying to get relation condition on `'.$this->alias().'` from unrelated table. `'.$table->alias().'`');
 	}
 
