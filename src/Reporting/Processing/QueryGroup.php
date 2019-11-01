@@ -7,16 +7,11 @@ use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\FieldInterface;
 use App\Reporting\FilterInterface;
-use App\Reporting\Filters\Filter;
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\Filter as TableFilter;
-use App\Reporting\Resources\TableCollectionFunctions\Filters\DirectlyRelatedTo;
 use App\Reporting\Resources\TableCollectionFunctions\Maps\Map;
 use App\Reporting\Resources\TableCollectionFunctions\Sorts\Sort;
-use App\Reporting\Selectables\Standard;
-use App\Reporting\SelectedField;
-use App\Reporting\SelectedFilter;
 use App\Reporting\SelectionsInterface;
 
 class QueryGroup
@@ -66,6 +61,10 @@ class QueryGroup
 			$qb = $field->addToQuery($qb);
 		}
 
+		foreach ($this->subQueryGroups as $queryGroup) {
+			$qb = $queryGroup->selectFieldsForOuterQuery($qb, $selections->selectedFields());
+		}
+
 		/** @var FilterInterface $filter */
 		foreach ($selections->selectedFilters() as $filter) {
 			$qb = $filter->filterQuery($qb);
@@ -91,6 +90,22 @@ class QueryGroup
 	public function joinCondition($tableAlias)
 	{
 		return $this->root->alias();
+	}
+
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @param FieldInterface[] $selectedFields
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function selectFieldsForOuterQuery(SelectQueryBuilderInterface $queryBuilder, $selectedFields)
+	{
+		$applicableFields = $this->applicableFields($selectedFields);
+
+		foreach ($applicableFields as $field) {
+			$queryBuilder = $field->addToQuery($queryBuilder);
+		}
+
+		return $queryBuilder;
 	}
 
 	/**
@@ -146,6 +161,7 @@ class QueryGroup
 				$applicableFields[] = $field;
 			}
 		}
+
 		return $applicableFields;
 	}
 
@@ -185,214 +201,4 @@ class QueryGroup
 
 		return $related->first();
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	public function addTable(Table $table)
-	{
-		$this->tables = $this->tables->addTable($table);
-	}
-
-	public function hasTable(Table $table)
-	{
-		return $this->tables->hasTable($table);
-	}
-
-	/**
-	 * @return Table
-	 */
-	public function getRoot()
-	{
-		return $this->root;
-	}
-
-	/**
-	 * @param $table_alias
-	 * @return Table
-	 */
-	public function getTable($table_alias)
-	{
-		return $this->tables->getTable($table_alias);
-	}
-
-	public function getReportFields()
-	{
-		$report_fields = [];
-		foreach ($this->tables as $table) {
-			$report_fields = array_merge($report_fields, $table->getReportFields());
-		}
-		return $report_fields;
-	}
-
-	public function getReportFilters()
-	{
-		if ($this->isSubQuery()) {
-			return [];
-		}
-		$report_filters = [];
-		foreach ($this->tables as $table) {
-			foreach ($table->getFields() as $db_field) {
-				if ($db_field->useAsFilter()) {
-					$report_filters[] = new Filter($table, $db_field);
-				}
-			}
-		}
-		return $report_filters;
-	}
-
-
-	/**
-	 * @param SelectedField[] $selected_fields
-	 * @param SelectedFilter[] $selected_filters
-	 * @return TableCollection
-	 */
-	public function requiredTables($selected_fields, $selected_filters)
-	{
-		$field_tables = $this->fieldsRequiredTables($selected_fields);
-
-		if ($field_tables->count() == 0) {
-			return $field_tables;
-		}
-
-		$filter_tables = $this->filtersRequiredTables($selected_filters);
-
-		$field_tables = $field_tables->merge($filter_tables);
-
-		return $field_tables;
-	}
-
-
-	/**
-	 * @param SelectedField[] $selected_fields
-	 * @param SelectedFilter[] $selected_filters
-	 * @return TableCollection
-	 */
-	public function primaryQueryTables($selected_fields, $selected_filters)
-	{
-		$tables = new TableCollection($this->root);
-		$field_tables = $this->fieldsRequiredTables($selected_fields);
-		$tables = $tables->merge($field_tables);
-
-		$filter_tables = $this->filtersRequiredTables($selected_filters);
-		$tables = $tables->merge($filter_tables);
-
-		return $tables;
-	}
-
-
-	/**
-	 * @param SelectedField[] $selected_fields
-	 * @return TableCollection
-	 */
-	public function subQueryTables($selected_fields)
-	{
-		return $this->fieldsRequiredTables($selected_fields);
-	}
-
-
-	/**
-	 * @param SelectedField[] $selected_fields
-	 * @return TableCollection
-	 */
-	public function fieldsRequiredTables($selected_fields)
-	{
-		$table_list = new TableCollection();
-		foreach ($selected_fields as $field) {
-			if ($this->tables->hasAlias($field->table())) {
-				$table = $this->tables->getTable($field->table());
-				$table_list = $table_list->merge($table->getPath());
-			}
-		}
-
-		return $table_list;
-	}
-
-
-	/**
-	 * @param SelectedFilter[] $selected_filters
-	 * @return TableCollection
-	 */
-	public function filtersRequiredTables($selected_filters)
-	{
-		$table_list = new TableCollection();
-		foreach ($selected_filters as $filter) {
-			if ($this->tables->hasAlias($filter->table())) {
-				$table = $this->tables->getTable($filter->table());
-				$table_list = $table_list->merge($table->getPath());
-			}
-		}
-
-		return $table_list;
-	}
-
-	/**
-	 * @param SelectedField[] $selectedFields
-	 * @return QueryField[]
-	 */
-	public function queryFields($selectedFields)
-	{
-		$queryFields = [];
-
-		foreach ($selectedFields as $selectedField) {
-			$fromQueryGroup = $this->tables->hasAlias($selectedField->table());
-
-
-			if ($this->isPrimary()) {
-				if ($fromQueryGroup) {
-
-				}
-				$queryFields[] = $selectedField;
-			} else {
-
-			}
-
-		}
-
-
-
-		if ($this->isPrimary()) {
-			return $queryFields;
-		}
-
-		$applicable_fields[] = $this->subQueryRequiredFields();
-
-		foreach ($selectedFields as $field) {
-			if ($this->tables->hasAlias($field->table())) {
-				$applicable_fields[] = $field;
-			}
-		}
-		return $applicable_fields;
-	}
-
-	public function prefix()
-	{
-		if ($this->isSubQuery()) {
-			return $this->root->aggregateName();
-		}
-		return '';
-	}
-
-	protected function subQueryRequiredFields()
-	{
-		$root_table = $this->root;
-
-		$base_table = $root_table->getPath()->first();
-
-		return new SelectedField($base_table->primaryKey(), new Standard());
-
-	}
-
-
 }
