@@ -14,26 +14,13 @@ class Average extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Average)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		if ($subQueryGroup) {
-			return 'AVG(`'.$table->alias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$table->aggregateName().'`.`'.$this->fieldAlias($table, $field, true).'`';
+		return 'AVG('.$field.')';
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		if ($subQueryGroup) {
-			return $field->alias($table->alias()).'_average';
-		}
-		return $table->aggregateName().'_'.$this->fieldAlias($table, $field, true);
+		return $alias.'__average';
 	}
-
-	public function selectField(string $field, string $alias = null)
-	{
-		return 'AVG('.$field.') AS '.$alias.'_average';
-	}
-
-
 }

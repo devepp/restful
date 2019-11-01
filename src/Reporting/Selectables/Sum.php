@@ -20,24 +20,13 @@ class Sum extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Sum)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		if ($subQueryGroup) {
-			return 'SUM(`'.$field->tableAlias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		return 'IFNULL(SUM('.$field.'), 0)';
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		if ($subQueryGroup) {
-			return $field->alias().'_sum';
-		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
-	}
-
-	public function selectField(string $field, string $alias = null)
-	{
-		return 'SUM(IFNULL('.$field.', 0)) AS '.$alias.'_sum';
+		return $alias.'__sum';
 	}
 }

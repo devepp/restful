@@ -20,24 +20,13 @@ class Percent extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Percent)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		if ($subQueryGroup) {
-			return 'SUM(IF(`'.$field->tableAlias().'`.`'.$field->name().'` != 0, 1, 1))/COUNT(`'.$field->tableAlias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		return 'SUM(IF('.$field.' != 0, 1, 1))/COUNT('.$field.')';
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		if ($subQueryGroup) {
-			return $field->alias().'_percent';
-		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
-	}
-
-	public function selectField(string $field, string $alias = null)
-	{
-		return 'SUM(IF('.$field.' != 0, 1, 1))/COUNT('.$field.') AS '.$alias.'_percent';
+		return $alias.'__percent';
 	}
 }

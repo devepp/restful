@@ -20,24 +20,15 @@ class ListSelectable extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (List)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		if ($subQueryGroup) {
-			return 'GROUP_CONCAT(`'.$field->tableAlias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		return 'GROUP_CONCAT('.$field.')';
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		if ($subQueryGroup) {
-			return $field->alias().'_list';
-		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
+		return $alias.'__list';
 	}
 
-	public function selectField(string $field, string $alias = null)
-	{
-		return 'GROUP_CONCAT('.$field.') AS '.$alias.'_list';
-	}
+
 }

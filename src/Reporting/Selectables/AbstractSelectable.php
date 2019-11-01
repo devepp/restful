@@ -21,20 +21,18 @@ abstract class AbstractSelectable implements JsonSerializable
 		Sum::ID => Sum::class,
 	];
 
-
 	/** @var string */
 	protected $label_override;
 
 	abstract protected function defaultLabel(DatabaseField $field);
-	abstract public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup);
-	abstract public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup);
 
 	/**
 	 * @param string $field
 	 * @param string|null $alias
 	 * @return string
 	 */
-	abstract public function selectField(string $field, string $alias = null);
+	abstract public function selectField(string $field);
+	abstract public function alias(string $alias);
 
 	public static function getSelectable($id)
 	{

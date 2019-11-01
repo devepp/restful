@@ -44,7 +44,7 @@ class QueryGroup
 	/**
 	 * @param QueryBuilderFactoryInterface $queryBuilder
 	 * @param SelectionsInterface $selections
-	 * @param FieldInterface|null $groupBy
+	 * @param DatabaseField|null $groupBy
 	 * @return SelectQueryBuilderInterface
 	 */
 	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections, DatabaseField $groupBy = null)
@@ -70,26 +70,7 @@ class QueryGroup
 			$qb = $filter->filterQuery($qb);
 		}
 
-//		foreach ($this->)
-
 		return $qb;
-	}
-
-	public function joinAsSubQuery(SelectQueryBuilderInterface $queryBuilder, SelectionsInterface $selections, $joinToAlias, QueryBuilderFactoryInterface $qbFactory)
-	{
-		// TODO probably remove this.  not sure if its the best way. getQuery might be better
-
-		return $queryBuilder->joinSubQuery($this->getQuery($qbFactory, $selections), $this->alias(), $this->joinCondition($joinToAlias), 'left');
-	}
-
-	public function alias()
-	{
-		return $this->root->alias();
-	}
-
-	public function joinCondition($tableAlias)
-	{
-		return $this->root->alias();
 	}
 
 	/**
@@ -102,7 +83,7 @@ class QueryGroup
 		$applicableFields = $this->applicableFields($selectedFields);
 
 		foreach ($applicableFields as $field) {
-			$queryBuilder = $field->addToQuery($queryBuilder);
+			$queryBuilder = $field->addToQueryAsAggregate($queryBuilder, $this->alias());
 		}
 
 		return $queryBuilder;
@@ -136,13 +117,12 @@ class QueryGroup
 	private function joinSubQueryGroups(SelectQueryBuilderInterface $queryBuilder, QueryBuilderFactoryInterface $queryBuilderFactory, SelectionsInterface $selections)
 	{
 		foreach ($this->subQueryGroups as $queryGroup) {
-//			$subQuery = $queryGroup->getQuery($queryBuilderFactory, $selections, $this->fromTable()->primaryKey());
 			$subQuery = $queryGroup->getQuery($queryBuilderFactory, $selections);
-			$primaryKeySelect = '`'.$this->fromTable()->alias().'`.`'.$this->fromTable()->primaryKey()->name().'` AS '.$this->fromTable()->alias().'__'.$this->fromTable()->primaryKey()->name();
+			$primaryKeySelect = '`'.$this->fromTable()->alias().'`.`'.$this->fromTable()->primaryKey()->name().'` '.$this->fromPrimaryKeyAlias();
 
 			$subQuery = $subQuery->select($primaryKeySelect);
 
-			$queryBuilder = $queryBuilder->joinSubQuery($subQuery, $queryGroup->alias(), $queryGroup->joinCondition($this->root->alias()), 'left');
+			$queryBuilder = $queryBuilder->joinSubQuery($subQuery, $queryGroup->alias(), $queryGroup->joinCondition(), 'left');
 		}
 
 		return $queryBuilder;
@@ -176,11 +156,6 @@ class QueryGroup
 		return false;
 	}
 
-	private function fromTable()
-	{
-		return $this->pathTables->first();
-	}
-
 	private function tablesToJoin()
 	{
 		$tables = $this->pathTables->merge($this->nodeTables);
@@ -200,5 +175,30 @@ class QueryGroup
 		}
 
 		return $related->first();
+	}
+
+	public function alias()
+	{
+		return $this->root->alias().'_aggregate';
+	}
+
+	public function joinCondition()
+	{
+		return $this->alias().'.'.$this->fromPrimaryKeyAlias().' = '.$this->fromTable()->alias().'.'.$this->fromPrimaryKeyName();
+	}
+
+	private function fromTable()
+	{
+		return $this->pathTables->first();
+	}
+
+	private function fromPrimaryKeyName()
+	{
+		return $this->fromTable()->primaryKey()->name();
+	}
+
+	private function fromPrimaryKeyAlias()
+	{
+		return $this->fromTable()->alias().'__'.$this->fromPrimaryKeyName();
 	}
 }

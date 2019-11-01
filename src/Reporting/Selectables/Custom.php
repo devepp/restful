@@ -20,24 +20,15 @@ class Custom extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Custom)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		if ($subQueryGroup) {
-			return 'AVG(`'.$field->tableAlias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		// TODO: Implement alias() method.
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		if ($subQueryGroup) {
-			return $field->alias().'_average';
-		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
+		// TODO: Implement alias() method.
 	}
 
-	public function selectField(string $field, string $alias = null)
-	{
-		return 'AVG('.$field.') AS '.$alias.'_average';
-	}
+
 }

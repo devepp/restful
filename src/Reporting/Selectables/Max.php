@@ -20,24 +20,15 @@ class Max extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Max)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
-	{
-		if ($subQueryGroup) {
-			return 'Max(`'.$field->tableAlias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
-	}
-
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
-	{
-		if ($subQueryGroup) {
-			return $field->alias().'_max';
-		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
-	}
-
 	public function selectField(string $field, string $alias = null)
 	{
-		return 'MAX('.$field.') AS '.$alias.'_max';
+		return 'MAX('.$field.')';
 	}
+
+	public function alias(string $alias)
+	{
+		return $alias.'__max';
+	}
+
+
 }

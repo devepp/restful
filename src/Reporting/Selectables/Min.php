@@ -20,24 +20,15 @@ class Min extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Min)';
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		if ($subQueryGroup) {
-			return 'MIN(`'.$field->tableAlias().'`.`'.$field->name().'`)';
-		}
-		return '`'.$field->tableAggregateAlias().'`.`'.$this->fieldAlias($field, true).'`';
+		return 'MIN('.$field.')';
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		if ($subQueryGroup) {
-			return $field->alias().'_min';
-		}
-		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
+		return $alias.'__min';
 	}
 
-	public function selectField(string $field, string $alias = null)
-	{
-		return 'MIN('.$field.') AS '.$alias.'_min';
-	}
+
 }

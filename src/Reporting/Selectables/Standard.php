@@ -14,22 +14,15 @@ class Standard extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name()));
 	}
 
-	public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup)
+	public function selectField(string $field)
 	{
-		return '`'.$table->alias().'`.`'.$field->name().'`';
+		return $field;
 	}
 
-	public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup)
+	public function alias(string $alias)
 	{
-		return $field->alias($table->alias());
+		return $alias;
 	}
 
-	public function selectField(string $field, string $alias = null)
-	{
-		if ($alias === null) {
-			return $field;
-		}
 
-		return $field.' '.$alias;
-	}
 }

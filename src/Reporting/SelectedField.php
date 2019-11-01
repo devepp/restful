@@ -85,7 +85,6 @@ class SelectedField implements FieldInterface, JsonSerializable
 		return $this->field->formatValueAsType($value);
 	}
 
-
 	/**
 	 * @return string
 	 */
@@ -97,6 +96,15 @@ class SelectedField implements FieldInterface, JsonSerializable
 	public function addToQuery(SelectQueryBuilderInterface $queryBuilder)
 	{
 		$selectField = $this->selectable->selectField('`'.$this->field->tableAlias().'`.`'.$this->field->name().'`');
+		$alias = $this->selectable->alias($this->field->tableAlias().'__'.$this->field->name());
+
+		return $queryBuilder->select($selectField.' '.$alias);
+	}
+
+	public function addToQueryAsAggregate(SelectQueryBuilderInterface $queryBuilder, $aggregateAlias)
+	{
+		$selectField = $aggregateAlias.'.'.$this->selectable->alias($this->field->tableAlias().'__'.$this->field->name());
+
 		return $queryBuilder->select($selectField);
 	}
 
@@ -104,18 +112,6 @@ class SelectedField implements FieldInterface, JsonSerializable
 	{
 		return $this->field->requiresTable($table);
 	}
-
-
-	/**
-	 * @param SelectQueryBuilderInterface $queryBuilder
-	 * @param $subQueryGroup
-	 * @return SelectQueryBuilderInterface
-	 */
-//	public function fieldSql(SelectQueryBuilderInterface $queryBuilder, $subQueryGroup)
-//	{
-//		return $queryBuilder->select($this->selectable->fieldSql($this->table, $this->field, $subQueryGroup));
-//	}
-
 
 	/**
 	 * @param QueryGroup $subQueryGroup

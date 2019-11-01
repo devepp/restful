@@ -12,6 +12,11 @@ interface FieldInterface
 	 * @return SelectQueryBuilderInterface
 	 */
 	public function addToQuery(SelectQueryBuilderInterface $queryBuilder);
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function addToQueryAsAggregate(SelectQueryBuilderInterface $queryBuilder, $aggregateAlias);
 
 	/**
 	 * @param Table $table
