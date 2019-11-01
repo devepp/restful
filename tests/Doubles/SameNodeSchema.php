@@ -4,6 +4,7 @@ namespace Tests\Doubles;
 
 use App\Reporting\Resources\Schema;
 use App\Reporting\Resources\Table;
+use App\Reporting\Resources\TableCollection;
 
 class SameNodeSchema extends Schema
 {

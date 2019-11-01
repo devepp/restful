@@ -2,6 +2,11 @@
 
 namespace App\Reporting\Resources;
 
+use App\Reporting\DB\QueryBuilder\LimitableInterface;
+use App\Reporting\DB\QueryBuilder\QueryBuilderInterface;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
 class Limit
 {
 	/** @var int */
@@ -19,6 +24,32 @@ class Limit
 	{
 		$this->numberOfRecords = $numberOfRecords;
 		$this->offset = $offset;
+	}
+
+	/**
+	 * @return Limit
+	 */
+	public static function default()
+	{
+		return new self(20, 0);
+	}
+
+	/**
+	 * @param ServerRequestInterface $request
+	 * @return Limit
+	 */
+	public static function fromRequestOrDefault(ServerRequestInterface $request)
+	{
+		$limit = $request->getAttribute('perPage');
+
+		if ($limit) {
+			$page = $request->getAttribute('page', 1);
+			$offset = ($page - 1) * $limit;
+
+			return new self($limit, $offset);
+		}
+
+		return self::default();
 	}
 
 	/**
@@ -45,7 +76,13 @@ class Limit
 		return 'LIMIT '.$this->offset().','.$this->numberOfRecords();
 	}
 
-
-
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function appendToQuery(SelectQueryBuilderInterface $queryBuilder)
+	{
+		return $queryBuilder->limit($this->numberOfRecords, $this->offset);
+	}
 
 }

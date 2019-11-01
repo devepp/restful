@@ -29,6 +29,13 @@ abstract class AbstractSelectable implements JsonSerializable
 	abstract public function fieldSql(Table $table, DatabaseField $field, $subQueryGroup);
 	abstract public function fieldAlias(Table $table, DatabaseField $field, $subQueryGroup);
 
+	/**
+	 * @param string $field
+	 * @param string|null $alias
+	 * @return string
+	 */
+	abstract public function selectField(string $field, string $alias = null);
+
 	public static function getSelectable($id)
 	{
 		$selectable_array = self::SELECTABLES;

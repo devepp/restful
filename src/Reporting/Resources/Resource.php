@@ -2,44 +2,70 @@
 
 namespace App\Reporting\Resources;
 
-use App\Reporting\Filters\Filter;
-use App\Reporting\Processing\QueryGroup;
-use App\Reporting\ReportField;
 
-class Resource
+use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterInterface;
+
+class Resource implements ResourceInterface
 {
-	/** @var QueryGroup */
-	private $queryGroup;
+	/** @var Table */
+	private $table;
 
-	/** @var ReportField[] */
+	/** @var string */
+	private $name;
+
+	/** @var ReportFieldInterface[] */
 	private $fields;
 
-	/** @var Filter[] */
+	/** @var ReportFilterInterface[] */
 	private $filters;
 
 	/**
 	 * Resource constructor.
-	 * @param QueryGroup $queryGroup
-	 * @param ReportField[] $fields
-	 * @param Filter[] $filters
+	 * @param Table $table
+	 * @param string $name
+	 * @param array $fields
+	 * @param array $filters
 	 */
-	public function __construct(QueryGroup $queryGroup, array $fields, array $filters)
+	public function __construct(Table $table, string $name, array $fields, array $filters)
 	{
-		$this->queryGroup = $queryGroup;
+		$this->table = $table;
+		$this->name = $name;
 		$this->fields = $fields;
 		$this->filters = $filters;
 	}
 
-	public static function builder(Schema $schema, Table $baseTable)
+	public static function builder(Table $baseTable, string $name)
 	{
-		return new ResourceBuilder($schema, $baseTable);
+		return new ResourceBuilder($baseTable, $name);
+	}
+
+	public function table()
+	{
+		return $this->table;
 	}
 
 	/**
-	 * @return QueryGroup
+	 * @inheritdoc
 	 */
-	public function getQueryGroup()
+	public function name()
 	{
-		return $this->queryGroup;
+		return $this->name;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function availableFields()
+	{
+		return $this->fields;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function availableFilters()
+	{
+		return $this->filters;
 	}
 }

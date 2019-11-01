@@ -9,9 +9,9 @@ class EndsWith extends AbstractConstraint
 {
 	const NAME = 'EndsWith';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
 	{
-		return $queryBuilder->where($dbField, 'LIKE', '%'.$inputs[0]);
+		return $queryBuilder->where($field, 'LIKE', '%'.$inputs[0]);
 	}
 
 	public function requiredInputs()

@@ -34,9 +34,9 @@ abstract class DatabaseField
 		return $this->name;
 	}
 
-	public function alias($tableAlias)
+	public function alias()
 	{
-		return $tableAlias.'__'.$this->name();
+		return $this->name();
 	}
 
 	public function title($tableAlias)
@@ -44,11 +44,10 @@ abstract class DatabaseField
 		return ucwords(str_replace('_', ' ',$tableAlias.' '.$this->name()));
 	}
 
-	public function selectables(Table $table)
+	public function selectables()
 	{
-		if ($table->descendant()) {
-			return $this->selectableOptions();
-		}
+
+		return $this->selectableOptions();
 
 		return [new Standard()];
 	}

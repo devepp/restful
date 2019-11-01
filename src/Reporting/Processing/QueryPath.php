@@ -43,7 +43,7 @@ class QueryPath
 	 */
 	public function addTable(Table $table)
 	{
-		$this->tables->addTable($table);
+		$this->tables = $this->tables->addTable($table);
 	}
 
 

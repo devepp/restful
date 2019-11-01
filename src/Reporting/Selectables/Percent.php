@@ -35,4 +35,9 @@ class Percent extends AbstractSelectable
 		}
 		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		return 'SUM(IF('.$field.' != 0, 1, 1))/COUNT('.$field.') AS '.$alias.'_percent';
+	}
 }

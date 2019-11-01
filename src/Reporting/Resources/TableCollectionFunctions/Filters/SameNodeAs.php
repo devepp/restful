@@ -4,51 +4,30 @@ namespace App\Reporting\Resources\TableCollectionFunctions\Filters;
 
 use App\Reporting\Resources\Schema;
 use App\Reporting\Resources\Table;
+use App\Reporting\Resources\TableCollection;
 
 class SameNodeAs
 {
-	/** @var Schema */
-	private $schema;
 
 	/** @var Table */
 	private $compareTable;
 
+	/** @var TableCollection */
+	private $availableTables;
+
 	/**
-	 * RelatedTablesFilter constructor.
-	 * @param Schema $schema
+	 * SameNodeAs constructor.
 	 * @param Table $compareTable
+	 * @param TableCollection $availableTables
 	 */
-	public function __construct(Table $compareTable, Schema $schema)
+	public function __construct(Table $compareTable, TableCollection $availableTables)
 	{
 		$this->compareTable = $compareTable;
-		$this->schema = $schema;
+		$this->availableTables = $availableTables;
 	}
 
 	public function __invoke(Table $table)
 	{
-		$path = $this->schema->getRelationshipPath($this->compareTable->alias(), $table->alias());
-
-		if ($path) {
-			for ($i = 0; $i < count($path) - 1; $i++) {
-				$firstTableAlias = $path[$i];
-				$secondTableAlias = $path[$i + 1];
-
-				$firstTable = $this->schema->getTable($firstTableAlias);
-
-				if($firstTable && $firstTable->relatedTo($secondTableAlias) && $firstTable->hasOne($secondTableAlias) === false) {
-					return false;
-				}
-
-				$secondTable = $this->schema->getTable($secondTableAlias);
-
-				if ($secondTable && $secondTable->relatedTo($firstTableAlias) && $secondTable->hasOne($firstTableAlias)) {
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-		return false;
+		return $this->compareTable->sameNodeAs($table, $this->availableTables);
 	}
 }

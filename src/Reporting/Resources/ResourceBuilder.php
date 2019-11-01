@@ -2,77 +2,72 @@
 
 namespace App\Reporting\Resources;
 
+use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\Filters\Filter;
-use App\Reporting\Processing\QueryGroup;
 use App\Reporting\ReportField;
-use App\Reporting\Resources\TableCollectionFunctions\Filters\Exclude;
-use App\Reporting\Resources\TableCollectionFunctions\Filters\SameNodeAs;
+use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterInterface;
 
 class ResourceBuilder
 {
-	/** @var Schema */
-	private $schema;
-
 	/** @var Table */
-	private $baseResource;
-
-	/** @var TableCollection */
-	private $tables;
+	private $table;
+	/** @var string */
+	private $name;
 
 	/** @var ReportField[] */
-	private $fields;
+	private $fields = [];
 
 	/** @var Filter[] */
-	private $filters;
+	private $filters = [];
 
 	/**
 	 * ResourceBuilder constructor.
-	 * @param Schema $schema
-	 * @param $baseResourceAlias
+	 * @param Table $table
+	 * @param string $name
 	 */
-	public function __construct(Schema $schema, $baseResourceAlias)
+	public function __construct(Table $table, string $name)
 	{
-		$this->schema = $schema;
-		$this->baseResource = $this->schema->getTable($baseResourceAlias);
-		$this->tables = new TableCollection([$baseResourceAlias]);
+		$this->table = $table;
+		$this->name = $name;
 	}
 
 	public function build()
 	{
-		return new Resource($this->compileQueryGroups(), $this->fields, $this->filters);
+		return new Resource($this->table, $this->name, $this->fields, $this->filters);
 	}
 
-	public function withTable($tableAlias)
+	public function addReportField(ReportFieldInterface $field)
 	{
-		if ($this->tables->findFirstMatching([$tableAlias])) {
-			$this->tables->addTable($this->schema->getTable($tableAlias));
+		$this->fields[] = $field;
+	}
+
+	public function addFieldFromTable(Table $table, DatabaseField $dbField, $label)
+	{
+		$this->fields[] = new ReportField($table, $dbField, $label);
+	}
+
+	public function addDefaultFieldsFromTable(Table $table)
+	{
+		foreach ($table->getReportFields() as $field) {
+			$this->fields[] = $field;
 		}
 	}
 
-	private function compileQueryGroups()
+	public function addReportFilter(ReportFilterInterface $filter)
 	{
-		return $this->getQueryGroup($this->baseResource, $this->tables, $this->schema, []);
+		$this->filters[] = $filter;
 	}
 
-	/**
-	 * This could possibly be turned into a TableCollection reducer
-	 *
-	 * @param Table $root
-	 * @param TableCollection $tables
-	 * @param Schema $schema
-	 * @param array $subQueryGroups
-	 * @return QueryGroup
-	 */
-	private function getQueryGroup(Table $root, TableCollection $tables, Schema $schema, $subQueryGroups = [])
+	public function addFilterFromTable(Table $table, DatabaseField $dbField, $label)
 	{
-		$otherTables = $tables->filter(new SameNodeAs($root, $this->schema));
+		$this->fields[] = new Filter($table, $dbField, $label);
+	}
 
-		$leftOverTables = $tables->filter(new Exclude($otherTables));
-
-		if ($leftOverTables->count() > 0) {
-			$subQueryGroups = $this->getQueryGroup($leftOverTables->current(), $leftOverTables, $schema, $subQueryGroups);
+	public function addDefaultFiltersFromTable(Table $table)
+	{
+		foreach ($table->getReportFilters() as $filter) {
+			$this->filters[] = $filter;
 		}
-
-		return new QueryGroup($root, $otherTables, $subQueryGroups);
 	}
 }

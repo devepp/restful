@@ -35,4 +35,9 @@ class ListSelectable extends AbstractSelectable
 		}
 		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		return 'GROUP_CONCAT('.$field.') AS '.$alias.'_list';
+	}
 }

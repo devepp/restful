@@ -35,4 +35,9 @@ class Count extends AbstractSelectable
 		}
 		return $table->aggregateName().'_'.$this->fieldAlias($table, $field, true);
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		return 'COUNT('.$field.') AS '.$alias.'_count';
+	}
 }

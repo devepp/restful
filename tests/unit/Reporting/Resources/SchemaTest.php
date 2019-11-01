@@ -101,9 +101,10 @@ class SchemaTest extends TestCase
 		$expectedQueryGroup = new QueryGroup(
 			$table,
 			TableCollection::fromArray([$table, $parentTable, $grandParentTable]),
+			TableCollection::fromArray([$table]),
 			[
-				new QueryGroup($childTable, TableCollection::fromArray([$table, $childTable])),
-				new QueryGroup($grandChildTable, TableCollection::fromArray([$table, $childTable, $grandChildTable, $parentOfGrandChildTable])),
+				new QueryGroup($childTable, TableCollection::fromArray([$childTable]), TableCollection::fromArray([$table, $childTable])),
+				new QueryGroup($grandChildTable, TableCollection::fromArray([$grandChildTable, $parentOfGrandChildTable]), TableCollection::fromArray([$table, $childTable, $grandChildTable])),
 			]
 		);
 

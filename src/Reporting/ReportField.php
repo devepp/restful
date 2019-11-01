@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/4/2019
- * Time: 4:09 PM
- */
 
 namespace App\Reporting;
 
@@ -12,14 +6,16 @@ use App\Reporting\Resources\Table;
 use JsonSerializable;
 use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\Selectables\AbstractSelectable;
+use Psr\Http\Message\ServerRequestInterface;
 
-class ReportField implements JsonSerializable
+class ReportField implements JsonSerializable, ReportFieldInterface
 {
 	/** @var Table */
 	protected $table;
 	/** @var DatabaseField */
 	protected $field;
-
+	/** @var string */
+	protected $label;
 	/** @var AbstractSelectable[] */
 	protected $selectables;
 
@@ -27,12 +23,14 @@ class ReportField implements JsonSerializable
 	 * ReportField constructor.
 	 * @param Table $table
 	 * @param DatabaseField $field
+	 * @param null $label
 	 * @param null $selectable_overrides
 	 */
-	public function __construct(Table $table, DatabaseField $field, $selectable_overrides = null)
+	public function __construct(Table $table, DatabaseField $field, $label = null, $selectable_overrides = null)
 	{
 		$this->table = $table;
 		$this->field = $field;
+		$this->label = $label === null ? ucwords(str_replace('_', ' ', $this->field->name())) : $label;
 
 		if ($selectable_overrides === null) {
 			$this->selectables = $field->selectables();
@@ -51,9 +49,9 @@ class ReportField implements JsonSerializable
 		return [
 			'name' => $this->field->alias(),
 			'field_name' => $this->field->name(),
-			'table_alias' => $this->field->tableAlias(),
+			'table_alias' => $this->table->alias(),
 			'table' => $this->tableAsCategory(),
-			'label' => ucwords(str_replace('_', ' ', $this->field->name())),
+			'label' => $this->label(),
 			'options' => $this->selectables,
 			'type' => $this->type(),
 		];
@@ -67,6 +65,11 @@ class ReportField implements JsonSerializable
 	public function table()
 	{
 		return $this->table;
+	}
+
+	public function label()
+	{
+		return $this->label;
 	}
 
 	public function dbField()
@@ -83,7 +86,7 @@ class ReportField implements JsonSerializable
 
 	public function tableAlias()
 	{
-		return $this->field->tableAlias();
+		return $this->table->alias();
 	}
 
 	public function tableAsCategory()
@@ -100,33 +103,34 @@ class ReportField implements JsonSerializable
 		return $this->table->alias() == $table->alias();
 	}
 
-
-	public function selectableFields()
+	public function selected(ServerRequestInterface $request)
 	{
-		$selectable_fields = [];
+		$selectedFields = $request->getAttribute('selected_fields', []);
 
-		foreach ($this->selectables as $selectable) {
-			$selectable_fields[] = new SelectableField($selectable->fieldName($this->table, $this->field), $selectable->label($this->field));
+		foreach ($selectedFields as $selectedField) {
+			if ($selectedField['name'] === $this->name()) {
+				return true;
+			}
 		}
 
-		return $selectable_fields;
+		return false;
 	}
 
-
-	public function fieldHtml($table_alias_name)
+	public function selectField(ServerRequestInterface $request)
 	{
-		if ($this->selectable()) {
-			return '<label><input type="checkbox" name="' . $table_alias_name . '_' . $this->name . '" class="report_field_select">' . $this->label . '</label>';
+		$selectedFields = $request->getAttribute('selected_fields', []);
+
+		foreach ($selectedFields as $selectedField) {
+			if ($selectedField['name'] === $this->name()) {
+				return new SelectedField($this, AbstractSelectable::getSelectable($selectedField['type']), $selectedField['label']);
+			}
 		}
+
+		throw new \LogicException('field was not selected by request');
 	}
 
-	public function aggregateFieldHtml($table_alias_name)
+	public function requiresTable(Table $table)
 	{
-		if ($this->selectable()) {
-			return '<label><input type="checkbox" name="' . $table_alias_name . '_' . $this->name . '" class="report_field_select">' . $this->label . '</label>';
-		}
+		return $table->alias() === $this->table->alias();
 	}
-
-
-
 }

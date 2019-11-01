@@ -9,9 +9,9 @@ class Between extends AbstractConstraint
 {
 	const NAME = 'Between';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
 	{
-		return $queryBuilder->whereBetween($dbField, $inputs[0], $inputs[1]);
+		return $queryBuilder->whereBetween($field, $inputs[0], $inputs[1]);
 	}
 
 	public function requiredInputs()

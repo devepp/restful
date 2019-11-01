@@ -37,8 +37,6 @@ class FilterAndMap implements TableReducerInterface
 			}
 		}
 
-		$collectedTables->addTable($table);
-
-		return $collectedTables;
+		return $collectedTables->addTable($table);
 	}
 }

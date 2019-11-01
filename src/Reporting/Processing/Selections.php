@@ -5,10 +5,12 @@ namespace App\Reporting\Processing;
 use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\Form;
 use App\Reporting\Resources\Limit;
+use App\Reporting\Resources\ReportTemplateInterface;
 use App\Reporting\Selectables\AbstractSelectable;
 use App\Reporting\SelectedField;
 use App\Reporting\SelectedFilter;
 use App\Reporting\SelectionsInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Selections implements SelectionsInterface
 {
@@ -33,17 +35,29 @@ class Selections implements SelectionsInterface
 	}
 
 	/**
-	 * @param $input
-	 * @param Form $form
+	 * @param ServerRequestInterface $request
+	 * @param ReportTemplateInterface $reportTemplate
 	 * @return Selections
 	 */
-	public static function FromInput($input, Form $form)
+	public static function fromRequest(ServerRequestInterface $request, ReportTemplateInterface $reportTemplate)
 	{
-		$fields = self::getFields($input, $form);
-		$filters = self::getFilters($input, $form);
-		$limit = self::getLimit($input);
+		$selectedFields = [];
+		foreach ($reportTemplate->availableFields() as $field) {
+			if ($field->selected($request)) {
+				$selectedFields[] = $field->selectField($request);
+			}
+		}
 
-		return new self($fields, $filters, $limit);
+		$selectedFilters = [];
+		foreach ($reportTemplate->availableFilters() as $filter) {
+			if($filter->selected($request)) {
+				$selectedFilters[] = $filter->selectFilter($request);
+			}
+		}
+
+		$limit = Limit::fromRequestOrDefault($request);
+
+		return new self($selectedFields, $selectedFilters, $limit);
 	}
 
 	/**

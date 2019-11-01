@@ -23,4 +23,13 @@ class Standard extends AbstractSelectable
 	{
 		return $field->alias($table->alias());
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		if ($alias === null) {
+			return $field;
+		}
+
+		return $field.' '.$alias;
+	}
 }

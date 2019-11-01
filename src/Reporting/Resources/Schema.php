@@ -40,33 +40,23 @@ class Schema
 	 * @param string[] $tableAliases
 	 * @return TableCollection
 	 */
-	public function getTables($tableAliases)
+	public function getTables($tableAliases = null)
 	{
 		$tables = new TableCollection([]);
 		foreach ($tableAliases as $tableAlias) {
-			$tables->addTable($this->getTable($tableAlias));
+			$tables = $tables->addTable($this->getTable($tableAlias));
 		}
 
 		return $tables;
 	}
 
 	/**
-	 * @param $tableAlias
-	 * @param $otherTableAlias
-	 * @return RelationshipInterface
+	 * @return TableCollection
 	 */
-//	public function getRelationship($tableAlias, $otherTableAlias)
-//	{
-//		if ($tableAlias !== $otherTableAlias) {
-//			foreach ($this->relationships as $relationship) {
-//				if ($relationship->hasTables($tableAlias, $otherTableAlias)) {
-//					return $relationship;
-//				}
-//			}
-//		}
-//
-//		throw new \LogicException("Relationship does not exist for tables: `$tableAlias` and `$otherTableAlias`");
-//	}
+	public function getAllTables()
+	{
+		return $this->tables;
+	}
 
 	/**
 	 * @param $tableAlias
@@ -75,7 +65,10 @@ class Schema
 	 */
 	public function hasRelationship($tableAlias, $otherTableAlias)
 	{
-		$path = $this->getPath($tableAlias, $otherTableAlias, true);
+		$fromTable = $this->tables->getTable($tableAlias);
+		$toTable = $this->tables->getTable($otherTableAlias);
+
+		$path = $fromTable->pathTo($toTable, $this->tables);
 
 		if ($path) {
 			return true;
@@ -91,63 +84,16 @@ class Schema
 	 */
 	public function getRelationshipPath($tableAlias, $otherTableAlias)
 	{
-		$path = $this->getPath($tableAlias, $otherTableAlias);
+		$fromTable = $this->tables->getTable($tableAlias);
+		$toTable = $this->tables->getTable($otherTableAlias);
+
+		$path = $fromTable->pathTo($toTable, $this->tables);
 
 		if ($path) {
-			return $path;
+			return $path->aliases();
 		}
 
 		throw new \LogicException("Relationship does not exist for tables: `$tableAlias` and `$otherTableAlias`");
-	}
-
-	private function getPath($tableAlias, $otherTableAlias, $returnFirstPath = false, $pathSoFar = [])
-	{
-		if (empty($pathSoFar)) {
-			$pathSoFar[] = $tableAlias;
-		}
-
-		if ($tableAlias === $otherTableAlias) {
-			return $pathSoFar;
-		}
-
-		$currentTable = $this->tables->getTable($tableAlias);
-		$relatedTables = $this->tables->filter(new DirectlyRelatedTo($currentTable));
-		$possiblePaths = [];
-
-		foreach ($relatedTables as $relatedTable) {
-			if (!in_array($relatedTable->alias(), $pathSoFar)) {
-				$newPathSoFar = $pathSoFar;
-				$newPathSoFar[] = $relatedTable->alias();
-				$path = $this->getPath($relatedTable->alias(), $otherTableAlias, $returnFirstPath, $newPathSoFar);
-				if ($path) {
-					if ($returnFirstPath) {
-						return $path;
-					}
-					$possiblePaths[] = $path;
-				}
-			}
-		}
-
-		$shortestPath = null;
-		foreach ($possiblePaths as $possiblePath) {
-			if ($shortestPath === null) {
-				$shortestPath = $possiblePath;
-			}
-			$shortestPath = (count($shortestPath) < count($possiblePath)) ? $shortestPath : $possiblePath;
-		}
-
-		return $shortestPath;
-	}
-
-	private function getRelationships($tableAlias)
-	{
-
-		foreach ($this->relationships as $relationship) {
-			if ($relationship->hasTable($tableAlias)) {
-				$relationship;
-
-			}
-		}
 	}
 
 	/**
@@ -159,7 +105,7 @@ class Schema
 	 */
 	public function getQueryGroup(Table $root, TableCollection $tables)
 	{
-		$tablesInMainNode = $tables->filter(new SameNodeAs($root, $this));
+		$tablesInMainNode = $tables->filter(new SameNodeAs($root, $this->tables));
 
 		$remainingTables = $tables->filter(new Exclude($tablesInMainNode));
 
@@ -171,20 +117,18 @@ class Schema
 
 			$newNodeRoot = $remainingTables->current();
 
-			$path = $this->getRelationshipPath($root->alias(), $newNodeRoot->alias());
-			$pathTables = $this->getTables($path);
+			$pathTables = $root->pathTo($newNodeRoot, $this->tables);
 
-			$remainingTables = $pathTables->merge($remainingTables);
+//			$remainingTables = $pathTables->merge($remainingTables);
 
-			$tablesInThisNode = $remainingTables->filter(new SameNodeAs($newNodeRoot, $this));
+			$tablesInThisNode = $remainingTables->filter(new SameNodeAs($newNodeRoot, $this->tables));
+
+			$subQueryGroups[] = new QueryGroup($newNodeRoot, $tablesInThisNode, $pathTables, []);
 
 			$remainingTables = $remainingTables->filter(new Exclude($tablesInThisNode));
-
-			$subQueryGroups[] = new QueryGroup($newNodeRoot, $tablesInThisNode);
-
 			$remainingTablesCount = $remainingTables->count();
 		}
 
-		return new QueryGroup($root, $tablesInMainNode, $subQueryGroups);
+		return new QueryGroup($root, $tablesInMainNode, TableCollection::fromArray([$root]), $subQueryGroups);
 	}
 }

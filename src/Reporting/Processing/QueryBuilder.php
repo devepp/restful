@@ -190,7 +190,7 @@ class QueryBuilder
 
 		$filter_sql = [];
 		foreach ($selected_filters as $filter) {
-			$filter_sql[] = $filter->filterSql();
+			$filter_sql[] = $filter->filterQuery();
 		}
 
 		$sql = ' WHERE '.implode(' AND ', $filter_sql);

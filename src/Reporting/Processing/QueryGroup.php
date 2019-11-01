@@ -2,12 +2,18 @@
 
 namespace App\Reporting\Processing;
 
+use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
+use App\Reporting\FieldInterface;
+use App\Reporting\FilterInterface;
 use App\Reporting\Filters\Filter;
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;
+use App\Reporting\Resources\TableCollectionFunctions\Filters\Filter as TableFilter;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\DirectlyRelatedTo;
+use App\Reporting\Resources\TableCollectionFunctions\Maps\Map;
+use App\Reporting\Resources\TableCollectionFunctions\Sorts\Sort;
 use App\Reporting\Selectables\Standard;
 use App\Reporting\SelectedField;
 use App\Reporting\SelectedFilter;
@@ -18,53 +24,51 @@ class QueryGroup
 	/** @var Table */
 	protected $root;
 	/** @var TableCollection */
-	protected $tables;
+	protected $nodeTables;
+	/** @var TableCollection */
+	protected $pathTables;
 	/** @var QueryGroup[] */
 	protected $subQueryGroups;
 
 	/**
 	 * QueryGroup constructor.
 	 * @param Table $root
-	 * @param TableCollection $allTables
+	 * @param TableCollection $nodeTables
+	 * @param TableCollection $pathTables
 	 * @param QueryGroup[] $subQueryGroups
 	 */
-	public function __construct(Table $root, TableCollection $allTables, $subQueryGroups = [])
+	public function __construct(Table $root, TableCollection $nodeTables, TableCollection $pathTables, array $subQueryGroups = [])
 	{
 		$this->root = $root;
-		$this->tables = $allTables;
+		$this->nodeTables = $nodeTables;
+		$this->pathTables = $pathTables;
 		$this->subQueryGroups = $subQueryGroups;
 	}
+
 
 	/**
 	 * @param QueryBuilderFactoryInterface $queryBuilder
 	 * @param SelectionsInterface $selections
+	 * @param FieldInterface|null $groupBy
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections)
+	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections, DatabaseField $groupBy = null)
 	{
-		$qb = $queryBuilder->selectFrom($this->root->name().' '.$this->root->alias());
+		$fromTable = $this->fromTable();
+		$qb = $queryBuilder->selectFrom($fromTable->name().' '.$fromTable->alias());
 
-		$joined = new TableCollection([$this->root]);
-		foreach ($this->tables as $table) {
-			if ($table->alias() != $this->root->alias()) {
-				$related = $joined->filter(new DirectlyRelatedTo($table));
-				$qb = $qb->join($table, $table->joinCondition($related->first()), 'left');
-				$joined->addTable($table);
-			}
+		$qb = $this->joinTables($qb);
+
+		$qb = $this->joinSubQueryGroups($qb, $queryBuilder, $selections);
+
+		/** @var FieldInterface $field */
+		foreach ($this->applicableFields($selections->selectedFields()) as $field) {
+			$qb = $field->addToQuery($qb);
 		}
 
-		foreach ($this->subQueryGroups as $queryGroup) {
-			$qb = $qb->joinSubQuery($queryGroup->getQuery($queryBuilder, $selections), $queryGroup->alias(), $queryGroup->joinCondition($this->root->alias()), 'left');
-		}
-
-		/** @var SelectedField $field */
-		foreach ($selections->selectedFields() as $field) {
-			$qb = $field->fieldSql($qb, false);
-		}
-
-		/** @var SelectedFilter $filter */
+		/** @var FilterInterface $filter */
 		foreach ($selections->selectedFilters() as $filter) {
-			$qb = $filter->filterSql($qb);
+			$qb = $filter->filterQuery($qb);
 		}
 
 //		foreach ($this->)
@@ -89,17 +93,97 @@ class QueryGroup
 		return $this->root->alias();
 	}
 
-	public function __debugInfo()
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @return SelectQueryBuilderInterface
+	 */
+	private function joinTables(SelectQueryBuilderInterface $queryBuilder)
 	{
-		return [
-			'root' => $this->root->__debugInfo(),
-			'tables' => $this->tables->map(function (Table $table) {
-				return $table->__debugInfo();
-			}),
-			'subQueryGroups' => \array_map(function ($queryGroup){
-				return $queryGroup->__debugInfo();
-			}, $this->subQueryGroups)
-		];
+		$joined = new TableCollection([$this->fromTable()]);
+
+		foreach ($this->tablesToJoin() as $table) {
+			$relatedTable = $this->firstRelatedTable($table, $joined);
+
+			$queryBuilder = $queryBuilder->join($table, $table->joinCondition($relatedTable), 'left');
+
+			$joined = $joined->addTable($table);
+		}
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @param QueryBuilderFactoryInterface $queryBuilderFactory
+	 * @param SelectionsInterface $selections
+	 * @return SelectQueryBuilderInterface
+	 */
+	private function joinSubQueryGroups(SelectQueryBuilderInterface $queryBuilder, QueryBuilderFactoryInterface $queryBuilderFactory, SelectionsInterface $selections)
+	{
+		foreach ($this->subQueryGroups as $queryGroup) {
+//			$subQuery = $queryGroup->getQuery($queryBuilderFactory, $selections, $this->fromTable()->primaryKey());
+			$subQuery = $queryGroup->getQuery($queryBuilderFactory, $selections);
+			$primaryKeySelect = '`'.$this->fromTable()->alias().'`.`'.$this->fromTable()->primaryKey()->name().'` AS '.$this->fromTable()->alias().'__'.$this->fromTable()->primaryKey()->name();
+
+			$subQuery = $subQuery->select($primaryKeySelect);
+
+			$queryBuilder = $queryBuilder->joinSubQuery($subQuery, $queryGroup->alias(), $queryGroup->joinCondition($this->root->alias()), 'left');
+		}
+
+		return $queryBuilder;
+	}
+
+	/**
+	 * @param FieldInterface[] $selectedFields
+	 * @return FieldInterface[]
+	 */
+	private function applicableFields($selectedFields)
+	{
+		$applicableFields = [];
+
+		foreach ($selectedFields as $field) {
+			if ($this->fieldApplicable($field, $this->nodeTables)) {
+				$applicableFields[] = $field;
+			}
+		}
+		return $applicableFields;
+	}
+
+	private function fieldApplicable(FieldInterface $field, TableCollection $tables)
+	{
+		foreach ($tables as $table) {
+			if ($field->requiresTable($table)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private function fromTable()
+	{
+		return $this->pathTables->first();
+	}
+
+	private function tablesToJoin()
+	{
+		$tables = $this->pathTables->merge($this->nodeTables);
+
+		$sortedTables = $tables->sort(Sort::byDistanceTo($this->fromTable(), $tables));
+
+		return $sortedTables->filter(TableFilter::excludeTable($this->fromTable()));
+	}
+
+	private function firstRelatedTable(Table $tableToFindRelationshipsFor, TableCollection $possibleRelations)
+	{
+		$related = $possibleRelations->filter(TableFilter::byDirectRelationTo($tableToFindRelationshipsFor));
+
+		if ($related->empty()) {
+			$tableAliases = implode(', ', $possibleRelations->map(Map::toAliases()));
+			throw new \LogicException('Table '.$tableToFindRelationshipsFor->alias().' does not have any direct relationships with '.$tableAliases);
+		}
+
+		return $related->first();
 	}
 
 
@@ -118,7 +202,7 @@ class QueryGroup
 
 	public function addTable(Table $table)
 	{
-		$this->tables->addTable($table);
+		$this->tables = $this->tables->addTable($table);
 	}
 
 	public function hasTable(Table $table)
@@ -251,28 +335,6 @@ class QueryGroup
 		}
 
 		return $table_list;
-	}
-
-	/**
-	 * @param SelectedField[] $selected_fields
-	 * @return SelectedField[]
-	 */
-	public function applicableFields($selected_fields)
-	{
-		$applicable_fields = [];
-
-		if ($this->isPrimary()) {
-			return $selected_fields;
-		}
-
-		$applicable_fields[] = $this->subQueryRequiredFields();
-
-		foreach ($selected_fields as $field) {
-			if ($this->tables->hasAlias($field->table())) {
-				$applicable_fields[] = $field;
-			}
-		}
-		return $applicable_fields;
 	}
 
 	/**

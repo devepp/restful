@@ -4,7 +4,6 @@ namespace App\Reporting;
 
 interface SelectionsInterface
 {
-
 	/** return FieldInterface[] */
 	public function selectedFields();
 

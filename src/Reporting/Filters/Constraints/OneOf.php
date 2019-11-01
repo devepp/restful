@@ -9,9 +9,9 @@ class OneOf extends AbstractConstraint
 {
 	const NAME = 'OneOf';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
 	{
-		return $queryBuilder->whereIn($dbField, $inputs[0]);
+		return $queryBuilder->whereIn($field, $inputs[0]);
 	}
 
 	public function requiredInputs()

@@ -9,9 +9,9 @@ class NotContains extends AbstractConstraint
 {
 	const NAME = 'NotContains';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
 	{
-		return $queryBuilder->where($dbField, 'NOT LIKE', '%'.$inputs[0].'$');
+		return $queryBuilder->where($field, 'NOT LIKE', '%'.$inputs[0].'$');
 	}
 
 	public function requiredInputs()

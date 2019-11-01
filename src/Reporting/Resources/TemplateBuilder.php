@@ -6,6 +6,8 @@ namespace App\Reporting\Resources;
 
 use App\Reporting\Filters\Filter;
 use App\Reporting\ReportField;
+use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterInterface;
 
 class TemplateBuilder
 {
@@ -33,14 +35,14 @@ class TemplateBuilder
 		return new ReportTemplate($this->resource, $this->reportFields, $this->reportFilters, $this->defaultFields, $this->defaultFilters);
 	}
 
-	public function withReportField(ReportField $field)
+	public function withReportField(ReportFieldInterface $field)
 	{
 		$clone  = clone $this;
 		$clone->reportFields[$field->name()] = $field;
 		return $clone;
 	}
 
-	public function withReportFilter(Filter $filter)
+	public function withReportFilter(ReportFilterInterface $filter)
 	{
 		$clone  = clone $this;
 		$clone->reportFilters[$filter->name()] = $filter;

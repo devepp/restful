@@ -49,7 +49,7 @@ class SchemaBuilder
 	public function addTable(Table $table)
 	{
 		$clone = clone $this;
-		$clone->tables->addTable($table);
+		$clone->tables = $clone->tables->addTable($table);
 		return $clone;
 	}
 }

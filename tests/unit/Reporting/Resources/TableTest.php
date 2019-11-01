@@ -5,11 +5,14 @@ namespace Tests\Unit\Reporting\Resources;
 use App\Reporting\DatabaseFields\StringField;
 use App\Reporting\Resources\Relationships\ManyToOne;
 use App\Reporting\Resources\Table;
+use App\Reporting\Resources\TableCollection;
 use App\Reporting\Resources\TableName;
 use PHPUnit\Framework\TestCase;
+use Tests\Doubles\GetTable;
 
 class TableTest extends TestCase
 {
+	use GetTable;
 
 	public function testToString()
 	{
@@ -104,49 +107,34 @@ class TableTest extends TestCase
 //		return $relationship->tableHasOne($this->alias(), $tableAlias);
 //	}
 
+	public function testPathTo()
+	{
+		$table1 = $this->getTable('table1');
+		$table2 = $this->getTable('table2', ['manyToOne' => 'table1']);
+		$table3 = $this->getTable('table3', ['manyToOne' => 'table2']);
+
+		$tableCollection = TableCollection::fromArray([$table1, $table2, $table3]);
+
+		$this->assertEquals($tableCollection, $table1->pathTo($table3, $tableCollection));
+	}
+
+	public function testSameNodeAs()
+	{
+		$table1 = $this->getTable('table1');
+		$table2 = $this->getTable('table2', ['manyToOne' => 'table1']);
+
+		$tableCollection = TableCollection::fromArray([$table1, $table2]);
+
+		$this->assertTrue($table2->sameNodeAs($table1, $tableCollection));
+	}
+
 	public function testJoinCondition()
 	{
 		$table1 = $this->getTable('table1');
-		$table2 = $this->getTable('table2', [], ['table1']);
+		$table2 = $this->getTable('table2', ['manyToOne' => 'table1']);
 
 		$this->assertEquals('table2Alias.table1_id = table1Alias.id', $table1->joinCondition($table2));
 
 		$this->assertEquals('table2Alias.table1_id = table1Alias.id', $table2->joinCondition($table1));
-	}
-
-	/**
-	 * @param $name
-	 * @param array $fieldNames
-	 * @param array $relationshipTableNames
-	 * @return Table
-	 */
-	private function getTable($name, $fieldNames = [], $relationshipTableNames = [])
-	{
-		$tableName = $this->getTableName($name);
-		$fields = [];
-		foreach ($fieldNames as $fieldName) {
-			$fields = new StringField($fieldName);
-		}
-
-		$relationships = [];
-		foreach ($relationshipTableNames as $relationshipTableName) {
-			$relationshipName = $this->getTableName($relationshipTableName);
-			$relationships[] = new ManyToOne($tableName, $relationshipName, $tableName->alias().'.'.$relationshipName->name().'_id = '.$relationshipName->alias().'.id');
-		}
-
-
-		$table = new Table($this->getTableName($name), $fields, $relationships);
-
-		return $table;
-	}
-
-	private function getField($name)
-	{
-
-	}
-
-	private function getTableName($name)
-	{
-		return new TableName($name, $name.'Alias');
 	}
 }

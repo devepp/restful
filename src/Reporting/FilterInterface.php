@@ -2,12 +2,13 @@
 
 namespace App\Reporting;
 
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+
 interface FilterInterface
 {
-	/** return string */
-	public function name();
-	/** return string */
-	public function relationship();
-	/** return string */
-	public function label();
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function filterQuery(SelectQueryBuilderInterface $queryBuilder);
 }

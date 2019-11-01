@@ -8,41 +8,56 @@ use App\Reporting\Resources\TableCollection;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\DirectlyRelatedTo;
 use App\Reporting\Resources\TableCollectionFunctions\TableReducerInterface;
 
-class PathTo implements TableReducerInterface
+class PathTo
 {
-	/** @var Schema */
-	private $schema;
-	/** @var Table[] */
-	private $tables;
 
 	/**
-	 * PathTo constructor.
-	 * @param Schema $schema
-	 * @param $tables
+	 * @param Table $pathFrom
+	 * @param Table $pathTo
+	 * @param TableCollection $availableTables
+	 * @param TableCollection|null $pathSoFar
+	 * @return TableCollection|null
+	 * @throws \Exception
 	 */
-	public function __construct(Schema $schema, $tables)
+	public function __invoke(Table $pathFrom, Table $pathTo, TableCollection $availableTables, TableCollection $pathSoFar = null)
 	{
-		$this->schema = $schema;
-		$this->tables = $tables;
-	}
-
-
-	public function __invoke(TableCollection $collectedTables, Table $table)
-	{
-		//TODO make sure this works or fix it
-		throw new \Exception('may not be suitable for production yet');
-
-		if ($collectedTables->hasTable($table)) {
-			return $collectedTables;
+		if ($pathSoFar === null) {
+			$pathSoFar = new TableCollection();
 		}
 
-		$relatedCollectedTables = $collectedTables->filter(new DirectlyRelatedTo($this->schema, $table));
-
-		if ($relatedCollectedTables->count() > 0) {
-			$collectedTables->addTable($table);
+		if (!$pathSoFar->hasTable($pathFrom)) {
+			$pathSoFar = $pathSoFar->addTable($pathFrom);
 		}
 
-		return $collectedTables->reduce(new PathTo($this->schema, $collectedTables), $this->tables);
+		if ($pathFrom->alias() === $pathTo->alias()) {
+			return $pathSoFar;
+		}
+
+		$relatedTables = $availableTables->filter(new DirectlyRelatedTo($pathFrom));
+		$possiblePaths = [];
+
+		foreach ($relatedTables as $relatedTable) {
+			if (!$pathSoFar->hasTable($relatedTable)) {
+				$pathFinder = new PathTo();
+				$path = $pathFinder($relatedTable, $pathTo, $availableTables, $pathSoFar);
+				if ($path) {
+					$possiblePaths[] = $path;
+				}
+			}
+		}
+
+		$shortestPath = null;
+		/** @var TableCollection $possiblePath */
+		foreach ($possiblePaths as $possiblePath) {
+			if ($shortestPath === null) {
+				$shortestPath = $possiblePath;
+			} else {
+				/** @var TableCollection $shortestPath */
+				$shortestPath = ($shortestPath->count() < $possiblePath->count()) ? $shortestPath : $possiblePath;
+			}
+		}
+
+		return $shortestPath;
 	}
 
 }

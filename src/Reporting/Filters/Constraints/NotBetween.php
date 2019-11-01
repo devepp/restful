@@ -9,9 +9,9 @@ class NotBetween extends AbstractConstraint
 {
 	const NAME = 'NotBetween';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
 	{
-		$queryBuilder->whereNotBetween($dbField, $inputs[0], $inputs[1]);
+		$queryBuilder->whereNotBetween($field, $inputs[0], $inputs[1]);
 	}
 
 	public function requiredInputs()

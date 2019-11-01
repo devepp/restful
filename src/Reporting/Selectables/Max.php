@@ -35,4 +35,9 @@ class Max extends AbstractSelectable
 		}
 		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		return 'MAX('.$field.') AS '.$alias.'_max';
+	}
 }

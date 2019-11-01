@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/17/2019
- * Time: 11:17 AM
- */
 
 namespace App\Reporting\Resources;
 
-use Iterator;
+use SeekableIterator;
+use OutOfBoundsException;
+use usort;
 
-class TableCollection implements Iterator
+class TableCollection implements SeekableIterator
 {
 	private $position = 0;
 
@@ -28,7 +24,7 @@ class TableCollection implements Iterator
 	{
 		$this->position = 0;
 		foreach ($tables as $table) {
-			$this->addTable($table);
+			$this->indexTable($table);
 		}
 	}
 
@@ -67,6 +63,15 @@ class TableCollection implements Iterator
 		$this->position = 0;
 	}
 
+	public function seek($position)
+	{
+		if (!isset($this->aliases[$position])) {
+			throw new OutOfBoundsException("invalid seek position ($position)");
+		}
+
+		$this->position = $position;
+	}
+
 	/**
 	 * @return Table
 	 */
@@ -91,11 +96,21 @@ class TableCollection implements Iterator
 		return count($this->tables);
 	}
 
+	/**
+	 * @return bool
+	 */
+	public function empty()
+	{
+		return empty($this->tables);
+	}
 
 	public function addTable(Table $table)
 	{
-		$this->tables[$table->alias()] = $table;
-		$this->aliases = array_keys($this->tables);
+		$clone = clone $this;
+
+		$clone->indexTable($table);
+
+		return $clone;
 	}
 
 	/**
@@ -122,6 +137,11 @@ class TableCollection implements Iterator
 		return isset($this->tables[$table_alias]);
 	}
 
+	public function aliases()
+	{
+		return $this->aliases;
+	}
+
 	public function hasTable(Table $table)
 	{
 		return $this->hasAlias($table->alias());
@@ -133,7 +153,7 @@ class TableCollection implements Iterator
 	public function mergeTables($tables)
 	{
 		foreach ($tables as $table) {
-			$this->addTable($table);
+			$this->indexTable($table);
 		}
 	}
 
@@ -159,6 +179,13 @@ class TableCollection implements Iterator
 		}
 	}
 
+	public function sort(callable $sortFunction)
+	{
+		$tables = $this->tables;
+		usort($tables, $sortFunction);
+		return self::fromArray($tables);
+	}
+
 	public function map(callable $mapFunction)
 	{
 		return array_map($mapFunction, $this->tables);
@@ -172,6 +199,12 @@ class TableCollection implements Iterator
 	public function reduce(callable $reducingFunction, $initialValue = null)
 	{
 		return array_reduce($this->tables, $reducingFunction, $initialValue);
+	}
+
+	private function indexTable(Table $table)
+	{
+		$this->tables[$table->alias()] = $table;
+		$this->aliases = array_keys($this->tables);
 	}
 
 }

@@ -9,28 +9,28 @@ use App\Reporting\Resources\Table;
 use App\Reporting\Selectables\AbstractSelectable;
 use JsonSerializable;
 
-class SelectedField implements JsonSerializable
+class SelectedField implements FieldInterface, JsonSerializable
 {
-	/** @var DatabaseField */
+	/** @var ReportFieldInterface */
 	protected $field;
-
-	/** @var Table */
-	protected $table;
 
 	/** @var AbstractSelectable */
 	protected $selectable;
 
+	/** @var string */
+	protected $label;
+
 	/**
 	 * SelectedField constructor.
-	 * @param Table $table
-	 * @param DatabaseField $dbField
+	 * @param ReportFieldInterface $field
 	 * @param AbstractSelectable $selectable
+	 * @param string $label
 	 */
-	public function __construct(Table $table, DatabaseField $dbField, AbstractSelectable $selectable)
+	public function __construct(ReportFieldInterface $field, AbstractSelectable $selectable, string $label)
 	{
-		$this->table = $table;
-		$this->field = $dbField;
+		$this->field = $field;
 		$this->selectable = $selectable;
+		$this->label = $label;
 	}
 
 	/**
@@ -38,13 +38,23 @@ class SelectedField implements JsonSerializable
 	 */
 	public function jsonSerialize()
 	{
+		$jsonData = $this->field->jsonSerialize();
+
+		$jsonData['type'] = $this->selectable->name();
+		$jsonData['label'] = $this->label;
+
+		return $jsonData;
+	}
+
+	public function __debugInfo()
+	{
 		return [
-			'name' => $this->name(),
-			'alias' => $this->fieldAlias(false),
-			'title' => $this->title(),
-			'label' => $this->label(),
+			'field' => $this->field,
+			'selectable' => $this->selectable->name(),
+			'label' => $this->label,
 		];
 	}
+
 
 	/**
 	 * @return string
@@ -59,7 +69,7 @@ class SelectedField implements JsonSerializable
 	 */
 	public function label()
 	{
-		return $this->field->alias();
+		return $this->label;
 	}
 
 	/**
@@ -84,16 +94,27 @@ class SelectedField implements JsonSerializable
 		return $this->field->tableAlias();
 	}
 
+	public function addToQuery(SelectQueryBuilderInterface $queryBuilder)
+	{
+		$selectField = $this->selectable->selectField('`'.$this->field->tableAlias().'`.`'.$this->field->name().'`');
+		return $queryBuilder->select($selectField);
+	}
+
+	public function requiresTable(Table $table)
+	{
+		return $this->field->requiresTable($table);
+	}
+
 
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
 	 * @param $subQueryGroup
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function fieldSql(SelectQueryBuilderInterface $queryBuilder, $subQueryGroup)
-	{
-		return $queryBuilder->select($this->selectable->fieldSql($this->table, $this->field, $subQueryGroup));
-	}
+//	public function fieldSql(SelectQueryBuilderInterface $queryBuilder, $subQueryGroup)
+//	{
+//		return $queryBuilder->select($this->selectable->fieldSql($this->table, $this->field, $subQueryGroup));
+//	}
 
 
 	/**

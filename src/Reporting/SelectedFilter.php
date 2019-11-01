@@ -14,10 +14,10 @@ use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\Selectables\AbstractSelectable;
 use JsonSerializable;
 
-class SelectedFilter implements JsonSerializable
+class SelectedFilter implements FilterInterface, JsonSerializable
 {
-	/** @var DatabaseField */
-	protected $field;
+	/** @var ReportFilterInterface */
+	protected $filter;
 
 	/** @var string */
 	protected $label;
@@ -30,13 +30,13 @@ class SelectedFilter implements JsonSerializable
 
 	/**
 	 * SelectedFilter constructor.
-	 * @param DatabaseField $field
+	 * @param ReportFilterInterface $filter
 	 * @param AbstractConstraint $constraint
 	 * @param array $inputs
 	 */
-	public function __construct(DatabaseField $field, AbstractConstraint $constraint, $inputs = [])
+	public function __construct(ReportFilterInterface $filter, AbstractConstraint $constraint, $inputs = [])
 	{
-		$this->field = $field;
+		$this->filter = $filter;
 		$this->constraint = $constraint;
 		$this->inputs = $inputs;
 	}
@@ -84,7 +84,7 @@ class SelectedFilter implements JsonSerializable
 	 * @param SelectQueryBuilderInterface $queryBuilder
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder)
+	public function filterQuery(SelectQueryBuilderInterface $queryBuilder)
 	{
 		return $this->constraint->filterSql($queryBuilder, $this->field, $this->inputs);
 	}

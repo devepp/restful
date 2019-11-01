@@ -3,10 +3,15 @@
 namespace App\Reporting\Filters;
 
 use App\Reporting\DatabaseFields\DatabaseField;
+use App\Reporting\FilterInterface;
+use App\Reporting\Filters\Constraints\AbstractConstraint;
+use App\Reporting\ReportFilterInterface;
 use App\Reporting\Resources\Table;
+use App\Reporting\SelectedFilter;
 use JsonSerializable;
+use Psr\Http\Message\ServerRequestInterface;
 
-class Filter implements JsonSerializable
+class Filter implements JsonSerializable, ReportFilterInterface
 {
 	/** @var Table */
 	protected $table;
@@ -78,5 +83,33 @@ class Filter implements JsonSerializable
 		return $this->table->alias();
 	}
 
+	public function selected(ServerRequestInterface $request)
+	{
+		$selectedFilters = $request->getAttribute('selected_filters', []);
+
+		foreach ($selectedFilters as $selectedFilter) {
+			if ($selectedFilter['name'] === $this->name()) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public function selectFilter(ServerRequestInterface $request)
+	{
+		$selectedFilters = $request->getAttribute('selected_filters', []);
+
+		foreach ($selectedFilters as $selectedFilter) {
+			if ($selectedFilter['name'] === $this->name()) {
+				$constraint = AbstractConstraint::getConstraint($selectedFilter['constraint']['name']);
+				$inputs = $constraint->inputArrayFromRequestData($selectedFilter['constraint']);
+
+				return new SelectedFilter($this, $constraint, $inputs);
+			}
+		}
+
+		throw new \LogicException('filter was not selected by request');
+	}
 
 }

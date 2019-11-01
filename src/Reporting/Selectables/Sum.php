@@ -35,4 +35,9 @@ class Sum extends AbstractSelectable
 		}
 		return $field->tableAggregateAlias().'_'.$this->fieldAlias($field, true);
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		return 'SUM(IFNULL('.$field.', 0)) AS '.$alias.'_sum';
+	}
 }

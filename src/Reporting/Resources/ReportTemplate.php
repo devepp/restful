@@ -3,34 +3,23 @@
 
 namespace App\Reporting\Resources;
 
-
-class ReportTemplate
+class ReportTemplate implements ReportTemplateInterface
 {
-	private $resource;
+	/** @var ResourceInterface */
+	private $baseResource;
 
-	private $reportFields;
-
-	private $reportFilters;
-
-	private $defaultFields;
-
-	private $defaultFilters;
+	/** @var ResourceInterface[] */
+	private $resources;
 
 	/**
 	 * ReportTemplate constructor.
-	 * @param $resource
-	 * @param $reportFields
-	 * @param $reportFilters
-	 * @param $defaultFields
-	 * @param $defaultFilters
+	 * @param ResourceInterface $baseResource
+	 * @param ResourceInterface[] $resources
 	 */
-	public function __construct($resource, $reportFields, $reportFilters, $defaultFields, $defaultFilters)
+	public function __construct(ResourceInterface $baseResource, array $resources)
 	{
-		$this->resource = $resource;
-		$this->reportFields = $reportFields;
-		$this->reportFilters = $reportFilters;
-		$this->defaultFields = $defaultFields;
-		$this->defaultFilters = $defaultFilters;
+		$this->baseResource = $baseResource;
+		$this->resources = $resources;
 	}
 
 	public static function builder($resource)
@@ -38,46 +27,61 @@ class ReportTemplate
 		return new TemplateBuilder($resource);
 	}
 
-	/**
-	 * @return mixed
-	 */
-	public function getResource()
+	public function availableRelatedResources()
 	{
-		return $this->resource;
+		return $this->resources;
+	}
+
+	public function nestedFields()
+	{
+		$fields = [];
+		foreach ($this->resources as $resource) {
+			$fields[$resource->name()] = [
+				'name' => $resource->name(),
+				'fields' => $resource->availableFields(),
+			];
+		}
+
+		return $fields;
 	}
 
 	/**
-	 * @return mixed
+	 * @inheritdoc
 	 */
-	public function getReportFields()
+	public function availableFields()
 	{
-		return $this->reportFields;
+		$fields = [];
+		foreach ($this->resources as $resource) {
+			$fields[] = $resource->availableFields();
+		}
+
+		return $fields;
+	}
+
+	public function nestedFilters()
+	{
+		$filters = [];
+		foreach ($this->resources as $resource) {
+			$filters[$resource->name()] = [
+				'name' => $resource->name(),
+				'filters' => $resource->availableFilters(),
+			];
+		}
+
+		return $filters;
 	}
 
 	/**
-	 * @return mixed
+	 * @inheritdoc
 	 */
-	public function getReportFilters()
+	public function availableFilters()
 	{
-		return $this->reportFilters;
+		$filters = [];
+		foreach ($this->resources as $resource) {
+			$filters[] = $resource->availableFilters();
+		}
+
+		return $filters;
 	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getDefaultFields()
-	{
-		return $this->defaultFields;
-	}
-
-	/**
-	 * @return mixed
-	 */
-	public function getDefaultFilters()
-	{
-		return $this->defaultFilters;
-	}
-
-
 
 }

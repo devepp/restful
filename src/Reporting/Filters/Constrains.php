@@ -15,11 +15,11 @@ interface Constrains extends JsonSerializable
 
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
-	 * @param DatabaseField $dbField
+	 * @param string $field
 	 * @param array $inputs
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = []);
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = []);
 
 	/**
 	 * @return string
@@ -30,4 +30,10 @@ interface Constrains extends JsonSerializable
 	 * @return int
 	 */
 	public function requiredInputs();	//return int - number of inputs required by constraint
+
+	/**
+	 * @param array $constraintData
+	 * @return array
+	 */
+	public function inputArrayFromRequestData($constraintData);
 }

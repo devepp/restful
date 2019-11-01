@@ -2,12 +2,26 @@
 
 namespace App\Reporting;
 
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use App\Reporting\Resources\Table;
+
 interface FieldInterface
 {
-	/** return string */
-	public function name();
-	/** return string */
-	public function relationship();
-	/** return string */
-	public function label();
+	/**
+	 * @param SelectQueryBuilderInterface $queryBuilder
+	 * @return SelectQueryBuilderInterface
+	 */
+	public function addToQuery(SelectQueryBuilderInterface $queryBuilder);
+
+	/**
+	 * @param Table $table
+	 * @return bool
+	 */
+	public function requiresTable(Table $table);
+
+
+//	public function addToSubQuery(SelectQueryBuilderInterface $queryBuilder);
+//
+//
+//	public function addToOuterQuery(SelectQueryBuilderInterface $queryBuilder);
 }

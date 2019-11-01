@@ -27,12 +27,9 @@ abstract class AbstractConstraint implements Constrains
 	];
 
 	/**
-	 * @param SelectQueryBuilderInterface $queryBuilder
-	 * @param DatabaseField $dbField
-	 * @param array $inputs
-	 * @return SelectQueryBuilderInterface
+	 * @inheritdoc
 	 */
-	abstract public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = []);
+	abstract public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = []);
 
 	/**
 	 * @return string
@@ -43,6 +40,8 @@ abstract class AbstractConstraint implements Constrains
 	 * @return int
 	 */
 	abstract public function requiredInputs();	//return int - number of inputs required by constraint
+
+
 
 	/**
 	 * @param $name
@@ -78,5 +77,16 @@ abstract class AbstractConstraint implements Constrains
 	public function name()
 	{
 		return static::NAME;
+	}
+
+	public function inputArrayFromRequestData($constraintData)
+	{
+		$inputs = [];
+
+		for ($i = 0; $i < $this->requiredInputs(); $i++) {
+			$inputs[] = $constraintData['input_'.($i+1)];
+		}
+
+		return $inputs;
 	}
 }

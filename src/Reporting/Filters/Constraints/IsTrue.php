@@ -9,9 +9,9 @@ class IsTrue extends AbstractConstraint
 {
 	const NAME = 'Is True';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, DatabaseField $dbField, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
 	{
-		return $queryBuilder->where($dbField, '=', 1);
+		return $queryBuilder->where($field, '=', 1);
 	}
 
 	public function requiredInputs()

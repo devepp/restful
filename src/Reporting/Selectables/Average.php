@@ -29,4 +29,11 @@ class Average extends AbstractSelectable
 		}
 		return $table->aggregateName().'_'.$this->fieldAlias($table, $field, true);
 	}
+
+	public function selectField(string $field, string $alias = null)
+	{
+		return 'AVG('.$field.') AS '.$alias.'_average';
+	}
+
+
 }
