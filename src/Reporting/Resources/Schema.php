@@ -3,7 +3,6 @@
 namespace App\Reporting\Resources;
 
 use App\Reporting\Processing\QueryGroup;
-use App\Reporting\Resources\TableCollectionFunctions\Filters\DirectlyRelatedTo;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\Exclude;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\SameNodeAs;
 
@@ -118,8 +117,6 @@ class Schema
 			$newNodeRoot = $remainingTables->current();
 
 			$pathTables = $root->pathTo($newNodeRoot, $this->tables);
-
-//			$remainingTables = $pathTables->merge($remainingTables);
 
 			$tablesInThisNode = $remainingTables->filter(new SameNodeAs($newNodeRoot, $this->tables));
 

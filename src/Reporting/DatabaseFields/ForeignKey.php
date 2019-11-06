@@ -59,7 +59,7 @@ class ForeignKey extends DatabaseField
 
 	public function useAsFilter()
 	{
-		return false;
+		return true;
 	}
 
 	public function formatParameter($parameter, $prepend = null, $append = null)

@@ -39,35 +39,86 @@ class ResourceBuilder
 
 	public function addReportField(ReportFieldInterface $field)
 	{
-		$this->fields[] = $field;
+		$clone = clone $this;
+		$clone->fields[] = $field;
+		return $clone;
 	}
 
 	public function addFieldFromTable(Table $table, DatabaseField $dbField, $label)
 	{
-		$this->fields[] = new ReportField($table, $dbField, $label);
+		$clone = clone $this;
+		$clone->fields[] = new ReportField($table, $dbField, $label);
+		return $clone;
 	}
 
 	public function addDefaultFieldsFromTable(Table $table)
 	{
+		$clone = clone $this;
 		foreach ($table->getReportFields() as $field) {
-			$this->fields[] = $field;
+			$clone->fields[] = $field;
 		}
+		return $clone;
 	}
 
 	public function addReportFilter(ReportFilterInterface $filter)
 	{
-		$this->filters[] = $filter;
+		$clone = clone $this;
+		$clone->filters[] = $filter;
+		return $clone;
 	}
 
 	public function addFilterFromTable(Table $table, DatabaseField $dbField, $label)
 	{
-		$this->fields[] = new Filter($table, $dbField, $label);
+		$clone = clone $this;
+		$clone->fields[] = new Filter($table, $dbField, $label);
+		return $clone;
 	}
 
 	public function addDefaultFiltersFromTable(Table $table)
 	{
+		$clone = clone $this;
 		foreach ($table->getReportFilters() as $filter) {
-			$this->filters[] = $filter;
+			$clone->filters[] = $filter;
 		}
+		return $clone;
+	}
+
+	public function excludeFieldFromTable(Table $table, DatabaseField $dbField, $label)
+	{
+		$field = new ReportField($table, $dbField, $label);
+
+		$clone = clone $this;
+		for ($i = 0; $i < count($clone->fields); $i++) {
+			$currentField = $clone->fields[$i];
+			if ($field->name() === $currentField->name()) {
+				unset($clone->fields[$i]);
+			}
+		}
+
+		return $clone;
+	}
+
+	public function excludeFilterFromTable(Table $table, DatabaseField $dbField, $label)
+	{
+		$filter = new Filter($table, $dbField, $label);
+
+		$clone = clone $this;
+		for ($i = 0; $i < count($clone->filters); $i++) {
+			$currentFilter = $clone->filters[$i];
+			if ($filter->name() === $currentFilter->name()) {
+				unset($clone->filters[$i]);
+			}
+		}
+
+		return $clone;
+	}
+
+	public function copyResource(Resource $resource)
+	{
+		$clone  = clone $this;
+		foreach ($resource->availableFields() as $field) {
+			$clone->fields[] = $field;
+		}
+		return $clone;
 	}
 }

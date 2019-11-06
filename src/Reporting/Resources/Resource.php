@@ -2,9 +2,10 @@
 
 namespace App\Reporting\Resources;
 
-
+use App\Reporting\Processing\Selections;
 use App\Reporting\ReportFieldInterface;
 use App\Reporting\ReportFilterInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class Resource implements ResourceInterface
 {
@@ -38,6 +39,19 @@ class Resource implements ResourceInterface
 	public static function builder(Table $baseTable, string $name)
 	{
 		return new ResourceBuilder($baseTable, $name);
+	}
+
+	public static function builderFromResource(ResourceInterface $resource)
+	{
+		$resourceBuilder = new ResourceBuilder($resource->table(), $resource->name());
+		foreach ($resource->availableFields() as $field) {
+			$resourceBuilder->addReportField($field);
+		}
+		foreach ($resource->availableFilters() as $filter) {
+			$resourceBuilder->addReportFilter($filter);
+		}
+
+		return $resourceBuilder;
 	}
 
 	public function table()

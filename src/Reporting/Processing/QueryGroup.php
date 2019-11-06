@@ -73,6 +73,16 @@ class QueryGroup
 		return $qb;
 	}
 
+	public function alias()
+	{
+		return $this->root->alias().'_aggregate';
+	}
+
+	public function joinCondition()
+	{
+		return $this->alias().'.'.$this->fromPrimaryKeyAlias().' = '.$this->fromTable()->alias().'.'.$this->fromPrimaryKeyName();
+	}
+
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
 	 * @param FieldInterface[] $selectedFields
@@ -175,16 +185,6 @@ class QueryGroup
 		}
 
 		return $related->first();
-	}
-
-	public function alias()
-	{
-		return $this->root->alias().'_aggregate';
-	}
-
-	public function joinCondition()
-	{
-		return $this->alias().'.'.$this->fromPrimaryKeyAlias().' = '.$this->fromTable()->alias().'.'.$this->fromPrimaryKeyName();
 	}
 
 	private function fromTable()

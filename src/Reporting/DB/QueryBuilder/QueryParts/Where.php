@@ -66,22 +66,4 @@ class Where implements WhereInterface
 	{
 		return [$this->value];
 	}
-
-
-
-//	/**
-//	 * @return array
-//	 */
-//	public function getParameter()
-//	{
-//		return $this->getValue();
-//	}
-//
-//	/**
-//	 * @return mixed
-//	 */
-//	public function getParameterKey()
-//	{
-//		return '?';
-//	}
 }

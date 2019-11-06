@@ -2,6 +2,8 @@
 
 namespace Tests\Functional;
 
+use App\Reporting\Resources\ReportTemplate;
+use App\Reporting\Resources\Resource;
 use PHPUnit\Framework\TestCase;
 use Tests\Doubles\GetSchema;
 
@@ -37,5 +39,49 @@ class ReportingTest extends TestCase
 			['invoices', 'invoice_types', ['invoices', 'invoice_types']],
 			['facilities', 'work_orders', ['facilities', 'work_orders']],
 		];
+	}
+
+	public function testReport()
+	{
+		$reportTemplate = $this->getReportTemplate();
+
+
+//		$reportTemplate->getQuery()
+
+//		\var_dump(\json_encode($reportTemplate->nestedFields()));
+//		\var_dump(\json_encode($reportTemplate->nestedFilters()));
+		$this->assertTrue(true);
+	}
+
+	private function getReportTemplate()
+	{
+		$woResource = $this->getResource('work_orders', 'Work Orders');
+		$facilityResource = $this->getResource('facilities', 'Facilities');
+		$jobResource = $this->getResource('jobs', 'Facilities');
+		$dispatchers = $this->getResource('dispatchers', 'Dispatchers');
+
+		$templateBuilder = ReportTemplate::builder($this->getSchema(), $woResource)
+			->withResource($facilityResource)
+			->withResource($jobResource)
+			->withResource($dispatchers);
+
+		return $templateBuilder->build();
+	}
+
+	private function getResource($tableAlias, $resourceName, $addFields = true, $addFilters = true)
+	{
+		$schema = $this->getSchema();
+		$table = $schema->getTable($tableAlias);
+		$resourceBuilder = Resource::builder($table, $resourceName);
+		if ($addFields) {
+			$resourceBuilder = $resourceBuilder->addDefaultFieldsFromTable($table);
+		}
+		if ($addFilters) {
+			$resourceBuilder = $resourceBuilder->addDefaultFiltersFromTable($table);
+		}
+
+		$resource = $resourceBuilder->build();
+
+		return $resource;
 	}
 }

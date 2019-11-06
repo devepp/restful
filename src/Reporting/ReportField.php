@@ -91,7 +91,7 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 
 	public function tableAsCategory()
 	{
-		return ucwords(str_replace('_', ' ', $this->field->tableAlias()));
+		return ucwords(str_replace('_', ' ', $this->table->alias()));
 	}
 
 	/**
