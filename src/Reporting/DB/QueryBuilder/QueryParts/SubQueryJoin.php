@@ -31,7 +31,7 @@ class SubQueryJoin extends Join
 	}
 
 	/**
-	 * @return mixed
+	 * @return string
 	 */
 	public function getStatementExpression()
 	{
@@ -39,7 +39,7 @@ class SubQueryJoin extends Join
 	}
 
 	/**
-	 * @return mixed
+	 * @return array
 	 */
 	public function getParameters()
 	{

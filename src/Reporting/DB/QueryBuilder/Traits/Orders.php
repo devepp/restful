@@ -29,8 +29,8 @@ trait Orders
 	{
 		$parameters = [];
 
-		foreach ($this->joins as $join) {
-			$parameters = array_merge($parameters, $join->getParameters());
+		foreach ($this->orderBys as $orderBy) {
+			$parameters = array_merge($parameters, $orderBy->getParameters());
 		}
 
 		return $parameters;

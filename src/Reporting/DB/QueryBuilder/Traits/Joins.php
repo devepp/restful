@@ -44,6 +44,7 @@ trait Joins
 		$parameters = [];
 
 		foreach ($this->joins as $join) {
+//			\var_dump($join->getParameters());
 			$parameters = array_merge($parameters, $join->getParameters());
 		}
 

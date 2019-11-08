@@ -176,13 +176,14 @@ class SelectTest extends TestCase
 		$qb = new Select('wo_jobs jobs');
 		$qb = $qb->joinSubQuery(
 			$qb->subQuery('wo_accounting_notes')
-				->select('wo_accounting_notes.job_id, SUM(wo_accounting_notes.price) as total_price'),
+				->select('wo_accounting_notes.job_id, SUM(wo_accounting_notes.price) as total_price')
+				->where('wo_accounting_notes.id', '>', 5),
 			'notes',
 			'notes.job_id = jobs.id',
 			'left'
 		);
 
-		$expectedQuery = new Query('SELECT * FROM wo_jobs jobs LEFT JOIN (SELECT wo_accounting_notes.job_id, SUM(wo_accounting_notes.price) as total_price FROM wo_accounting_notes) notes ON notes.job_id = jobs.id', []);
+		$expectedQuery = new Query('SELECT * FROM wo_jobs jobs LEFT JOIN (SELECT wo_accounting_notes.job_id, SUM(wo_accounting_notes.price) as total_price FROM wo_accounting_notes WHERE wo_accounting_notes.id > ?) notes ON notes.job_id = jobs.id', [5]);
 		$this->assertEquals($qb->getQuery(), $expectedQuery);
 	}
 
