@@ -14,13 +14,13 @@ use App\Reporting\DatabaseFields\StringField;
 
 class TableBuilder
 {
-	/** @var string */
+	/** @var */
 	protected $name;
 
 	/** @var FieldInterface[] */
 	protected $fields = [];
 
-	public function __construct(string $tableName)
+	public function __construct($tableName)
 	{
 		$this->name = $tableName;
 	}

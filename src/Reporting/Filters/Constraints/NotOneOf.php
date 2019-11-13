@@ -9,7 +9,7 @@ class NotOneOf extends AbstractConstraint
 {
 	const NAME = 'NotOneOf';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, $field, $inputs = [])
 	{
 		return $queryBuilder->whereNotIn($field, $inputs[0]);
 	}

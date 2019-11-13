@@ -4,6 +4,9 @@ namespace App\Reporting\Processing;
 
 use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\Form;
+use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterInterface;
+use App\Reporting\ReportRequest;
 use App\Reporting\Resources\Limit;
 use App\Reporting\Resources\ReportTemplateInterface;
 use App\Reporting\Selectables\AbstractSelectable;
@@ -35,29 +38,40 @@ class Selections implements SelectionsInterface
 	}
 
 	/**
-	 * @param ServerRequestInterface $request
-	 * @param ReportTemplateInterface $reportTemplate
+	 * @param ReportRequest $request
+	 * @param ReportFieldInterface[] $availableFields
+	 * @param ReportFilterInterface[] $availableFilters
 	 * @return Selections
 	 */
-	public static function fromRequest(ServerRequestInterface $request, ReportTemplateInterface $reportTemplate)
+	public static function fromRequest(ReportRequest $request, $availableFields, $availableFilters)
 	{
 		$selectedFields = [];
-		foreach ($reportTemplate->availableFields() as $field) {
-			if ($field->selected($request)) {
+		foreach ($availableFields as $field) {
+			if($field->selected($request)) {
 				$selectedFields[] = $field->selectField($request);
 			}
 		}
 
 		$selectedFilters = [];
-		foreach ($reportTemplate->availableFilters() as $filter) {
+		foreach ($availableFilters as $filter) {
 			if($filter->selected($request)) {
 				$selectedFilters[] = $filter->selectFilter($request);
 			}
 		}
 
-		$limit = Limit::fromRequestOrDefault($request);
+		$limit = new Limit($request->limit(), $request->offset());
 
 		return new self($selectedFields, $selectedFilters, $limit);
+	}
+
+	public static function getMatchingField($fieldName, $reportFields)
+	{
+		/** @var ReportFieldInterface $reportField */
+		foreach ($reportFields as $reportField) {
+			if ($reportField->name() == $fieldName) {
+				return $reportField;
+			}
+		}
 	}
 
 	/**

@@ -3,15 +3,9 @@
 namespace App\Reporting\Filters;
 
 use App\Reporting\DatabaseFields\DatabaseField;
-use App\Reporting\FilterInterface;
-use App\Reporting\Filters\Constraints\AbstractConstraint;
-use App\Reporting\ReportFilterInterface;
 use App\Reporting\Resources\Table;
-use App\Reporting\SelectedFilter;
-use JsonSerializable;
-use Psr\Http\Message\ServerRequestInterface;
 
-class Filter implements JsonSerializable, ReportFilterInterface
+class Filter extends AbstractFilter
 {
 	/** @var Table */
 	protected $table;
@@ -29,42 +23,39 @@ class Filter implements JsonSerializable, ReportFilterInterface
 		$this->label = $label ? $label : ucwords(str_replace('_', ' ', $this->dbField->name()));
 	}
 
-	public function jsonSerialize()
+	public function id()
 	{
-		return [
-			'name' => $this->name(),
-			'field_name' => $this->dbField->name(),
-			'table_alias' => $this->table->alias(),
-			'table' => $this->tableAsCategory(),
-			'label' => $this->label(),
-			'constraints' => $this->constraints(),
-			'url' => $this->url(),
-		];
+		return $this->dbField->alias();
 	}
 
-	/**
-	 * @return string
-	 */
-	public function name()
+	public function groupName()
 	{
-		return $this->dbField->alias($this->table->alias());
+		return ucwords(str_replace('_', ' ', $this->table->alias()));
 	}
 
-	/**
-	 * @return string
-	 */
-	public function label()
+
+
+	protected function name()
+	{
+		return $this->dbField->alias();
+	}
+
+	protected function label()
 	{
 		return $this->label;
 	}
 
+	protected function fieldName()
+	{
+		return $this->dbField->name();
+	}
 
-	public function dbField()
+	protected function tableAlias()
 	{
 		return $this->dbField;
 	}
 
-	public function tableAsCategory()
+	protected function tableAsCategory()
 	{
 		return ucwords(str_replace('_', ' ', $this->table->alias()));
 	}
@@ -72,44 +63,17 @@ class Filter implements JsonSerializable, ReportFilterInterface
 	/**
 	 * @return Constrains[]
 	 */
-	public function constraints()
+	protected function constraints()
 	{
 		return $this->dbField->filterConstraints();
 	}
 
-
-	public function url()
+	protected function options()
 	{
-		return $this->table->alias();
+		return [
+			'url' => $this->table->alias()
+		];
 	}
 
-	public function selected(ServerRequestInterface $request)
-	{
-		$selectedFilters = $request->getAttribute('selected_filters', []);
-
-		foreach ($selectedFilters as $selectedFilter) {
-			if ($selectedFilter['name'] === $this->name()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public function selectFilter(ServerRequestInterface $request)
-	{
-		$selectedFilters = $request->getAttribute('selected_filters', []);
-
-		foreach ($selectedFilters as $selectedFilter) {
-			if ($selectedFilter['name'] === $this->name()) {
-				$constraint = AbstractConstraint::getConstraint($selectedFilter['constraint']['name']);
-				$inputs = $constraint->inputArrayFromRequestData($selectedFilter['constraint']);
-
-				return new SelectedFilter($this, $constraint, $inputs);
-			}
-		}
-
-		throw new \LogicException('filter was not selected by request');
-	}
 
 }

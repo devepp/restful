@@ -5,8 +5,11 @@ namespace App\Reporting\Resources;
 use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\Filters\Filter;
 use App\Reporting\ReportField;
+use App\Reporting\ReportFieldCollection;
 use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterCollection;
 use App\Reporting\ReportFilterInterface;
+use App\Reporting\Selectables\Standard;
 
 class ResourceBuilder
 {
@@ -26,7 +29,7 @@ class ResourceBuilder
 	 * @param Table $table
 	 * @param string $name
 	 */
-	public function __construct(Table $table, string $name)
+	public function __construct(Table $table, $name)
 	{
 		$this->table = $table;
 		$this->name = $name;
@@ -34,7 +37,7 @@ class ResourceBuilder
 
 	public function build()
 	{
-		return new Resource($this->table, $this->name, $this->fields, $this->filters);
+		return new Resource($this->table, $this->name, new ReportFieldCollection($this->fields), new ReportFilterCollection($this->filters));
 	}
 
 	public function addReportField(ReportFieldInterface $field)
@@ -44,17 +47,18 @@ class ResourceBuilder
 		return $clone;
 	}
 
-	public function addFieldFromTable(Table $table, DatabaseField $dbField, $label)
+	public function addFieldFromTable(Table $table, DatabaseField $dbField, $label, $sameNode = true)
 	{
 		$clone = clone $this;
-		$clone->fields[] = new ReportField($table, $dbField, $label);
+		$selectables = $sameNode ? [new Standard()] : $dbField->selectables();
+		$clone->fields[] = new ReportField($table, $dbField, $selectables, $label);
 		return $clone;
 	}
 
-	public function addDefaultFieldsFromTable(Table $table)
+	public function defaultFields($sameNode = true)
 	{
 		$clone = clone $this;
-		foreach ($table->getReportFields() as $field) {
+		foreach ($this->table->getReportFields($sameNode) as $field) {
 			$clone->fields[] = $field;
 		}
 		return $clone;
@@ -74,10 +78,10 @@ class ResourceBuilder
 		return $clone;
 	}
 
-	public function addDefaultFiltersFromTable(Table $table)
+	public function defaultFilters($sameNode = true)
 	{
 		$clone = clone $this;
-		foreach ($table->getReportFilters() as $filter) {
+		foreach ($this->table->getReportFilters($sameNode) as $filter) {
 			$clone->filters[] = $filter;
 		}
 		return $clone;
@@ -105,9 +109,9 @@ class ResourceBuilder
 		$clone = clone $this;
 		for ($i = 0; $i < count($clone->filters); $i++) {
 			$currentFilter = $clone->filters[$i];
-			if ($filter->name() === $currentFilter->name()) {
-				unset($clone->filters[$i]);
-			}
+//			if ($filter->name() === $currentFilter->name()) {
+//				unset($clone->filters[$i]);
+//			}
 		}
 
 		return $clone;

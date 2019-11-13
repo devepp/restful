@@ -11,7 +11,7 @@ namespace App\Reporting;
 
 class TabularData implements \JsonSerializable
 {
-	/** @var SelectedField[] */
+	/** @var SelectedFieldCollection */
 	protected $columns;
 
 	/** @var [] */
@@ -40,8 +40,6 @@ class TabularData implements \JsonSerializable
 			$row_values = [];
 			foreach ($this->columns as $reportField) {
 				$value = $row_array[$reportField->fieldAlias(false)];
-//				var_dump($value);
-//				var_dump($reportField->formatValueAsType($value));
 				$row_values[] = $reportField->formatValueAsType($value);
 			}
 			yield $row_values;

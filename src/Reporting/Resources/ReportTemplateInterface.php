@@ -3,42 +3,35 @@
 
 namespace App\Reporting\Resources;
 
+use App\Reporting\DB\ConnectionInterface;
+use App\Reporting\DB\DbInterface;
 use App\Reporting\DB\Query;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
+use App\Reporting\ReportFieldCollection;
 use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterCollection;
 use App\Reporting\ReportFilterInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use App\Reporting\ReportRequest;
+use App\Reporting\SelectionsInterface;
+use App\Reporting\TabularData;
 
 interface ReportTemplateInterface
 {
 
-	public function availableRelatedResources();
+	/**
+	 * @return ReportFieldCollection
+	 */
+	public function fields();
 
 	/**
-	 * @return array
+	 * @return ReportFilterCollection
 	 */
-	public function nestedFields();
+	public function filters();
 
 	/**
-	 * @return ReportFieldInterface[]
+	 * @param DbInterface $db
+	 * @param ReportRequest $request
+	 * @return TabularData
 	 */
-	public function availableFields();
-
-	/**
-	 * @return array
-	 */
-	public function nestedFilters();
-
-	/**
-	 * @return ReportFilterInterface[]
-	 */
-	public function availableFilters();
-
-
-	/**
-	 * @param QueryBuilderFactoryInterface $queryBuilderFactory
-	 * @param ServerRequestInterface $request
-	 * @return Query
-	 */
-	public function getQuery(QueryBuilderFactoryInterface $queryBuilderFactory, ServerRequestInterface $request);
+	public function getData(DbInterface $db, ReportRequest $request);
 }

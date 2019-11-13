@@ -20,12 +20,12 @@ class Custom extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Custom)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		// TODO: Implement alias() method.
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		// TODO: Implement alias() method.
 	}

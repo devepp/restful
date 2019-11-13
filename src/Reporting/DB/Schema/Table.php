@@ -4,7 +4,7 @@ namespace App\Reporting\DB\Schema;
 
 class Table
 {
-	/** @var string */
+	/** @var */
 	protected $name;
 
 	/** @var FieldInterface[] */
@@ -12,10 +12,10 @@ class Table
 
 	/**
 	 * Table constructor.
-	 * @param string $name
+	 * @param $name
 	 * @param FieldInterface[] $fields
 	 */
-	public function __construct(string $name, $fields = [])
+	public function __construct($name, $fields = [])
 	{
 		$this->name = $name;
 
@@ -44,12 +44,12 @@ class Table
 		return array_values($this->fields);
 	}
 
-	public function hasField(string $fieldName)
+	public function hasField($fieldName)
 	{
 		return isset($this->fields[$fieldName]);
 	}
 
-	public function field(string $fieldName)
+	public function field($fieldName)
 	{
 		if (isset($this->fields[$fieldName])) {
 			return $this->fields[$fieldName];

@@ -3,7 +3,9 @@
 namespace App\Reporting\Resources;
 
 use App\Reporting\Processing\Selections;
+use App\Reporting\ReportFieldCollection;
 use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterCollection;
 use App\Reporting\ReportFilterInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -15,20 +17,20 @@ class Resource implements ResourceInterface
 	/** @var string */
 	private $name;
 
-	/** @var ReportFieldInterface[] */
+	/** @var ReportFieldCollection */
 	private $fields;
 
-	/** @var ReportFilterInterface[] */
+	/** @var ReportFilterCollection */
 	private $filters;
 
 	/**
 	 * Resource constructor.
 	 * @param Table $table
 	 * @param string $name
-	 * @param array $fields
-	 * @param array $filters
+	 * @param ReportFieldCollection $fields
+	 * @param ReportFilterCollection $filters
 	 */
-	public function __construct(Table $table, string $name, array $fields, array $filters)
+	public function __construct(Table $table, $name, ReportFieldCollection $fields, ReportFilterCollection $filters)
 	{
 		$this->table = $table;
 		$this->name = $name;
@@ -36,7 +38,7 @@ class Resource implements ResourceInterface
 		$this->filters = $filters;
 	}
 
-	public static function builder(Table $baseTable, string $name)
+	public static function builder(Table $baseTable, $name)
 	{
 		return new ResourceBuilder($baseTable, $name);
 	}

@@ -104,6 +104,7 @@ class Schema
 	 */
 	public function getQueryGroup(Table $root, TableCollection $tables)
 	{
+//		die(var_dump($tables->map(function (Table $table){ return $table->alias(); })));
 		$tablesInMainNode = $tables->filter(new SameNodeAs($root, $this->tables));
 
 		$remainingTables = $tables->filter(new Exclude($tablesInMainNode));

@@ -2,8 +2,8 @@
 
 namespace App\Reporting\Resources;
 
-use App\Reporting\ReportFieldInterface;
-use App\Reporting\ReportFilterInterface;
+use App\Reporting\ReportFieldCollection;
+use App\Reporting\ReportFilterCollection;
 
 interface ResourceInterface
 {
@@ -17,12 +17,12 @@ interface ResourceInterface
 	public function name();
 
 	/**
-	 * @return ReportFieldInterface[]
+	 * @return ReportFieldCollection
 	 */
 	public function availableFields();
 
 	/**
-	 * @return ReportFilterInterface[]
+	 * @return ReportFilterCollection
 	 */
 	public function availableFilters();
 }

@@ -20,12 +20,12 @@ class Max extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Max)';
 	}
 
-	public function selectField(string $field, string $alias = null)
+	public function selectField($field, $alias = null)
 	{
 		return 'MAX('.$field.')';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__max';
 	}

@@ -4,7 +4,16 @@ namespace App\Reporting;
 
 class AbstractProviderRepository implements ProviderRepositoryInterface
 {
-	CONST PROVIDERS = [];
+	protected $providers;
+
+	/**
+	 * AbstractProviderRepository constructor.
+	 * @param array $providers
+	 */
+	public function __construct($providers = [])
+	{
+		$this->providers = $providers;
+	}
 
 	/**
 	 * @param string $provider_slug
@@ -12,8 +21,8 @@ class AbstractProviderRepository implements ProviderRepositoryInterface
 	 */
 	public function getBySlug($provider_slug)
 	{
-		if (array_key_exists($provider_slug, static::PROVIDERS)) {
-			$provider_class = static::PROVIDERS[$provider_slug];
+		if (array_key_exists($provider_slug, $this->providers)) {
+			$provider_class = $this->providers[$provider_slug];
 			return new $provider_class;
 		}
 	}
@@ -21,7 +30,7 @@ class AbstractProviderRepository implements ProviderRepositoryInterface
 	public function getAll()
 	{
 		$providers = [];
-		foreach (static::PROVIDERS as $provider_class) {
+		foreach ($this->providers as $provider_class) {
 			$providers[] = new $provider_class;
 		}
 		return $providers;

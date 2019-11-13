@@ -29,7 +29,7 @@ abstract class AbstractConstraint implements Constrains
 	/**
 	 * @inheritdoc
 	 */
-	abstract public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = []);
+	abstract public function filterSql(SelectQueryBuilderInterface $queryBuilder,  $field, $inputs = []);
 
 	/**
 	 * @return string

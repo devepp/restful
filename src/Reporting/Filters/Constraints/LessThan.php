@@ -9,7 +9,7 @@ class LessThan extends AbstractConstraint
 {
 	const NAME = 'LessThan';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, $field, $inputs = [])
 	{
 		return $queryBuilder->where($field, '<', $inputs[0]);
 	}

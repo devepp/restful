@@ -17,7 +17,7 @@ class Where implements WhereInterface
 	 */
 	public function __construct($field, $operator, $value)
 	{
-		$this->field = trim($field);
+		$this->field = trim($field.'');
 		$this->operator = trim($operator);
 		$this->value = $value;
 	}

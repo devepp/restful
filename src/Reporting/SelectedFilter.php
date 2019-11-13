@@ -1,17 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Paul.Epp
- * Date: 1/8/2019
- * Time: 10:34 AM
- */
 
 namespace App\Reporting;
 
-use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\Filters\Constraints\AbstractConstraint;
-use App\Reporting\Selectables\AbstractSelectable;
+use App\Reporting\Resources\Table;
 use JsonSerializable;
 
 class SelectedFilter implements FilterInterface, JsonSerializable
@@ -41,44 +34,13 @@ class SelectedFilter implements FilterInterface, JsonSerializable
 		$this->inputs = $inputs;
 	}
 
-
 	/**
 	 * @return array
 	 */
 	public function jsonSerialize()
 	{
-		return [
-			'name' => $this->name(),
-			'label' => $this->label(),
-			'aggregate_options' => $this->label(),
-		];
+		return $this->filter->jsonSerialize();
 	}
-
-	/**
-	 * @return string
-	 */
-	public function name()
-	{
-		return $this->field->name();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function label()
-	{
-		return $this->field->alias();
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function table()
-	{
-		return $this->field->tableAlias();
-	}
-
 
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
@@ -86,18 +48,11 @@ class SelectedFilter implements FilterInterface, JsonSerializable
 	 */
 	public function filterQuery(SelectQueryBuilderInterface $queryBuilder)
 	{
-		return $this->constraint->filterSql($queryBuilder, $this->field, $this->inputs);
+		return $this->filter->filterQuery($queryBuilder, $this->constraint, $this->inputs);
 	}
 
-
-	/**
-	 * @param bool $subQuery
-	 * @return string
-	 */
-	public function filterAlias($subQuery)
+	public function requiresTable(Table $table)
 	{
-		return $this->constraint->filterAlias($this->field, $subQuery);
+		return $this->filter->requiresTable($table);
 	}
-
-
 }

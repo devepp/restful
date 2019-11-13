@@ -20,12 +20,12 @@ class ListSelectable extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (List)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		return 'GROUP_CONCAT('.$field.')';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__list';
 	}

@@ -33,11 +33,6 @@ class TableCollection implements SeekableIterator
 		return new self($tables);
 	}
 
-	public function __debugInfo()
-	{
-		return $this->aliases;
-	}
-
 	public function current()
 	{
 		return $this->tables[$this->aliases[$this->position]];
@@ -99,7 +94,7 @@ class TableCollection implements SeekableIterator
 	/**
 	 * @return bool
 	 */
-	public function empty()
+	public function isEmpty()
 	{
 		return empty($this->tables);
 	}

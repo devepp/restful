@@ -29,6 +29,11 @@ class ForeignKey extends DatabaseField
 		return '';
 	}
 
+	public function url()
+	{
+		return $this->relationshipAlias->alias();
+	}
+
 	/**
 	 * @param string $table_alias_name
 	 * @param bool $descendant
@@ -59,7 +64,7 @@ class ForeignKey extends DatabaseField
 
 	public function useAsFilter()
 	{
-		return true;
+		return false;
 	}
 
 	public function formatParameter($parameter, $prepend = null, $append = null)

@@ -9,7 +9,7 @@ class Contains extends AbstractConstraint
 {
 	const NAME = 'Contains';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, $field, $inputs = [])
 	{
 		return $queryBuilder->where($field, 'LIKE', '%'.$inputs[0].'%');
 	}

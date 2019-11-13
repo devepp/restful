@@ -20,12 +20,12 @@ class Sum extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Sum)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		return 'IFNULL(SUM('.$field.'), 0)';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__sum';
 	}

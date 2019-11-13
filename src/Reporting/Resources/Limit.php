@@ -2,8 +2,6 @@
 
 namespace App\Reporting\Resources;
 
-use App\Reporting\DB\QueryBuilder\LimitableInterface;
-use App\Reporting\DB\QueryBuilder\QueryBuilderInterface;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -29,7 +27,7 @@ class Limit
 	/**
 	 * @return Limit
 	 */
-	public static function default()
+	public static function defaultLimit()
 	{
 		return new self(20, 0);
 	}
@@ -49,7 +47,7 @@ class Limit
 			return new self($limit, $offset);
 		}
 
-		return self::default();
+		return self::defaultLimit();
 	}
 
 	/**

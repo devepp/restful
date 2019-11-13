@@ -17,7 +17,7 @@ class TableName
 	 * @param string $name
 	 * @param string|null $alias
 	 */
-	public function __construct(string $name, string $alias = null)
+	public function __construct($name, $alias = null)
 	{
 		$this->name = $name;
 		$this->alias = $alias;

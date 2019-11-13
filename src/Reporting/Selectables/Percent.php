@@ -20,12 +20,12 @@ class Percent extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Percent)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		return 'SUM(IF('.$field.' != 0, 1, 1))/COUNT('.$field.')';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__percent';
 	}

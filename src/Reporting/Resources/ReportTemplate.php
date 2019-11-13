@@ -3,10 +3,21 @@
 
 namespace App\Reporting\Resources;
 
+use App\Reporting\DB\ConnectionInterface;
+use App\Reporting\DB\DbInterface;
+use App\Reporting\DB\Query;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
+use App\Reporting\FieldInterface;
+use App\Reporting\FilterInterface;
 use App\Reporting\Processing\Selections;
+use App\Reporting\ReportFieldCollection;
+use App\Reporting\ReportFieldInterface;
+use App\Reporting\ReportFilterCollection;
+use App\Reporting\ReportRequest;
+use App\Reporting\SelectedFieldCollection;
+use App\Reporting\SelectedFilterCollection;
 use App\Reporting\SelectionsInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use App\Reporting\TabularData;
 
 class ReportTemplate implements ReportTemplateInterface
 {
@@ -40,71 +51,70 @@ class ReportTemplate implements ReportTemplateInterface
 		return new TemplateBuilder($schema, $baseResource);
 	}
 
-	public function availableRelatedResources()
+	public function fields()
 	{
-		return $this->availableResources;
-	}
-
-	public function nestedFields()
-	{
-		$fields = [];
-
+		$fields = new ReportFieldCollection();
 		foreach ($this->resources as $resource) {
-			$fields[$resource->name()] = [
-				'name' => $resource->name(),
-				'fields' => $resource->availableFields(),
-			];
+			$fields = $fields->withFields($resource->availableFields());
 		}
-
 		return $fields;
 	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function availableFields()
-	{
-		$fields = [];
-		foreach ($this->resources as $resource) {
-			$fields[] = $resource->availableFields();
-		}
-
-		return $fields;
-	}
-
-	public function nestedFilters()
+	public function filters()
 	{
 		$filters = [];
 		foreach ($this->resources as $resource) {
-			$filters[$resource->name()] = [
-				'name' => $resource->name(),
-				'filters' => $resource->availableFilters(),
-			];
+			$availableFilters = $resource->availableFilters();
+			if (count($availableFilters)) {
+				$filters[$resource->name()] = [
+					'name' => $resource->name(),
+					'filters' => $resource->availableFilters(),
+				];
+			}
 		}
 
 		return $filters;
 	}
 
-	/**
-	 * @inheritdoc
-	 */
-	public function availableFilters()
+	public function getData(DbInterface $db, ReportRequest $request)
 	{
-		$filters = [];
-		foreach ($this->resources as $resource) {
-			$filters[] = $resource->availableFilters();
-		}
+		$fields = $this->selectedFields($request);
+		$filters = $this->selectedFilters($request);
 
+		$queryGroup = $this->schema->getQueryGroup($this->getRootTable(), $this->getTables($fields, $filters));
+
+		$queryBuilder = $queryGroup->getQuery($db, $fields, $filters, $this->getLimit($request), $request->groupings(), $request->sort());
+
+		/** @var Query $query */
+		$query = $queryBuilder->getQuery();
+
+		$data = $db->execute($query);
+
+		return new TabularData($fields, $data->all(\PDO::FETCH_ASSOC));
+	}
+
+	private function selectedFields(ReportRequest $request)
+	{
+		return $this->fields()->getSelected($request);
+	}
+
+	private function selectedFilters(ReportRequest $request)
+	{
+		return $this->availableFilters()->getSelected($request);
+	}
+
+	private function availableFilters()
+	{
+		$filters = new ReportFilterCollection();
+		foreach ($this->resources as $resource) {
+			$filters = $filters->withFilters($resource->availableFilters());
+		}
 		return $filters;
 	}
 
-	public function getQuery(QueryBuilderFactoryInterface $queryBuilderFactory, ServerRequestInterface $request)
+	private function getLimit(ReportRequest $request)
 	{
-		$selections = Selections::fromRequest($request, $this);
-
-		$queryGroup = $this->schema->getQueryGroup($this->getRootTable(), $this->getTables($request));
-
-		return $queryGroup->getQuery($queryBuilderFactory, $selections)->getQuery();
+		return new Limit($request->limit(), $request->offset());
 	}
 
 	private function getRootTable()
@@ -112,29 +122,31 @@ class ReportTemplate implements ReportTemplateInterface
 		return $this->baseResource->table();
 	}
 
-	private function getTables(ServerRequestInterface $request)
+	private function getTables(SelectedFieldCollection $selectedFields, SelectedFilterCollection $selectedFilters)
 	{
 		$tables = TableCollection::fromArray([$this->getRootTable()]);
 
 		foreach ($this->resources as $resource) {
-			if ($this->resourceRequired($resource, $request)) {
-				$tables->addTable($resource->table());
+			if ($this->resourceRequired($resource, $selectedFields, $selectedFilters)) {
+				$tables = $tables->addTable($resource->table());
 			}
 		}
 
 		return $tables;
 	}
 
-	private function resourceRequired(ResourceInterface $resource, ServerRequestInterface $request)
+	private function resourceRequired(ResourceInterface $resource, SelectedFieldCollection $selectedFields, SelectedFilterCollection $selectedFilters)
 	{
-		foreach ($this->availableFields() as $field) {
-			if ($field->selected($request)) {
+		/** @var FieldInterface $field */
+		foreach ($selectedFields as $field) {
+			if ($field->requiresTable($resource->table())) {
 				return true;
 			}
 		}
 
-		foreach ($this->availableFilters() as $filter) {
-			if ($filter->selected($request)) {
+		/** @var FilterInterface $filter */
+		foreach ($selectedFilters as $filter) {
+			if ($filter->requiresTable($resource->table())) {
 				return true;
 			}
 		}

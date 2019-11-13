@@ -74,10 +74,10 @@ class ReportingTest extends TestCase
 		$table = $schema->getTable($tableAlias);
 		$resourceBuilder = Resource::builder($table, $resourceName);
 		if ($addFields) {
-			$resourceBuilder = $resourceBuilder->addDefaultFieldsFromTable($table);
+			$resourceBuilder = $resourceBuilder->defaultFields();
 		}
 		if ($addFilters) {
-			$resourceBuilder = $resourceBuilder->addDefaultFiltersFromTable($table);
+			$resourceBuilder = $resourceBuilder->defaultFilters();
 		}
 
 		$resource = $resourceBuilder->build();

@@ -26,7 +26,7 @@ class SelectedField implements FieldInterface, JsonSerializable
 	 * @param AbstractSelectable $selectable
 	 * @param string $label
 	 */
-	public function __construct(ReportFieldInterface $field, AbstractSelectable $selectable, string $label)
+	public function __construct(ReportFieldInterface $field, AbstractSelectable $selectable,  $label)
 	{
 		$this->field = $field;
 		$this->selectable = $selectable;
@@ -40,6 +40,8 @@ class SelectedField implements FieldInterface, JsonSerializable
 	{
 		$jsonData = $this->field->jsonSerialize();
 
+		$jsonData['title'] = $jsonData['label'];
+		$jsonData['alias'] = $jsonData['field_name'];
 		$jsonData['type'] = $this->selectable->name();
 		$jsonData['label'] = $this->label;
 
@@ -49,9 +51,10 @@ class SelectedField implements FieldInterface, JsonSerializable
 	public function __debugInfo()
 	{
 		return [
-			'field' => $this->field,
-			'selectable' => $this->selectable->name(),
+//			'field' => $this->field,
+//			'selectable' => $this->selectable->name(),
 			'label' => $this->label,
+			'table' => $this->table(),
 		];
 	}
 
@@ -95,15 +98,15 @@ class SelectedField implements FieldInterface, JsonSerializable
 
 	public function addToQuery(SelectQueryBuilderInterface $queryBuilder)
 	{
-		$selectField = $this->selectable->selectField('`'.$this->field->tableAlias().'`.`'.$this->field->name().'`');
-		$alias = $this->selectable->alias($this->field->tableAlias().'__'.$this->field->name());
+		$selectField = $this->selectable->selectField('`'.$this->field->tableAlias().'`.`'.$this->field->fieldName().'`');
+		$alias = $this->selectable->alias($this->field->tableAlias().'__'.$this->field->fieldName());
 
 		return $queryBuilder->select($selectField.' '.$alias);
 	}
 
 	public function addToQueryAsAggregate(SelectQueryBuilderInterface $queryBuilder, $aggregateAlias)
 	{
-		$selectField = $aggregateAlias.'.'.$this->selectable->alias($this->field->tableAlias().'__'.$this->field->name());
+		$selectField = $aggregateAlias.'.'.$this->selectable->alias($this->field->tableAlias().'__'.$this->field->fieldName());
 
 		return $queryBuilder->select($selectField);
 	}

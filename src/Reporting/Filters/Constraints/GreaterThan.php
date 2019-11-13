@@ -9,7 +9,7 @@ class GreaterThan extends AbstractConstraint
 {
 	const NAME = 'GreaterThan';
 
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = [])
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder, $field, $inputs = [])
 	{
 		return $queryBuilder->where($field, '>', $inputs[0]);
 	}

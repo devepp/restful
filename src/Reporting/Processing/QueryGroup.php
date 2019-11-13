@@ -7,11 +7,14 @@ use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\FieldInterface;
 use App\Reporting\FilterInterface;
+use App\Reporting\Resources\Limit;
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\Filter as TableFilter;
 use App\Reporting\Resources\TableCollectionFunctions\Maps\Map;
 use App\Reporting\Resources\TableCollectionFunctions\Sorts\Sort;
+use App\Reporting\SelectedFieldCollection;
+use App\Reporting\SelectedFilterCollection;
 use App\Reporting\SelectionsInterface;
 
 class QueryGroup
@@ -40,34 +43,46 @@ class QueryGroup
 		$this->subQueryGroups = $subQueryGroups;
 	}
 
-
 	/**
 	 * @param QueryBuilderFactoryInterface $queryBuilder
-	 * @param SelectionsInterface $selections
-	 * @param DatabaseField|null $groupBy
+	 * @param SelectedFieldCollection $fields
+	 * @param SelectedFilterCollection $filters
+	 * @param Limit|null $limit
+	 * @param array $groupings
+	 * @param array $sorts
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectionsInterface $selections, DatabaseField $groupBy = null)
+	public function getQuery(QueryBuilderFactoryInterface $queryBuilder, SelectedFieldCollection $fields, SelectedFilterCollection $filters, Limit $limit = null, $groupings = [], $sorts = [])
 	{
 		$fromTable = $this->fromTable();
+
 		$qb = $queryBuilder->selectFrom($fromTable->name().' '.$fromTable->alias());
-
 		$qb = $this->joinTables($qb);
-
-		$qb = $this->joinSubQueryGroups($qb, $queryBuilder, $selections);
+		$qb = $this->joinSubQueryGroups($qb, $queryBuilder, $fields, $filters);
 
 		/** @var FieldInterface $field */
-		foreach ($this->applicableFields($selections->selectedFields()) as $field) {
+		foreach ($this->applicableFields($fields) as $field) {
 			$qb = $field->addToQuery($qb);
 		}
-
 		foreach ($this->subQueryGroups as $queryGroup) {
-			$qb = $queryGroup->selectFieldsForOuterQuery($qb, $selections->selectedFields());
+			$qb = $queryGroup->selectFieldsForOuterQuery($qb, $fields);
 		}
 
 		/** @var FilterInterface $filter */
-		foreach ($selections->selectedFilters() as $filter) {
+		foreach ($filters as $filter) {
 			$qb = $filter->filterQuery($qb);
+		}
+
+		foreach ($groupings as $grouping) {
+			$qb = $qb->groupBy($grouping);
+		}
+
+		foreach ($sorts as $sort) {
+			$qb = $qb->orderBy($sort);
+		}
+
+		if ($limit) {
+			$qb = $limit->appendToQuery($qb);
 		}
 
 		return $qb;
@@ -85,10 +100,10 @@ class QueryGroup
 
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
-	 * @param FieldInterface[] $selectedFields
+	 * @param SelectedFieldCollection $selectedFields
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function selectFieldsForOuterQuery(SelectQueryBuilderInterface $queryBuilder, $selectedFields)
+	public function selectFieldsForOuterQuery(SelectQueryBuilderInterface $queryBuilder, SelectedFieldCollection $selectedFields)
 	{
 		$applicableFields = $this->applicableFields($selectedFields);
 
@@ -121,13 +136,14 @@ class QueryGroup
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
 	 * @param QueryBuilderFactoryInterface $queryBuilderFactory
-	 * @param SelectionsInterface $selections
+	 * @param SelectedFieldCollection $fields
+	 * @param SelectedFilterCollection $filters
 	 * @return SelectQueryBuilderInterface
 	 */
-	private function joinSubQueryGroups(SelectQueryBuilderInterface $queryBuilder, QueryBuilderFactoryInterface $queryBuilderFactory, SelectionsInterface $selections)
+	private function joinSubQueryGroups(SelectQueryBuilderInterface $queryBuilder, QueryBuilderFactoryInterface $queryBuilderFactory, SelectedFieldCollection $fields, SelectedFilterCollection $filters)
 	{
 		foreach ($this->subQueryGroups as $queryGroup) {
-			$subQuery = $queryGroup->getQuery($queryBuilderFactory, $selections);
+			$subQuery = $queryGroup->getQuery($queryBuilderFactory, $fields, $filters);
 			$primaryKeySelect = '`'.$this->fromTable()->alias().'`.`'.$this->fromTable()->primaryKey()->name().'` '.$this->fromPrimaryKeyAlias();
 
 			$subQuery = $subQuery->select($primaryKeySelect);
@@ -139,16 +155,16 @@ class QueryGroup
 	}
 
 	/**
-	 * @param FieldInterface[] $selectedFields
-	 * @return FieldInterface[]
+	 * @param SelectedFieldCollection $fields
+	 * @return SelectedFieldCollection
 	 */
-	private function applicableFields($selectedFields)
+	private function applicableFields(SelectedFieldCollection $fields)
 	{
-		$applicableFields = [];
+		$applicableFields = new SelectedFieldCollection();
 
-		foreach ($selectedFields as $field) {
+		foreach ($fields as $field) {
 			if ($this->fieldApplicable($field, $this->nodeTables)) {
-				$applicableFields[] = $field;
+				$applicableFields = $applicableFields->withField($field);
 			}
 		}
 
@@ -179,7 +195,7 @@ class QueryGroup
 	{
 		$related = $possibleRelations->filter(TableFilter::byDirectRelationTo($tableToFindRelationshipsFor));
 
-		if ($related->empty()) {
+		if ($related->isEmpty()) {
 			$tableAliases = implode(', ', $possibleRelations->map(Map::toAliases()));
 			throw new \LogicException('Table '.$tableToFindRelationshipsFor->alias().' does not have any direct relationships with '.$tableAliases);
 		}

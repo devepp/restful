@@ -39,6 +39,11 @@ abstract class DatabaseField
 		return $this->name();
 	}
 
+	public function url()
+	{
+		return null;
+	}
+
 	public function title($tableAlias)
 	{
 		return ucwords(str_replace('_', ' ',$tableAlias.' '.$this->name()));
@@ -64,10 +69,6 @@ abstract class DatabaseField
 
 	public function constraints(Table $table)
 	{
-		if ($table->descendant()) {
-			return $this->selectableOptions();
-		}
-
 		return [new Standard()];
 	}
 

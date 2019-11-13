@@ -10,6 +10,7 @@ use App\Reporting\ReportField;
 use App\Reporting\ReportFieldInterface;
 use App\Reporting\ReportFilterInterface;
 use App\Reporting\Resources\TableCollectionFunctions\Filters\DirectlyRelatedTo;
+use App\Reporting\Selectables\Standard;
 
 class Table
 {
@@ -107,7 +108,7 @@ class Table
 		return array_values($this->fields);
 	}
 
-	public function hasField(string $fieldName)
+	public function hasField($fieldName)
 	{
 		return isset($this->fields[$fieldName]);
 	}
@@ -124,12 +125,13 @@ class Table
 	/**
 	 * @return ReportFieldInterface[]
 	 */
-	public function getReportFields()
+	public function getReportFields($sameNode = true)
 	{
 		$reportFields = [];
 		foreach ($this->fields as $databaseField) {
 			if ($databaseField->useAsField()) {
-				$reportFields[] = new ReportField($this, $databaseField);
+				$selectables = $sameNode ? [new Standard()] : $databaseField->selectables();
+				$reportFields[] = new ReportField($this, $databaseField, $selectables);
 			}
 		}
 
@@ -139,7 +141,7 @@ class Table
 	/**
 	 * @return ReportFilterInterface[]
 	 */
-	public function getReportFilters()
+	public function getReportFilters($sameNode = true)
 	{
 		$reportFilters = [];
 		foreach ($this->fields as $databaseField) {

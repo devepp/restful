@@ -19,7 +19,7 @@ interface Constrains extends JsonSerializable
 	 * @param array $inputs
 	 * @return SelectQueryBuilderInterface
 	 */
-	public function filterSql(SelectQueryBuilderInterface $queryBuilder, string $field, $inputs = []);
+	public function filterSql(SelectQueryBuilderInterface $queryBuilder,  $field, $inputs = []);
 
 	/**
 	 * @return string

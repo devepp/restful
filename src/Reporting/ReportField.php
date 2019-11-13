@@ -23,22 +23,23 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 	 * ReportField constructor.
 	 * @param Table $table
 	 * @param DatabaseField $field
+	 * @param AbstractSelectable[] $selectables
 	 * @param null $label
-	 * @param null $selectable_overrides
 	 */
-	public function __construct(Table $table, DatabaseField $field, $label = null, $selectable_overrides = null)
+	public function __construct(Table $table, DatabaseField $field, $selectables, $label = null)
 	{
 		$this->table = $table;
 		$this->field = $field;
+		$this->selectables = $selectables;
 		$this->label = $label === null ? ucwords(str_replace('_', ' ', $this->field->name())) : $label;
 
-		if ($selectable_overrides === null) {
-			$this->selectables = $field->selectables();
-		} else {
-			$this->selectables = array_uintersect( $selectable_overrides, $field->selectables(), function ($a, $b) {
-				return strcmp(get_class($a), get_class($b));
-			});
-		}
+//		if ($selectable_overrides === null) {
+//			$this->selectables = $field->selectables();
+//		} else {
+//			$this->selectables = array_uintersect( $selectable_overrides, $field->selectables(), function ($a, $b) {
+//				return strcmp(get_class($a), get_class($b));
+//			});
+//		}
 	}
 
 	/**
@@ -47,19 +48,38 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 	public function jsonSerialize()
 	{
 		return [
-			'name' => $this->field->alias(),
-			'field_name' => $this->field->name(),
-			'table_alias' => $this->table->alias(),
-			'table' => $this->tableAsCategory(),
+			'id' => $this->id(),
 			'label' => $this->label(),
-			'options' => $this->selectables,
-			'type' => $this->type(),
+			'defaultLabel' => $this->defaultLabel(),
+			'groupName' => $this->groupName(),
+			'availableModifiers' => $this->selectables,
+			'modifier' => $this->type(),
 		];
+	}
+
+	public function id()
+	{
+		return $this->table->alias().'__'.$this->field->alias();
+	}
+
+	public function defaultLabel()
+	{
+		return $this->label;
+	}
+
+	public function label()
+	{
+		return $this->label;
+	}
+
+	public function groupName()
+	{
+		return ucwords(str_replace('_', ' ', $this->table->alias()));
 	}
 
 	public function name()
 	{
-		return $this->field->alias();
+		return $this->table->alias().'__'.$this->field->alias();
 	}
 
 	public function table()
@@ -67,9 +87,14 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 		return $this->table;
 	}
 
-	public function label()
+	public function fieldName()
 	{
-		return $this->label;
+		return $this->field->name();
+	}
+
+	public function formatValue($value)
+	{
+		return $this->field->formatValueAsType($value);
 	}
 
 	public function dbField()
@@ -103,11 +128,9 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 		return $this->table->alias() == $table->alias();
 	}
 
-	public function selected(ServerRequestInterface $request)
+	public function selected(ReportRequest $request)
 	{
-		$selectedFields = $request->getAttribute('selected_fields', []);
-
-		foreach ($selectedFields as $selectedField) {
+		foreach ($request->fields() as $selectedField) {
 			if ($selectedField['name'] === $this->name()) {
 				return true;
 			}
@@ -116,11 +139,9 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 		return false;
 	}
 
-	public function selectField(ServerRequestInterface $request)
+	public function selectField(ReportRequest $request)
 	{
-		$selectedFields = $request->getAttribute('selected_fields', []);
-
-		foreach ($selectedFields as $selectedField) {
+		foreach ($request->fields() as $selectedField) {
 			if ($selectedField['name'] === $this->name()) {
 				return new SelectedField($this, AbstractSelectable::getSelectable($selectedField['type']), $selectedField['label']);
 			}

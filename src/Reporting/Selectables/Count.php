@@ -20,12 +20,12 @@ class Count extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Count)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		return 'COUNT('.$field.')';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__count';
 	}

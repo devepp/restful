@@ -20,12 +20,12 @@ class Min extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Min)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		return 'MIN('.$field.')';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__min';
 	}

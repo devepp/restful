@@ -15,6 +15,8 @@ use App\Reporting\Selectables\Max;
 use App\Reporting\Selectables\Standard;
 use App\Reporting\Selectables\Sum;
 use App\Reporting\SelectedField;
+use App\Reporting\SelectedFieldCollection;
+use App\Reporting\SelectedFilterCollection;
 use App\Reporting\SelectionsInterface;
 use PHPUnit\Framework\TestCase;
 use Tests\Doubles\GetTable;
@@ -27,12 +29,13 @@ class QueryGroupTest extends TestCase
 	 * @dataProvider provider
 	 *
 	 * @param QueryGroup $group
-	 * @param SelectionsInterface $selections
+	 * @param $fields
+	 * @param $filters
 	 * @param $expectedQueryStatement
 	 */
-	public function testGetQuery(QueryGroup $group, SelectionsInterface $selections, $expectedQueryStatement)
+	public function testGetQuery(QueryGroup $group, $fields, $filters, $expectedQueryStatement)
 	{
-		$query = $group->getQuery(new QueryBuilderFactory(), $selections);
+		$query = $group->getQuery(new QueryBuilderFactory(), $fields, $filters);
 
 		$this->assertSame($expectedQueryStatement, $query->getStatementExpression());
 	}
@@ -40,8 +43,8 @@ class QueryGroupTest extends TestCase
 	public function provider()
 	{
 		return [
-			[$this->getNonNestedQueryGroup(), $this->getStandardSelections(), 'SELECT `assetsAlias`.`name` assetsAlias__name, `elementsAlias`.`name` elementsAlias__name, `recommendationsAlias`.`name` recommendationsAlias__name FROM recommendations recommendationsAlias LEFT JOIN elements elementsAlias ON elementsAlias.recommendations_id = recommendationsAlias.id LEFT JOIN assets assetsAlias ON assetsAlias.elements_id = elementsAlias.id'],
-			[$this->getNestedQueryGroup(), $this->getAggregateSelections(), 'SELECT `assetsAlias`.`name` assetsAlias__name, elementsAlias_aggregate.elementsAlias__cost__sum, recommendationsAlias_aggregate.recommendationsAlias__cost__average FROM assets assetsAlias LEFT JOIN (SELECT IFNULL(SUM(`elementsAlias`.`cost`), 0) elementsAlias__cost__sum, `assetsAlias`.`id` assetsAlias__id FROM assets assetsAlias LEFT JOIN elements elementsAlias ON elementsAlias.assets_id = assetsAlias.id) elementsAlias_aggregate ON elementsAlias_aggregate.assetsAlias__id = assetsAlias.id LEFT JOIN (SELECT AVG(`recommendationsAlias`.`cost`) recommendationsAlias__cost__average, `assetsAlias`.`id` assetsAlias__id FROM assets assetsAlias LEFT JOIN elements elementsAlias ON elementsAlias.assets_id = assetsAlias.id LEFT JOIN recommendations recommendationsAlias ON recommendationsAlias.elements_id = elementsAlias.id) recommendationsAlias_aggregate ON recommendationsAlias_aggregate.assetsAlias__id = assetsAlias.id'],
+			[$this->getNonNestedQueryGroup(), $this->getStandardFields(), new SelectedFilterCollection(), 'SELECT `assetsAlias`.`name` assetsAlias__name, `elementsAlias`.`name` elementsAlias__name, `recommendationsAlias`.`name` recommendationsAlias__name FROM recommendations recommendationsAlias LEFT JOIN elements elementsAlias ON elementsAlias.recommendations_id = recommendationsAlias.id LEFT JOIN assets assetsAlias ON assetsAlias.elements_id = elementsAlias.id'],
+			[$this->getNestedQueryGroup(), $this->getAggregateFields(), new SelectedFilterCollection(), 'SELECT `assetsAlias`.`name` assetsAlias__name, elementsAlias_aggregate.elementsAlias__cost__sum, recommendationsAlias_aggregate.recommendationsAlias__cost__average FROM assets assetsAlias LEFT JOIN (SELECT IFNULL(SUM(`elementsAlias`.`cost`), 0) elementsAlias__cost__sum, `assetsAlias`.`id` assetsAlias__id FROM assets assetsAlias LEFT JOIN elements elementsAlias ON elementsAlias.assets_id = assetsAlias.id) elementsAlias_aggregate ON elementsAlias_aggregate.assetsAlias__id = assetsAlias.id LEFT JOIN (SELECT AVG(`recommendationsAlias`.`cost`) recommendationsAlias__cost__average, `assetsAlias`.`id` assetsAlias__id FROM assets assetsAlias LEFT JOIN elements elementsAlias ON elementsAlias.assets_id = assetsAlias.id LEFT JOIN recommendations recommendationsAlias ON recommendationsAlias.elements_id = elementsAlias.id) recommendationsAlias_aggregate ON recommendationsAlias_aggregate.assetsAlias__id = assetsAlias.id'],
 		];
 	}
 
@@ -79,49 +82,43 @@ class QueryGroupTest extends TestCase
 		);
 	}
 
-	private function getStandardSelections()
+	private function getStandardFields()
 	{
 		$assetsTable = $this->getTable('assets');
 		$elementsTable = $this->getTable('elements');
 		$recommendationsTable = $this->getTable('recommendations');
-		$selections = new Selections(
-			[
-				new SelectedField(
-					new ReportField(
-						$assetsTable,
-						$assetsTable->dbField('name'),
-						'name'
-					),
-					new Standard(),
-					'Name'
+		$selections = new SelectedFieldCollection([
+			new SelectedField(
+				new ReportField(
+					$assetsTable,
+					$assetsTable->dbField('name'),
+					'name'
 				),
-				new SelectedField(
-					new ReportField(
-						$elementsTable,
-						$elementsTable->dbField('name'),
-						'elementName'
-					),
-					new Standard(),
-					'Element Name'
+				new Standard(),
+				'Name'
+			),
+			new SelectedField(
+				new ReportField(
+					$elementsTable,
+					$elementsTable->dbField('name'),
+					'elementName'
 				),
-				new SelectedField(
-					new ReportField(
-						$recommendationsTable,
-						$recommendationsTable->dbField('name'),
-						'recommendationName'
-					),
-					new Standard(),
-					'Recommendation Name'
-				)
-			],
-			[],
-			new Limit(5, 0)
-		);
+				new Standard(),
+				'Element Name'
+			),
+			new SelectedField(
+				new ReportField(
+					$recommendationsTable,
+					$recommendationsTable->dbField('name'),
+					'recommendationName'
+				),
+				new Standard(),
+				'Recommendation Name'
+			)
+		]);
 
 		return $selections;
 	}
-
-
 
 	private function getNestedQueryGroup()
 	{
@@ -146,44 +143,40 @@ class QueryGroupTest extends TestCase
 		);
 	}
 
-	private function getAggregateSelections()
+	private function getAggregateFields()
 	{
 		$assetsTable = $this->getTable('assets');
 		$elementsTable = $this->getTable('elements');
 		$recommendationsTable = $this->getTable('recommendations');
-		$selections = new Selections(
-			[
-				new SelectedField(
-					new ReportField(
-						$assetsTable,
-						$assetsTable->dbField('name'),
-						'name'
-					),
-					new Standard(),
-					'Name'
+		$selections = new SelectedFieldCollection([
+			new SelectedField(
+				new ReportField(
+					$assetsTable,
+					$assetsTable->dbField('name'),
+					'name'
 				),
-				new SelectedField(
-					new ReportField(
-						$elementsTable,
-						$elementsTable->dbField('cost'),
-						'cost'
-					),
-					new Sum(),
-					'Total Element Cost'
+				new Standard(),
+				'Name'
+			),
+			new SelectedField(
+				new ReportField(
+					$elementsTable,
+					$elementsTable->dbField('cost'),
+					'cost'
 				),
-				new SelectedField(
-					new ReportField(
-						$recommendationsTable,
-						$recommendationsTable->dbField('cost'),
-						'recommendationCost'
-					),
-					new Average(),
-					'Average Recommendation Cost'
-				)
-			],
-			[],
-			new Limit(5, 0)
-		);
+				new Sum(),
+				'Total Element Cost'
+			),
+			new SelectedField(
+				new ReportField(
+					$recommendationsTable,
+					$recommendationsTable->dbField('cost'),
+					'recommendationCost'
+				),
+				new Average(),
+				'Average Recommendation Cost'
+			)
+		]);
 
 		return $selections;
 	}

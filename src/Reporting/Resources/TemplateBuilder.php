@@ -62,12 +62,12 @@ class TemplateBuilder
 		return $clone;
 	}
 
-	public function withDefaultFilter(Filter $filter)
-	{
-		$clone  = clone $this;
-		$clone->defaultFilters[$filter->name()] = $filter;
-		return $clone;
-	}
+//	public function withDefaultFilter(Filter $filter)
+//	{
+//		$clone  = clone $this;
+//		$clone->defaultFilters[$filter->name()] = $filter;
+//		return $clone;
+//	}
 
 	public function withResource(ResourceInterface $resource)
 	{

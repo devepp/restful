@@ -14,12 +14,12 @@ class Average extends AbstractSelectable
 		return ucwords(str_replace('_', ' ', $field->name())).' (Average)';
 	}
 
-	public function selectField(string $field)
+	public function selectField($field)
 	{
 		return 'AVG('.$field.')';
 	}
 
-	public function alias(string $alias)
+	public function alias($alias)
 	{
 		return $alias.'__average';
 	}

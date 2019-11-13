@@ -21,7 +21,7 @@ class Field implements FieldInterface
 	 * Field constructor.
 	 * @param $name
 	 */
-	public function __construct(string $name)
+	public function __construct($name)
 	{
 		$this->name = $name;
 	}
