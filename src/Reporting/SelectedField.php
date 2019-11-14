@@ -40,9 +40,8 @@ class SelectedField implements FieldInterface, JsonSerializable
 	{
 		$jsonData = $this->field->jsonSerialize();
 
-		$jsonData['title'] = $jsonData['label'];
-		$jsonData['alias'] = $jsonData['field_name'];
-		$jsonData['type'] = $this->selectable->name();
+//		$jsonData['title'] = $jsonData['label'];
+		$jsonData['modifier'] = $this->selectable->name();
 		$jsonData['label'] = $this->label;
 
 		return $jsonData;

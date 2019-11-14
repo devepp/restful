@@ -62,24 +62,17 @@ class ReportTemplate implements ReportTemplateInterface
 
 	public function filters()
 	{
-		$filters = [];
+		$filters = new ReportFilterCollection();
 		foreach ($this->resources as $resource) {
-			$availableFilters = $resource->availableFilters();
-			if (count($availableFilters)) {
-				$filters[$resource->name()] = [
-					'name' => $resource->name(),
-					'filters' => $resource->availableFilters(),
-				];
-			}
+			$filters = $filters->withFilters($resource->availableFilters());
 		}
-
 		return $filters;
 	}
 
 	public function getData(DbInterface $db, ReportRequest $request)
 	{
-		$fields = $this->selectedFields($request);
-		$filters = $this->selectedFilters($request);
+		$fields = $this->fields()->getSelected($request);
+		$filters = $this->filters()->getSelected($request);
 
 		$queryGroup = $this->schema->getQueryGroup($this->getRootTable(), $this->getTables($fields, $filters));
 
@@ -91,25 +84,6 @@ class ReportTemplate implements ReportTemplateInterface
 		$data = $db->execute($query);
 
 		return new TabularData($fields, $data->all(\PDO::FETCH_ASSOC));
-	}
-
-	private function selectedFields(ReportRequest $request)
-	{
-		return $this->fields()->getSelected($request);
-	}
-
-	private function selectedFilters(ReportRequest $request)
-	{
-		return $this->availableFilters()->getSelected($request);
-	}
-
-	private function availableFilters()
-	{
-		$filters = new ReportFilterCollection();
-		foreach ($this->resources as $resource) {
-			$filters = $filters->withFilters($resource->availableFilters());
-		}
-		return $filters;
 	}
 
 	private function getLimit(ReportRequest $request)

@@ -25,7 +25,7 @@ class Filter extends AbstractFilter
 
 	public function id()
 	{
-		return $this->dbField->alias();
+		return $this->table->alias().'__'.$this->dbField->alias();
 	}
 
 	public function groupName()

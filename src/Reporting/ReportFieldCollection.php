@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Reporting;
 
-use Traversable;
+use IteratorAggregate;
+use JsonSerializable;
 
-class ReportFieldCollection implements \IteratorAggregate
+class ReportFieldCollection implements IteratorAggregate, JsonSerializable
 {
 	/** @var ReportFieldInterface[] */
 	private $fields;
@@ -16,7 +16,9 @@ class ReportFieldCollection implements \IteratorAggregate
 	 */
 	public function __construct($fields = [])
 	{
-		$this->fields = $fields;
+		foreach ($fields as $field) {
+			$this->addField($field);
+		}
 	}
 
 	/**
@@ -41,10 +43,20 @@ class ReportFieldCollection implements \IteratorAggregate
 		return $selected;
 	}
 
+	public function hasField($id)
+	{
+		return isset($this->fields[$id]);
+	}
+
+	public function getField($id)
+	{
+		return $this->fields[$id];
+	}
+
 	public function withField(ReportFieldInterface $field)
 	{
 		$clone = clone $this;
-		$clone->fields[] = $field;
+		$clone->addField($field);
 		return $clone;
 	}
 
@@ -73,5 +85,15 @@ class ReportFieldCollection implements \IteratorAggregate
 		}
 
 		return $fields;
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->fields;
+	}
+
+	private function addField(ReportFieldInterface $field)
+	{
+		$this->fields[$field->id()] = $field;
 	}
 }

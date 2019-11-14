@@ -131,7 +131,7 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 	public function selected(ReportRequest $request)
 	{
 		foreach ($request->fields() as $selectedField) {
-			if ($selectedField['name'] === $this->name()) {
+			if ($selectedField['id'] === $this->id()) {
 				return true;
 			}
 		}
@@ -142,8 +142,8 @@ class ReportField implements JsonSerializable, ReportFieldInterface
 	public function selectField(ReportRequest $request)
 	{
 		foreach ($request->fields() as $selectedField) {
-			if ($selectedField['name'] === $this->name()) {
-				return new SelectedField($this, AbstractSelectable::getSelectable($selectedField['type']), $selectedField['label']);
+			if ($selectedField['id'] === $this->id()) {
+				return new SelectedField($this, AbstractSelectable::getSelectable($selectedField['modifier']), $selectedField['label']);
 			}
 		}
 
