@@ -25,7 +25,7 @@ class Connection implements DbInterface
 	 * @param Credentials $credentials
 	 * @param ConnectionOptions $options
 	 */
-	public function __construct(PDO $pdo, Dsn $dsn, Credentials $credentials, ConnectionOptions $options)
+	public function __construct(PDO $pdo, Dsn $dsn = null, Credentials $credentials = null, ConnectionOptions $options = null)
 	{
 		$this->pdo = $pdo;
 		$this->dsn = $dsn;
@@ -61,7 +61,7 @@ class Connection implements DbInterface
 
 	public function rollback()
 	{
-		return $this->pdo->commit();
+		return $this->pdo->rollback();
 	}
 
 	public function lastInsertId()

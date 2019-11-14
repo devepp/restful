@@ -4,8 +4,12 @@ namespace Tests\Functional;
 
 use App\Domain\Reports\WorkOrders;
 use App\Reporting\DB\Connection;
+use App\Reporting\DB\ConnectionManager;
 use App\Reporting\DB\DbInterface;
+use App\Reporting\ReportFilterCollection;
 use App\Reporting\ReportRequest;
+use App\Reporting\RequestedFilterCollection;
+use App\Reporting\Resources\Limit;
 use Helmich\JsonAssert\JsonAssertions;
 use PHPUnit\Framework\TestCase;
 
@@ -42,17 +46,39 @@ class ReportTest extends TestCase
 	{
 		$reportTemplate = $this->getReportTemplate();
 
-		$db = $this->createMock(Connection::class);
+		$db = ConnectionManager::getConnection();
 
-
-		$request = new ReportRequest();
+		$request = $this->getRequest();
 
 		$data = $reportTemplate->getData($db, $request);
+
+		\var_dump($data);
+
+		$this->assertTrue(true);
 	}
 
 	private function getReportTemplate()
 	{
 		return new WorkOrders();
+	}
+
+	private function getRequest()
+	{
+		$reportTemplate = $this->getReportTemplate();
+		$availableFields = $reportTemplate->fields();
+
+		$fields = [];
+		$count = 0;
+		foreach ($availableFields as $field) {
+			$fields[] = $field;
+			$count++;
+			if ($count > 10) {
+				continue;
+			}
+		}
+
+		$filters = new RequestedFilterCollection([]);
+		return new ReportRequest($fields, $filters, [], [], 20, 0);
 	}
 
 	private function nestedJsonFieldSchema()
