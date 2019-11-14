@@ -8,7 +8,7 @@ use JsonSerializable;
 class SelectedFieldCollection implements IteratorAggregate, JsonSerializable
 {
 	/** @var FieldInterface[] */
-	private $selectedFields;
+	private $selectedFields = [];
 
 	/**
 	 * SelectedFieldCollection constructor.

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Reporting;
 
 use Traversable;
@@ -8,7 +7,7 @@ use Traversable;
 class ReportFilterCollection implements \IteratorAggregate
 {
 	/** @var ReportFilterInterface[] */
-	private $filters;
+	private $filters = [];
 
 	/**
 	 * ReportFilterCollection constructor.
@@ -16,7 +15,9 @@ class ReportFilterCollection implements \IteratorAggregate
 	 */
 	public function __construct($filters = [])
 	{
-		$this->filters = $filters;
+		foreach ($filters as $filter) {
+			$this->addFilter($filter);
+		}
 	}
 
 	/**
@@ -29,23 +30,33 @@ class ReportFilterCollection implements \IteratorAggregate
 		}
 	}
 
-	public function getSelected(ReportRequest $request)
+	public function hasFilter($id)
 	{
-		$selected = new SelectedFilterCollection([]);
-
-		foreach ($this->filters as $filter) {
-			if ($filter->selected($request)) {
-				$selected = $selected->withFilter($filter->selectFilter($request));
-			}
-		}
-		return $selected;
+		return isset($this->filters[$id]);
 	}
+
+	public function getFilter($id)
+	{
+		return $this->filters[$id];
+	}
+
+//	public function getSelected(ReportRequest $request)
+//	{
+//		$selected = new SelectedFilterCollection([]);
+//
+//		foreach ($this->filters as $filter) {
+//			if ($filter->selected($request)) {
+//				$selected = $selected->withFilter($filter->selectFilter($request));
+//			}
+//		}
+//		return $selected;
+//	}
 
 	public function withFilter(ReportFilterInterface $filter)
 	{
 		$clone = clone $this;
 
-		$clone->filters[] = $filter;
+		$clone->addFilter($filter);
 
 		return $clone;
 	}
@@ -54,8 +65,8 @@ class ReportFilterCollection implements \IteratorAggregate
 	{
 		$clone = clone $this;
 
-		foreach ($filters->filters as $filter) {
-			$clone->filters[] = $filter;
+		foreach ($filters as $filter) {
+			$clone->addFilter($filter);
 		}
 
 		return $clone;
@@ -74,6 +85,11 @@ class ReportFilterCollection implements \IteratorAggregate
 			$filters[$filter->groupName()]['filters'][] = $filter;
 		}
 
-		return $filters;
+		return array_values($filters);
+	}
+
+	private function addFilter(ReportFilterInterface $filter)
+	{
+		$this->filters[$filter->id()] = $filter;
 	}
 }

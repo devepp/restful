@@ -8,7 +8,7 @@ use JsonSerializable;
 class ReportFieldCollection implements IteratorAggregate, JsonSerializable
 {
 	/** @var ReportFieldInterface[] */
-	private $fields;
+	private $fields = [];
 
 	/**
 	 * ReportFieldCollection constructor.
@@ -84,7 +84,7 @@ class ReportFieldCollection implements IteratorAggregate, JsonSerializable
 			$fields[$field->groupName()]['fields'][] = $field;
 		}
 
-		return $fields;
+		return array_values($fields);
 	}
 
 	public function jsonSerialize()

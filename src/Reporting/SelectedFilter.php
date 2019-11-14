@@ -3,6 +3,7 @@
 namespace App\Reporting;
 
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use App\Reporting\Filters\Constrains;
 use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\Resources\Table;
 use JsonSerializable;
@@ -15,7 +16,7 @@ class SelectedFilter implements FilterInterface, JsonSerializable
 	/** @var string */
 	protected $label;
 
-	/** @var AbstractConstraint */
+	/** @var Constrains */
 	protected $constraint;
 
 	/** @var array */
@@ -24,10 +25,10 @@ class SelectedFilter implements FilterInterface, JsonSerializable
 	/**
 	 * SelectedFilter constructor.
 	 * @param ReportFilterInterface $filter
-	 * @param AbstractConstraint $constraint
+	 * @param Constrains $constraint
 	 * @param array $inputs
 	 */
-	public function __construct(ReportFilterInterface $filter, AbstractConstraint $constraint, $inputs = [])
+	public function __construct(ReportFilterInterface $filter, Constrains $constraint, $inputs = [])
 	{
 		$this->filter = $filter;
 		$this->constraint = $constraint;

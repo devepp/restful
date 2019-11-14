@@ -10,6 +10,7 @@ class ReportRequest
 {
 	private $requestedFields;
 
+	/** @var RequestedFilterCollection */
 	private $requestedFilters;
 
 	private $requestedGrouping;
@@ -44,7 +45,10 @@ class ReportRequest
 	public static function fromRequest(ServerRequestInterface $request)
 	{
 		$fields = $request->getAttribute('selected_fields', []);
-		$filters = $request->getAttribute('selected_filters', []);
+
+		$filterData = $request->getAttribute('selected_filters', []);
+		$filters = RequestedFilterCollection::fromRequestDataArray($filterData);
+
 		$grouping = $request->getAttribute('grouping', []);
 		$sorting = $request->getAttribute('sort', []);
 
@@ -69,7 +73,7 @@ class ReportRequest
 	}
 
 	/**
-	 * @return array
+	 * @return RequestedFilterCollection
 	 */
 	public function filters()
 	{

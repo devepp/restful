@@ -7,7 +7,7 @@ use App\Reporting\Resources\Resource;
 use PHPUnit\Framework\TestCase;
 use Tests\Doubles\GetSchema;
 
-class ReportingTest extends TestCase
+class PathTest extends TestCase
 {
 	use GetSchema;
 

@@ -11,6 +11,8 @@ use Psr\Http\Message\ServerRequestInterface;
 interface ReportFilterInterface extends JsonSerializable
 {
 
+	public function id();
+
 	public function groupName();
 
 	/**
