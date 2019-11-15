@@ -1,20 +1,23 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace App\Reporting\DB\QueryBuilder\Builders;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\SubQuery;
 use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
-use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use App\Reporting\DB\QueryBuilder\SqlExpressionInterface;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
 use App\Reporting\DB\QueryBuilder\Traits\Groups;
 use App\Reporting\DB\QueryBuilder\Traits\Joins;
 use App\Reporting\DB\QueryBuilder\Traits\Limits;
+use App\Reporting\DB\QueryBuilder\Traits\MakesExpressions;
+use App\Reporting\DB\QueryBuilder\Traits\MakesSubQueryBuilder;
 use App\Reporting\DB\QueryBuilder\Traits\Orders;
 use InvalidArgumentException;
 
 class Select extends QueryBuilder implements SelectQueryBuilderInterface
 {
-	use Joins, ConstrainsWithWheres, Groups, Orders, Limits, makesExpressions;
+	use Joins, ConstrainsWithWheres, Groups, Orders, Limits, MakesExpressions, MakesSubQueryBuilder;
 
 	protected $select = [];
 
@@ -50,15 +53,6 @@ class Select extends QueryBuilder implements SelectQueryBuilderInterface
 		$clone->select[] = new SubQuery($queryBuilder, $alias);
 
 		return $clone;
-	}
-
-	/**
-	 * @param $tableExpression
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function subQuery($tableExpression)
-	{
-		return new self($tableExpression);
 	}
 
 	public function getStatementExpression()

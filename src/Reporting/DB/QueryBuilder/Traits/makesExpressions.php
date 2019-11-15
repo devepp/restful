@@ -4,7 +4,7 @@ namespace App\Reporting\DB\QueryBuilder\Traits;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
 
-trait makesExpressions
+trait MakesExpressions
 {
 	public function expression($expressionString, $parameters = [])
 	{

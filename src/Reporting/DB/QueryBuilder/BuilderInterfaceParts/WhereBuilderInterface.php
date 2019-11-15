@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace App\Reporting\DB\QueryBuilder\BuilderInterfaceParts;
+
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 
 interface WhereBuilderInterface
 {

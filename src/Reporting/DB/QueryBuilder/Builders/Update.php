@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace App\Reporting\DB\QueryBuilder\Builders;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
 use App\Reporting\DB\QueryBuilder\Traits\Joins;
 use App\Reporting\DB\QueryBuilder\Traits\Limits;
-use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
+use App\Reporting\DB\QueryBuilder\Traits\MakesExpressions;
+use App\Reporting\DB\QueryBuilder\Traits\MakesSubQueryBuilder;
 use App\Reporting\DB\QueryBuilder\Traits\Orders;
 use App\Reporting\DB\QueryBuilder\Traits\SetsValues;
+use App\Reporting\DB\QueryBuilder\UpdateQueryBuilderInterface;
 
 class Update extends QueryBuilder implements UpdateQueryBuilderInterface
 {
-	use ConstrainsWithWheres, Joins, SetsValues, Orders, Limits, makesExpressions;
+	use ConstrainsWithWheres, Joins, SetsValues, Orders, Limits, MakesExpressions, MakesSubQueryBuilder;
 
 	/** @var TableExpression */
 	protected $updateTable;
@@ -57,15 +59,4 @@ class Update extends QueryBuilder implements UpdateQueryBuilderInterface
 
 		return $parameters;
 	}
-
-	/**
-	 * @param $tableExpression
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function subQuery($tableExpression)
-	{
-		return new Select($tableExpression);
-	}
-
-
 }

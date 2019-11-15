@@ -2,8 +2,8 @@
 
 namespace App\Reporting\DB\QueryBuilder\QueryParts;
 
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\WhereBuilderInterface;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
-use App\Reporting\DB\QueryBuilder\WhereBuilderInterface;
 
 class WhereCollection implements WhereInterface, WhereBuilderInterface
 {

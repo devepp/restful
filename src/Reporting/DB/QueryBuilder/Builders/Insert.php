@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace App\Reporting\DB\QueryBuilder\Builders;
 
+use App\Reporting\DB\QueryBuilder\InsertQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
-use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
+use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
+use App\Reporting\DB\QueryBuilder\Traits\MakesExpressions;
+use App\Reporting\DB\QueryBuilder\Traits\MakesSubQueryBuilder;
 use App\Reporting\DB\QueryBuilder\Traits\SetsValues;
 
 class Insert extends QueryBuilder implements InsertQueryBuilderInterface
 {
-	use SetsValues, makesExpressions;
+	use SetsValues, MakesExpressions, MakesSubQueryBuilder;
 
 	/** @var TableExpression */
 	protected $insertTable;

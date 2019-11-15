@@ -2,6 +2,10 @@
 
 namespace App\Reporting\DB\QueryBuilder;
 
+use App\Reporting\DB\QueryBuilder\Builders\Delete;
+use App\Reporting\DB\QueryBuilder\Builders\Insert;
+use App\Reporting\DB\QueryBuilder\Builders\Select;
+use App\Reporting\DB\QueryBuilder\Builders\Update;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
 
 class QueryBuilderFactory implements QueryBuilderFactoryInterface

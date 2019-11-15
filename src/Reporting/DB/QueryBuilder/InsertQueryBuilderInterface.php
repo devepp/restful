@@ -2,7 +2,11 @@
 
 namespace App\Reporting\DB\QueryBuilder;
 
-interface InsertQueryBuilderInterface extends QueryBuilderInterface, SetsValuesInterface
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\ExpressionFactoryInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\SetsValuesInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\SubQueryBuilderFactoryInterface;
+
+interface InsertQueryBuilderInterface extends QueryBuilderInterface, SetsValuesInterface, SubQueryBuilderFactoryInterface, ExpressionFactoryInterface
 {
 
 	/**
@@ -10,11 +14,4 @@ interface InsertQueryBuilderInterface extends QueryBuilderInterface, SetsValuesI
 	 * @return InsertQueryBuilderInterface
 	 */
 	public function insertSubQuery(SelectQueryBuilderInterface $selectQuery);
-
-	/**
-	 * @param $expressionString
-	 * @param array $parameters
-	 * @return Expression
-	 */
-	public function expression($expressionString, $parameters = []);
 }

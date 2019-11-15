@@ -2,34 +2,19 @@
 
 namespace App\Reporting\DB\QueryBuilder;
 
-use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\ExpressionFactoryInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\JoinsInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\OrdersInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\SetsValuesInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\SubQueryBuilderFactoryInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\WhereBuilderInterface;
 
-interface UpdateQueryBuilderInterface extends QueryBuilderInterface, WhereBuilderInterface, JoinsInterface, SetsValuesInterface
+interface UpdateQueryBuilderInterface extends QueryBuilderInterface, WhereBuilderInterface, JoinsInterface, SetsValuesInterface, OrdersInterface, SubQueryBuilderFactoryInterface, ExpressionFactoryInterface
 {
-
-	/**
-	 * @param $field
-	 * @param string $direction
-	 * @return UpdateQueryBuilderInterface
-	 */
-	public function orderBy($field, $direction = 'ASC');
 
 	/**
 	 * @param $limit
 	 * @return UpdateQueryBuilderInterface
 	 */
 	public function limit($limit);
-
-	/**
-	 * @param $tableExpression
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function subQuery($tableExpression);
-
-	/**
-	 * @param $expressionString
-	 * @param array $parameters
-	 * @return Expression
-	 */
-	public function expression($expressionString, $parameters = []);
 }

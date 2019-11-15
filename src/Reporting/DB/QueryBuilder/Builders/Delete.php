@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace App\Reporting\DB\QueryBuilder\Builders;
 
+use App\Reporting\DB\QueryBuilder\DeleteQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
-use App\Reporting\DB\QueryBuilder\QueryTypes\Type;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
 use App\Reporting\DB\QueryBuilder\Traits\Joins;
 use App\Reporting\DB\QueryBuilder\Traits\Limits;
-use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
+use App\Reporting\DB\QueryBuilder\Traits\MakesExpressions;
+use App\Reporting\DB\QueryBuilder\Traits\MakesSubQueryBuilder;
 use App\Reporting\DB\QueryBuilder\Traits\Orders;
 
 class Delete extends QueryBuilder implements DeleteQueryBuilderInterface
 {
-	use Joins, ConstrainsWithWheres, Orders, Limits, makesExpressions;
+	use Joins, ConstrainsWithWheres, Orders, Limits, MakesExpressions, MakesSubQueryBuilder;
 
 	/** @var TableExpression */
 	protected $from;
@@ -20,9 +21,8 @@ class Delete extends QueryBuilder implements DeleteQueryBuilderInterface
 	protected $parameters = [];
 
 	/**
-	 * QueryBuilderInterface constructor.
+	 * Delete constructor.
 	 * @param $tableExpression
-	 * @param Type|null $type
 	 */
 	public function __construct($tableExpression)
 	{
@@ -57,15 +57,4 @@ class Delete extends QueryBuilder implements DeleteQueryBuilderInterface
 
 		return $parameters;
 	}
-
-	/**
-	 * @param $tableExpression
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function subQuery($tableExpression)
-	{
-		return new Select($tableExpression);
-	}
-
-
 }

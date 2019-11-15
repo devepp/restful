@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Reporting\DB\QueryBuilder;
+namespace App\Reporting\DB\QueryBuilder\BuilderInterfaceParts;
 
 interface SetsValuesInterface
 {

@@ -2,32 +2,18 @@
 
 namespace App\Reporting\DB\QueryBuilder;
 
-interface DeleteQueryBuilderInterface extends QueryBuilderInterface, WhereBuilderInterface, JoinsInterface
-{
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\ExpressionFactoryInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\JoinsInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\OrdersInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\SubQueryBuilderFactoryInterface;
+use App\Reporting\DB\QueryBuilder\BuilderInterfaceParts\WhereBuilderInterface;
 
-	/**
-	 * @param $field
-	 * @param string $direction
-	 * @return DeleteQueryBuilderInterface
-	 */
-	public function orderBy($field, $direction = 'ASC');
+interface DeleteQueryBuilderInterface extends QueryBuilderInterface, WhereBuilderInterface, JoinsInterface, OrdersInterface, SubQueryBuilderFactoryInterface, ExpressionFactoryInterface
+{
 
 	/**
 	 * @param $limit
 	 * @return DeleteQueryBuilderInterface
 	 */
 	public function limit($limit);
-
-	/**
-	 * @param $tableExpression
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function subQuery($tableExpression);
-
-	/**
-	 * @param $expressionString
-	 * @param array $parameters
-	 * @return Expression
-	 */
-	public function expression($expressionString, $parameters = []);
 }

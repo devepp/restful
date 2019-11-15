@@ -3,8 +3,8 @@
 namespace Tests\Unit\Reporting\DB\QueryBuilder;
 
 use App\Reporting\DB\Query;
+use App\Reporting\DB\QueryBuilder\Builders\Select;
 use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
-use App\Reporting\DB\QueryBuilder\Select;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use PHPUnit\Framework\TestCase;
 
