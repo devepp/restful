@@ -99,4 +99,11 @@ interface DeleteQueryBuilderInterface extends QueryBuilderInterface
 	 * @return SelectQueryBuilderInterface
 	 */
 	public function subQuery($tableExpression);
+
+	/**
+	 * @param $expressionString
+	 * @param array $parameters
+	 * @return Expression
+	 */
+	public function expression($expressionString, $parameters = []);
 }

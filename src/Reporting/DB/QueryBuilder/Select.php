@@ -4,6 +4,7 @@ namespace App\Reporting\DB\QueryBuilder;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\SubQuery;
 use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
+use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
 use App\Reporting\DB\QueryBuilder\Traits\Groups;
 use App\Reporting\DB\QueryBuilder\Traits\Joins;
@@ -13,7 +14,7 @@ use InvalidArgumentException;
 
 class Select extends QueryBuilder implements SelectQueryBuilderInterface
 {
-	use Joins, ConstrainsWithWheres, Groups, Orders, Limits;
+	use Joins, ConstrainsWithWheres, Groups, Orders, Limits, makesExpressions;
 
 	protected $select = [];
 

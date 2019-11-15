@@ -6,12 +6,13 @@ use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
 use App\Reporting\DB\QueryBuilder\Traits\Joins;
 use App\Reporting\DB\QueryBuilder\Traits\Limits;
+use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
 use App\Reporting\DB\QueryBuilder\Traits\Orders;
 use App\Reporting\DB\QueryBuilder\Traits\SetsValues;
 
 class Update extends QueryBuilder implements UpdateQueryBuilderInterface
 {
-	use ConstrainsWithWheres, Joins, SetsValues, Orders, Limits;
+	use ConstrainsWithWheres, Joins, SetsValues, Orders, Limits, makesExpressions;
 
 	/** @var TableExpression */
 	protected $updateTable;

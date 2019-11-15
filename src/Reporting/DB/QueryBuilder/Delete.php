@@ -7,11 +7,12 @@ use App\Reporting\DB\QueryBuilder\QueryTypes\Type;
 use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
 use App\Reporting\DB\QueryBuilder\Traits\Joins;
 use App\Reporting\DB\QueryBuilder\Traits\Limits;
+use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
 use App\Reporting\DB\QueryBuilder\Traits\Orders;
 
 class Delete extends QueryBuilder implements DeleteQueryBuilderInterface
 {
-	use Joins, ConstrainsWithWheres, Orders, Limits;
+	use Joins, ConstrainsWithWheres, Orders, Limits, makesExpressions;
 
 	/** @var TableExpression */
 	protected $from;

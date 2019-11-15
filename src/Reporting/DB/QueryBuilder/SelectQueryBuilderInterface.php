@@ -2,6 +2,8 @@
 
 namespace App\Reporting\DB\QueryBuilder;
 
+use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
+
 interface SelectQueryBuilderInterface extends QueryBuilderInterface
 {
 	/**
@@ -135,4 +137,11 @@ interface SelectQueryBuilderInterface extends QueryBuilderInterface
 	 * @return SelectQueryBuilderInterface
 	 */
 	public function subQuery($tableExpression);
+
+	/**
+	 * @param $expressionString
+	 * @param array $parameters
+	 * @return Expression
+	 */
+	public function expression($expressionString, $parameters = []);
 }

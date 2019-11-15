@@ -3,11 +3,12 @@
 namespace App\Reporting\DB\QueryBuilder;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\TableExpression;
+use App\Reporting\DB\QueryBuilder\Traits\makesExpressions;
 use App\Reporting\DB\QueryBuilder\Traits\SetsValues;
 
 class Insert extends QueryBuilder implements InsertQueryBuilderInterface
 {
-	use SetsValues;
+	use SetsValues, makesExpressions;
 
 	/** @var TableExpression */
 	protected $insertTable;

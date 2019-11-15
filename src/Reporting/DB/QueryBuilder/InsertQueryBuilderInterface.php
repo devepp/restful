@@ -22,4 +22,11 @@ interface InsertQueryBuilderInterface extends QueryBuilderInterface
 	 * @return InsertQueryBuilderInterface
 	 */
 	public function insertSubQuery(SelectQueryBuilderInterface $selectQuery);
+
+	/**
+	 * @param $expressionString
+	 * @param array $parameters
+	 * @return Expression
+	 */
+	public function expression($expressionString, $parameters = []);
 }
