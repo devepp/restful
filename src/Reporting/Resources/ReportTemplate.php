@@ -67,11 +67,11 @@ class ReportTemplate implements ReportTemplateInterface
 	public function getData(DbInterface $db, ReportRequest $request)
 	{
 		$fields = $this->fields()->getSelected($request);
-		$filters = $this->filters()->getSelected($request);
+		$filters = $this->filters()->getSelected($request->filters());
 
 		$queryGroup = $this->schema->getQueryGroup($this->getRootTable(), $this->getTables($fields, $filters));
 
-		$queryBuilder = $queryGroup->getQuery($db, $fields, $filters, $this->getLimit($request), $request->groupings(), $request->sort());
+		$queryBuilder = $queryGroup->getQuery($db, $fields, $filters, $request->limit(), $request->groupings(), $request->sorts());
 
 		/** @var Query $query */
 		$query = $queryBuilder->getQuery();
@@ -79,11 +79,6 @@ class ReportTemplate implements ReportTemplateInterface
 		$data = $db->execute($query);
 
 		return new TabularData($fields, $data->all(\PDO::FETCH_ASSOC));
-	}
-
-	private function getLimit(ReportRequest $request)
-	{
-		return new Limit($request->limit(), $request->offset());
 	}
 
 	private function getRootTable()

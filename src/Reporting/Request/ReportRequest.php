@@ -2,112 +2,104 @@
 
 namespace App\Reporting\Request;
 
-use App\Reporting\RequestedFilterCollection;
+use App\Reporting\Common\Values;
 use Psr\Http\Message\ServerRequestInterface;
 
 class ReportRequest
 {
-	private $requestedFields;
+	/** @var RequestedFields */
+	private $fields;
 
-	/** @var RequestedFilterCollection */
-	private $requestedFilters;
+	/** @var RequestedFilters */
+	private $filters;
 
-	private $requestedGrouping;
+	/** @var Groupings */
+	private $groupings;
 
-	private $requestedSorting;
+	/** @var Sorts */
+	private $sorts;
 
-	private $requestedLimit;
-
-	private $requestedOffset;
+	/** @var Limit|null */
+	private $limit;
 
 	/**
 	 * ReportRequest constructor.
-	 * @param $requestedFields
-	 * @param $requestedFilters
-	 * @param $requestedLimit
-	 * @param $requestedGrouping
-	 * @param $requestedSorting
+	 * @param RequestedFields $fields
+	 * @param RequestedFilters $filters
+	 * @param Groupings $groupings
+	 * @param Sorts $sorts
+	 * @param Limit|null $limit
 	 */
-	public function __construct($requestedFields, $requestedFilters, $requestedGrouping, $requestedSorting, $requestedLimit, $requestedOffset)
+	public function __construct(RequestedFields $fields, RequestedFilters $filters, Groupings $groupings, Sorts $sorts, Limit $limit = null)
 	{
-		$this->requestedFields = $requestedFields;
-		$this->requestedFilters = $requestedFilters;
-		$this->requestedLimit = $requestedLimit;
-		$this->requestedGrouping = $requestedGrouping;
-		$this->requestedSorting = $requestedSorting;
+		$this->fields = $fields;
+		$this->filters = $filters;
+		$this->groupings = $groupings;
+		$this->sorts = $sorts;
+		$this->limit = $limit;
 	}
 
-	/**
-	 * @param ServerRequestInterface $request
-	 * @return ReportRequest
-	 */
 	public static function fromRequest(ServerRequestInterface $request)
 	{
-		$fields = $request->getAttribute('selected_fields', []);
+		$fields = RequestedFields::fromRequestDataArray($request->getAttribute('selected_fields', []));
+		$filters = RequestedFilters::fromRequestDataArray($request->getAttribute('selected_filters', []));
+		$grouping = Groupings::fromRequestDataArray($request->getAttribute('groupings', []));
+		$sorting = Sorts::fromRequestDataArray($request->getAttribute('sorts', []));
+		$limit = Limit::fromRequest($request);
 
-		$filterData = $request->getAttribute('selected_filters', []);
-		$filters = RequestedFilterCollection::fromRequestDataArray($filterData);
+		return new self($fields, $filters, $grouping, $sorting, $limit);
+	}
 
-		$grouping = $request->getAttribute('grouping', []);
-		$sorting = $request->getAttribute('sort', []);
+	public static function fromInputArray($requestData)
+	{
+		$data = Values::fromArray($requestData);
 
-		$limit = $request->getAttribute('limit', null);
-		if ($limit) {
-			$offset = $request->getAttribute('offset', null);
-		} else {
-			$limit = $request->getAttribute('perPage', null);
-			$page = $request->getAttribute('page', 1);
-			$offset = $limit && $page ? $limit-1 * $page : null;
-		}
+		$fields = RequestedFields::fromRequestDataArray($data->value('selected_fields', []));
+		$filters = RequestedFilters::fromRequestDataArray($data->value('selected_filters', []));
+		$grouping = Groupings::fromRequestDataArray($data->value('groupings', []));
+		$sorting = Sorts::fromRequestDataArray($data->value('sorts', []));
+		$limit = Limit::fromRequestDataArray($requestData);
 
-		return new self($fields, $filters, $grouping, $sorting, $limit, $offset);
+		return new self($fields, $filters, $grouping, $sorting, $limit);
 	}
 
 	/**
-	 * @return array
+	 * @return RequestedFields
 	 */
 	public function fields()
 	{
-		return $this->requestedFields;
+		return $this->fields;
 	}
 
 	/**
-	 * @return RequestedFilterCollection
+	 * @return RequestedFilters
 	 */
 	public function filters()
 	{
-		return $this->requestedFilters;
+		return $this->filters;
 	}
 
 	/**
-	 * @return array
+	 * @return Groupings
 	 */
 	public function groupings()
 	{
-		return $this->requestedGrouping;
+		return $this->groupings;
 	}
 
 	/**
-	 * @return array
+	 * @return Sorts
 	 */
-	public function sort()
+	public function sorts()
 	{
-		return $this->requestedGrouping;
+		return $this->sorts;
 	}
 
 	/**
-	 * @return string
+	 * @return Limit|null
 	 */
 	public function limit()
 	{
-		return $this->requestedLimit;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function offset()
-	{
-		return $this->requestedOffset;
+		return $this->limit;
 	}
 }

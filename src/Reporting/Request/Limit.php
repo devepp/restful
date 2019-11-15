@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Reporting\Resources;
+namespace App\Reporting\Request;
 
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -24,19 +24,47 @@ class Limit
 		$this->offset = $offset;
 	}
 
-	/**
-	 * @return Limit
-	 */
-	public static function defaultLimit()
+	public static function default()
 	{
-		return new self(20, 0);
+		return new self(20, null);
 	}
 
-	/**
-	 * @param ServerRequestInterface $request
-	 * @return Limit
-	 */
-	public static function fromRequestOrDefault(ServerRequestInterface $request)
+	public static function fromRequestDataArray($requestLimitData)
+	{
+		$limit = null;
+		if (isset($requestFilterData['limit'])) {
+			$limit = $requestLimitData['limit'];
+		}
+		if (isset($requestFilterData['perPage'])) {
+			$limit = $requestLimitData['perPage'];
+		}
+
+		if ($limit) {
+			$offset = null;
+			if (isset($requestFilterData['offset'])) {
+				$offset = $requestLimitData['offset'];
+			}
+			if (isset($requestLimitData['page'])) {
+				$page = $requestLimitData['page'];
+				$offset = ($page - 1) * $limit;
+			}
+
+			return new self($limit, $offset);
+		}
+	}
+
+	public static function fromRequestDataArrayOrDefault($requestLimitData)
+	{
+		$limit = self::fromRequestDataArray($requestLimitData);
+
+		if ($limit) {
+			return $limit;
+		}
+
+		return self::default();
+	}
+
+	public static function fromRequest(ServerRequestInterface $request)
 	{
 		$limit = $request->getAttribute('perPage');
 
@@ -46,8 +74,17 @@ class Limit
 
 			return new self($limit, $offset);
 		}
+	}
 
-		return self::defaultLimit();
+	public static function fromRequestOrDefault(ServerRequestInterface $request)
+	{
+		$limit = self::fromRequest($request);
+
+		if ($limit) {
+			return $limit;
+		}
+
+		return self::default();
 	}
 
 	/**

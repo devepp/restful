@@ -2,6 +2,7 @@
 
 namespace App\Reporting;
 
+use App\Reporting\Request\RequestedFilters;
 use Traversable;
 
 class ReportFilterCollection implements \IteratorAggregate
@@ -28,6 +29,11 @@ class ReportFilterCollection implements \IteratorAggregate
 		foreach ($this->filters as $filter) {
 			yield $filter;
 		}
+	}
+
+	public function getSelected(RequestedFilters $requestedFilters)
+	{
+		return SelectedFilterCollection::makeFromRequestedReportFilters($requestedFilters, $this);
 	}
 
 	public function hasFilter($id)

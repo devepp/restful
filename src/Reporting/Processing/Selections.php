@@ -2,18 +2,13 @@
 
 namespace App\Reporting\Processing;
 
-use App\Reporting\Filters\Constraints\AbstractConstraint;
-use App\Reporting\Form;
 use App\Reporting\ReportFieldInterface;
 use App\Reporting\ReportFilterInterface;
+use App\Reporting\Request\Limit;
 use App\Reporting\Request\ReportRequest;
-use App\Reporting\Resources\Limit;
-use App\Reporting\Resources\ReportTemplateInterface;
-use App\Reporting\Selectables\AbstractSelectable;
 use App\Reporting\SelectedField;
 use App\Reporting\SelectedFilter;
 use App\Reporting\SelectionsInterface;
-use Psr\Http\Message\ServerRequestInterface;
 
 class Selections implements SelectionsInterface
 {

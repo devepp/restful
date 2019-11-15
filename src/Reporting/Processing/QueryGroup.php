@@ -2,20 +2,18 @@
 
 namespace App\Reporting\Processing;
 
-use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\DB\QueryBuilderFactoryInterface;
 use App\Reporting\FieldInterface;
 use App\Reporting\FilterInterface;
-use App\Reporting\Resources\Limit;
+use App\Reporting\Request\Limit;
 use App\Reporting\Resources\Table;
 use App\Reporting\Resources\TableCollection;
-use App\Reporting\Resources\TableCollectionFunctions\Filters\Filter as TableFilter;
+use App\Reporting\Resources\TableCollectionFunctions\Filters\Filter;
 use App\Reporting\Resources\TableCollectionFunctions\Maps\Map;
 use App\Reporting\Resources\TableCollectionFunctions\Sorts\Sort;
 use App\Reporting\SelectedFieldCollection;
 use App\Reporting\SelectedFilterCollection;
-use App\Reporting\SelectionsInterface;
 
 class QueryGroup
 {
@@ -188,12 +186,12 @@ class QueryGroup
 
 		$sortedTables = $tables->sort(Sort::byDistanceTo($this->fromTable(), $tables));
 
-		return $sortedTables->filter(TableFilter::excludeTable($this->fromTable()));
+		return $sortedTables->filter(Filter::excludeTable($this->fromTable()));
 	}
 
 	private function firstRelatedTable(Table $tableToFindRelationshipsFor, TableCollection $possibleRelations)
 	{
-		$related = $possibleRelations->filter(TableFilter::byDirectRelationTo($tableToFindRelationshipsFor));
+		$related = $possibleRelations->filter(Filter::byDirectRelationTo($tableToFindRelationshipsFor));
 
 		if ($related->isEmpty()) {
 			$tableAliases = implode(', ', $possibleRelations->map(Map::toAliases()));

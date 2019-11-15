@@ -4,7 +4,7 @@ namespace App\Reporting\Request;
 
 use IteratorAggregate;
 
-class RequestedFilterCollection implements IteratorAggregate
+class RequestedFilters implements IteratorAggregate
 {
 	/** @var RequestedFilter[] */
 	private $filters = [];
@@ -30,9 +30,6 @@ class RequestedFilterCollection implements IteratorAggregate
 		return new self($filters);
 	}
 
-	/**
-	 * @return \Generator|Traversable
-	 */
 	public function getIterator()
 	{
 		foreach ($this->filters as $filter) {
@@ -47,11 +44,11 @@ class RequestedFilterCollection implements IteratorAggregate
 		return $clone;
 	}
 
-	public function withFilters(RequestedFilterCollection $filters)
+	public function withFilters(RequestedFilters $filters)
 	{
 		$clone = clone $this;
 
-		foreach ($filters->filters as $filter) {
+		foreach ($filters as $filter) {
 			$clone->addFilter($filter);
 		}
 

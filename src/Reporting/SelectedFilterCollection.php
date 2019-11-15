@@ -2,6 +2,8 @@
 
 namespace App\Reporting;
 
+use App\Reporting\Request\RequestedFilters;
+
 class SelectedFilterCollection implements \IteratorAggregate
 {
 	/** @var FilterInterface[] */
@@ -18,7 +20,7 @@ class SelectedFilterCollection implements \IteratorAggregate
 		}
 	}
 
-	public static function makeFromRequestedReportFilters(RequestedFilterCollection $requestedFilters, ReportFilterCollection $reportFilters)
+	public static function makeFromRequestedReportFilters(RequestedFilters $requestedFilters, ReportFilterCollection $reportFilters)
 	{
 		$selectedFilters = new self([]);
 
