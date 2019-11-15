@@ -4,6 +4,7 @@ namespace App\Reporting\DB\QueryBuilder\Traits;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
 use App\Reporting\DB\QueryBuilder\QueryParts\Where;
+use App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection;
 use App\Reporting\DB\QueryBuilder\QueryParts\WhereExists;
 use App\Reporting\DB\QueryBuilder\QueryParts\WhereIn;
 use App\Reporting\DB\QueryBuilder\QueryParts\WhereInterface;
@@ -114,6 +115,11 @@ trait ConstrainsWithWheres
 		$clone->addWhere(new WhereNotExists($selectQueryBuilder));
 
 		return $clone;
+	}
+
+	public function whereGroup()
+	{
+		return new WhereCollection();
 	}
 
 	protected function whereStatementExpressions()

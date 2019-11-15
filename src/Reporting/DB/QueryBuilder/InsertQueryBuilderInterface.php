@@ -2,20 +2,8 @@
 
 namespace App\Reporting\DB\QueryBuilder;
 
-interface InsertQueryBuilderInterface extends QueryBuilderInterface
+interface InsertQueryBuilderInterface extends QueryBuilderInterface, SetsValuesInterface
 {
-	/**
-	 * @param $fieldName
-	 * @param $value
-	 * @return InsertQueryBuilderInterface
-	 */
-	public function setValue($fieldName, $value);
-
-	/**
-	 * @param $values
-	 * @return InsertQueryBuilderInterface
-	 */
-	public function setValues($values);
 
 	/**
 	 * @param SelectQueryBuilderInterface $selectQuery

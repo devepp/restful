@@ -2,31 +2,25 @@
 
 namespace App\Reporting\DB\QueryBuilder\QueryParts;
 
+use App\Reporting\DB\QueryBuilder\Traits\ConstrainsWithWheres;
+use App\Reporting\DB\QueryBuilder\WhereBuilderInterface;
 
-class WhereCollection
+class WhereCollection implements WhereInterface, WhereBuilderInterface
 {
-	private $wheres = [];
+	use ConstrainsWithWheres;
 
-	/**
-	 * WhereCollection constructor.
-	 * @param array $wheres
-	 */
-	public function __construct($wheres)
+	public function getStatementExpression()
 	{
-		foreach ($wheres as $where)
-		$this->wheres = $wheres;
+		return empty($this->wheres)? '' :  '('.$this->whereExpressions().')';
 	}
 
-	public function withWhere(Where $whereClause)
+	public function getParameters()
 	{
-		$collection = clone $this;
-		$collection->wheres[] = $whereClause;
-		return $collection;
+		return $this->getWhereParameters();
 	}
 
-	private function getWheres()
+	public function __toString()
 	{
-		return $this->wheres;
+		return $this->getStatementExpression();
 	}
-
 }

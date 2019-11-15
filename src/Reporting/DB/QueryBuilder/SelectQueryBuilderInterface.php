@@ -3,138 +3,46 @@
 namespace App\Reporting\DB\QueryBuilder;
 
 use App\Reporting\DB\QueryBuilder\QueryParts\Expression;
+use App\Reporting\DB\QueryBuilder\QueryParts\WhereCollection;
 
-interface SelectQueryBuilderInterface extends QueryBuilderInterface
+interface SelectQueryBuilderInterface extends QueryBuilderInterface, WhereBuilderInterface, JoinsInterface
 {
 	/**
 	 * @param mixed ...$fieldExpressions
-	 * @return SelectQueryBuilderInterface
+	 * @return SelectQueryBuilderInterface - cloned query builder
 	 */
 	public function select(...$fieldExpressions);
 
 	/**
 	 * @param SelectQueryBuilderInterface $queryBuilder
 	 * @param $alias
-	 * @return SelectQueryBuilderInterface
+	 * @return SelectQueryBuilderInterface - cloned query builder
 	 */
 	public function selectSubQuery(SelectQueryBuilderInterface $queryBuilder, $alias);
 
 	/**
 	 * @param $field
-	 * @param $operator
-	 * @param $value
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function where($field, $operator, $value);
-
-	/**
-	 * @param $whereString
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereRaw($whereString);
-
-	/**
-	 * @param $field
-	 * @param $operator
-	 * @param $value
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function orWhere($field, $operator, $value);
-
-	/**
-	 * @param $field
-	 * @param $values
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereIn($field, $values);
-
-	/**
-	 * @param $field
-	 * @param $values
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereNotIn($field, $values);
-
-	/**
-	 * @param $field
-	 * @param $low
-	 * @param $high
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereBetween($field, $low, $high);
-
-	/**
-	 * @param $field
-	 * @param $low
-	 * @param $high
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereNotBetween($field, $low, $high);
-
-	/**
-	 * @param $field
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereNull($field);
-
-	/**
-	 * @param $field
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereNotNull($field);
-
-	/**
-	 * @param SelectQueryBuilderInterface $selectQueryBuilder
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereExists(SelectQueryBuilderInterface $selectQueryBuilder);
-
-	/**
-	 * @param SelectQueryBuilderInterface $selectQueryBuilder
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function whereNotExists(SelectQueryBuilderInterface $selectQueryBuilder);
-
-	/**
-	 * @param $table
-	 * @param $on
-	 * @param string $type
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function join($table, $on, $type = 'inner');
-
-	/**
-	 * @param SelectQueryBuilderInterface $subQuery
-	 * @param $alias
-	 * @param $on
-	 * @param string $type
-	 * @return SelectQueryBuilderInterface
-	 */
-	public function joinSubQuery(SelectQueryBuilderInterface $subQuery, $alias, $on, $type = 'inner');
-
-	/**
-	 * @param $field
-	 * @return SelectQueryBuilderInterface
+	 * @return SelectQueryBuilderInterface - cloned query builder
 	 */
 	public function groupBy($field);
 
 	/**
 	 * @param $field
 	 * @param string $direction
-	 * @return SelectQueryBuilderInterface
+	 * @return SelectQueryBuilderInterface - cloned query builder
 	 */
 	public function orderBy($field, $direction = 'ASC');
 
 	/**
 	 * @param $limit
 	 * @param null $offset
-	 * @return SelectQueryBuilderInterface
+	 * @return SelectQueryBuilderInterface - cloned query builder
 	 */
 	public function limit($limit, $offset = null);
 
 	/**
 	 * @param $tableExpression
-	 * @return SelectQueryBuilderInterface
+	 * @return SelectQueryBuilderInterface - new query builder
 	 */
 	public function subQuery($tableExpression);
 
