@@ -1,9 +1,8 @@
 <?php
 
+namespace App\Reporting\Request;
 
-namespace App\Reporting;
-
-
+use App\Reporting\RequestedFilterCollection;
 use Psr\Http\Message\ServerRequestInterface;
 
 class ReportRequest

@@ -5,10 +5,9 @@ namespace App\Reporting\Filters;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\ReportFilterInterface;
-use App\Reporting\ReportRequest;
+use App\Reporting\Request\ReportRequest;
 use App\Reporting\Resources\Table;
 use App\Reporting\SelectedFilter;
-use Psr\Http\Message\ServerRequestInterface;
 
 abstract class AbstractFilter implements ReportFilterInterface
 {

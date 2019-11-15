@@ -4,9 +4,9 @@ namespace App\Reporting;
 
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\Filters\Constrains;
+use App\Reporting\Request\ReportRequest;
 use App\Reporting\Resources\Table;
 use JsonSerializable;
-use Psr\Http\Message\ServerRequestInterface;
 
 interface ReportFilterInterface extends JsonSerializable
 {

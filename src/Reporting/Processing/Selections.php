@@ -6,7 +6,7 @@ use App\Reporting\Filters\Constraints\AbstractConstraint;
 use App\Reporting\Form;
 use App\Reporting\ReportFieldInterface;
 use App\Reporting\ReportFilterInterface;
-use App\Reporting\ReportRequest;
+use App\Reporting\Request\ReportRequest;
 use App\Reporting\Resources\Limit;
 use App\Reporting\Resources\ReportTemplateInterface;
 use App\Reporting\Selectables\AbstractSelectable;

@@ -46,13 +46,13 @@ class ReportTest extends TestCase
 	{
 		$reportTemplate = $this->getReportTemplate();
 
-		$db = ConnectionManager::getConnection();
+//		$db = ConnectionManager::getConnection();
 
-		$request = $this->getRequest();
+//		$request = $this->getRequest();
 
-		$data = $reportTemplate->getData($db, $request);
+//		$data = $reportTemplate->getData($db, $request);
 
-		\var_dump($data);
+//		\var_dump($data);
 
 		$this->assertTrue(true);
 	}

@@ -2,6 +2,7 @@
 
 namespace App\Reporting;
 
+use App\Reporting\Request\ReportRequest;
 use IteratorAggregate;
 use JsonSerializable;
 

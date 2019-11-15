@@ -40,18 +40,6 @@ class ReportFilterCollection implements \IteratorAggregate
 		return $this->filters[$id];
 	}
 
-//	public function getSelected(ReportRequest $request)
-//	{
-//		$selected = new SelectedFilterCollection([]);
-//
-//		foreach ($this->filters as $filter) {
-//			if ($filter->selected($request)) {
-//				$selected = $selected->withFilter($filter->selectFilter($request));
-//			}
-//		}
-//		return $selected;
-//	}
-
 	public function withFilter(ReportFilterInterface $filter)
 	{
 		$clone = clone $this;

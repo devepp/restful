@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Reporting;
+namespace App\Reporting\Request;
 
 use App\Reporting\Filters\Constrains;
 use App\Reporting\Filters\Constraints\AbstractConstraint;

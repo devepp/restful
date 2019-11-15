@@ -2,6 +2,7 @@
 
 namespace App\Reporting;
 
+use App\Reporting\Request\ReportRequest;
 use App\Reporting\Resources\Table;
 use JsonSerializable;
 
