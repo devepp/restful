@@ -3,6 +3,7 @@
 namespace App\Reporting;
 
 use App\Reporting\Request\ReportRequest;
+use App\Reporting\Request\RequestedField;
 use IteratorAggregate;
 use JsonSerializable;
 
@@ -22,25 +23,27 @@ class ReportFieldCollection implements IteratorAggregate, JsonSerializable
 		}
 	}
 
-	/**
-	 * @return \Generator|Traversable
-	 */
 	public function getIterator()
 	{
-		foreach ($this->fields as $field) {
-			yield $field;
+		if (is_array($this->fields)) {
+			return new \ArrayIterator($this->fields);
 		}
+
+		return $this->fields;
 	}
 
 	public function getSelected(ReportRequest $request)
 	{
 		$selected = new SelectedFieldCollection([]);
 
-		foreach ($this->fields as $field) {
-			if ($field->selected($request)) {
-				$selected = $selected->withField($field->selectField($request));
+		/** @var RequestedField $requestedField */
+		foreach ($request->fields() as $requestedField) {
+			if ($this->hasField($requestedField->reportFieldId())) {
+				$selectedField = SelectedField::fromRequestField($requestedField, $this->getField($requestedField->reportFieldId()));
+				$selected = $selected->withField($selectedField);
 			}
 		}
+
 		return $selected;
 	}
 
@@ -66,7 +69,7 @@ class ReportFieldCollection implements IteratorAggregate, JsonSerializable
 		$clone = clone $this;
 
 		foreach ($fields->fields as $field) {
-			$clone->fields[] = $field;
+			$clone->addField($field);
 		}
 
 		return $clone;

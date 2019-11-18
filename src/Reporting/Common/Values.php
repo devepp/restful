@@ -14,7 +14,7 @@ class Values extends \ArrayIterator
 		return new self($array);
 	}
 
-	public static function empty()
+	public static function emptyValues()
 	{
 		return new self([]);
 	}

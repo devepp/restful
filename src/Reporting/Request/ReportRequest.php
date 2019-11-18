@@ -45,7 +45,7 @@ class ReportRequest
 		$filters = RequestedFilters::fromRequestDataArray($request->getAttribute('selected_filters', []));
 		$grouping = Groupings::fromRequestDataArray($request->getAttribute('groupings', []));
 		$sorting = Sorts::fromRequestDataArray($request->getAttribute('sorts', []));
-		$limit = Limit::fromRequest($request);
+		$limit = Limit::fromRequestOrDefault($request);
 
 		return new self($fields, $filters, $grouping, $sorting, $limit);
 	}

@@ -30,7 +30,7 @@ class RequestedField
 	public static function fromRequestDataArray($requestFieldData)
 	{
 		$reportFieldId = $requestFieldData['id'];
-		$modifier = AbstractSelectable::getSelectable($requestFieldData['modifier']['name']);
+		$modifier = AbstractSelectable::getSelectable($requestFieldData['modifier']);
 		$label = $requestFieldData['label'];
 
 		return new self($reportFieldId, $modifier, $label);

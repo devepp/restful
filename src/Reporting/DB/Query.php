@@ -2,11 +2,10 @@
 
 namespace App\Reporting\DB;
 
-
-use App\Reporting\DB\QueryBuilder\Delete;
-use App\Reporting\DB\QueryBuilder\Insert;
-use App\Reporting\DB\QueryBuilder\Select;
-use App\Reporting\DB\QueryBuilder\Update;
+use App\Reporting\DB\QueryBuilder\Builders\Delete;
+use App\Reporting\DB\QueryBuilder\Builders\Insert;
+use App\Reporting\DB\QueryBuilder\Builders\Select;
+use App\Reporting\DB\QueryBuilder\Builders\Update;
 
 class Query
 {

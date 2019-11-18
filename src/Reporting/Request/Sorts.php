@@ -6,7 +6,7 @@ use App\Reporting\Common\Values;
 
 class Sorts implements \IteratorAggregate
 {
-	private $sorts;
+	private $sorts = [];
 
 	/**
 	 * RequestedSortCollection constructor.

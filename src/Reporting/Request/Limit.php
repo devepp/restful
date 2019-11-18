@@ -24,7 +24,7 @@ class Limit
 		$this->offset = $offset;
 	}
 
-	public static function default()
+	public static function defaultLimit()
 	{
 		return new self(20, null);
 	}
@@ -61,7 +61,7 @@ class Limit
 			return $limit;
 		}
 
-		return self::default();
+		return self::defaultLimit();
 	}
 
 	public static function fromRequest(ServerRequestInterface $request)
@@ -84,7 +84,7 @@ class Limit
 			return $limit;
 		}
 
-		return self::default();
+		return self::defaultLimit();
 	}
 
 	/**

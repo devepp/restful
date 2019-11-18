@@ -2,7 +2,7 @@
 
 namespace App\Reporting\Request;
 
-class RequestedFields
+class RequestedFields implements \IteratorAggregate
 {
 	/** @var RequestedField[] */
 	private $fields = [];
@@ -30,9 +30,11 @@ class RequestedFields
 
 	public function getIterator()
 	{
-		foreach ($this->fields as $field) {
-			yield $field;
+		if (is_array($this->fields)) {
+			return new \ArrayIterator($this->fields);
 		}
+
+		return $this->fields;
 	}
 
 	public function withField(RequestedField $field)

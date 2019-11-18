@@ -5,6 +5,7 @@ namespace App\Reporting;
 use App\Reporting\DatabaseFields\DatabaseField;
 use App\Reporting\DB\QueryBuilder\SelectQueryBuilderInterface;
 use App\Reporting\Processing\QueryGroup;
+use App\Reporting\Request\RequestedField;
 use App\Reporting\Resources\Table;
 use App\Reporting\Selectables\AbstractSelectable;
 use JsonSerializable;
@@ -31,6 +32,11 @@ class SelectedField implements FieldInterface, JsonSerializable
 		$this->field = $field;
 		$this->selectable = $selectable;
 		$this->label = $label;
+	}
+
+	public static function fromRequestField(RequestedField $reqeustField, ReportFieldInterface $reportField)
+	{
+		return new self($reportField, $reqeustField->modifier(), $reqeustField->label());
 	}
 
 	/**
