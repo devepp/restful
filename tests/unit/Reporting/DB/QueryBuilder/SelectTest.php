@@ -162,6 +162,20 @@ class SelectTest extends TestCase
 		$this->assertEquals($qb->getQuery(), $expectedQuery);
 	}
 
+	public function testWhereGroup()
+	{
+		$qb = new Select('as_assets');
+		$qb = $qb->where('as_assets.id', '<=', 25);
+		$qb = $qb->orWhere('as_assets.name', 'LIKE', 'The%');
+		$qb = $qb->whereRaw($qb->whereGroup()
+			->where('as_assets.created_at', '<', '2019-04-01')
+			->orWhere('as_assets.updated_at', '<', '2019-04-01')
+		);
+
+		$expectedQuery = new Query('SELECT * FROM as_assets WHERE as_assets.id <= ? OR as_assets.name LIKE ? AND (as_assets.created_at < ? OR as_assets.updated_at < ?)', [25, 'The%', '2019-04-01', '2019-04-01']);
+		$this->assertEquals($qb->getQuery(), $expectedQuery);
+	}
+
 	public function testJoin()
 	{
 		$qb = new Select('wo_orders');
